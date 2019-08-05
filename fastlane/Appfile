@@ -1,0 +1,8 @@
+app_identifier("ie.mapps.Luas") # The bundle identifier of your app
+apple_id("appmanager@mapps.ie") # Your Apple email address
+
+itc_team_id("1032802") # App Store Connect Team ID
+team_id("2H43Y8J8SC") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
