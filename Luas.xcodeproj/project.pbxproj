@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB4945A622F8C4130018E9C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4945A522F8C4130018E9C8 /* Location.swift */; };
+		ABB16C6522F8E84A0079CDEA /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = ABB16C6422F8E84A0079CDEA /* JSON */; };
 		ABE27BCB22F789A20018C55E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE27BCA22F789A20018C55E /* AppDelegate.swift */; };
 		ABE27BCD22F789A20018C55E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE27BCC22F789A20018C55E /* SceneDelegate.swift */; };
 		ABE27BD022F789A20018C55E /* Luas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABE27BCE22F789A20018C55E /* Luas.xcdatamodeld */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		AB4945A522F8C4130018E9C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		ABB16C6422F8E84A0079CDEA /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
 		ABE27BC722F789A20018C55E /* Luas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE27BCA22F789A20018C55E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABE27BCC22F789A20018C55E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				ABE27BCA22F789A20018C55E /* AppDelegate.swift */,
 				ABE27BCC22F789A20018C55E /* SceneDelegate.swift */,
 				ABE27BD122F789A20018C55E /* ContentView.swift */,
+				ABB16C6422F8E84A0079CDEA /* JSON */,
 				AB4945A522F8C4130018E9C8 /* Location.swift */,
 				ABE27BD322F789A30018C55E /* Assets.xcassets */,
 				ABE27BD822F789A30018C55E /* LaunchScreen.storyboard */,
@@ -248,6 +251,7 @@
 			files = (
 				ABE27BDA22F789A30018C55E /* LaunchScreen.storyboard in Resources */,
 				ABE27BD722F789A30018C55E /* Preview Assets.xcassets in Resources */,
+				ABB16C6522F8E84A0079CDEA /* JSON in Resources */,
 				ABE27BD422F789A30018C55E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +360,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -416,6 +421,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
