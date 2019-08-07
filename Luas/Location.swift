@@ -28,7 +28,7 @@ class Location: NSObject {
 
 	let locationManager = CLLocationManager()
 	let locationDelegate = LocationDelegate(allStations: TrainStations(fromFile: "luasStops"))
-	
+
 	override init() {
 		locationManager.requestAlwaysAuthorization()
 

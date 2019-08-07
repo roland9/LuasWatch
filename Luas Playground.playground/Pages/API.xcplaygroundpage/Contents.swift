@@ -26,7 +26,7 @@ protocol API {
 	func getTrains(stopName: String, completion: @escaping (Data?, Error?) -> Void)
 }
 
-func dueTime(for stopName: String, api: API, completion: @escaping (Result<TrainsByDirection>) -> ()) {
+func dueTime(for stopName: String, api: API, completion: @escaping (Result<TrainsByDirection>) -> Void) {
 
 	api.getTrains(stopName: stopName) { (data, error) in
 		if let data = data,
@@ -95,7 +95,7 @@ struct LuasMockAPI: API {
 		let json: JSONDictionary =
 			[
 				"errormessage": "",
-				"results":     [
+				"results": [
 					[
 						"destination": "LUAS Bride's Glen",
 						"direction": "Outbound",
@@ -114,6 +114,7 @@ struct LuasMockAPI: API {
 				]
 		]
 
+		// swiftlint:disable:next force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
 	}
 }
