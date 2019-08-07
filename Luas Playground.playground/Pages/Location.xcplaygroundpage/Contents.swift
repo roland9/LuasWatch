@@ -1,31 +1,6 @@
 import CoreLocation
 import PlaygroundSupport
 import UIKit
-
-class Location: NSObject, CLLocationManagerDelegate {
-	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-		print(error)
-	}
-
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		print(locations)
-	}
-}
-
-print(CLLocationManager.locationServicesEnabled())
-
-let locationManager = CLLocationManager()
-let location = Location()
-
-locationManager.requestAlwaysAuthorization()
-
-locationManager.delegate = location
-//locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-
-PlaygroundPage.current.needsIndefiniteExecution = true
-
-//locationManager.startUpdatingLocation()
-
 struct TrainStation: CustomDebugStringConvertible {
 	let stationId: String
 	let name: String
