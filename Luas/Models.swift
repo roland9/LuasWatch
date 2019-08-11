@@ -1,28 +1,37 @@
 //
-//  Created by Roland Gropmair on 07/08/2019.
+//  Created by Roland Gropmair on 11/08/2019.
 //  Copyright © 2019 mApps.ie. All rights reserved.
 //
 
+import Foundation
 import CoreLocation
 
-typealias JSONDictionary = [String: Any]
+public struct Train: CustomDebugStringConvertible {
+	let destination: String
+	let direction: String
+	let dueTime: String
 
-struct TrainStation: CustomDebugStringConvertible {
+	public var debugDescription: String {
+		return "\(destination) - due: \'\(dueTime)\'"
+	}
+}
+
+public struct TrainStation: CustomDebugStringConvertible {
 	let stationId: String
 	let name: String
 	let location: CLLocation
 
-	var debugDescription: String {
+	public var debugDescription: String {
 		return "\n<\(stationId)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))"
 	}
 }
 
-struct TrainStations {
+public struct TrainStations {
 	let stations: [TrainStation]
 
-	init(fromFile fileName: String) {
+	public init(fromFile fileName: String) {
 		guard
-			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
+			let luasStopsFile = Bundle.main.url(forResource: fileName, withExtension: "json"),
 			let data = try? Data(contentsOf: luasStopsFile),
 			let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
 			let stationsArray = json["stations"] as? [JSONDictionary]
@@ -38,7 +47,7 @@ struct TrainStations {
 		// swiftlint:enable force_cast
 	}
 
-	func closestStation(from location: CLLocation) -> TrainStation {
+	public func closestStation(from location: CLLocation) -> TrainStation {
 		var closestStationSoFar: TrainStation?
 
 		stations.forEach { (station) in
@@ -53,4 +62,9 @@ struct TrainStations {
 
 		return closestStationSoFar!
 	}
+}
+
+public struct TrainsByDirection {
+	let inbound: [Train]
+	let outbound: [Train]
 }
