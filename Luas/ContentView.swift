@@ -58,14 +58,14 @@ struct ContentView: View {
 
 					Text("Inbound")
 					List(trainsByDirection.inbound, id: \.id) { (train) in
-						Text(train.dueTime)
+						Text(train.dueTimeDescription)
 					}
 
 					Spacer(minLength: 80)
 					Text("Outbound")
 
 					List(trainsByDirection.outbound, id: \.id) { (train) in
-						Text(train.dueTime)
+						Text(train.dueTimeDescription)
 					}
 
 					Spacer()

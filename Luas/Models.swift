@@ -16,7 +16,11 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	let dueTime: String
 
 	public var debugDescription: String {
-		return "\(destination) - due: \'\(dueTime)\'"
+		return "\(destination) - due: \'\(dueTimeDescription)\'"
+	}
+
+	public var dueTimeDescription: String {
+		return dueTime == "Due" ? "Due" : "\(dueTime) mins"
 	}
 }
 
