@@ -13,7 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 
-	let location = Location()
+	let appState = AppState()
+	var mainCoordinator: MainCoordinator!
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,17 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		if let windowScene = scene as? UIWindowScene {
 		    let window = UIWindow(windowScene: windowScene)
 
-			let appState = AppState()
-
 		    window.rootViewController = UIHostingController(rootView:
 				ContentView().environmentObject(appState))
 
-			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-				appState.state = .errorGettingLocation(NSError(domain: "domain", code: 100, userInfo: nil))
-			}
-
 		    self.window = window
 		    window.makeKeyAndVisible()
+
+			mainCoordinator = MainCoordinator(appState: appState)
+			mainCoordinator.start()
 		}
 	}
 

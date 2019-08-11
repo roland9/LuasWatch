@@ -5,37 +5,51 @@
 
 import CoreLocation
 
-class LocationDelegate: NSObject, CLLocationManagerDelegate {
-	let allStations: TrainStations
-
-	init(allStations: TrainStations) {
-		self.allStations = allStations
-	}
-
-	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-		print(error)
-	}
-
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		print(locations)
-//		logs.logEntries.append(locations.description)
-//		print(allStations.closestStation(from: userLocation))
-	}
+public protocol LocationDelegate: class {
+	func didFail(_ error: Error)
+	func didGetLocation(_ location: CLLocation)
 }
 
-class Location: NSObject {
+public class Location: NSObject {
+
+	public weak var delegate: LocationDelegate?
 
 	let locationManager = CLLocationManager()
 
-	// swiftlint:disable:next weak_delegate
-	let locationDelegate = LocationDelegate(allStations: TrainStations(fromFile: "luasStops"))
-
-	override init() {
-		locationManager.requestAlwaysAuthorization()
-
-		locationManager.delegate = locationDelegate
-		locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-
-		locationManager.startUpdatingLocation()
+	public override init() {
 	}
+
+	public func start() {
+
+		// start getting location
+		if CLLocationManager.locationServicesEnabled() {
+			print("\(#function): services enabled")
+			locationManager.requestAlwaysAuthorization()
+			locationManager.delegate = self
+
+			locationManager.startUpdatingLocation()
+
+		} else {
+			print("\(#function): services NOT enabled")
+
+			// TODO error handling - expose message
+			delegate?.didFail(NSError(domain: "ie.mapps.LuasWatch", code: 300, userInfo: nil))
+		}
+	}
+}
+
+extension Location: CLLocationManagerDelegate {
+
+	public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print("\(#function): \(error)")
+
+		delegate?.didFail(error)
+	}
+
+	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		print("\(#function): \(locations)")
+
+		delegate?.didGetLocation(locations.last!)
+	}
+
 }
