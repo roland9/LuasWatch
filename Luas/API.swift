@@ -27,7 +27,9 @@ public extension API {
 
 				if let errorMessage = json["errormessage"] as? String,
 					errorMessage.count > 0 {
-					completion(.error(errorMessage))
+					DispatchQueue.main.async {
+						completion(.error(errorMessage))
+					}
 					return
 				}
 
@@ -46,13 +48,19 @@ public extension API {
 
 					if let inboundTrains = groupedTrains["Inbound"], let outboundTrains = groupedTrains["Outbound"] {
 						let trainsByDirection = TrainsByDirection(inbound: inboundTrains, outbound: outboundTrains)
-						completion(.success(trainsByDirection))
+						DispatchQueue.main.async {
+							completion(.success(trainsByDirection))
+						}
 					} else {
-						completion(.error("Could not group inbound / outbound trains"))
+						DispatchQueue.main.async {
+							completion(.error("Could not group inbound / outbound trains"))
+						}
 					}
 
 				} else {
-					completion(.error("Error parsing results"))
+					DispatchQueue.main.async {
+						completion(.error("Error parsing results"))
+					}
 				}
 
 			}

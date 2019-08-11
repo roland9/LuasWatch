@@ -14,7 +14,7 @@ public enum State {
 	case errorGettingStation(Error)
 
 	case gettingDepartureTimes(TrainStation)
-	case errorGettingDepartureTimes(Error)
+	case errorGettingDepartureTimes(String)
 
 	case foundDepartureTimes(TrainsByDirection)
 }
@@ -33,8 +33,8 @@ extension State: CustomDebugStringConvertible {
 			return "error getting station: \(error)"
 		case .gettingDepartureTimes(let trainStation):
 			return "getting departure times for \(trainStation.name)..."
-		case .errorGettingDepartureTimes(let error):
-			return "error getting departure times: \(error)"
+		case .errorGettingDepartureTimes(let errorMessage):
+			return "error getting departure times: \(errorMessage)"
 		case .foundDepartureTimes(let trains):
 			return "found departure times: \(trains)"
 		}

@@ -19,7 +19,7 @@ class MainCoordinator: NSObject {
 		// step 1: determine location
 		location = Location()
 		location.delegate = self
-		
+
 		location.start()
 	}
 }
@@ -37,7 +37,7 @@ extension MainCoordinator: LocationDelegate {
 		// now that we have location: get closest station
 		let allStations = TrainStations(fromFile: "luasStops")
 		let closestStation = allStations.closestStation(from: location)
-		print("\(#function): found cloest station <\(closestStation.name)>")
+		print("\(#function): found closest station <\(closestStation.name)>")
 
 		appState.state = .gettingDepartureTimes(closestStation)
 
@@ -46,6 +46,7 @@ extension MainCoordinator: LocationDelegate {
 			switch result {
 			case .error(let error):
 				print("\(#function): \(error)")
+				self?.appState.state = .errorGettingDepartureTimes(error)
 
 			case .success(let trains):
 				print("\(#function): \(trains)")
