@@ -16,7 +16,6 @@ LuasAPI.dueTime(for: stopName) { (result) in
 	}
 }
 
-
 LuasMockAPI.dueTime(for: stopName) { (result) in
 	switch result {
 	case .error(let message):
@@ -25,7 +24,6 @@ LuasMockAPI.dueTime(for: stopName) { (result) in
 		print(trains)
 	}
 }
-
 
 //print(CLLocationManager.locationServicesEnabled())
 

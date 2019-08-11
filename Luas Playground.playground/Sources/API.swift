@@ -13,7 +13,7 @@ public protocol API {
 
 public extension API {
 
-	static func dueTime(for stopName: String, completion: @escaping (Result<TrainsByDirection>) -> ()) {
+	static func dueTime(for stopName: String, completion: @escaping (Result<TrainsByDirection>) -> Void) {
 
 		Self.getTrains(stopName: stopName) { (data, error) in
 			if let data = data,
@@ -76,7 +76,7 @@ public struct LuasMockAPI: API {
 		let json: JSONDictionary =
 			[
 				"errormessage": "",
-				"results":     [
+				"results": [
 					[
 						"destination": "LUAS Bride's Glen",
 						"direction": "Outbound",
@@ -95,6 +95,7 @@ public struct LuasMockAPI: API {
 				]
 		]
 
+		// swiftlint:disable force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
 	}
 

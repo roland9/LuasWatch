@@ -32,12 +32,14 @@ public struct TrainStations {
 			let stationsArray = json["stations"] as? [JSONDictionary]
 			else { fatalError("could not parse JSON file") }
 
+		// swiftlint:disable force_cast
 		stations = stationsArray.compactMap { (station) in
 			return TrainStation(stationId: station["stationId"] as! String,
 								name: station["name"] as! String,
 								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
 													 longitude: CLLocationDegrees(station["long"] as! Double)))
 		}
+		// swiftlint:enable force_cast
 	}
 
 	public func closestStation(from location: CLLocation) -> TrainStation {
