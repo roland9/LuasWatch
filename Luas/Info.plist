@@ -57,8 +57,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location access allows the app to find the closes LUAS stop</string>
+	<string>Location access allows the app to find the closest LUAS stop</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location access allows the app to find the closes LUAS stop</string>
+	<string>Location access allows the app to find the closest LUAS stop</string>
 </dict>
 </plist>
