@@ -59,15 +59,17 @@ extension Location: CLLocationManagerDelegate {
 		if abs(howRecent) < 15.0 {
 			// TODO we should kill previous API requests if there is a newer location
 			delegate?.didGetLocation(lastLocation)
+
+			if lastLocation.horizontalAccuracy < 100 &&
+				lastLocation.verticalAccuracy < 100 {
+				print("\(#function): last location quite precise, to stopping location updates for now")
+				locationManager.stopUpdatingLocation()
+			}
+
 		} else {
 			print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
 		}
 
-		if lastLocation.horizontalAccuracy < 100 &&
-			lastLocation.verticalAccuracy < 100 {
-			print("\(#function): last location quite precise, to stopping location updates for now")
-			locationManager.stopUpdatingLocation()
-		}
 	}
 
 }

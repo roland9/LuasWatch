@@ -1,7 +1,16 @@
+//
+//  Created by Roland Gropmair on 11/08/2019.
+//  Copyright © 2019 mApps.ie. All rights reserved.
+//
+
 import Foundation
 import CoreLocation
 
-public struct Train: CustomDebugStringConvertible {
+public struct Train: CustomDebugStringConvertible, Hashable, Codable {
+	var id: String {
+		return direction + dueTime
+	}
+
 	let destination: String
 	let direction: String
 	let dueTime: String
@@ -18,7 +27,14 @@ public struct TrainStation: CustomDebugStringConvertible {
 	let location: CLLocation
 
 	public var debugDescription: String {
-		return "\n<\(stationId)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))"
+		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))"
+	}
+
+	public init(stationId: String, stationIdShort: String, name: String, location: CLLocation) {
+		self.stationId = stationId
+		self.stationIdShort = stationIdShort
+		self.name = name
+		self.location = location
 	}
 }
 
@@ -62,6 +78,7 @@ public struct TrainStations {
 }
 
 public struct TrainsByDirection {
+	let trainStation: TrainStation
 	let inbound: [Train]
 	let outbound: [Train]
 }

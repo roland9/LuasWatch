@@ -18,9 +18,9 @@ public protocol API {
 
 public extension API {
 
-	static func dueTime(for stationId: String, completion: @escaping (Result<TrainsByDirection>) -> Void) {
+	static func dueTime(for trainStation: TrainStation, completion: @escaping (Result<TrainsByDirection>) -> Void) {
 
-		Self.getTrains(stationId: stationId) { (data, error) in
+		Self.getTrains(stationId: trainStation.stationIdShort) { (data, error) in
 			if let data = data,
 				let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary {
 				//			print("\(json)")
@@ -64,7 +64,9 @@ public extension API {
 						return
 					}
 
-					let trainsByDirection = TrainsByDirection(inbound: inboundTrains, outbound: outboundTrains)
+					let trainsByDirection = TrainsByDirection(trainStation: trainStation,
+															  inbound: inboundTrains,
+															  outbound: outboundTrains)
 					DispatchQueue.main.async {
 						completion(.success(trainsByDirection))
 					}
