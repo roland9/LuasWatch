@@ -31,7 +31,7 @@ public struct TrainStations {
 
 	public init(fromFile fileName: String) {
 		guard
-			let luasStopsFile = Bundle.main.url(forResource: fileName, withExtension: "json"),
+			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
 			let data = try? Data(contentsOf: luasStopsFile),
 			let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
 			let stationsArray = json["stations"] as? [JSONDictionary]
