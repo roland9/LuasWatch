@@ -7,7 +7,6 @@ import CoreLocation
 
 class LocationDelegate: NSObject, CLLocationManagerDelegate {
 	let allStations: TrainStations
-	let logs = Logs(["one", "two"])
 
 	init(allStations: TrainStations) {
 		self.allStations = allStations
@@ -19,7 +18,7 @@ class LocationDelegate: NSObject, CLLocationManagerDelegate {
 
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		print(locations)
-		logs.logEntries.append(locations.description)
+//		logs.logEntries.append(locations.description)
 //		print(allStations.closestStation(from: userLocation))
 	}
 }
@@ -27,6 +26,8 @@ class LocationDelegate: NSObject, CLLocationManagerDelegate {
 class Location: NSObject {
 
 	let locationManager = CLLocationManager()
+
+	// swiftlint:disable:next weak_delegate
 	let locationDelegate = LocationDelegate(allStations: TrainStations(fromFile: "luasStops"))
 
 	override init() {

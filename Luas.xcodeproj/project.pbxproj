@@ -40,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		AB4945A522F8C4130018E9C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		AB5E416C23002B2F00F18648 /* Luas Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Luas Playground.playground"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABB16C6422F8E84A0079CDEA /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
 		ABBBCA4E22FB74AA008FDEB2 /* TrainStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStations.swift; sourceTree = "<group>"; };
 		ABE27BC722F789A20018C55E /* Luas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +108,7 @@
 		ABE27BC922F789A20018C55E /* Luas */ = {
 			isa = PBXGroup;
 			children = (
+				AB5E416C23002B2F00F18648 /* Luas Playground.playground */,
 				ABE27BCA22F789A20018C55E /* AppDelegate.swift */,
 				ABE27BCC22F789A20018C55E /* SceneDelegate.swift */,
 				ABE27BD122F789A20018C55E /* ContentView.swift */,

@@ -7,14 +7,36 @@
 //
 
 import SwiftUI
+import Combine
+
+class Logs: Combine.ObservableObject, Identifiable {
+	typealias PublisherType = PassthroughSubject<Void, Never>
+
+	var didChange = PublisherType()
+
+	var logEntries: [String] = [""] {
+		didSet {
+			didChange.send(())
+		}
+	}
+
+	init(_ entries: [String]) {
+		logEntries = entries
+	}
+}
 
 struct ContentView: View {
+	@ObservedObject var logs = Logs(["one", "two", "three"])
+
     var body: some View {
-        Text("Hello World")
+		List(logs.logEntries, id: \.self) { (log) in
+			Text(log)
+		}
     }
 }
 
 #if DEBUG
+// swiftlint:disable:next type_name
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
