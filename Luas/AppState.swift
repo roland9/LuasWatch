@@ -41,18 +41,6 @@ extension State: CustomDebugStringConvertible {
 	}
 }
 
-public class AppState: Combine.ObservableObject {
-	typealias PublisherType = PassthroughSubject<Void, Never>
-
-	var didChange = PublisherType()
-
-	var state: State {
-		didSet {
-			didChange.send(())
-		}
-	}
-
-	init(state: State) {
-		self.state = state
-	}
+public class AppState: ObservableObject {
+	@Published var state: State = .gettingLocation
 }

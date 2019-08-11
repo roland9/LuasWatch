@@ -1,3 +1,8 @@
+//
+//  Created by Roland Gropmair on 11/08/2019.
+//  Copyright © 2019 mApps.ie. All rights reserved.
+//
+
 import CoreLocation
 import Combine
 
@@ -22,8 +27,8 @@ extension State: CustomDebugStringConvertible {
 			return "getting location..."
 		case .errorGettingLocation(let error):
 			return "error getting location: \(error)"
-		case .gettingStation(_):
-			return "getting station..."
+		case .gettingStation(let location):
+			return "getting station for location \(location.coordinate)..."
 		case .errorGettingStation(let error):
 			return "error getting station: \(error)"
 		case .gettingDepartureTimes(let trainStation):
@@ -36,18 +41,6 @@ extension State: CustomDebugStringConvertible {
 	}
 }
 
-public class AppState: Combine.ObservableObject {
-	typealias PublisherType = PassthroughSubject<Void, Never>
-
-	var didChange = PublisherType()
-
-	var state: State {
-		didSet {
-			didChange.send(())
-		}
-	}
-
-	init(state: State) {
-		self.state = state
-	}
+public class AppState: ObservableObject {
+	@Published var state: State = .gettingLocation
 }

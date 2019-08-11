@@ -24,9 +24,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		if let windowScene = scene as? UIWindowScene {
 		    let window = UIWindow(windowScene: windowScene)
 
-			let appState = AppState(state: .gettingLocation)
+			let appState = AppState()
+
 		    window.rootViewController = UIHostingController(rootView:
 				ContentView().environmentObject(appState))
+
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+				appState.state = .errorGettingLocation(NSError(domain: "domain", code: 100, userInfo: nil))
+			}
 
 		    self.window = window
 		    window.makeKeyAndVisible()
