@@ -5,6 +5,7 @@ import CoreLocation
 //
 //print(allStations.closestStation(from: userLocation))
 
+// swiftlint:disable line_length
 // list from https://github.com/mcevoyki2/finalproject/blob/bf95904206107d45743c83bf7bc951c5c99f26b6/move-app/src/app/%2Bluas/enum/luas-stops.enum.ts
 let stationId = "LUAS8"
 
