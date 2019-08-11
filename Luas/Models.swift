@@ -20,7 +20,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	}
 
 	public var dueTimeDescription: String {
-		return dueTime == "Due" ? "Due" : "\(dueTime) mins"
+		return "\(destination): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
 }
 
@@ -83,6 +83,7 @@ public struct TrainStations {
 
 public struct TrainsByDirection {
 	let trainStation: TrainStation
+
 	let inbound: [Train]
 	let outbound: [Train]
 }

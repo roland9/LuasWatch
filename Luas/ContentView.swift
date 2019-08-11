@@ -62,8 +62,8 @@ struct ContentView: View {
 					}
 
 					Spacer(minLength: 80)
-					Text("Outbound")
 
+					Text("Outbound")
 					List(trainsByDirection.outbound, id: \.id) { (train) in
 						Text(train.dueTimeDescription)
 					}
