@@ -17,7 +17,8 @@ public struct Train: CustomDebugStringConvertible {
 }
 
 public struct TrainStation: CustomDebugStringConvertible {
-	let stationId: String
+	let stationId: String		// not sure what that 'id' is for?
+	let stationIdShort: String 	// that is the 'id' required for the API
 	let name: String
 	let location: CLLocation
 
@@ -31,7 +32,7 @@ public struct TrainStations {
 
 	public init(fromFile fileName: String) {
 		guard
-			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
+			let luasStopsFile = Bundle.main.url(forResource: fileName, withExtension: "json"),
 			let data = try? Data(contentsOf: luasStopsFile),
 			let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
 			let stationsArray = json["stations"] as? [JSONDictionary]
@@ -40,6 +41,7 @@ public struct TrainStations {
 		// swiftlint:disable force_cast
 		stations = stationsArray.compactMap { (station) in
 			return TrainStation(stationId: station["stationId"] as! String,
+								stationIdShort: station["stationIdShort"] as! String,
 								name: station["name"] as! String,
 								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
 													 longitude: CLLocationDegrees(station["long"] as! Double)))
