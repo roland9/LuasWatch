@@ -13,14 +13,14 @@ public enum Result<T> {
 typealias JSONDictionary = [String: Any]
 
 public protocol API {
-	static func getTrains(stopName: String, completion: @escaping (Data?, Error?) -> Void)
+	static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void)
 }
 
 public extension API {
 
-	static func dueTime(for stopName: String, completion: @escaping (Result<TrainsByDirection>) -> Void) {
+	static func dueTime(for stationId: String, completion: @escaping (Result<TrainsByDirection>) -> Void) {
 
-		Self.getTrains(stopName: stopName) { (data, error) in
+		Self.getTrains(stationId: stationId) { (data, error) in
 			if let data = data,
 				let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary {
 				//			print("\(json)")
@@ -46,15 +46,27 @@ public extension API {
 					}
 					let groupedTrains = Dictionary(grouping: trains, by: { $0.direction })
 
-					if let inboundTrains = groupedTrains["Inbound"], let outboundTrains = groupedTrains["Outbound"] {
-						let trainsByDirection = TrainsByDirection(inbound: inboundTrains, outbound: outboundTrains)
+					var inboundTrains = [Train]()
+					var outboundTrains = [Train]()
+
+					if let inbound = groupedTrains["Inbound"] {
+						inboundTrains = inbound
+					}
+
+					if let outbound = groupedTrains["Outbound"] {
+						outboundTrains = outbound
+					}
+
+					if inboundTrains.isEmpty && outboundTrains.isEmpty {
 						DispatchQueue.main.async {
-							completion(.success(trainsByDirection))
+							completion(.error("Both inbound & outbound trains empty"))
 						}
-					} else {
-						DispatchQueue.main.async {
-							completion(.error("Could not group inbound / outbound trains"))
-						}
+						return
+					}
+
+					let trainsByDirection = TrainsByDirection(inbound: inboundTrains, outbound: outboundTrains)
+					DispatchQueue.main.async {
+						completion(.success(trainsByDirection))
 					}
 
 				} else {
@@ -70,8 +82,8 @@ public extension API {
 
 public struct LuasAPI: API {
 
-	public static func getTrains(stopName: String, completion: @escaping (Data?, Error?) -> Void) {
-		let url = URL(string: "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=\(stopName)&format=json")!
+	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
+		let url = URL(string: "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=\(stationId)&format=json")!
 		let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
 			completion(data, error)
 		}
@@ -85,7 +97,7 @@ public struct LuasAPI: API {
 
 public struct LuasMockAPI: API {
 
-	public static func getTrains(stopName: String, completion: @escaping (Data?, Error?) -> Void) {
+	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
 		let json: JSONDictionary =
 			[
 				"errormessage": "",

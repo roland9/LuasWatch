@@ -42,7 +42,7 @@ extension MainCoordinator: LocationDelegate {
 		appState.state = .gettingDepartureTimes(closestStation)
 
 		// get departure times
-		LuasAPI.dueTime(for: closestStation.stationId) { [weak self] (result) in
+		LuasAPI.dueTime(for: closestStation.stationIdShort) { [weak self] (result) in
 			switch result {
 			case .error(let error):
 				print("\(#function): \(error)")
