@@ -49,26 +49,21 @@ struct ContentView: View {
 
 				VStack {
 
-					Spacer(minLength: 80)
-
 					Text(trainsByDirection.trainStation.name)
-						.font(.system(.title))
+						.font(.system(.headline))
 
-					Spacer(minLength: 80)
-
-					Text("Inbound")
+//					Text("Inbound").font(.system(.footnote))
 					List(trainsByDirection.inbound, id: \.id) { (train) in
 						Text(train.dueTimeDescription)
 					}
 
-					Spacer(minLength: 80)
-
-					Text("Outbound")
+					Spacer()
+//					Text("Outbound").font(.system(.footnote))
 					List(trainsByDirection.outbound, id: \.id) { (train) in
 						Text(train.dueTimeDescription)
 					}
 
-					Spacer()
+
 				}
 			)
 		}
