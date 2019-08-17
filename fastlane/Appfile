@@ -1,4 +1,4 @@
-app_identifier("ie.mapps.Luas") # The bundle identifier of your app
+app_identifier("ie.mapps.LuasWatch") # The bundle identifier of your app
 apple_id("appmanager@mapps.ie") # Your Apple email address
 
 itc_team_id("1032802") # App Store Connect Team ID
