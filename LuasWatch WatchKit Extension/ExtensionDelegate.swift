@@ -7,6 +7,7 @@
 //
 
 import WatchKit
+import LuasKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 

@@ -6,6 +6,7 @@
 import SwiftUI
 import Combine
 import CoreLocation
+import LuasKit
 
 struct ContentView: View {
 	@EnvironmentObject var appState: AppState

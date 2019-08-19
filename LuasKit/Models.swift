@@ -7,13 +7,13 @@ import Foundation
 import CoreLocation
 
 public struct Train: CustomDebugStringConvertible, Hashable, Codable {
-	var id: String {
+	public var id: String {
 		return direction + dueTime
 	}
 
-	let destination: String
-	let direction: String
-	let dueTime: String
+	public let destination: String
+	public let direction: String
+	public let dueTime: String
 
 	public var debugDescription: String {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
@@ -22,13 +22,19 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	public var dueTimeDescription: String {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
+
+	public init(destination: String, direction: String, dueTime: String) {
+		self.destination = destination
+		self.direction = direction
+		self.dueTime = dueTime
+	}
 }
 
 public struct TrainStation: CustomDebugStringConvertible {
-	let stationId: String		// not sure what that 'id' is for?
-	let stationIdShort: String 	// that is the 'id' required for the API
-	let name: String
-	let location: CLLocation
+	public let stationId: String		// not sure what that 'id' is for?
+	public let stationIdShort: String 	// that is the 'id' required for the API
+	public let name: String
+	public let location: CLLocation
 
 	public var debugDescription: String {
 		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))"
@@ -43,7 +49,7 @@ public struct TrainStation: CustomDebugStringConvertible {
 }
 
 public struct TrainStations {
-	let stations: [TrainStation]
+	public let stations: [TrainStation]
 
 	public init(fromFile fileName: String) {
 		guard
@@ -82,8 +88,16 @@ public struct TrainStations {
 }
 
 public struct TrainsByDirection {
-	let trainStation: TrainStation
+	public let trainStation: TrainStation
 
-	let inbound: [Train]
-	let outbound: [Train]
+	public let inbound: [Train]
+	public let outbound: [Train]
+
+	public init(trainStation: TrainStation,
+				inbound: [Train],
+				outbound: [Train]) {
+		self.trainStation = trainStation
+		self.inbound = inbound
+		self.outbound = outbound
+	}
 }

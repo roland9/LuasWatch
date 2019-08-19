@@ -42,5 +42,9 @@ extension State: CustomDebugStringConvertible {
 }
 
 public class AppState: ObservableObject {
-	@Published var state: State = .gettingLocation
+	@Published public var state: State = .gettingLocation
+
+	public init() {
+		//
+	}
 }
