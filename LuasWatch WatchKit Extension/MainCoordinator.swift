@@ -23,14 +23,19 @@ class MainCoordinator: NSObject {
 		location.delegate = self
 
 		location.start()
-
-		// set timer to update periodically
-		timer = Timer.scheduledTimer(timeInterval: 15.0,
-										 target: self, selector: #selector(fireTimer),
-										 userInfo: nil, repeats: true)
 	}
 
-	@objc func fireTimer() {
+	func invalidateTimer() {
+		timer?.invalidate()
+	}
+
+	func scheduleTimer() {
+		timer = Timer.scheduledTimer(timeInterval: 15.0,
+									 target: self, selector: #selector(timerDidFire),
+									 userInfo: nil, repeats: true)
+	}
+
+	@objc func timerDidFire() {
 		location.update()
 	}
 }
