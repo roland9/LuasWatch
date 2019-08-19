@@ -16,11 +16,11 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	let dueTime: String
 
 	public var debugDescription: String {
-		return "\(destination): \'\(dueTimeDescription)\'"
+		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
 	}
 
 	public var dueTimeDescription: String {
-		return "\(destination): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
+		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
 }
 

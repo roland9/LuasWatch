@@ -52,16 +52,21 @@ struct ContentView: View {
 					Text(trainsByDirection.trainStation.name)
 						.font(.system(.headline))
 
-					List(trainsByDirection.inbound, id: \.id) { (train) in
-						Text(train.dueTimeDescription)
+					List {
+						Section(header: Text("Inbound")) {
+
+							ForEach(trainsByDirection.inbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
+
+						Section(header: Text("Outbound")) {
+
+							ForEach(trainsByDirection.outbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
 					}
-
-					Spacer()
-
-					List(trainsByDirection.outbound, id: \.id) { (train) in
-						Text(train.dueTimeDescription)
-					}
-
 
 				}
 			)
@@ -84,9 +89,9 @@ struct ContentView_Previews: PreviewProvider {
 		//		let trainStation = TrainStation(stationId: "stationId", name: "Name", location: location)
 		//		appState.state = .gettingDepartureTimes(trainStation)
 
-		let train1 = Train(destination: "Broombridge", direction: "Outbound", dueTime: "Due")
-		let train2 = Train(destination: "Broombridge", direction: "Outbound", dueTime: "9")
-		let train3 = Train(destination: "Sandyford", direction: "Inbound", dueTime: "12")
+		let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
+		let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
+		let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
 
 		let station = TrainStation(stationId: "stationId",
 								   stationIdShort: "LUAS8",
