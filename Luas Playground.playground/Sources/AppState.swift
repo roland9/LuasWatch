@@ -13,10 +13,10 @@ public enum State {
 	case gettingStation(CLLocation)
 	case errorGettingStation(Error)
 
-	case gettingDepartureTimes(TrainStation)
-	case errorGettingDepartureTimes(Error)
+	case gettingDueTimes(TrainStation)
+	case errorGettingDueTimes(String)
 
-	case foundDepartureTimes(TrainsByDirection)
+	case foundDueTimes(TrainsByDirection)
 }
 
 extension State: CustomDebugStringConvertible {
@@ -31,16 +31,18 @@ extension State: CustomDebugStringConvertible {
 			return "getting station for location \(location.coordinate)..."
 		case .errorGettingStation(let error):
 			return "error getting station: \(error)"
-		case .gettingDepartureTimes(let trainStation):
-			return "getting departure times for \(trainStation.name)..."
-		case .errorGettingDepartureTimes(let error):
-			return "error getting departure times: \(error)"
-		case .foundDepartureTimes(let trains):
-			return "found departure times: \(trains)"
+		case .gettingDueTimes(let trainStation):
+			return "getting due times for \(trainStation.name)..."
+		case .errorGettingDueTimes(let errorMessage):
+			return "error getting due times: \(errorMessage)"
+		case .foundDueTimes(let trains):
+			return "found due times: \(trains)"
 		}
 	}
 }
 
 public class AppState: ObservableObject {
-	@Published var state: State = .gettingLocation
+	@Published public var state: State = .gettingLocation
+
+	public init() {}
 }

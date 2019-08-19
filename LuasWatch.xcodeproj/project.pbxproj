@@ -208,10 +208,10 @@
 			children = (
 				AB364D352308281100C73EF6 /* MainCoordinator.swift */,
 				AB364D172308277000C73EF6 /* ContentView.swift */,
-				AB364D332308281000C73EF6 /* JSON */,
 				AB364D192308277000C73EF6 /* HostingController.swift */,
 				AB364D1B2308277000C73EF6 /* ExtensionDelegate.swift */,
 				AB364D1D2308277000C73EF6 /* ComplicationController.swift */,
+				AB364D332308281000C73EF6 /* JSON */,
 				AB364D1F2308277100C73EF6 /* Assets.xcassets */,
 				AB364D242308277100C73EF6 /* Info.plist */,
 				AB364D212308277100C73EF6 /* Preview Content */,

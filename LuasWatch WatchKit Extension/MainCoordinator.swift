@@ -35,23 +35,23 @@ extension MainCoordinator: LocationDelegate {
 
 		appState.state = .gettingStation(location)
 
-		// now that we have location: get closest station
+		// step 2: we have location -> now find closest station
 		let allStations = TrainStations(fromFile: "luasStops")
 		let closestStation = allStations.closestStation(from: location)
 		print("\(#function): found closest station <\(closestStation.name)>")
 
-		appState.state = .gettingDepartureTimes(closestStation)
+		appState.state = .gettingDueTimes(closestStation)
 
-		// get departure times
+		// step 3: get due times from API
 		LuasAPI.dueTime(for: closestStation) { [weak self] (result) in
 			switch result {
 			case .error(let error):
 				print("\(#function): \(error)")
-				self?.appState.state = .errorGettingDepartureTimes(error)
+				self?.appState.state = .errorGettingDueTimes(error)
 
 			case .success(let trains):
 				print("\(#function): \(trains)")
-				self?.appState.state = .foundDepartureTimes(trains)
+				self?.appState.state = .foundDueTimes(trains)
 			}
 		}
 

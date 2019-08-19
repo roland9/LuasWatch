@@ -35,17 +35,17 @@ struct ContentView: View {
 				Text(self.appState.state.debugDescription)
 			)
 
-		case .gettingDepartureTimes:
+		case .gettingDueTimes:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
 			)
 
-		case .errorGettingDepartureTimes:
+		case .errorGettingDueTimes:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
 			)
 
-		case .foundDepartureTimes(let trainsByDirection):
+		case .foundDueTimes(let trainsByDirection):
 			return AnyView (
 
 				VStack {
@@ -88,7 +88,7 @@ struct ContentView_Previews: PreviewProvider {
 
 		//		let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2)))
 		//		let trainStation = TrainStation(stationId: "stationId", name: "Name", location: location)
-		//		appState.state = .gettingDepartureTimes(trainStation)
+		//		appState.state = .gettingDueTimes(trainStation)
 
 		let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 		let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
@@ -102,7 +102,7 @@ struct ContentView_Previews: PreviewProvider {
 		let trains = TrainsByDirection(trainStation: station,
 									   inbound: [train3],
 									   outbound: [train1, train2])
-		appState.state = .foundDepartureTimes(trains)
+		appState.state = .foundDueTimes(trains)
 
 		return ContentView().environmentObject(appState)
 	}

@@ -16,8 +16,7 @@ public class Location: NSObject {
 
 	let locationManager = CLLocationManager()
 
-	public override init() {
-	}
+	public override init() {}
 
 	public func start() {
 
