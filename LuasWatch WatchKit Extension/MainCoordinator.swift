@@ -10,6 +10,7 @@ class MainCoordinator: NSObject {
 
 	let appState: AppState
 	var location: Location!
+	var timer: Timer?
 
 	init(appState: AppState) {
 		self.appState = appState
@@ -22,6 +23,15 @@ class MainCoordinator: NSObject {
 		location.delegate = self
 
 		location.start()
+
+		// set timer to update periodically
+		timer = Timer.scheduledTimer(timeInterval: 15.0,
+										 target: self, selector: #selector(fireTimer),
+										 userInfo: nil, repeats: true)
+	}
+
+	@objc func fireTimer() {
+		location.update()
 	}
 }
 

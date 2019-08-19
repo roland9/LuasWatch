@@ -10,9 +10,15 @@ public protocol LocationDelegate: class {
 	func didGetLocation(_ location: CLLocation)
 }
 
+enum LocationState {
+	case initializing, gettingLocation, stoppedUpdatingLocation, error
+}
+
 public class Location: NSObject {
 
 	public weak var delegate: LocationDelegate?
+
+	var state: LocationState = .initializing
 
 	let locationManager = CLLocationManager()
 
@@ -21,19 +27,35 @@ public class Location: NSObject {
 	public func start() {
 
 		// start getting location
+		locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+
 		if CLLocationManager.locationServicesEnabled() {
 			print("\(#function): services enabled")
+
 			locationManager.requestWhenInUseAuthorization()
 			locationManager.delegate = self
-			locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 
+			state = .gettingLocation
 			locationManager.startUpdatingLocation()
 
 		} else {
 			print("\(#function): services NOT enabled")
 
+			state = .error
 			// TODO error handling - expose message
 			delegate?.didFail(NSError(domain: "ie.mapps.LuasWatch", code: 300, userInfo: nil))
+		}
+	}
+
+	public func update() {
+		if (state == .stoppedUpdatingLocation || state == .error) &&
+			CLLocationManager.locationServicesEnabled() {
+
+			locationManager.requestWhenInUseAuthorization()
+			locationManager.delegate = self
+
+			state = .gettingLocation
+			locationManager.startUpdatingLocation()
 		}
 	}
 }
@@ -43,6 +65,7 @@ extension Location: CLLocationManagerDelegate {
 	public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		print("\(#function): \(error)")
 
+		state = .error
 		delegate?.didFail(error)
 	}
 
@@ -62,6 +85,8 @@ extension Location: CLLocationManagerDelegate {
 			if lastLocation.horizontalAccuracy < 100 &&
 				lastLocation.verticalAccuracy < 100 {
 				print("\(#function): last location quite precise, to stopping location updates for now")
+
+				state = .stoppedUpdatingLocation
 				locationManager.stopUpdatingLocation()
 			}
 
