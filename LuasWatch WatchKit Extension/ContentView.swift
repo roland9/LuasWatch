@@ -100,8 +100,8 @@ struct ContentView_Previews: PreviewProvider {
 								   location: location)
 
 		let trains = TrainsByDirection(trainStation: station,
-									   inbound: [train1, train2],
-									   outbound: [train3])
+									   inbound: [train3],
+									   outbound: [train1, train2])
 		appState.state = .foundDepartureTimes(trains)
 
 		return ContentView().environmentObject(appState)
