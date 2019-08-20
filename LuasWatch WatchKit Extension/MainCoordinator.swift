@@ -30,7 +30,11 @@ class MainCoordinator: NSObject {
 	}
 
 	func scheduleTimer() {
-		timer = Timer.scheduledTimer(timeInterval: 15.0,
+		// fire right now...
+		timerDidFire()
+
+		// ... but also schedule for later
+		timer = Timer.scheduledTimer(timeInterval: 12.0,
 									 target: self, selector: #selector(timerDidFire),
 									 userInfo: nil, repeats: true)
 	}
