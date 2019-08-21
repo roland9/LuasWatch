@@ -24,19 +24,19 @@ extension State: CustomDebugStringConvertible {
 		switch self {
 
 		case .gettingLocation:
-			return "getting location..."
+			return "Getting your location..."
 		case .errorGettingLocation(let error):
-			return "error getting location: \(error)"
-		case .gettingStation(let location):
-			return "getting station for location \(location.coordinate)..."
+			return "Error getting location: \(error)"
+		case .gettingStation:
+			return "Finding closest station..."
 		case .errorGettingStation(let error):
-			return "error getting station: \(error)"
+			return "Error finding station: \(error)"
 		case .gettingDueTimes(let trainStation):
-			return "getting due times for \(trainStation.name)..."
+			return "Getting due times for \(trainStation.name)..."
 		case .errorGettingDueTimes(let errorMessage):
-			return "error getting due times: \(errorMessage)"
+			return "Error getting due times: \(errorMessage)"
 		case .foundDueTimes(let trains):
-			return "found due times: \(trains)"
+			return "Found due times: \(trains)"
 		}
 	}
 }
