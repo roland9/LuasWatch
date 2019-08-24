@@ -25,6 +25,8 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location access allows the app to find the closest LUAS stop</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

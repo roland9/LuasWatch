@@ -50,7 +50,5 @@
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKWatchOnly</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location access allows the app to find the closest LUAS stop</string>
 </dict>
 </plist>
