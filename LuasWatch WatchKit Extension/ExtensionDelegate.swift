@@ -12,11 +12,11 @@ import LuasKit
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
 	let appState = AppState()
-	var mainCoordinator: MainCoordinator!
+	var mainCoordinator: Coordinator!
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
-		mainCoordinator = MainCoordinator(appState: appState)
+		mainCoordinator = Coordinator(appState: appState)
 		mainCoordinator.start()
 	}
 

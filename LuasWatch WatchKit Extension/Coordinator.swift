@@ -6,7 +6,7 @@
 import CoreLocation
 import LuasKit
 
-class MainCoordinator: NSObject {
+class Coordinator: NSObject {
 
 	let appState: AppState
 	var location: Location!
@@ -44,7 +44,7 @@ class MainCoordinator: NSObject {
 	}
 }
 
-extension MainCoordinator: LocationDelegate {
+extension Coordinator: LocationDelegate {
 
 	func didFail(_ error: Error) {
 		appState.state = .errorGettingLocation(error)

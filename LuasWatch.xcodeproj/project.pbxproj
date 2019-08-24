@@ -18,7 +18,7 @@
 		AB364D202308277100C73EF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D1F2308277100C73EF6 /* Assets.xcassets */; };
 		AB364D232308277100C73EF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D222308277100C73EF6 /* Preview Assets.xcassets */; };
 		AB364D3A2308281100C73EF6 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
-		AB364D3C2308281100C73EF6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D352308281100C73EF6 /* MainCoordinator.swift */; };
+		AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D352308281100C73EF6 /* Coordinator.swift */; };
 		AB57F0E1230B3C1900BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F0E4230B3C1900BA8B53 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB57F0E5230B3C1900BA8B53 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -119,7 +119,7 @@
 		AB364D32230827D700C73EF6 /* Luas Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Luas Playground.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AB364D332308281000C73EF6 /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
 		AB364D342308281000C73EF6 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		AB364D352308281100C73EF6 /* MainCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		AB364D352308281100C73EF6 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB364D362308281100C73EF6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB364D382308281100C73EF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB364D392308281100C73EF6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		AB364D162308277000C73EF6 /* LuasWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				AB364D352308281100C73EF6 /* MainCoordinator.swift */,
+				AB364D352308281100C73EF6 /* Coordinator.swift */,
 				AB364D172308277000C73EF6 /* ContentView.swift */,
 				AB364D192308277000C73EF6 /* HostingController.swift */,
 				AB364D1B2308277000C73EF6 /* ExtensionDelegate.swift */,
@@ -484,7 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB364D1A2308277000C73EF6 /* HostingController.swift in Sources */,
-				AB364D3C2308281100C73EF6 /* MainCoordinator.swift in Sources */,
+				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
 				AB364D1E2308277000C73EF6 /* ComplicationController.swift in Sources */,
 				AB364D182308277000C73EF6 /* ContentView.swift in Sources */,
 				AB364D1C2308277000C73EF6 /* ExtensionDelegate.swift in Sources */,
