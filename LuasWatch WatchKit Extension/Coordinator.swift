@@ -12,6 +12,8 @@ class Coordinator: NSObject {
 	var location: Location!
 	var timer: Timer?
 
+	var trains: TrainsByDirection?
+
 	init(appState: AppState) {
 		self.appState = appState
 	}
@@ -59,7 +61,12 @@ extension Coordinator: LocationDelegate {
 		let closestStation = allStations.closestStation(from: location)
 		print("\(#function): found closest station <\(closestStation.name)>")
 
-		appState.state = .gettingDueTimes(closestStation)
+		// use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
+		if let trains = trains {
+			appState.state = .updatingDueTimes(trains)
+		} else {
+			appState.state = .gettingDueTimes(closestStation)
+		}
 
 		// step 3: get due times from API
 		LuasAPI.dueTime(for: closestStation) { [weak self] (result) in
@@ -70,6 +77,7 @@ extension Coordinator: LocationDelegate {
 
 			case .success(let trains):
 				print("\(#function): \(trains)")
+				self?.trains = trains
 				self?.appState.state = .foundDueTimes(trains)
 			}
 		}

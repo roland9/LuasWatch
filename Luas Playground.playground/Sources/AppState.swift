@@ -18,7 +18,6 @@ public enum State {
 
 	case foundDueTimes(TrainsByDirection)
 
-	case updatingLocation(TrainsByDirection)
 	case updatingDueTimes(TrainsByDirection)
 }
 
@@ -40,8 +39,6 @@ extension State: CustomDebugStringConvertible {
 			return "Error getting due times: \(errorMessage)"
 		case .foundDueTimes(let trains):
 			return "Found due times: \(trains)"
-		case .updatingLocation(let trains):
-			return "Updating location (current trains: \(trains))"
 		case .updatingDueTimes(let trains):
 			return "Updating due times (current trains: \(trains))"
 		}

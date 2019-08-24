@@ -85,20 +85,6 @@ struct ContentView: View {
 				}
 			)
 
-		case .updatingLocation(let trains):
-			return AnyView (
-				VStack {
-
-					Text(trains.trainStation.name)
-						.font(.system(.headline))
-
-					Text("Updating location")
-						.font(.system(.footnote))
-
-					TrainsList(trains: trains)
-				}
-			)
-
 		case .updatingDueTimes(let trains):
 			return AnyView (
 				VStack {
@@ -106,7 +92,7 @@ struct ContentView: View {
 					Text(trains.trainStation.name)
 						.font(.system(.headline))
 
-					Text("Updating due times")
+					Text("Updating...")
 						.font(.system(.footnote))
 
 					TrainsList(trains: trains)
@@ -157,8 +143,6 @@ struct Preview_AppRunning: PreviewProvider {
 
 		Group {
 			ContentView().environmentObject(AppState(state: .foundDueTimes(trains))).previewDisplayName("found first due times")
-
-			ContentView().environmentObject(AppState(state: .updatingLocation(trains))).previewDisplayName("updating location")
 
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trains))).previewDisplayName("updating due times")
 		}
