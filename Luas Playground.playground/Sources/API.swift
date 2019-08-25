@@ -33,8 +33,9 @@ public extension API {
 					let trains: [Train] = results.compactMap { (train) in
 						if let destination = train["destination"] as? String,
 							let direction = train["direction"] as? String,
-							let dueTime = train["duetime"] as? String {
-							return Train(destination: destination, direction: direction, dueTime: dueTime)
+							let dueTime = train["duetime"] as? String,
+							let route = train["route"] as? String {
+							return Train(destination: destination, direction: direction, dueTime: dueTime, route: route)
 						} else {
 							return nil
 						}

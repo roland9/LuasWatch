@@ -1,8 +1,3 @@
-//
-//  Created by Roland Gropmair on 11/08/2019.
-//  Copyright © 2019 mApps.ie. All rights reserved.
-//
-
 import Foundation
 
 public enum Result<T> {
@@ -38,8 +33,9 @@ public extension API {
 					let trains: [Train] = results.compactMap { (train) in
 						if let destination = train["destination"] as? String,
 							let direction = train["direction"] as? String,
-							let dueTime = train["duetime"] as? String {
-							return Train(destination: destination, direction: direction, dueTime: dueTime)
+							let dueTime = train["duetime"] as? String,
+							let route = train["route"] as? String {
+							return Train(destination: destination, direction: direction, dueTime: dueTime, route: route)
 						} else {
 							return nil
 						}
@@ -107,17 +103,20 @@ public struct LuasMockAPI: API {
 					[
 						"destination": "LUAS Bride's Glen",
 						"direction": "Outbound",
-						"duetime": "Due"
+						"duetime": "Due",
+						"route": "Green"
 					],
 					[
 						"destination": "LUAS Broombridge",
 						"direction": "Inbound",
-						"duetime": "6"
+						"duetime": "6",
+						"route": "Green"
 					],
 					[
-						"destination": "LUAS Bride's Glen",
+						"destination": "LUAS Tallaght",
 						"direction": "Outbound",
-						"duetime": "15"
+						"duetime": "15",
+						"route": "Red"
 					]
 				]
 		]
@@ -130,3 +129,4 @@ public struct LuasMockAPI: API {
 		//
 	}
 }
+

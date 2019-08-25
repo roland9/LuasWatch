@@ -14,19 +14,21 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	public let destination: String
 	public let direction: String
 	public let dueTime: String
+	public let route: String // red or green - for now
 
 	public var debugDescription: String {
-		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
+		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")) \(route): \'\(dueTimeDescription)\'"
 	}
 
 	public var dueTimeDescription: String {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
 
-	public init(destination: String, direction: String, dueTime: String) {
+	public init(destination: String, direction: String, dueTime: String, route: String) {
 		self.destination = destination
 		self.direction = direction
 		self.dueTime = dueTime
+		self.route = route
 	}
 }
 
