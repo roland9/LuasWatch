@@ -8,6 +8,24 @@ import Combine
 import CoreLocation
 import LuasKit
 
+struct Header: View {
+	var station: String
+
+	var body: some View {
+		ZStack {
+
+			Image("Header")
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 50, alignment: .trailing)
+
+			Text(station)
+				.font(.system(.headline))
+				.foregroundColor(.black)
+		}
+	}
+}
+
 struct TrainsList: View {
 	let trains: TrainsByDirection
 
@@ -78,8 +96,7 @@ struct ContentView: View {
 			return AnyView (
 				VStack {
 
-					Text(trains.trainStation.name)
-						.font(.system(.headline))
+					Header(station: trains.trainStation.name)
 
 					TrainsList(trains: trains)
 				}
@@ -89,8 +106,7 @@ struct ContentView: View {
 			return AnyView (
 				VStack {
 
-					Text(trains.trainStation.name)
-						.font(.system(.headline))
+					Header(station: trains.trainStation.name)
 
 					Text("Updating...")
 						.font(.system(.footnote))
