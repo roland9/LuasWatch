@@ -14,22 +14,22 @@ let station = TrainStation(stationId: "stationId",
 						   name: "Cabra",
 						   location: userLocation)
 
-LuasAPI.dueTime(for: station) { (result) in
-	switch result {
-	case .error(let message):
-	print(message)
-	case .success(let trains):
-		print(trains)
-	}
-}
-
-//LuasMockAPI.dueTime(for: station) { (result) in
+//LuasAPI.dueTime(for: station) { (result) in
 //	switch result {
 //	case .error(let message):
-//		print(message)
+//	print(message)
 //	case .success(let trains):
 //		print(trains)
 //	}
 //}
+
+LuasMockAPI.dueTime(for: station) { (result) in
+	switch result {
+	case .error(let message):
+		print(message)
+	case .success(let trains):
+		print(trains)
+	}
+}
 
 PlaygroundPage.current.needsIndefiniteExecution = true

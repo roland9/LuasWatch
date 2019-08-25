@@ -9,17 +9,17 @@ import CoreLocation
 import LuasKit
 
 struct Header: View {
-	var station: String
+	var station: TrainStation
 
 	var body: some View {
 		ZStack {
 
-			Image("Header")
+			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
 				.resizable()
 				.aspectRatio(contentMode: .fit)
 				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 50, alignment: .trailing)
 
-			Text(station)
+			Text(station.name)
 				.font(.system(.headline))
 				.foregroundColor(.black)
 		}
@@ -96,7 +96,7 @@ struct ContentView: View {
 			return AnyView (
 				VStack {
 
-					Header(station: trains.trainStation.name)
+					Header(station: trains.trainStation)
 
 					TrainsList(trains: trains)
 				}
@@ -106,7 +106,7 @@ struct ContentView: View {
 			return AnyView (
 				VStack {
 
-					Header(station: trains.trainStation.name)
+					Header(station: trains.trainStation)
 
 					Text("Updating...")
 						.font(.system(.footnote))
@@ -123,18 +123,34 @@ struct ContentView: View {
 let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
 						  longitude: CLLocationDegrees(Double(1.2)))
 
-let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
-let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
-let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
-
-let station = TrainStation(stationId: "stationId",
+let stationRed = TrainStation(stationId: "stationId",
 						   stationIdShort: "LUAS8",
+						   route: .red,
 						   name: "Bluebell",
 						   location: location)
 
-let trains = TrainsByDirection(trainStation: station,
-							   inbound: [train3],
-							   outbound: [train1, train2])
+let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
+let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
+let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
+
+let trainsRed = TrainsByDirection(trainStation: stationRed,
+							   inbound: [trainRed3],
+							   outbound: [trainRed1, trainRed2])
+
+
+let stationGreen = TrainStation(stationId: "stationId",
+								stationIdShort: "LUAS69",
+								route: .green,
+								name: "Phibsboro",
+								location: location)
+
+let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
+let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
+let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
+
+let trainsGreen = TrainsByDirection(trainStation: stationGreen,
+								  inbound: [trainGreen3],
+								  outbound: [trainGreen1, trainGreen2])
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
@@ -148,6 +164,7 @@ struct Preview_AppStartup: PreviewProvider {
 			ContentView().environmentObject(AppState(state:
 				.gettingDueTimes(TrainStation(stationId: "stationId",
 											  stationIdShort: "LUAS70",
+											  route: .green,
 											  name: "Cabra",
 											  location: location)))).previewDisplayName("getting due times")
 		}
@@ -158,9 +175,9 @@ struct Preview_AppRunning: PreviewProvider {
 	static var previews: some View {
 
 		Group {
-			ContentView().environmentObject(AppState(state: .foundDueTimes(trains))).previewDisplayName("found first due times")
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed))).previewDisplayName("found first due times")
 
-			ContentView().environmentObject(AppState(state: .updatingDueTimes(trains))).previewDisplayName("updating due times")
+			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
 		}
 	}
 }
