@@ -31,27 +31,26 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	public let destination: String
 	public let direction: String
 	public let dueTime: String
-	public let route: Route
 
 	public var debugDescription: String {
-		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")) \(route): \'\(dueTimeDescription)\'"
+		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
 	}
 
 	public var dueTimeDescription: String {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
 
-	public init(destination: String, direction: String, dueTime: String, route: Route) {
+	public init(destination: String, direction: String, dueTime: String) {
 		self.destination = destination
 		self.direction = direction
 		self.dueTime = dueTime
-		self.route = route
 	}
 }
 
 public struct TrainStation: CustomDebugStringConvertible {
 	public let stationId: String		// not sure what that 'id' is for?
 	public let stationIdShort: String 	// that is the 'id' required for the API
+	public let route: Route
 	public let name: String
 	public let location: CLLocation
 
@@ -59,9 +58,10 @@ public struct TrainStation: CustomDebugStringConvertible {
 		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))"
 	}
 
-	public init(stationId: String, stationIdShort: String, name: String, location: CLLocation) {
+	public init(stationId: String, stationIdShort: String, route: Route, name: String, location: CLLocation) {
 		self.stationId = stationId
 		self.stationIdShort = stationIdShort
+		self.route = route
 		self.name = name
 		self.location = location
 	}
@@ -82,6 +82,7 @@ public struct TrainStations {
 		stations = stationsArray.compactMap { (station) in
 			return TrainStation(stationId: station["stationId"] as! String,
 								stationIdShort: station["stationIdShort"] as! String,
+								route: Route(station["route"] as! String)!,
 								name: station["name"] as! String,
 								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
 													 longitude: CLLocationDegrees(station["long"] as! Double)))
