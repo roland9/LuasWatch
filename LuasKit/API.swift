@@ -34,7 +34,8 @@ public extension API {
 						if let destination = train["destination"] as? String,
 							let direction = train["direction"] as? String,
 							let dueTime = train["duetime"] as? String,
-							let route = train["route"] as? String {
+							let routeString = train["route"] as? String,
+							let route = Route(routeString) {
 							return Train(destination: destination, direction: direction, dueTime: dueTime, route: route)
 						} else {
 							return nil

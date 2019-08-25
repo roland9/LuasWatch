@@ -6,7 +6,24 @@
 import Foundation
 import CoreLocation
 
+public enum Route: Int, Codable {
+	case red, green
+}
+
+extension Route {
+	init?(_ routeString: String) {
+		if routeString == "Red" {
+			self = .red
+		} else if routeString == "Green" {
+			self = .green
+		} else {
+			return nil
+		}
+	}
+}
+
 public struct Train: CustomDebugStringConvertible, Hashable, Codable {
+
 	public var id: String {
 		return direction + dueTime
 	}
@@ -14,7 +31,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	public let destination: String
 	public let direction: String
 	public let dueTime: String
-	public let route: String // red or green - for now
+	public let route: Route
 
 	public var debugDescription: String {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")) \(route): \'\(dueTimeDescription)\'"
@@ -24,7 +41,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
 
-	public init(destination: String, direction: String, dueTime: String, route: String) {
+	public init(destination: String, direction: String, dueTime: String, route: Route) {
 		self.destination = destination
 		self.direction = direction
 		self.dueTime = dueTime

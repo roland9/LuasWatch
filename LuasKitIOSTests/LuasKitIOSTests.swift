@@ -10,9 +10,9 @@ import LuasKitIOS
 
 class LuasKitIOSTests: XCTestCase {
 
-	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due", route: "Green")
-	let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9", route: "Green")
-	let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12", route: "Green")
+	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due", route: .green)
+	let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9", route: .green)
+	let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12", route: .green)
 
 	let station = TrainStation(stationId: "stationId",
 							   stationIdShort: "LUAS8",
@@ -80,11 +80,11 @@ class LuasKitIOSTests: XCTestCase {
 
 			case .success(let trains):
 				XCTAssert(trains.inbound.count == 1)
-				XCTAssert(trains.inbound[0] == Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6", route: "Green"))
+				XCTAssert(trains.inbound[0] == Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6", route: .green))
 
 				XCTAssert(trains.outbound.count == 2)
-				XCTAssert(trains.outbound[0] == Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due", route: "Green"))
-				XCTAssert(trains.outbound[1] == Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15", route: "Red"))
+				XCTAssert(trains.outbound[0] == Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due", route: .green))
+				XCTAssert(trains.outbound[1] == Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15", route: .red))
 
 				apiExpectation.fulfill()
 				print(trains)

@@ -34,7 +34,8 @@ public extension API {
 						if let destination = train["destination"] as? String,
 							let direction = train["direction"] as? String,
 							let dueTime = train["duetime"] as? String,
-							let route = train["route"] as? String {
+							let routeString = train["route"] as? String,
+							let route = Route(routeString) {
 							return Train(destination: destination, direction: direction, dueTime: dueTime, route: route)
 						} else {
 							return nil
@@ -103,17 +104,20 @@ public struct LuasMockAPI: API {
 					[
 						"destination": "LUAS Bride's Glen",
 						"direction": "Outbound",
-						"duetime": "Due"
+						"duetime": "Due",
+						"route": "Green"
 					],
 					[
 						"destination": "LUAS Broombridge",
 						"direction": "Inbound",
-						"duetime": "6"
+						"duetime": "6",
+						"route": "Green"
 					],
 					[
-						"destination": "LUAS Bride's Glen",
+						"destination": "LUAS Tallaght",
 						"direction": "Outbound",
-						"duetime": "15"
+						"duetime": "15",
+						"route": "Red"
 					]
 				]
 		]
