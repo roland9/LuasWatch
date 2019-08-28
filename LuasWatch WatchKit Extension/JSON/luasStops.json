@@ -21,7 +21,7 @@
 	{"stationIdShort": "LUAS20", "stationId": "822GA00404", "route": "Red", "name": "Jervis", "lat": 53.3476830068047, "long": -6.26527546402985},
 	{"stationIdShort": "LUAS21", "stationId": "822GA00408", "route": "Red", "name": "Abbey Street", "lat": 53.3485637203993, "long": -6.2584803582757},
 	{"stationIdShort": "LUAS22", "stationId": "822GA00420", "route": "Red", "name": "Busáras", "lat": 53.3501166497177, "long": -6.25158234663218},
-	{"stationIdShort": "LUAS23", "stationId": "822GA00423", "route": "Green", "name": "Connolly", "lat": 53.3509834907561, "long": -6.25001465932888},
+	{"stationIdShort": "LUAS23", "stationId": "822GA00423", "route": "Red", "name": "Connolly", "lat": 53.3509834907561, "long": -6.25001465932888},
 	{"stationIdShort": "LUAS24", "stationId": "822GA00058", "route": "Green", "name": "St.Stephen's Green", "lat": 53.339128708973, "long": -6.26111748798404},
 	{"stationIdShort": "LUAS25", "stationId": "822GA00440", "route": "Green", "name": "Harcourt", "lat": 53.3336246192981, "long": -6.26273785213714},
 	{"stationIdShort": "LUAS26", "stationId": "822GA00070", "route": "Green", "name": "Charlemont", "lat": 53.3306152452483, "long": -6.25853598870766},

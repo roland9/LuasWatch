@@ -61,7 +61,7 @@ extension Location: CLLocationManagerDelegate {
 
 			if lastLocation.horizontalAccuracy < 100 &&
 				lastLocation.verticalAccuracy < 100 {
-				print("\(#function): last location quite precise, to stopping location updates for now")
+				print("\(#function): last location quite precise -> stopping location updates for now")
 				locationManager.stopUpdatingLocation()
 			}
 
