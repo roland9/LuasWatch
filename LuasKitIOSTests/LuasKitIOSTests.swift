@@ -10,12 +10,13 @@ import LuasKitIOS
 
 class LuasKitIOSTests: XCTestCase {
 
-	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due", route: .green)
-	let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9", route: .green)
-	let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12", route: .green)
+	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
+	let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
+	let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
 
 	let station = TrainStation(stationId: "stationId",
 							   stationIdShort: "LUAS8",
+							   route: .green,
 							   name: "Bluebell",
 							   location: CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2))))
 
