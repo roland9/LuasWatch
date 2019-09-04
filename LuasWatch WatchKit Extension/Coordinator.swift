@@ -52,13 +52,7 @@ extension Coordinator: LocationDelegate {
 		appState.state = .errorGettingLocation(error)
 	}
 
-	func didGetLocation(_ location: CLLocation) {
-
-		// step 2: we have location -> now find closest station
-		let allStations = TrainStations(fromFile: "luasStops")
-		let closestStation = allStations.closestStation(from: location)
-		print("\(#function): found closest station <\(closestStation.name)>")
-
+	fileprivate func handle(_ closestStation: TrainStation) {
 		// use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 		if let trains = trains {
 			appState.state = .updatingDueTimes(trains)
@@ -71,6 +65,7 @@ extension Coordinator: LocationDelegate {
 			switch result {
 			case .error(let error):
 				print("\(#function): \(error)")
+//	TODO should we nil it?			trains = nil
 				self?.appState.state = .errorGettingDueTimes(error)
 
 			case .success(let trains):
@@ -79,7 +74,23 @@ extension Coordinator: LocationDelegate {
 				self?.appState.state = .foundDueTimes(trains)
 			}
 		}
+	}
 
+	func didGetLocation(_ location: CLLocation) {
+
+		// step 2: we have location -> now find closest station
+		let allStations = TrainStations(fromFile: "luasStops")
+
+		if let closestStation = allStations.closestStation(from: location) {
+			print("\(#function): found closest station <\(closestStation.name)>")
+
+			handle(closestStation)
+		} else {
+
+			// no station found -> user too far away!
+			trains = nil
+			appState.state = .errorGettingStation(LuasErrors.errorLocationTooFarAway)
+		}
 	}
 
 }
