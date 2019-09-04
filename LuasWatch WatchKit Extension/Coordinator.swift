@@ -54,8 +54,6 @@ extension Coordinator: LocationDelegate {
 
 	func didGetLocation(_ location: CLLocation) {
 
-		appState.state = .gettingStation(location)
-
 		// step 2: we have location -> now find closest station
 		let allStations = TrainStations(fromFile: "luasStops")
 		let closestStation = allStations.closestStation(from: location)

@@ -68,15 +68,9 @@ struct ContentView: View {
 					.padding(.horizontal)
 			)
 
-		case .gettingStation:
+		case .errorGettingStation(let error):
 			return AnyView (
-				Text(self.appState.state.debugDescription)
-					.padding(.horizontal)
-			)
-
-		case .errorGettingStation:
-			return AnyView (
-				Text(self.appState.state.debugDescription)
+				Text((error as NSError).userInfo["message"] as? String ?? self.appState.state.debugDescription)
 					.padding(.horizontal)
 			)
 
@@ -152,14 +146,24 @@ let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 								  inbound: [trainGreen3],
 								  outbound: [trainGreen1, trainGreen2])
 
+extension Error {
+}
+
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
+	static let genericErrorGettingStation = NSError(domain: "ie.mapps.luaswatch", code: 100, userInfo: nil)
+	static let errorGettingStation = NSError(domain: "ie.mapps.luaswatch", code: 100, userInfo: ["message": "<Insert Specific Error Here>"])
+
 	static var previews: some View {
 
 		Group {
 			ContentView().environmentObject(AppState(state: .gettingLocation)).previewDisplayName("getting location")
 
-			ContentView().environmentObject(AppState(state: .gettingStation(location))).previewDisplayName("getting station")
+			ContentView().environmentObject(AppState(state: .errorGettingStation(genericErrorGettingStation)))
+				.previewDisplayName("generic error getting station")
+
+			ContentView().environmentObject(AppState(state: .errorGettingStation(errorGettingStation)))
+				.previewDisplayName("error getting station")
 
 			ContentView().environmentObject(AppState(state:
 				.gettingDueTimes(TrainStation(stationId: "stationId",

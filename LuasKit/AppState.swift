@@ -10,8 +10,7 @@ public enum State {
 	case gettingLocation
 	case errorGettingLocation(Error)
 
-	case gettingStation(CLLocation)
-	case errorGettingStation(Error)
+	case errorGettingStation(Error)		// in case the user is too far away
 
 	case gettingDueTimes(TrainStation)
 	case errorGettingDueTimes(String)
@@ -26,21 +25,19 @@ extension State: CustomDebugStringConvertible {
 		switch self {
 
 		case .gettingLocation:
-			return "Getting your location..."
+			return NSLocalizedString("Getting your location...", comment: "")
 		case .errorGettingLocation(let error):
-			return "Error getting location: \(error)"
-		case .gettingStation:
-			return "Finding closest station..."
-		case .errorGettingStation(let error):
-			return "Error finding station: \(error)"
+			return NSLocalizedString("Error getting your location: \(error)", comment: "")
+		case .errorGettingStation:
+			return NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
 		case .gettingDueTimes(let trainStation):
-			return "Getting due times for \(trainStation.name)..."
+			return NSLocalizedString("Getting due times for \(trainStation.name)...", comment: "")
 		case .errorGettingDueTimes(let errorMessage):
-			return "Error getting due times: \(errorMessage)"
+			return NSLocalizedString("Error getting due times: \(errorMessage)", comment: "")
 		case .foundDueTimes(let trains):
-			return "Found due times: \(trains)"
+			return NSLocalizedString("Found due times: \(trains)", comment: "")
 		case .updatingDueTimes(let trains):
-			return "Updating due times (current trains: \(trains))"
+			return NSLocalizedString("Updating due times (current trains: \(trains))", comment: "")
 		}
 	}
 }
