@@ -43,7 +43,7 @@ public class Location: NSObject {
 
 			state = .error
 			// TODO error handling - expose message
-			delegate?.didFail(NSError(domain: "ie.mapps.LuasWatch", code: 300, userInfo: nil))
+			delegate?.didFail(NSError(domain: LuasStrings.luasWatchErrorDomain, code: 300, userInfo: nil))
 		}
 	}
 

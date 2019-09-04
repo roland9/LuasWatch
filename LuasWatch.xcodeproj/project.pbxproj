@@ -33,6 +33,8 @@
 		AB57F122230B432E00BA8B53 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D382308281100C73EF6 /* AppState.swift */; };
 		AB57F131230B43AA00BA8B53 /* LuasKitIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57F130230B43AA00BA8B53 /* LuasKitIOSTests.swift */; };
 		AB57F133230B43AA00BA8B53 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
+		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
+		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +133,7 @@
 		AB57F12E230B43AA00BA8B53 /* LuasKitIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasKitIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB57F130230B43AA00BA8B53 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
 		AB57F132230B43AA00BA8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +238,7 @@
 				AB364D342308281000C73EF6 /* Models.swift */,
 				AB364D392308281100C73EF6 /* Location.swift */,
 				AB364D362308281100C73EF6 /* API.swift */,
+				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
 				AB57F0E0230B3C1900BA8B53 /* Info.plist */,
 			);
 			path = LuasKit;
@@ -495,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */,
 				AB57F0EC230B3C3F00BA8B53 /* API.swift in Sources */,
 				AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */,
@@ -506,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F11F230B432E00BA8B53 /* Location.swift in Sources */,
 				AB57F120230B432E00BA8B53 /* API.swift in Sources */,
 				AB57F121230B432E00BA8B53 /* Models.swift in Sources */,

@@ -59,30 +59,35 @@ struct ContentView: View {
 		case .gettingLocation:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
 					.padding(.horizontal)
 			)
 
 		case .errorGettingLocation:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
 					.padding(.horizontal)
 			)
 
 		case .errorGettingStation(let error):
 			return AnyView (
 				Text((error as NSError).userInfo["message"] as? String ?? self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
 					.padding(.horizontal)
 			)
 
 		case .gettingDueTimes:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
 					.padding(.horizontal)
 			)
 
 		case .errorGettingDueTimes:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
 					.padding(.horizontal)
 			)
 
@@ -151,8 +156,7 @@ extension Error {
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
-	static let genericErrorGettingStation = NSError(domain: "ie.mapps.luaswatch", code: 100, userInfo: nil)
-	static let errorGettingStation = NSError(domain: "ie.mapps.luaswatch", code: 100, userInfo: ["message": "<Insert Specific Error Here>"])
+	static let genericErrorGettingStation = NSError(domain: LuasStrings.luasWatchErrorDomain, code: 100, userInfo: nil)
 
 	static var previews: some View {
 
@@ -162,8 +166,9 @@ struct Preview_AppStartup: PreviewProvider {
 			ContentView().environmentObject(AppState(state: .errorGettingStation(genericErrorGettingStation)))
 				.previewDisplayName("generic error getting station")
 
-			ContentView().environmentObject(AppState(state: .errorGettingStation(errorGettingStation)))
+			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasErrors.errorLocationTooFarAway)))
 				.previewDisplayName("error getting station")
+				.environment(\.sizeCategory, .extraLarge)
 
 			ContentView().environmentObject(AppState(state:
 				.gettingDueTimes(TrainStation(stationId: "stationId",

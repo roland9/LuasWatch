@@ -80,11 +80,11 @@ class LuasKitIOSTests: XCTestCase {
 
 			case .success(let trains):
 				XCTAssert(trains.inbound.count == 1)
-				XCTAssert(trains.inbound[0] == Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6", route: .green))
+				XCTAssert(trains.inbound[0] == Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6"))
 
 				XCTAssert(trains.outbound.count == 2)
-				XCTAssert(trains.outbound[0] == Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due", route: .green))
-				XCTAssert(trains.outbound[1] == Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15", route: .red))
+				XCTAssert(trains.outbound[0] == Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due"))
+				XCTAssert(trains.outbound[1] == Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15"))
 
 				apiExpectation.fulfill()
 				print(trains)
