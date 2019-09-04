@@ -9,6 +9,7 @@ public struct LuasStrings {
 
 	public static let luasWatchErrorDomain = "ie.mapps.LuasWatch"
 
+	public static let emptyDueTimesErrorMessage = "Unfortunately we couldn’t get any due times for the %@ Luas station at this moment. Either the Luas is not operating right now, or there is a system problem with the Real Time Passenger Information (RTPI) Service.\n\nPlease try again later."
 }
 
 public struct LuasErrors {

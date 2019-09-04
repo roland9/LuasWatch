@@ -18,7 +18,7 @@ public extension API {
 		Self.getTrains(stationId: trainStation.stationIdShort) { (data, error) in
 			if let data = data,
 				let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary {
-							print("\(json)")
+				//			print("\(json)")
 
 				if let errorMessage = json["errormessage"] as? String,
 					errorMessage.count > 0 {
@@ -54,7 +54,7 @@ public extension API {
 
 					if inboundTrains.isEmpty && outboundTrains.isEmpty {
 						DispatchQueue.main.async {
-							completion(.error("Both inbound & outbound trains empty"))
+							completion(.error("result empty"))
 						}
 						return
 					}
@@ -129,3 +129,20 @@ public struct LuasMockAPI: API {
 	}
 }
 
+public struct LuasMockEmptyAPI: API {
+
+	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
+		let json: JSONDictionary =
+			[
+				"errormessage": "",
+				"results": []
+		]
+
+		// swiftlint:disable force_try
+		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
+	}
+
+	public init() {
+		//
+	}
+}

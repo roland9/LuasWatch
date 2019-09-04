@@ -33,7 +33,7 @@ extension State: CustomDebugStringConvertible {
 		case .gettingDueTimes(let trainStation):
 			return NSLocalizedString("Getting due times for \(trainStation.name)...", comment: "")
 		case .errorGettingDueTimes(let errorMessage):
-			return NSLocalizedString("Error getting due times: \(errorMessage)", comment: "")
+			return errorMessage
 		case .foundDueTimes(let trains):
 			return NSLocalizedString("Found due times: \(trains)", comment: "")
 		case .updatingDueTimes(let trains):

@@ -56,7 +56,7 @@ class LuasKitIOSTests: XCTestCase {
 		location = CLLocation(latitude: CLLocationDegrees(53.329), longitude: CLLocationDegrees(-6.333))
 		XCTAssert(allStations.closestStation(from: location)!.name == "Bluebell")
 
-		location = CLLocation(latitude: CLLocationDegrees(52.329), longitude: CLLocationDegrees(-6.333))
+		location = CLLocation(latitude: CLLocationDegrees(53.1), longitude: CLLocationDegrees(-6.333))
 		XCTAssertNil(allStations.closestStation(from: location))
 	}
 

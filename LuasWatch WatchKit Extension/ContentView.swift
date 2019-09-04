@@ -187,6 +187,9 @@ struct Preview_AppRunning: PreviewProvider {
 			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed))).previewDisplayName("found first due times")
 
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
+
+			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra")))).previewDisplayName("no due times found")
+
 		}
 	}
 }
