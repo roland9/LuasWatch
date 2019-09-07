@@ -60,35 +60,36 @@ struct ContentView: View {
 			return AnyView (
 				Text(self.appState.state.debugDescription)
 					.multilineTextAlignment(.center)
-					.padding(.horizontal)
 			)
 
 		case .errorGettingLocation:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
 					.multilineTextAlignment(.center)
-					.padding(.horizontal)
 			)
 
 		case .errorGettingStation(let error):
 			return AnyView (
-				Text((error as NSError).userInfo["message"] as? String ?? self.appState.state.debugDescription)
-					.multilineTextAlignment(.center)
-					.padding(.horizontal)
+				ScrollView {
+					Text((error as NSError).userInfo["message"] as? String ?? self.appState.state.debugDescription)
+						.multilineTextAlignment(.center)
+						.frame(idealHeight: .greatestFiniteMagnitude)
+				}
 			)
 
 		case .gettingDueTimes:
 			return AnyView (
 				Text(self.appState.state.debugDescription)
 					.multilineTextAlignment(.center)
-					.padding(.horizontal)
 			)
 
 		case .errorGettingDueTimes:
 			return AnyView (
-				Text(self.appState.state.debugDescription)
-					.multilineTextAlignment(.center)
-					.padding(.horizontal)
+				ScrollView {
+					Text(self.appState.state.debugDescription)
+						.multilineTextAlignment(.center)
+						.frame(idealHeight: .greatestFiniteMagnitude)
+				}
 			)
 
 		case .foundDueTimes(let trains):
@@ -123,18 +124,18 @@ let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
 						  longitude: CLLocationDegrees(Double(1.2)))
 
 let stationRed = TrainStation(stationId: "stationId",
-						   stationIdShort: "LUAS8",
-						   route: .red,
-						   name: "Bluebell",
-						   location: location)
+							  stationIdShort: "LUAS8",
+							  route: .red,
+							  name: "Bluebell",
+							  location: location)
 
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
 let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
 
 let trainsRed = TrainsByDirection(trainStation: stationRed,
-							   inbound: [trainRed3],
-							   outbound: [trainRed1, trainRed2])
+								  inbound: [trainRed3],
+								  outbound: [trainRed1, trainRed2])
 
 
 let stationGreen = TrainStation(stationId: "stationId",
@@ -148,8 +149,8 @@ let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", 
 let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
 
 let trainsGreen = TrainsByDirection(trainStation: stationGreen,
-								  inbound: [trainGreen3],
-								  outbound: [trainGreen1, trainGreen2])
+									inbound: [trainGreen3],
+									outbound: [trainGreen1, trainGreen2])
 
 extension Error {
 }
@@ -167,8 +168,8 @@ struct Preview_AppStartup: PreviewProvider {
 				.previewDisplayName("generic error getting station")
 
 			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasErrors.errorLocationTooFarAway)))
-				.previewDisplayName("error getting station")
 				.environment(\.sizeCategory, .extraLarge)
+				.previewDisplayName("error getting station")
 
 			ContentView().environmentObject(AppState(state:
 				.gettingDueTimes(TrainStation(stationId: "stationId",
@@ -188,7 +189,9 @@ struct Preview_AppRunning: PreviewProvider {
 
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
 
-			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra")))).previewDisplayName("no due times found")
+			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+				//				.environment(\.sizeCategory, .extraLarge)
+				.previewDisplayName("no due times found")
 
 		}
 	}
