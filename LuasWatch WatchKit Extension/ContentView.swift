@@ -16,8 +16,9 @@ struct Header: View {
 
 			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
 				.resizable()
-				.aspectRatio(contentMode: .fit)
-				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 50, alignment: .trailing)
+				.aspectRatio(contentMode: .fill)
+				.frame(minWidth: 0, maxWidth: .infinity,
+					   minHeight: 36, maxHeight: 36, alignment: .trailing)
 
 			Text(station.name)
 				.font(.system(.headline))
