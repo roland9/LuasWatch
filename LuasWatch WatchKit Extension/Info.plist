@@ -54,5 +54,7 @@
 	<string>Location access allows the app to find the closest LUAS stop</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location access allows the app to find the closest LUAS stop</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location access allows the app to find the closest LUAS stop</string>
 </dict>
 </plist>
