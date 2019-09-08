@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB364D042308276C00C73EF6 /* LuasWatch WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB364D032308276C00C73EF6 /* LuasWatch WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB364D042308276C00C73EF6 /* LuasWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB364D032308276C00C73EF6 /* LuasWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB364D0A2308276D00C73EF6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB364D082308276D00C73EF6 /* Interface.storyboard */; };
 		AB364D0C2308277000C73EF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D0B2308277000C73EF6 /* Assets.xcassets */; };
 		AB364D132308277000C73EF6 /* LuasWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AB364D122308277000C73EF6 /* LuasWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -86,7 +86,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				AB364D042308276C00C73EF6 /* LuasWatch WatchKit App.app in Embed Watch Content */,
+				AB364D042308276C00C73EF6 /* LuasWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +106,7 @@
 
 /* Begin PBXFileReference section */
 		AB364CFF2308276C00C73EF6 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB364D032308276C00C73EF6 /* LuasWatch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LuasWatch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB364D032308276C00C73EF6 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB364D092308276D00C73EF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		AB364D0B2308277000C73EF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB364D0D2308277000C73EF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				AB364CFF2308276C00C73EF6 /* LuasWatch.app */,
-				AB364D032308276C00C73EF6 /* LuasWatch WatchKit App.app */,
+				AB364D032308276C00C73EF6 /* LuasWatch.app */,
 				AB364D122308277000C73EF6 /* LuasWatch WatchKit Extension.appex */,
 				AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */,
 				AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */,
@@ -306,7 +306,7 @@
 			);
 			name = "LuasWatch WatchKit App";
 			productName = "LuasWatch WatchKit App";
-			productReference = AB364D032308276C00C73EF6 /* LuasWatch WatchKit App.app */;
+			productReference = AB364D032308276C00C73EF6 /* LuasWatch.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
 		AB364D112308277000C73EF6 /* LuasWatch WatchKit Extension */ = {
@@ -734,7 +734,7 @@
 				IBSC_MODULE = LuasWatch_WatchKit_Extension;
 				INFOPLIST_FILE = "LuasWatch WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasWatch.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LuasWatch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -753,7 +753,7 @@
 				IBSC_MODULE = LuasWatch_WatchKit_Extension;
 				INFOPLIST_FILE = "LuasWatch WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasWatch.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LuasWatch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
