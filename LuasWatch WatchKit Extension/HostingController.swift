@@ -9,9 +9,8 @@ import SwiftUI
 
 class HostingController: WKHostingController<AnyView> {
 
-	let extensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
-
 	override var body: AnyView {
+		let extensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 		return AnyView(ContentView().environmentObject(extensionDelegate.appState))
     }
 }

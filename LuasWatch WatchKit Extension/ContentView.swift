@@ -138,7 +138,6 @@ let trainsRed = TrainsByDirection(trainStation: stationRed,
 								  inbound: [trainRed3],
 								  outbound: [trainRed1, trainRed2])
 
-
 let stationGreen = TrainStation(stationId: "stationId",
 								stationIdShort: "LUAS69",
 								route: .green,
@@ -182,6 +181,7 @@ struct Preview_AppStartup: PreviewProvider {
 	}
 }
 
+// swiftlint:disable:next type_name
 struct Preview_AppRunning: PreviewProvider {
 	static var previews: some View {
 

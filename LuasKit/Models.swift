@@ -93,7 +93,7 @@ public struct TrainStations {
 	public init(stations: [TrainStation]) {
 		self.stations = stations
 	}
-	
+
 	public func closestStation(from location: CLLocation) -> TrainStation? {
 		var closestStationSoFar: TrainStation?
 
