@@ -27,7 +27,14 @@ extension State: CustomDebugStringConvertible {
 		case .gettingLocation:
 			return NSLocalizedString("Getting your location...", comment: "")
 		case .errorGettingLocation(let error):
-			return NSLocalizedString("Error getting your location: \(error)", comment: "")
+			if (error as NSError).code == CLError.denied.rawValue {
+				// if user denied location access for entire app
+				return NSLocalizedString("Error getting your location: location access denied", comment: "")
+			} else {
+				// if didChangeAuthorization comes through
+				// TODO check code / userInfo
+				return NSLocalizedString("Error getting your location: \(error.localizedDescription)", comment: "")
+			}
 		case .errorGettingStation:
 			return NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
 		case .gettingDueTimes(let trainStation):

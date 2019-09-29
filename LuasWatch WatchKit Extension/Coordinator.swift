@@ -9,19 +9,20 @@ import LuasKit
 class Coordinator: NSObject {
 
 	let appState: AppState
-	var location: Location!
+	var location: Location
 	var timer: Timer?
 
 	var trains: TrainsByDirection?
 
-	init(appState: AppState) {
+	init(appState: AppState,
+		 location: Location) {
 		self.appState = appState
+		self.location = location
 	}
 
 	func start() {
 
 		// step 1: determine location
-		location = Location()
 		location.delegate = self
 
 		location.start()
