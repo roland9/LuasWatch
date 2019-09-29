@@ -10,6 +10,7 @@ import SwiftUI
 class HostingController: WKHostingController<AnyView> {
 
 	override var body: AnyView {
+		// swiftlint:disable:next force_cast
 		let extensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 		return AnyView(ContentView().environmentObject(extensionDelegate.appState))
     }
