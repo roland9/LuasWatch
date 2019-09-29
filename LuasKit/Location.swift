@@ -6,8 +6,15 @@
 import CoreLocation
 
 public protocol LocationDelegate: class {
-	func didFail(_ error: Error)
+	func didFail(_ error: LocationDelegateError)
 	func didGetLocation(_ location: CLLocation)
+}
+
+public enum LocationDelegateError {
+	case locationServicesNotEnabled
+	case locationAccessDenied
+	case locationManagerError(Error)
+	case authStatus(CLAuthorizationStatus)
 }
 
 enum LocationState {
@@ -42,8 +49,7 @@ public class Location: NSObject {
 			print("\(#function): services NOT enabled")
 
 			state = .error
-			// TODO error handling - expose message
-			delegate?.didFail(NSError(domain: LuasStrings.luasWatchErrorDomain, code: 300, userInfo: nil))
+			delegate?.didFail(.locationServicesNotEnabled)
 		}
 	}
 
@@ -66,15 +72,38 @@ extension Location: CLLocationManagerDelegate {
 		print("\(#function): \(error)")
 
 		state = .error
-		delegate?.didFail(error)
+		let nsError = error as NSError
+
+		if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.denied.rawValue {
+			delegate?.didFail(.locationAccessDenied)
+		} else {
+			delegate?.didFail(.locationManagerError(error))
+		}
 	}
+
+	public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		print("\(CLLocationManager.authorizationStatus())")
+
+		let authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+
+		switch authorizationStatus {
+			case .denied, .notDetermined, .restricted:
+				delegate?.didFail(.authStatus(authorizationStatus))
+		case .authorizedAlways:
+			print("authorizedAlways")
+		case .authorizedWhenInUse:
+			print("authorizedWhenInUse")
+		@unknown default:
+			print("default")
+		}
+}
 
 	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		print("\(#function): \(locations)")
 
 		let lastLocation = locations.last!
 
-		// TODO If it's a relatively recent event, turn off updates to save power. Also, turn on again later
+		// TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later
 
 		let howRecent = lastLocation.timestamp.timeIntervalSinceNow
 

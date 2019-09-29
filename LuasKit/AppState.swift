@@ -8,9 +8,9 @@ import Combine
 
 public enum State {
 	case gettingLocation
-	case errorGettingLocation(Error)
+	case errorGettingLocation(String)
 
-	case errorGettingStation(Error)		// in case the user is too far away
+	case errorGettingStation(String)		// in case the user is too far away
 
 	case gettingDueTimes(TrainStation)
 	case errorGettingDueTimes(String)
@@ -26,15 +26,8 @@ extension State: CustomDebugStringConvertible {
 
 		case .gettingLocation:
 			return NSLocalizedString("Getting your location...", comment: "")
-		case .errorGettingLocation(let error):
-			if (error as NSError).code == CLError.denied.rawValue {
-				// if user denied location access for entire app
-				return NSLocalizedString("Error getting your location: location access denied", comment: "")
-			} else {
-				// if didChangeAuthorization comes through
-				// TODO check code / userInfo
-				return NSLocalizedString("Error getting your location: \(error.localizedDescription)", comment: "")
-			}
+		case .errorGettingLocation(let errorMessage):
+			return errorMessage
 		case .errorGettingStation:
 			return NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
 		case .gettingDueTimes(let trainStation):

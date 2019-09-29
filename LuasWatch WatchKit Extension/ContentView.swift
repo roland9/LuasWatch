@@ -69,10 +69,10 @@ struct ContentView: View {
 					.multilineTextAlignment(.center)
 			)
 
-		case .errorGettingStation(let error):
+		case .errorGettingStation(let errorMessage):
 			return AnyView (
 				ScrollView {
-					Text((error as NSError).userInfo["message"] as? String ?? self.appState.state.debugDescription)
+					Text(errorMessage)
 						.multilineTextAlignment(.center)
 						.frame(idealHeight: .greatestFiniteMagnitude)
 				}
@@ -157,7 +157,7 @@ extension Error {
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
-	static let genericErrorGettingStation = NSError(domain: LuasStrings.luasWatchErrorDomain, code: 100, userInfo: nil)
+	static let genericErrorGettingStation = "generic error"
 
 	static var previews: some View {
 
@@ -167,7 +167,7 @@ struct Preview_AppStartup: PreviewProvider {
 			ContentView().environmentObject(AppState(state: .errorGettingStation(genericErrorGettingStation)))
 				.previewDisplayName("generic error getting station")
 
-			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasErrors.errorLocationTooFarAway)))
+			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
 				.environment(\.sizeCategory, .extraLarge)
 				.previewDisplayName("error getting station")
 

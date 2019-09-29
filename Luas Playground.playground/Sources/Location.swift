@@ -6,8 +6,16 @@
 import CoreLocation
 
 public protocol LocationDelegate: class {
-	func didFail(_ error: Error)
+	func didFail(_ error: LocationDelegateError)
 	func didGetLocation(_ location: CLLocation)
+}
+
+public enum LocationDelegateError {
+	case locationServicesNotEnabled
+	case locationAccessDenied
+	case locationManagerError(Error)
+	case authStatusDenied
+	case authStatus(CLAuthorizationStatus)
 }
 
 public class Location: NSObject {
@@ -32,8 +40,7 @@ public class Location: NSObject {
 		} else {
 			print("\(#function): services NOT enabled")
 
-			// TODO error handling - expose message
-			delegate?.didFail(NSError(domain: "ie.mapps.LuasWatch", code: 300, userInfo: nil))
+			delegate?.didFail(.locationServicesNotEnabled)
 		}
 	}
 }
@@ -43,7 +50,7 @@ extension Location: CLLocationManagerDelegate {
 	public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		print("\(#function): \(error)")
 
-		delegate?.didFail(error)
+		delegate?.didFail(.locationManagerError(error))
 	}
 
 	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -51,12 +58,11 @@ extension Location: CLLocationManagerDelegate {
 
 		let lastLocation = locations.last!
 
-		// TODO If it's a relatively recent event, turn off updates to save power. Also, turn on again later
+		// TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later
 
 		let howRecent = lastLocation.timestamp.timeIntervalSinceNow
 
 		if abs(howRecent) < 15.0 {
-			// TODO we should kill previous API requests if there is a newer location
 			delegate?.didGetLocation(lastLocation)
 
 			if lastLocation.horizontalAccuracy < 100 &&

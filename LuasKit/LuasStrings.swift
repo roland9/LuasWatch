@@ -7,17 +7,12 @@ import Foundation
 
 public struct LuasStrings {
 
-	public static let luasWatchErrorDomain = "ie.mapps.LuasWatch"
+	public static let emptyDueTimesErrorMessage =
+		NSLocalizedString("Couldn’t get any trains for the %@ station. " +
+		"Either Luas is not operating, or there is a problem with the RTPI Service.\n\n" +
+			"Please try again later.", comment: "")
 
-	public static let emptyDueTimesErrorMessage = "Couldn’t get any trains for the %@ station. " +
-	"Either Luas is not operating, or there is a problem with the RTPI Service.\n\nPlease try again later."
-}
-
-public struct LuasErrors {
-
-	public static let errorLocationTooFarAway =
-		NSError(domain: LuasStrings.luasWatchErrorDomain,
-				code: 100,
-				userInfo: ["message": NSLocalizedString("It looks like the closest Luas station is quite far away.\n\n" +
-					"Please use the Luas Watch app again when you’re closer to the Dublin Area.", comment: "")])
+	public static let tooFarAway =
+	NSLocalizedString("It looks like the closest Luas station is quite far away.\n\n" +
+		"Please use the Luas Watch app again when you’re closer to the Dublin Area.", comment: "")
 }

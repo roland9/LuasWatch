@@ -47,10 +47,47 @@ class Coordinator: NSObject {
 	}
 }
 
+extension CLAuthorizationStatus {
+	func localizedErrorMessage() -> String? {
+		switch self {
+			case .notDetermined:
+				return NSLocalizedString("auth status not determined (yet)", comment: "")
+
+			case .restricted:
+				return NSLocalizedString("auth status restricted", comment: "")
+
+			case .denied:
+				return NSLocalizedString("auth status denied", comment: "")
+
+			default:
+				return nil
+		}
+	}
+}
 extension Coordinator: LocationDelegate {
 
-	func didFail(_ error: Error) {
-		appState.state = .errorGettingLocation(error)
+	func didFail(_ delegateError: LocationDelegateError) {
+		switch delegateError {
+
+			case .locationServicesNotEnabled:
+				appState.state = .errorGettingLocation(
+					NSLocalizedString("Error getting your location:\n\nLocation Services not enabled", comment: ""))
+
+			case .locationAccessDenied:
+				appState.state = .errorGettingLocation(
+					NSLocalizedString("Error getting your location:\n\nLocation Access denied", comment: ""))
+
+			case .locationManagerError(let error):
+				appState.state = .errorGettingLocation(error.localizedDescription)
+
+			case .authStatus(let authStatusError):
+				if let errorMessage = authStatusError.localizedErrorMessage() {
+					appState.state = .errorGettingLocation("Error getting your location:\n\n\(errorMessage)")
+				} else {
+					appState.state = .errorGettingLocation(
+						NSLocalizedString("Error getting your location:\n\nOther error", comment: ""))
+			}
+		}
 	}
 
 	fileprivate func handle(_ closestStation: TrainStation) {
@@ -64,15 +101,15 @@ extension Coordinator: LocationDelegate {
 		// step 3: get due times from API
 		LuasAPI.dueTime(for: closestStation) { [weak self] (result) in
 			switch result {
-			case .error(let error):
-				print("\(#function): \(error)")
-//	TODO should we nil it?			trains = nil
-				self?.appState.state = .errorGettingDueTimes(error)
+				case .error(let error):
+					print("\(#function): \(error)")
+					//	TODO should we nil it?			trains = nil
+					self?.appState.state = .errorGettingDueTimes(error)
 
-			case .success(let trains):
-				print("\(#function): \(trains)")
-				self?.trains = trains
-				self?.appState.state = .foundDueTimes(trains)
+				case .success(let trains):
+					print("\(#function): \(trains)")
+					self?.trains = trains
+					self?.appState.state = .foundDueTimes(trains)
 			}
 		}
 	}
@@ -90,7 +127,7 @@ extension Coordinator: LocationDelegate {
 
 			// no station found -> user too far away!
 			trains = nil
-			appState.state = .errorGettingStation(LuasErrors.errorLocationTooFarAway)
+			appState.state = .errorGettingStation(LuasStrings.tooFarAway)
 		}
 	}
 
