@@ -68,14 +68,14 @@ class LuasKitIOSTests: XCTestCase {
 
 			case .error(let message):
 				print("error: \(message)")
-
+				XCTFail("did not expect error")
 			case .success(let trains):
-				apiExpectation.fulfill()
 				print(trains)
+				apiExpectation.fulfill()
 			}
 		}
 
-		wait(for: [apiExpectation], timeout: 10)
+		wait(for: [apiExpectation], timeout: 5)
 	}
 
 	func testMockAPI() {
@@ -115,6 +115,24 @@ class LuasKitIOSTests: XCTestCase {
 
 				apiExpectation.fulfill()
 				print(trains)
+			}
+		}
+
+		wait(for: [apiExpectation], timeout: 1)
+	}
+
+	func testMockErrorAPI() {
+		let apiExpectation = expectation(description: "API call expectation")
+
+		LuasMockErrorAPI.dueTime(for: station) { (result) in
+			switch result {
+
+				case .error(let message):
+					print("error: \(message)")
+					apiExpectation.fulfill()
+
+				case .success:
+					XCTFail("did not expect success for this test case")
 			}
 		}
 

@@ -33,14 +33,14 @@ struct TrainsList: View {
 	var body: some View {
 
 		List {
-			Section(header: Text("Inbound")) {
+			Section {
 
 				ForEach(trains.inbound, id: \.id) {
 					Text($0.dueTimeDescription)
 				}
 			}
 
-			Section(header: Text("Outbound")) {
+			Section {
 
 				ForEach(trains.outbound, id: \.id) {
 					Text($0.dueTimeDescription)

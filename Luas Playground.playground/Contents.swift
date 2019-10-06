@@ -14,14 +14,14 @@ let station = TrainStation(stationId: "stationId",
 						   name: "Cabra",
 						   location: userLocation)
 
-//LuasAPI.dueTime(for: station) { (result) in
-//	switch result {
-//	case .error(let message):
-//	print(message)
-//	case .success(let trains):
-//		print(trains)
-//	}
-//}
+LuasAPI.dueTime(for: station) { (result) in
+	switch result {
+	case .error(let message):
+	print(message)
+	case .success(let trains):
+		print(trains)
+	}
+}
 
 //LuasMockAPI.dueTime(for: station) { (result) in
 //	switch result {

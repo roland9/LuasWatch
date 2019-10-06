@@ -82,7 +82,7 @@ extension Coordinator: LocationDelegate {
 
 			case .authStatus(let authStatusError):
 				if let errorMessage = authStatusError.localizedErrorMessage() {
-					appState.state = .errorGettingLocation("Error getting your location:\n\n\(errorMessage)")
+					appState.state = .errorGettingLocation(NSLocalizedString("Error getting your location:\n\n\(errorMessage)", comment: ""))
 				} else {
 					appState.state = .errorGettingLocation(
 						NSLocalizedString("Error getting your location:\n\nOther error", comment: ""))
@@ -104,7 +104,7 @@ extension Coordinator: LocationDelegate {
 				case .error(let error):
 					print("\(#function): \(error)")
 					//	TODO should we nil it?			trains = nil
-					self?.appState.state = .errorGettingDueTimes(error)
+					self?.appState.state = .errorGettingDueTimes(error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
 
 				case .success(let trains):
 					print("\(#function): \(trains)")

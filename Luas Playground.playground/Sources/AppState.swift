@@ -8,10 +8,9 @@ import Combine
 
 public enum State {
 	case gettingLocation
-	case errorGettingLocation(Error)
+	case errorGettingLocation(String)
 
-	case gettingStation(CLLocation)
-	case errorGettingStation(Error)
+	case errorGettingStation(String)		// in case the user is too far away
 
 	case gettingDueTimes(TrainStation)
 	case errorGettingDueTimes(String)
@@ -25,22 +24,20 @@ extension State: CustomDebugStringConvertible {
 	public var debugDescription: String {
 		switch self {
 
-		case .gettingLocation:
-			return "Getting your location..."
-		case .errorGettingLocation(let error):
-			return "Error getting location: \(error)"
-		case .gettingStation:
-			return "Finding closest station..."
-		case .errorGettingStation(let error):
-			return "Error finding station: \(error)"
-		case .gettingDueTimes(let trainStation):
-			return "Getting due times for \(trainStation.name)..."
-		case .errorGettingDueTimes(let errorMessage):
-			return "Error getting due times: \(errorMessage)"
-		case .foundDueTimes(let trains):
-			return "Found due times: \(trains)"
-		case .updatingDueTimes(let trains):
-			return "Updating due times (current trains: \(trains))"
+			case .gettingLocation:
+				return NSLocalizedString("Getting your location...", comment: "")
+			case .errorGettingLocation(let errorMessage):
+				return errorMessage
+			case .errorGettingStation:
+				return NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
+			case .gettingDueTimes(let trainStation):
+				return NSLocalizedString("Getting due times for \(trainStation.name)...", comment: "")
+			case .errorGettingDueTimes(let errorMessage):
+				return errorMessage
+			case .foundDueTimes(let trains):
+				return NSLocalizedString("Found due times: \(trains)", comment: "")
+			case .updatingDueTimes(let trains):
+				return NSLocalizedString("Updating due times (current trains: \(trains))", comment: "")
 		}
 	}
 }

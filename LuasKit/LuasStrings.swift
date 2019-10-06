@@ -15,4 +15,6 @@ public struct LuasStrings {
 	public static let tooFarAway =
 	NSLocalizedString("It looks like the closest Luas station is quite far away.\n\n" +
 		"Please use the Luas Watch app again when you’re closer to the Dublin Area.", comment: "")
+
+	public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
 }

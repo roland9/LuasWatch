@@ -22,6 +22,7 @@ public extension API {
 
 				if let errorMessage = json["errormessage"] as? String,
 					errorMessage.count > 0 {
+
 					DispatchQueue.main.async {
 						completion(.error(errorMessage))
 					}
@@ -31,6 +32,7 @@ public extension API {
 				if let results = (json["results"] as? [JSONDictionary]) {
 
 					let trains: [Train] = results.compactMap { (train) in
+
 						if let destination = train["destination"] as? String,
 							let direction = train["direction"] as? String,
 							let dueTime = train["duetime"] as? String {
@@ -38,7 +40,9 @@ public extension API {
 						} else {
 							return nil
 						}
+
 					}
+
 					let groupedTrains = Dictionary(grouping: trains, by: { $0.direction })
 
 					var inboundTrains = [Train]()
@@ -72,6 +76,15 @@ public extension API {
 					}
 				}
 
+			} else {
+
+				DispatchQueue.main.async {
+					if let error = error {
+						completion(.error(NSLocalizedString("Error getting due times from internet: \(error)", comment: "")))
+					} else {
+						completion(.error(NSLocalizedString("Error getting due times from internet", comment: "")))
+					}
+				}
 			}
 		}
 	}
@@ -140,6 +153,18 @@ public struct LuasMockEmptyAPI: API {
 
 		// swiftlint:disable force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
+	}
+
+	public init() {
+		//
+	}
+}
+
+public struct LuasMockErrorAPI: API {
+
+	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
+
+		completion(nil, NSError(domain: "luaswatch", code: 100, userInfo: nil))
 	}
 
 	public init() {
