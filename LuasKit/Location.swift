@@ -74,8 +74,11 @@ extension Location: CLLocationManagerDelegate {
 		state = .error
 		let nsError = error as NSError
 
-		if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.denied.rawValue {
+		if nsError.domain == kCLErrorDomain &&
+			nsError.code == CLError.Code.denied.rawValue {
 			delegate?.didFail(.locationAccessDenied)
+		} else if nsError.domain == kCLErrorDomain &&
+			nsError.code == CLError.Code.locationUnknown.rawValue {
 		} else {
 			delegate?.didFail(.locationManagerError(error))
 		}

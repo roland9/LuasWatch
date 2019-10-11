@@ -156,6 +156,7 @@ extension Error {
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
 	static let genericError = "generic error"
+	// swiftlint:disable:next line_length
 	static let longGenericError = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 	static var previews: some View {
 
