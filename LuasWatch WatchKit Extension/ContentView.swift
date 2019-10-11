@@ -57,63 +57,61 @@ struct ContentView: View {
 
 		switch appState.state {
 
-		case .gettingLocation:
-			return AnyView (
-				Text(self.appState.state.debugDescription)
-					.multilineTextAlignment(.center)
-			)
-
-		case .errorGettingLocation:
-			return AnyView (
-				Text(self.appState.state.debugDescription)
-					.multilineTextAlignment(.center)
-			)
-
-		case .errorGettingStation(let errorMessage):
-			return AnyView (
-				ScrollView {
-					Text(errorMessage)
-						.multilineTextAlignment(.center)
-						.frame(idealHeight: .greatestFiniteMagnitude)
-				}
-			)
-
-		case .gettingDueTimes:
-			return AnyView (
-				Text(self.appState.state.debugDescription)
-					.multilineTextAlignment(.center)
-			)
-
-		case .errorGettingDueTimes:
-			return AnyView (
-				ScrollView {
+			case .gettingLocation:
+				return AnyView (
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
-						.frame(idealHeight: .greatestFiniteMagnitude)
-				}
 			)
 
-		case .foundDueTimes(let trains):
-			return AnyView (
-				VStack {
-
-					Header(station: trains.trainStation)
-
-					TrainsList(trains: trains)
-				}
+			case .errorGettingLocation:
+				return AnyView (
+					ScrollView {
+						Text(self.appState.state.debugDescription)
+							.multilineTextAlignment(.center)
+							.frame(idealHeight: .greatestFiniteMagnitude)
+					}
 			)
 
-		case .updatingDueTimes(let trains):
-			return AnyView (
-				VStack {
+			case .errorGettingStation(let errorMessage):
+				return AnyView (
+						Text(errorMessage)
+							.multilineTextAlignment(.center)
+							.frame(idealHeight: .greatestFiniteMagnitude)
+			)
 
-					Header(station: trains.trainStation)
+			case .gettingDueTimes:
+				return AnyView (
+					Text(self.appState.state.debugDescription)
+						.multilineTextAlignment(.center)
+			)
 
-					Text("Updating...")
-						.font(.system(.footnote))
+			case .errorGettingDueTimes:
+				return AnyView (
+					Text(self.appState.state.debugDescription)
+						.multilineTextAlignment(.center)
+			)
 
-					TrainsList(trains: trains)
-				}
+			case .foundDueTimes(let trains):
+				return AnyView (
+					VStack {
+
+						Header(station: trains.trainStation)
+
+						TrainsList(trains: trains)
+					}
+			)
+
+			case .updatingDueTimes(let trains):
+				return AnyView (
+					VStack {
+
+						Header(station: trains.trainStation)
+
+						Text("Updating...")
+							.font(.system(.footnote))
+
+						TrainsList(trains: trains)
+					}
 			)
 
 		}
@@ -157,15 +155,24 @@ extension Error {
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
-	static let genericErrorGettingStation = "generic error"
-
+	static let genericError = "generic error"
+	static let longGenericError = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 	static var previews: some View {
 
 		Group {
 			ContentView().environmentObject(AppState(state: .gettingLocation)).previewDisplayName("getting location")
 
-			ContentView().environmentObject(AppState(state: .errorGettingStation(genericErrorGettingStation)))
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(genericError)))
+				.previewDisplayName("error getting location")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(longGenericError)))
+				.previewDisplayName("error getting location (long)")
+
+			ContentView().environmentObject(AppState(state: .errorGettingStation(genericError)))
 				.previewDisplayName("generic error getting station")
+
+			ContentView().environmentObject(AppState(state: .errorGettingStation(longGenericError)))
+				.previewDisplayName("generic error getting station (long)")
 
 			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
 				.environment(\.sizeCategory, .extraLarge)

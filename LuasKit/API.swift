@@ -82,7 +82,7 @@ public extension API {
 					if let error = error {
 						completion(.error(NSLocalizedString("Error getting due times from internet: \(error)", comment: "")))
 					} else {
-						completion(.error(NSLocalizedString("Error getting due times from internet", comment: "")))
+						completion(.error(NSLocalizedString("Error getting due times from internet.\n\nPlease try agin later.", comment: "")))
 					}
 				}
 			}
