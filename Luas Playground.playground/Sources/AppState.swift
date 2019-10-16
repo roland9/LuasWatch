@@ -6,7 +6,7 @@
 import CoreLocation
 import Combine
 
-public enum State {
+public enum MyState {
 	case gettingLocation
 	case errorGettingLocation(String)
 
@@ -20,7 +20,7 @@ public enum State {
 	case updatingDueTimes(TrainsByDirection)
 }
 
-extension State: CustomDebugStringConvertible {
+extension MyState: CustomDebugStringConvertible {
 	public var debugDescription: String {
 		switch self {
 
@@ -43,11 +43,11 @@ extension State: CustomDebugStringConvertible {
 }
 
 public class AppState: ObservableObject {
-	@Published public var state: State = .gettingLocation
+	@Published public var state: MyState = .gettingLocation
 
 	public init() {}
 
-	public init(state: State) {
+	public init(state: MyState) {
 		self.state = state
 	}
 }
