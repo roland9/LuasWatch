@@ -11,8 +11,10 @@ platform :ios do
     increment_build_number 
     gym(
       scheme: "LuasWatch WatchKit App",
-      export_xcargs: "-allowProvisioningUpdates",
-      output_directory: "build/"
+      # export_xcargs: "-allowProvisioningUpdates",
+      # output_directory: "build/",
+      # output_name: "LuasWatchRelease.ipa",
+      # archive_path: "build/LuasWatchRelease.xcarchive"
     )
   end
 
