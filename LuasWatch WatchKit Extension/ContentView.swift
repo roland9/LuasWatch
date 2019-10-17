@@ -51,7 +51,21 @@ struct TrainsList: View {
 }
 
 struct ContentView: View {
+
 	@EnvironmentObject var appState: AppState
+	@State private var isAnimating = false
+
+	var animation: Animation {
+		Animation
+			.easeInOut(duration: 0.7)
+			.repeatForever()
+	}
+
+	var slowAnimation: Animation {
+		Animation
+			.easeInOut(duration: 1.4)
+			.repeatForever()
+	}
 
 	var body: some View {
 
@@ -59,8 +73,33 @@ struct ContentView: View {
 
 			case .gettingLocation:
 				return AnyView (
-					Text(self.appState.state.debugDescription)
-						.multilineTextAlignment(.center)
+					VStack {
+						Text(self.appState.state.debugDescription)
+							.multilineTextAlignment(.center)
+							.padding()
+
+						ZStack {
+
+							Circle()
+								.stroke(Color(UIColor.luasPurple), lineWidth: 6)
+								.scaleEffect(isAnimating ? 2.8 : 1)
+								.animation(slowAnimation)
+								.blur(radius: 8)
+
+							Circle()
+								.fill(Color(UIColor.luasGreen))
+								.scaleEffect(isAnimating ? 1.5 : 1)
+								.animation(animation)
+
+							Circle()
+								.stroke(Color(UIColor.luasRed), lineWidth: 3)
+								.scaleEffect(isAnimating ? 2.0 : 1)
+								.animation(slowAnimation)
+
+						}.frame(width: CGFloat(20), height: CGFloat(20))
+							.onAppear { self.isAnimating = true }
+							.padding(25)
+					}
 			)
 
 			case .errorGettingLocation:
@@ -74,9 +113,9 @@ struct ContentView: View {
 
 			case .errorGettingStation(let errorMessage):
 				return AnyView (
-						Text(errorMessage)
-							.multilineTextAlignment(.center)
-							.frame(idealHeight: .greatestFiniteMagnitude)
+					Text(errorMessage)
+						.multilineTextAlignment(.center)
+						.frame(idealHeight: .greatestFiniteMagnitude)
 			)
 
 			case .gettingDueTimes:
@@ -184,7 +223,7 @@ struct Preview_AppStartup: PreviewProvider {
 											  stationIdShort: "LUAS70",
 											  route: .green,
 											  name: "Cabra",
-											  location: location)))).previewDisplayName("getting due times")
+											  location: location)))).previewDisplayName("getting info")
 		}
 	}
 }
@@ -194,13 +233,13 @@ struct Preview_AppRunning: PreviewProvider {
 	static var previews: some View {
 
 		Group {
-			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed))).previewDisplayName("found first due times")
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed))).previewDisplayName("found  info (first time)")
 
-			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
+			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating time info")
 
 			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 				//				.environment(\.sizeCategory, .extraLarge)
-				.previewDisplayName("no due times found")
+				.previewDisplayName("no time info found")
 
 		}
 	}
