@@ -31,13 +31,13 @@ extension MyState: CustomDebugStringConvertible {
 		case .errorGettingStation:
 			return NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
 		case .gettingDueTimes(let trainStation):
-			return NSLocalizedString("Getting due times for \(trainStation.name)...", comment: "")
+			return NSLocalizedString("Getting times for \(trainStation.name)...", comment: "")
 		case .errorGettingDueTimes(let errorMessage):
 			return errorMessage
 		case .foundDueTimes(let trains):
-			return NSLocalizedString("Found due times: \(trains)", comment: "")
+			return NSLocalizedString("Found times: \(trains)", comment: "")
 		case .updatingDueTimes(let trains):
-			return NSLocalizedString("Updating due times (current trains: \(trains))", comment: "")
+			return NSLocalizedString("Updating times (current trains: \(trains))", comment: "")
 		}
 	}
 }
