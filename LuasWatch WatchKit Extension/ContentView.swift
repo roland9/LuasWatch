@@ -247,9 +247,11 @@ struct Preview_AppRunning: PreviewProvider {
 				.errorGettingDueTimes(genericError)))
 				.previewDisplayName("error getting due times (specific)")
 
-			ContentView().environmentObject(AppState(state:
-				.errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
+			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
 				.previewDisplayName("error getting due times (generic)")
+
+			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorNoInternet)))
+				.previewDisplayName("error getting due times (offline)")
 
 			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed)))
 				.previewDisplayName("found due times")

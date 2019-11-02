@@ -80,7 +80,11 @@ public extension API {
 
 				DispatchQueue.main.async {
 					if let error = error {
-						completion(.error(NSLocalizedString("Error getting due times from internet: \(error)", comment: "")))
+						if (error as NSError).code == NSURLErrorNotConnectedToInternet {
+							completion(.error(LuasStrings.errorNoInternet))
+						} else {
+							completion(.error(NSLocalizedString("Error getting due times from internet: \(error.localizedDescription)", comment: "")))
+						}
 					} else {
 						completion(.error(NSLocalizedString("Error getting due times from internet.\n\nPlease try agin later.", comment: "")))
 					}

@@ -5,6 +5,7 @@
 
 import Foundation
 
+// swiftlint:disable line_length
 public struct LuasStrings {
 
 	public static let emptyDueTimesErrorMessage =
@@ -18,11 +19,13 @@ public struct LuasStrings {
 
 	public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
 
+	public static let errorNoInternet =
+		NSLocalizedString("Looks like your watch is not connected to the internet.\n\nPlease check your internet connection and try again.", comment: "")
+
 	public static let locationServicesDisabled =
 		NSLocalizedString("Error getting your location:\n\nLocation Services not enabled", comment: "")
 
 	public static let locationAccessDenied =
-		// swiftlint:disable:next line_length
 		NSLocalizedString("We are only able to find the closest station if you allow location services.\n\nPlease go to Settings -> Privacy -> Location Services to turn them on for LuasWatch.", comment: "")
 
 	public static func gettingLocationAuthError(_ errorMessage: String) -> String {
