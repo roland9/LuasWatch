@@ -13,8 +13,40 @@ public struct LuasStrings {
 			"Please try again later.", comment: "")
 
 	public static let tooFarAway =
-	NSLocalizedString("It looks like the closest Luas station is quite far away.\n\n" +
-		"Please use the Luas Watch app again when you’re closer to the Dublin Area.", comment: "")
+	NSLocalizedString("Looks like the closest Luas station is quite far away.\n\n" +
+		"Please try again later when you’re closer to the Dublin Area.", comment: "")
 
 	public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
+
+	public static let locationServicesDisabled =
+		NSLocalizedString("Error getting your location:\n\nLocation Services not enabled", comment: "")
+
+	public static let locationAccessDenied =
+		// swiftlint:disable:next line_length
+		NSLocalizedString("We are only able to find the closest station if you allow location services.\n\nPlease go to Settings -> Privacy -> Location Services to turn them on for LuasWatch.", comment: "")
+
+	public static func gettingLocationAuthError(_ errorMessage: String) -> String {
+		NSLocalizedString("Error getting your location:\n\n\(errorMessage)", comment: "")
+	}
+
+	public static let gettingLocation =
+		NSLocalizedString("Getting your location...", comment: "")
+
+	public static let gettingLocationOtherError =
+		NSLocalizedString("Error getting your location:\n\nOther error", comment: "")
+
+	public static let errorGettingStation =
+		NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
+
+	public static func gettingDueTimes(_ trainStation: TrainStation) -> String {
+		NSLocalizedString("Getting times for \(trainStation.name)...", comment: "")
+	}
+
+	public static func foundDueTimes(_ trains: TrainsByDirection) -> String {
+		NSLocalizedString("Found times: \(trains)", comment: "")
+	}
+
+	public static func updatingDueTimes(_ trains: TrainsByDirection) -> String {
+		NSLocalizedString("Updating times (current trains: \(trains))", comment: "")
+	}
 }

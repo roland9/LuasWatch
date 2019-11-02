@@ -70,22 +70,19 @@ extension Coordinator: LocationDelegate {
 		switch delegateError {
 
 			case .locationServicesNotEnabled:
-				appState.state = .errorGettingLocation(
-					NSLocalizedString("Error getting your location:\n\nLocation Services not enabled", comment: ""))
+				appState.state = .errorGettingLocation(LuasStrings.locationServicesDisabled)
 
 			case .locationAccessDenied:
-				appState.state = .errorGettingLocation(
-					NSLocalizedString("Error getting your location:\n\nLocation Access denied", comment: ""))
+				appState.state = .errorGettingLocation(LuasStrings.locationAccessDenied)
 
 			case .locationManagerError(let error):
 				appState.state = .errorGettingLocation(error.localizedDescription)
 
 			case .authStatus(let authStatusError):
 				if let errorMessage = authStatusError.localizedErrorMessage() {
-					appState.state = .errorGettingLocation(NSLocalizedString("Error getting your location:\n\n\(errorMessage)", comment: ""))
+					appState.state = .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage))
 				} else {
-					appState.state = .errorGettingLocation(
-						NSLocalizedString("Error getting your location:\n\nOther error", comment: ""))
+					appState.state = .errorGettingLocation(LuasStrings.gettingLocationOtherError)
 			}
 		}
 	}

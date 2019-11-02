@@ -197,50 +197,71 @@ struct Preview_AppStartup: PreviewProvider {
 	static let genericError = "generic error"
 	// swiftlint:disable:next line_length
 	static let longGenericError = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+
 	static var previews: some View {
 
 		Group {
 			ContentView().environmentObject(AppState(state: .gettingLocation)).previewDisplayName("getting location")
 
-			ContentView().environmentObject(AppState(state: .errorGettingLocation(genericError)))
-				.previewDisplayName("error getting location")
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
+				.previewDisplayName("error getting location - location services disabled")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationAccessDenied)))
+				.previewDisplayName("error getting location - location access denied")
 
 			ContentView().environmentObject(AppState(state: .errorGettingLocation(longGenericError)))
-				.previewDisplayName("error getting location (long)")
+				.previewDisplayName("error getting location - location manager error")
 
-			ContentView().environmentObject(AppState(state: .errorGettingStation(genericError)))
-				.previewDisplayName("generic error getting station")
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationAuthError(genericError))))
+				.previewDisplayName("error getting location - auth error")
 
-			ContentView().environmentObject(AppState(state: .errorGettingStation(longGenericError)))
-				.previewDisplayName("generic error getting station (long)")
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationOtherError)))
+				.previewDisplayName("error getting location - other error")
 
 			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
-				.environment(\.sizeCategory, .extraLarge)
-				.previewDisplayName("error getting station")
+				.previewDisplayName("error getting station - too far away")
 
-			ContentView().environmentObject(AppState(state:
-				.gettingDueTimes(TrainStation(stationId: "stationId",
-											  stationIdShort: "LUAS70",
-											  route: .green,
-											  name: "Cabra",
-											  location: location)))).previewDisplayName("getting info")
+			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
+				.previewDisplayName("error getting station - too far away (larger)")
 		}
 	}
 }
 
 // swiftlint:disable:next type_name
 struct Preview_AppRunning: PreviewProvider {
+	static let genericError = "generic error"
+
 	static var previews: some View {
 
 		Group {
-			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed))).previewDisplayName("found  info (first time)")
+			ContentView().environmentObject(AppState(state:
+				.gettingDueTimes(TrainStation(stationId: "stationId",
+											  stationIdShort: "LUAS70",
+											  route: .green,
+											  name: "Cabra",
+											  location: location))))
+				.previewDisplayName("getting info")
 
-			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating time info")
+			ContentView().environmentObject(AppState(state:
+				.errorGettingDueTimes(genericError)))
+				.previewDisplayName("error getting due times (specific)")
+
+			ContentView().environmentObject(AppState(state:
+				.errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
+				.previewDisplayName("error getting due times (generic)")
+
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed)))
+				.previewDisplayName("found due times")
+
+			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
 
 			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
-				//				.environment(\.sizeCategory, .extraLarge)
-				.previewDisplayName("no time info found")
+				.previewDisplayName("error getting due times")
 
+			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+				.environment(\.sizeCategory, .extraExtraLarge)
+				.previewDisplayName("error getting due times (larger)")
 		}
 	}
 }
