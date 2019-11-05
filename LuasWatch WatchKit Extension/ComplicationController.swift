@@ -1,7 +1,4 @@
 //
-//  ComplicationController.swift
-//  LuasWatch WatchKit Extension
-//
 //  Created by Roland Gropmair on 17/08/2019.
 //  Copyright © 2019 mApps.ie. All rights reserved.
 //
@@ -14,7 +11,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 	func getSupportedTimeTravelDirections(for complication: CLKComplication,
 										  withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
-		handler([.forward, .backward])
+		handler([])
 	}
 
 	func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
@@ -33,7 +30,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 	func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
 		// Call the handler with the current timeline entry
-		handler(nil)
+		handler(timelineEntry(for: complication.family))
 	}
 
 	func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int,
@@ -52,7 +49,146 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 	func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
 		// This method will be called once per supported complication, and the results will be cached
-		handler(nil)
+		switch complication.family {
+
+			case .modularSmall:
+				let template = CLKComplicationTemplateModularSmallSimpleImage()
+				template.imageProvider = standardImageProvider()
+				handler(template)
+
+			case .modularLarge:
+				assertionFailure("unsupported complication family")
+				handler(nil)
+
+			case .utilitarianSmall:
+				let template = CLKComplicationTemplateUtilitarianSmallSquare()
+				template.imageProvider = standardImageProvider()
+				handler(template)
+
+			case .utilitarianSmallFlat:
+				assertionFailure("unsupported complication family")
+				handler(nil)
+
+			case .utilitarianLarge:
+				assertionFailure("unsupported complication family")
+				handler(nil)
+
+			case .circularSmall:
+				let template = CLKComplicationTemplateCircularSmallSimpleImage()
+				template.imageProvider = standardImageProvider()
+				handler(template)
+
+			case .extraLarge:
+				let template = CLKComplicationTemplateExtraLargeSimpleImage()
+				template.imageProvider = standardImageProvider()
+				handler(template)
+
+			case .graphicCorner:
+				let template = CLKComplicationTemplateGraphicCornerCircularImage()
+				template.imageProvider = graphicCornerImageProvider()
+				handler(template)
+
+			case .graphicBezel:
+				assertionFailure("unsupported complication family")
+				handler(nil)
+
+			case .graphicCircular:
+				let template = CLKComplicationTemplateGraphicCircularImage()
+				template.imageProvider = graphicCornerImageProvider()
+				handler(nil)
+
+			case .graphicRectangular:
+				assertionFailure("unsupported complication family")
+				handler(nil)
+
+			@unknown default:
+				assertionFailure("unsupported complication family")
+				handler(nil)
+
+		}
 	}
 
+}
+
+private extension ComplicationController {
+
+	func standardImageProvider() -> CLKImageProvider {
+		return CLKImageProvider(onePieceImage: UIImage(named: "Icon (Complication)")!)
+	}
+
+	func graphicCornerImageProvider() -> CLKFullColorImageProvider {
+		return CLKFullColorImageProvider(fullColorImage: UIImage(named: "IconRound (Complication)")!)
+	}
+
+	// swiftlint:disable:next cyclomatic_complexity
+	func timelineEntry(for family: CLKComplicationFamily) -> CLKComplicationTimelineEntry? {
+
+		switch family {
+			// OK
+			case .modularSmall:
+				let template = CLKComplicationTemplateModularSmallSimpleImage()
+				template.imageProvider = standardImageProvider()
+				return CLKComplicationTimelineEntry(date: Date(),
+													complicationTemplate: template)
+
+			case .modularLarge:
+				assertionFailure("unsupported complication family")
+				return nil
+
+			// ok
+			case .utilitarianSmall:
+				let template = CLKComplicationTemplateUtilitarianSmallSquare()
+				template.imageProvider = standardImageProvider()
+				return CLKComplicationTimelineEntry(date: Date(),
+													complicationTemplate: template)
+
+			case .utilitarianSmallFlat:
+				assertionFailure("unsupported complication family")
+				return nil
+
+			case .utilitarianLarge:
+				assertionFailure("unsupported complication family")
+				return nil
+
+			// OK
+			case .circularSmall:
+				let template = CLKComplicationTemplateCircularSmallSimpleImage()
+				template.imageProvider = standardImageProvider()
+				return CLKComplicationTimelineEntry(date: Date(),
+													complicationTemplate: template)
+
+			// OK - but too small??
+			case .extraLarge:
+				let template = CLKComplicationTemplateExtraLargeSimpleImage()
+				template.imageProvider = standardImageProvider()
+				return CLKComplicationTimelineEntry(date: Date(),
+													complicationTemplate: template)
+
+			// OK
+			case .graphicCorner:
+				let template = CLKComplicationTemplateGraphicCornerCircularImage()
+				template.imageProvider = graphicCornerImageProvider()
+				return CLKComplicationTimelineEntry(date: Date(),
+													complicationTemplate: template)
+
+			case .graphicBezel:
+				assertionFailure("unsupported complication family")
+				return nil
+
+			// OK
+			case .graphicCircular:
+				let template = CLKComplicationTemplateGraphicCircularImage()
+				template.imageProvider = graphicCornerImageProvider()
+				return CLKComplicationTimelineEntry(date: Date(),
+													complicationTemplate: template)
+
+			case .graphicRectangular:
+				assertionFailure("unsupported complication family")
+				return nil
+
+			@unknown default:
+				assertionFailure("unsupported complication family")
+				return nil
+		}
+	}
 }
