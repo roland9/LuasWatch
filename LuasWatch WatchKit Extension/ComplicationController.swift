@@ -124,7 +124,6 @@ private extension ComplicationController {
 	func timelineEntry(for family: CLKComplicationFamily) -> CLKComplicationTimelineEntry? {
 
 		switch family {
-			// OK
 			case .modularSmall:
 				let template = CLKComplicationTemplateModularSmallSimpleImage()
 				template.imageProvider = standardImageProvider()
@@ -135,7 +134,6 @@ private extension ComplicationController {
 				assertionFailure("unsupported complication family")
 				return nil
 
-			// ok
 			case .utilitarianSmall:
 				let template = CLKComplicationTemplateUtilitarianSmallSquare()
 				template.imageProvider = standardImageProvider()
@@ -150,21 +148,18 @@ private extension ComplicationController {
 				assertionFailure("unsupported complication family")
 				return nil
 
-			// OK
 			case .circularSmall:
 				let template = CLKComplicationTemplateCircularSmallSimpleImage()
 				template.imageProvider = standardImageProvider()
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
-			// OK - but too small??
 			case .extraLarge:
 				let template = CLKComplicationTemplateExtraLargeSimpleImage()
 				template.imageProvider = standardImageProvider()
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
-			// OK
 			case .graphicCorner:
 				let template = CLKComplicationTemplateGraphicCornerCircularImage()
 				template.imageProvider = graphicCornerImageProvider()
@@ -175,7 +170,6 @@ private extension ComplicationController {
 				assertionFailure("unsupported complication family")
 				return nil
 
-			// OK
 			case .graphicCircular:
 				let template = CLKComplicationTemplateGraphicCircularImage()
 				template.imageProvider = graphicCornerImageProvider()
