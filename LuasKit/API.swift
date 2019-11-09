@@ -18,7 +18,6 @@ public extension API {
 		Self.getTrains(stationId: trainStation.stationIdShort) { (data, error) in
 			if let data = data,
 				let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary {
-				//			print("\(json)")
 
 				if let errorMessage = json["errormessage"] as? String,
 					errorMessage.count > 0 {
