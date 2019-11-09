@@ -20,6 +20,7 @@
 		AB364D3A2308281100C73EF6 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
 		AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D352308281100C73EF6 /* Coordinator.swift */; };
 		AB55742823770C48007778DC /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
+		AB55742923770FED007778DC /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		AB57F0E1230B3C1900BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F0E4230B3C1900BA8B53 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB57F0E5230B3C1900BA8B53 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -517,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB364D1A2308277000C73EF6 /* HostingController.swift in Sources */,
+				AB55742923770FED007778DC /* Logging.swift in Sources */,
 				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
 				AB364D1E2308277000C73EF6 /* ComplicationController.swift in Sources */,
 				AB364D182308277000C73EF6 /* ContentView.swift in Sources */,

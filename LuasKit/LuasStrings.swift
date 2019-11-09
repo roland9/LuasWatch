@@ -33,7 +33,7 @@ public struct LuasStrings {
 	}
 
 	public static let gettingLocation =
-		NSLocalizedString("Getting your location...", comment: "")
+		NSLocalizedString("Getting location...", comment: "")
 
 	public static let gettingLocationOtherError =
 		NSLocalizedString("Error getting your location:\n\nOther error", comment: "")
