@@ -202,10 +202,14 @@ struct Preview_AppStartup: PreviewProvider {
 
 		Group {
 			ContentView()
-				.previewDevice("Apple Watch Series 4 - 44mm")
+				.environmentObject(AppState(state: .gettingLocation))
+				.previewDisplayName("getting location")
+
+			ContentView()
+				.previewDevice("Apple Watch Series 2 - 38mm")
 				.environmentObject(AppState(state: .gettingLocation))
 				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.previewDisplayName("getting location")
+				.previewDisplayName("getting location (38mm)")
 
 			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
 				.previewDisplayName("error getting location - location services disabled")
