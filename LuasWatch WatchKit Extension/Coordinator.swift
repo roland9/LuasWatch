@@ -5,6 +5,7 @@
 
 import CoreLocation
 import LuasKit
+import Intents
 
 class Coordinator: NSObject {
 
@@ -107,6 +108,39 @@ extension Coordinator: LocationDelegate {
 					print("\(#function): \(trains)")
 					self?.trains = trains
 					self?.appState.state = .foundDueTimes(trains)
+
+					self?.donateIntent(trains)
+
+			}
+		}
+	}
+
+	private func donateIntent(_ trains: TrainsByDirection) {
+		let nextLuasIntent = NextLuasIntent()
+
+		let response = NextLuasIntentResponse(code: .success, userActivity: nil)
+
+		let inbound = trains.inbound.map({ (train) -> NextLuas in
+			let next = NextLuas(identifier: nil, display: "\(train.destination) \(train.dueTime)", pronunciationHint: nil)
+			next.destination = train.destination
+			next.minutes = train.dueTime
+			return next
+		})
+		let outbound = trains.outbound.map({ (train) -> NextLuas in
+			let next = NextLuas(identifier: nil, display: "\(train.destination) \(train.dueTime)", pronunciationHint: nil)
+			next.destination = train.destination
+			next.minutes = train.dueTime
+			return next
+		})
+
+		response.nextLuases = inbound + outbound
+
+		let interaction = INInteraction(intent: nextLuasIntent, response: response)
+		interaction.donate { (error) in
+			if let error = error {
+				print("💔 error donating: \(error)")
+			} else {
+				print("✅ donated successfully")
 			}
 		}
 	}

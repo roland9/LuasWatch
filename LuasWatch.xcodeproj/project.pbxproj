@@ -37,6 +37,7 @@
 		AB57F133230B43AA00BA8B53 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
+		AB9AF3A023AD6C8E00E3A501 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AB9AF39F23AD6C8E00E3A501 /* Intents.intentdefinition */; };
 		ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 		ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,7 @@
 		AB57F130230B43AA00BA8B53 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
 		AB57F132230B43AA00BA8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
+		AB9AF39F23AD6C8E00E3A501 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				AB364D192308277000C73EF6 /* HostingController.swift */,
 				AB364D1B2308277000C73EF6 /* ExtensionDelegate.swift */,
 				AB364D1D2308277000C73EF6 /* ComplicationController.swift */,
+				AB9AF39F23AD6C8E00E3A501 /* Intents.intentdefinition */,
 				AB364D332308281000C73EF6 /* JSON */,
 				AB364D1F2308277100C73EF6 /* Assets.xcassets */,
 				AB364D242308277100C73EF6 /* Info.plist */,
@@ -517,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB9AF3A023AD6C8E00E3A501 /* Intents.intentdefinition in Sources */,
 				AB364D1A2308277000C73EF6 /* HostingController.swift in Sources */,
 				AB55742923770FED007778DC /* Logging.swift in Sources */,
 				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
