@@ -62,6 +62,14 @@
 				<key>INIntentResponseCodes</key>
 				<array>
 					<dict>
+						<key>INIntentResponseCodeConciseFormatString</key>
+						<string>Next Luas to ${nextLuases.destination}will be in ${nextLuases.minutes}.</string>
+						<key>INIntentResponseCodeConciseFormatStringID</key>
+						<string>iTsFos</string>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>Next Luas to ${nextLuases.destination}will be in ${nextLuases.minutes}.</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>gxYK1M</string>
 						<key>INIntentResponseCodeName</key>
 						<string>success</string>
 						<key>INIntentResponseCodeSuccess</key>
@@ -69,7 +77,7 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Sorry, we couldn't find the next Luas from ne</string>
+						<string>Sorry, we couldn't find the next Luas from ${nextLuases.destination}</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>89mK89</string>
 						<key>INIntentResponseCodeName</key>
@@ -78,6 +86,8 @@
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
 				<integer>5</integer>
+				<key>INIntentResponseOutput</key>
+				<string>nextLuases</string>
 				<key>INIntentResponseParameters</key>
 				<array>
 					<dict>
