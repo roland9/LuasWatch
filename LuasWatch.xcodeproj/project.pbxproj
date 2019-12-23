@@ -164,6 +164,7 @@
 		ABD8584B23B166EE00C25315 /* LuasWatchIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LuasWatchIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD8584D23B166EE00C25315 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		ABD8584F23B166EE00C25315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABD8585723B1686A00C25315 /* LuasWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LuasWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +250,7 @@
 		AB364D162308277000C73EF6 /* LuasWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				ABD8585723B1686A00C25315 /* LuasWatch WatchKit Extension.entitlements */,
 				AB364D352308281100C73EF6 /* Coordinator.swift */,
 				AB364D172308277000C73EF6 /* ContentView.swift */,
 				AB364D192308277000C73EF6 /* HostingController.swift */,
@@ -806,6 +808,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "LuasWatch WatchKit Extension/LuasWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LuasWatch WatchKit Extension\"/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
@@ -829,6 +832,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "LuasWatch WatchKit Extension/LuasWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LuasWatch WatchKit Extension\"/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
