@@ -76,8 +76,12 @@
 						<true/>
 					</dict>
 					<dict>
+						<key>INIntentResponseCodeConciseFormatString</key>
+						<string>Sorry, we couldn't find the next Luas from ${nextLuases.destination}.</string>
+						<key>INIntentResponseCodeConciseFormatStringID</key>
+						<string>WkiYfI</string>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Sorry, we couldn't find the next Luas from ${nextLuases.destination}</string>
+						<string>Sorry, we couldn't find the next Luas from ${nextLuases.destination}.</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>89mK89</string>
 						<key>INIntentResponseCodeName</key>
