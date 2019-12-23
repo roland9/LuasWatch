@@ -75,7 +75,7 @@ class LuasKitIOSTests: XCTestCase {
 			}
 		}
 
-		wait(for: [apiExpectation], timeout: 5)
+		wait(for: [apiExpectation], timeout: 15)
 	}
 
 	func testMockAPI() {
