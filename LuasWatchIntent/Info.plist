@@ -19,15 +19,19 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.1</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>28</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>IntentsRestrictedWhileLocked</key>
 			<array/>
-			<key>IntentsSupported</key>
+			<key>IntentsRestrictedWhileProtectedDataUnavailable</key>
 			<array/>
+			<key>IntentsSupported</key>
+			<array>
+				<string>NextLuasIntent</string>
+			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.intents-service</string>
