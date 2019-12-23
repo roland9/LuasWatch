@@ -8,11 +8,11 @@ import LuasKit
 
 class Coordinator: NSObject {
 
-	let appState: AppState
-	var location: Location
-	var timer: Timer?
+	private let appState: AppState
+	private var location: Location
+	private var timer: Timer?
 
-	var trains: TrainsByDirection?
+	private var trains: TrainsByDirection?
 
 	init(appState: AppState,
 		 location: Location) {
