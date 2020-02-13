@@ -42,6 +42,7 @@
 		ABD8585223B166EE00C25315 /* LuasWatchIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ABD8584B23B166EE00C25315 /* LuasWatchIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ABD8585823B1723300C25315 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AB9AF39F23AD6C8E00E3A501 /* Intents.intentdefinition */; };
 		ABD8585B23B1737A00C25315 /* IntentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD8585A23B1737A00C25315 /* IntentCoordinator.swift */; };
+		ABD8585D23B17FAB00C25315 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 		ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = ABD8584A23B166EE00C25315;
 			remoteInfo = LuasWatchIntent;
+		};
+		ABD8585F23B17FAB00C25315 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB364CF92308276C00C73EF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB57F0DC230B3C1900BA8B53;
+			remoteInfo = LuasKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -206,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABD8585D23B17FAB00C25315 /* LuasKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +232,7 @@
 				ABD8584C23B166EE00C25315 /* LuasWatchIntent */,
 				AB364D002308276C00C73EF6 /* Products */,
 				AB57F129230B432F00BA8B53 /* LuasKitIOS-Info.plist */,
+				ABD8585C23B17FAB00C25315 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -309,6 +319,13 @@
 				ABD8584F23B166EE00C25315 /* Info.plist */,
 			);
 			path = LuasWatchIntent;
+			sourceTree = "<group>";
+		};
+		ABD8585C23B17FAB00C25315 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +471,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				ABD8586023B17FAB00C25315 /* PBXTargetDependency */,
 			);
 			name = LuasWatchIntent;
 			productName = LuasWatchIntent;
@@ -679,6 +697,11 @@
 			isa = PBXTargetDependency;
 			target = ABD8584A23B166EE00C25315 /* LuasWatchIntent */;
 			targetProxy = ABD8585023B166EE00C25315 /* PBXContainerItemProxy */;
+		};
+		ABD8586023B17FAB00C25315 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB57F0DC230B3C1900BA8B53 /* LuasKit */;
+			targetProxy = ABD8585F23B17FAB00C25315 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
