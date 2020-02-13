@@ -8,6 +8,7 @@
 
 import WatchKit
 import LuasKit
+import Intents
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
@@ -35,7 +36,14 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 		coordinator.invalidateTimer()
     }
 
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+	func handle(_ intent: INIntent, completionHandler: @escaping (INIntentResponse) -> Void) {
+				// WIP
+//		if intent.identifier ==
+		let response = NextLuasIntentResponse(code: .success, userActivity: nil)
+		completionHandler(response)
+	}
+
+	func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         // Sent when the system needs to launch the application in the background to process tasks.
 		// Tasks arrive in a set, so loop through and process each one.
         for task in backgroundTasks {

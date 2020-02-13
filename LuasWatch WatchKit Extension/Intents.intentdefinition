@@ -63,11 +63,11 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeConciseFormatString</key>
-						<string>Next Luas to ${nextLuases.destination}will be in ${nextLuases.minutes}.</string>
+						<string>Next Luas to ${nextLuases.destination}will be in ${nextLuases.minutes}: ${nextLuases.failureText}.</string>
 						<key>INIntentResponseCodeConciseFormatStringID</key>
 						<string>iTsFos</string>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Next Luas to ${nextLuases.destination}will be in ${nextLuases.minutes}.</string>
+						<string>Next Luas to ${nextLuases.destination}will be in ${nextLuases.minutes}: ${nextLuases.failureText}.</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>gxYK1M</string>
 						<key>INIntentResponseCodeName</key>
@@ -89,7 +89,7 @@
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>5</integer>
+				<integer>6</integer>
 				<key>INIntentResponseOutput</key>
 				<string>nextLuases</string>
 				<key>INIntentResponseParameters</key>
@@ -134,7 +134,7 @@
 			<key>INTypeDisplayNameID</key>
 			<string>xGvupV</string>
 			<key>INTypeLastPropertyTag</key>
-			<integer>109</integer>
+			<integer>110</integer>
 			<key>INTypeName</key>
 			<string>NextLuas</string>
 			<key>INTypeProperties</key>
@@ -214,6 +214,20 @@
 					<string>destination</string>
 					<key>INTypePropertyTag</key>
 					<integer>108</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Failure Text</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>iF0Pgp</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>7</integer>
+					<key>INTypePropertyName</key>
+					<string>failureText</string>
+					<key>INTypePropertyTag</key>
+					<integer>110</integer>
 					<key>INTypePropertyType</key>
 					<string>String</string>
 				</dict>
