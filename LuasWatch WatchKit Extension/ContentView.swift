@@ -72,7 +72,7 @@ struct ContentView: View {
 		switch appState.state {
 
 			case .gettingLocation:
-				return AnyView (
+				return AnyView(
 					VStack {
 						Text(self.appState.state.debugDescription)
 							.multilineTextAlignment(.center)
@@ -103,7 +103,7 @@ struct ContentView: View {
 			)
 
 			case .errorGettingLocation:
-				return AnyView (
+				return AnyView(
 					ScrollView {
 						Text(self.appState.state.debugDescription)
 							.multilineTextAlignment(.center)
@@ -112,26 +112,26 @@ struct ContentView: View {
 			)
 
 			case .errorGettingStation(let errorMessage):
-				return AnyView (
+				return AnyView(
 					Text(errorMessage)
 						.multilineTextAlignment(.center)
 						.frame(idealHeight: .greatestFiniteMagnitude)
 			)
 
 			case .gettingDueTimes:
-				return AnyView (
+				return AnyView(
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
 			)
 
 			case .errorGettingDueTimes:
-				return AnyView (
+				return AnyView(
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
 			)
 
 			case .foundDueTimes(let trains):
-				return AnyView (
+				return AnyView(
 					VStack {
 
 						Header(station: trains.trainStation)
@@ -141,7 +141,7 @@ struct ContentView: View {
 			)
 
 			case .updatingDueTimes(let trains):
-				return AnyView (
+				return AnyView(
 					VStack {
 
 						Header(station: trains.trainStation)
