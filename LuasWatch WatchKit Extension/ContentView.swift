@@ -171,9 +171,18 @@ let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueT
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
 let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
 
-let trainsRed = TrainsByDirection(trainStation: stationRed,
-								  inbound: [trainRed3],
-								  outbound: [trainRed1, trainRed2])
+let trainsRed_1_1 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed3],
+									  outbound: [trainRed2])
+let trainsRed_2_1 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed1, trainRed3],
+									  outbound: [trainRed2])
+let trainsRed_3_2 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed1, trainRed2, trainRed3],
+									  outbound: [trainRed1, trainRed2])
+let trainsRed_4_4 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed1, trainRed2, trainRed3, trainRed3],
+									  outbound: [trainRed1, trainRed2, trainRed3, trainRed3])
 
 let stationGreen = TrainStation(stationId: "stationId",
 								stationIdShort: "LUAS69",
@@ -189,12 +198,9 @@ let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 									inbound: [trainGreen3],
 									outbound: [trainGreen1, trainGreen2])
 
-extension Error {
-}
-
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
-	static let genericError = "generic error"
+	static let genericError = "Some generic error"
 	// swiftlint:disable:next line_length
 	static let longGenericError = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
@@ -238,7 +244,7 @@ struct Preview_AppStartup: PreviewProvider {
 
 // swiftlint:disable:next type_name
 struct Preview_AppRunning: PreviewProvider {
-	static let genericError = "generic error"
+	static let genericError = "Some generic error"
 
 	static var previews: some View {
 
@@ -260,9 +266,26 @@ struct Preview_AppRunning: PreviewProvider {
 
 			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorNoInternet)))
 				.previewDisplayName("error getting due times (offline)")
+		}
+	}
+}
 
-			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed)))
-				.previewDisplayName("found due times")
+// swiftlint:disable:next type_name
+struct Preview_AppResult: PreviewProvider {
+	static var previews: some View {
+
+		Group {
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.previewDisplayName("found due times - 1:1")
+
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
+				.previewDisplayName("found due times - 2:1")
+
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
+				.previewDisplayName("found due times - 3:2")
+
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
+				.previewDisplayName("found due times - 4:4")
 
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
 
