@@ -16,7 +16,6 @@ struct Header: View {
 
 			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
 				.resizable()
-				.aspectRatio(contentMode: .fill)
 				.frame(minWidth: 0, maxWidth: .infinity,
 					   minHeight: 36, maxHeight: 36, alignment: .trailing)
 
@@ -284,7 +283,9 @@ struct Preview_AppResult: PreviewProvider {
 			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
 				.previewDisplayName("found due times - 3:2")
 
-			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
+			ContentView().previewDevice("Apple Watch Series 2 - 38mm")
+				.environmentObject(AppState(state:
+					.foundDueTimes(trainsRed_4_4)))
 				.previewDisplayName("found due times - 4:4")
 
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
