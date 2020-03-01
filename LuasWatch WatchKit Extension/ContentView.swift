@@ -26,25 +26,56 @@ struct Header: View {
 	}
 }
 
-struct TrainsList: View {
-	let trains: TrainsByDirection
+struct DirectionDashboard: View {
+	let viewModel: TrainsViewModel
+
+	var body: some View {
+		switch viewModel {
+
+			case .none:
+				return AnyView(Text("No inbound trains"))
+
+			case .one(let model):
+				return AnyView(Text(model.dueTimeDescription))
+
+			case .two(let modelMain, let model2):
+				return AnyView(
+					VStack {
+						Text(modelMain.dueTimeDescription)
+						Text(model2.dueTimeDescription)
+					})
+
+			case .three(let modelMain, let model2, let model3):
+				return AnyView(
+					VStack {
+						Text(modelMain.dueTimeDescription)
+						HStack {
+							Text(model2.dueTimeDescription)
+							Text(model3.dueTimeDescription)
+						}
+				})
+
+			case .more(let modelMain, let model2, let model3):
+				return AnyView(
+					VStack {
+						Text(modelMain.dueTimeDescription)
+						HStack {
+							Text(model2.dueTimeDescription)
+							Text(model3.dueTimeDescription)
+						}
+				})
+		}
+	}
+}
+
+struct TrainsDashboard: View {
+	let viewModel: ContentViewModel
 
 	var body: some View {
 
-		List {
-			Section {
-
-				ForEach(trains.inbound, id: \.id) {
-					Text($0.dueTimeDescription)
-				}
-			}
-
-			Section {
-
-				ForEach(trains.outbound, id: \.id) {
-					Text($0.dueTimeDescription)
-				}
-			}
+		VStack {
+			DirectionDashboard(viewModel: viewModel.inbound)
+			DirectionDashboard(viewModel: viewModel.inbound)
 		}
 	}
 }
@@ -135,7 +166,7 @@ struct ContentView: View {
 
 						Header(station: trains.trainStation)
 
-						TrainsList(trains: trains)
+						TrainsDashboard(viewModel: ContentViewModel.create(trains: trains))
 					}
 			)
 
@@ -148,7 +179,7 @@ struct ContentView: View {
 						Text("Updating...")
 							.font(.system(.footnote))
 
-						TrainsList(trains: trains)
+						TrainsDashboard(viewModel: ContentViewModel.create(trains: trains))
 					}
 			)
 
@@ -296,6 +327,17 @@ struct Preview_AppResult: PreviewProvider {
 			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 				.environment(\.sizeCategory, .extraExtraLarge)
 				.previewDisplayName("error getting due times (larger)")
+		}
+	}
+}
+
+// swiftlint:disable:next type_name
+struct Preview_AppResultNew: PreviewProvider {
+	static var previews: some View {
+
+		Group {
+			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.previewDisplayName("found due times - 1:1")
 		}
 	}
 }
