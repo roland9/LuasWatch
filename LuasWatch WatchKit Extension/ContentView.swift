@@ -8,6 +8,23 @@ import Combine
 import CoreLocation
 import LuasKit
 
+extension Color {
+	init(hex: Int, alpha: Double = 1) {
+		let components = (
+			R: Double((hex >> 16) & 0xff) / 255,
+			G: Double((hex >> 08) & 0xff) / 255,
+			B: Double((hex >> 00) & 0xff) / 255
+		)
+		self.init(
+			.sRGB,
+			red: components.R,
+			green: components.G,
+			blue: components.B,
+			opacity: alpha
+		)
+	}
+}
+
 struct Header: View {
 	var station: TrainStation
 
@@ -16,13 +33,52 @@ struct Header: View {
 
 			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
 				.resizable()
-				.frame(minWidth: 0, maxWidth: .infinity,
-					   minHeight: 36, maxHeight: 36, alignment: .trailing)
 
 			Text(station.name)
 				.font(.system(.headline))
 				.foregroundColor(.black)
 		}
+	}
+}
+
+struct MainTrain: View {
+	var text: String
+
+	let backgroundColor = Color(hex: 0x323233)
+
+	var body: some View {
+		AnyView(
+			ZStack {
+				RoundedRectangle(cornerRadius: 8)
+					.foregroundColor(backgroundColor)
+
+				Text(text)
+					.font(.system(size: 18))
+					.foregroundColor(.white)
+			}
+		)
+	}
+}
+
+struct SecondaryTrain: View {
+	var text: String
+
+	let backgroundColor = Color(hex: 0x1F1D1D)
+	let frameColor = Color(hex: 0x4B4B4B)
+
+	var body: some View {
+		AnyView(
+			ZStack {
+				RoundedRectangle(cornerRadius: 8)
+					.stroke(frameColor, lineWidth: 1)
+					.background(backgroundColor)
+
+				Text(text)
+					.truncationMode(.middle)
+					.font(.system(size: 15))
+					.foregroundColor(.white)
+			}
+		)
 	}
 }
 
@@ -36,32 +92,36 @@ struct DirectionDashboard: View {
 				return AnyView(Text("No inbound trains"))
 
 			case .one(let model):
-				return AnyView(Text(model.dueTimeDescription))
+				return AnyView(
+					VStack {
+						MainTrain(text: model.dueTimeDescription)
+					}
+			)
 
 			case .two(let modelMain, let model2):
 				return AnyView(
 					VStack {
-						Text(modelMain.dueTimeDescription)
-						Text(model2.dueTimeDescription)
+						MainTrain(text: modelMain.dueTimeDescription)
+						SecondaryTrain(text: model2.dueTimeDescriptionShort)
 					})
 
 			case .three(let modelMain, let model2, let model3):
 				return AnyView(
 					VStack {
-						Text(modelMain.dueTimeDescription)
+						MainTrain(text: modelMain.dueTimeDescription)
 						HStack {
-							Text(model2.dueTimeDescription)
-							Text(model3.dueTimeDescription)
+							SecondaryTrain(text: model2.dueTimeDescriptionShort)
+							SecondaryTrain(text: model3.dueTimeDescriptionShort)
 						}
 				})
 
 			case .more(let modelMain, let model2, let model3):
 				return AnyView(
 					VStack {
-						Text(modelMain.dueTimeDescription)
+						MainTrain(text: modelMain.dueTimeDescription)
 						HStack {
-							Text(model2.dueTimeDescription)
-							Text(model3.dueTimeDescription)
+							SecondaryTrain(text: model2.dueTimeDescriptionShort)
+							SecondaryTrain(text: model3.dueTimeDescriptionShort)
 						}
 				})
 		}
@@ -72,10 +132,17 @@ struct TrainsDashboard: View {
 	let viewModel: ContentViewModel
 
 	var body: some View {
+		GeometryReader { geometry in
 
-		VStack {
-			DirectionDashboard(viewModel: viewModel.inbound)
-			DirectionDashboard(viewModel: viewModel.inbound)
+			VStack {
+				DirectionDashboard(viewModel: self.viewModel.inbound)
+					.frame(width: geometry.size.width, height: geometry.size.height / 2 - 5, alignment: .top)
+
+				Spacer()
+
+				DirectionDashboard(viewModel: self.viewModel.inbound)
+					.frame(width: geometry.size.width, height: geometry.size.height / 2 - 5, alignment: .bottom)
+			}
 		}
 	}
 }
@@ -84,6 +151,8 @@ struct ContentView: View {
 
 	@EnvironmentObject var appState: AppState
 	@State private var isAnimating = false
+
+	let headerHeight: CGFloat = 36
 
 	var animation: Animation {
 		Animation
@@ -162,24 +231,36 @@ struct ContentView: View {
 
 			case .foundDueTimes(let trains):
 				return AnyView(
-					VStack {
 
-						Header(station: trains.trainStation)
+					GeometryReader { geometry in
+						VStack {
 
-						TrainsDashboard(viewModel: ContentViewModel.create(trains: trains))
+							Header(station: trains.trainStation)
+								.frame(width: geometry.size.width, height: self.headerHeight, alignment: .bottom)
+
+							TrainsDashboard(viewModel: ContentViewModel.create(trains: trains))
+								.frame(width: geometry.size.width, height: geometry.size.height - self.headerHeight, alignment: .center)
+
+						}
 					}
 			)
 
 			case .updatingDueTimes(let trains):
 				return AnyView(
-					VStack {
 
-						Header(station: trains.trainStation)
+					GeometryReader { geometry in
+						VStack {
 
-						Text("Updating...")
-							.font(.system(.footnote))
+							Header(station: trains.trainStation)
+								.frame(width: geometry.size.width, height: self.headerHeight, alignment: .top)
 
-						TrainsDashboard(viewModel: ContentViewModel.create(trains: trains))
+							Text("Updating...")
+								.font(.system(.footnote))
+
+							TrainsDashboard(viewModel: ContentViewModel.create(trains: trains))
+								.frame(width: geometry.size.width, height: geometry.size.height - self.headerHeight, alignment: .center)
+
+						}
 					}
 			)
 
@@ -317,7 +398,7 @@ struct Preview_AppResult: PreviewProvider {
 			ContentView().previewDevice("Apple Watch Series 2 - 38mm")
 				.environmentObject(AppState(state:
 					.foundDueTimes(trainsRed_4_4)))
-				.previewDisplayName("found due times - 4:4")
+				.previewDisplayName("Small watch - found due times - 4:4")
 
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
 

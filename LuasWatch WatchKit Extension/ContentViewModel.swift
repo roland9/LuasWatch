@@ -13,6 +13,10 @@ struct TrainViewModel {
 	public var dueTimeDescription: String {
 		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
 	}
+
+	public var dueTimeDescriptionShort: String {
+		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")) " + (dueTime == "Due" ? "Due" : "\(dueTime)")
+	}
 }
 
 enum TrainsViewModel {
@@ -24,7 +28,7 @@ enum TrainsViewModel {
 }
 
 struct ContentViewModel {
-	let inbound:  TrainsViewModel
+	let inbound: TrainsViewModel
 	let outbound: TrainsViewModel
 }
 
