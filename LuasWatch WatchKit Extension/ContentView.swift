@@ -286,8 +286,7 @@ struct Preview_AppResult: PreviewProvider {
 			ContentView().previewDevice("Apple Watch Series 2 - 38mm")
 				.environmentObject(AppState(state:
 					.foundDueTimes(trainsRed_4_4)))
-				.previewDisplayName("found due times - 4:4")
-
+				.previewDisplayName("Small watch - found due times - 4:4")
 			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
 
 			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
