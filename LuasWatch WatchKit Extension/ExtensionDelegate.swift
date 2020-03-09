@@ -12,6 +12,7 @@ import LuasKit
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
 	let appState = AppState()
+	let directionState = DirectionState()
 	let location = Location()
 	var mainCoordinator: Coordinator!
 
