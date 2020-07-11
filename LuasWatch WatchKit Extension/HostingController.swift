@@ -14,7 +14,6 @@ class HostingController: WKHostingController<AnyView> {
 		let extensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
 		return AnyView(ContentView()
-			.environmentObject(extensionDelegate.appState)
-			.environmentObject(extensionDelegate.directionState))
+			.environmentObject(extensionDelegate.appState))
 	}
 }

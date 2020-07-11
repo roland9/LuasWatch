@@ -11,9 +11,9 @@ import LuasKit
 struct ContentView: View {
 
 	@EnvironmentObject var appState: AppState
-	@EnvironmentObject var directionState: DirectionState
 
 	@State private var isAnimating = false
+	@State var direction: DirectionState.Direction = .both // DirectionState.direction(for: trains.trainStation.name)
 
 	var animation: Animation {
 		Animation
@@ -96,7 +96,12 @@ struct ContentView: View {
 
 						Header(station: trains.trainStation)
 
-						TrainsList(trains: trains, directionState: directionState)
+						TrainsList(trains: trains,
+								   direction: self.direction)
+					}.onTapGesture {
+						self.direction = self.direction.next()
+						debugPrint("new direction: \(self.direction.text())")
+						DirectionState.setDirection(for: trains.trainStation.name, to: self.direction)
 					}
 			)
 
@@ -109,7 +114,11 @@ struct ContentView: View {
 						Text("Updating...")
 							.font(.system(.footnote))
 
-						TrainsList(trains: trains, directionState: directionState)
+						TrainsList(trains: trains,
+								   direction: self.direction)
+					}.onTapGesture {
+						self.direction = self.direction.next()
+						DirectionState.setDirection(for: trains.trainStation.name, to: self.direction)
 					}
 			)
 
@@ -137,7 +146,7 @@ struct Header: View {
 
 struct TrainsList: View {
 	let trains: TrainsByDirection
-	var directionState: DirectionState
+	let direction: DirectionState.Direction
 
 	var body: some View {
 
@@ -149,7 +158,7 @@ struct TrainsList: View {
 				}
 			}
 
-			Section(footer: Footer(directionState: directionState)) {
+			Section(footer: Footer(direction: direction)) {
 
 				ForEach(trains.outbound, id: \.id) {
 					Text($0.dueTimeDescription)
@@ -161,14 +170,13 @@ struct TrainsList: View {
 
 struct Footer: View {
 	@State private var isExplanationShown = true
-
-	var directionState: DirectionState
+	let direction: DirectionState.Direction
 
 	var body: some View {
 
 		VStack {
 			Spacer()
-			Text(directionState.text())
+			Text(direction.text())
 				.fontWeight(.heavy)
 				.frame(maxWidth: .infinity, alignment: .center)
 			if isExplanationShown {
@@ -186,6 +194,7 @@ struct Footer: View {
 	}
 }
 
+#if DEBUG
 ////  Previews
 let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
 						  longitude: CLLocationDegrees(Double(1.2)))
@@ -226,10 +235,6 @@ let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", due
 let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 									inbound: [trainGreen3],
 									outbound: [trainGreen1, trainGreen2])
-
-let directionBoth = DirectionState(.both)
-let directionInbound = DirectionState(.inbound)
-let directionOutbound = DirectionState(.outbound)
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
@@ -292,13 +297,11 @@ struct Preview_AppRunning: PreviewProvider {
 															  route: .green,
 															  name: "Cabra",
 															  location: location))))
-				.environmentObject(directionBoth)
 				.previewDisplayName("getting info")
 
 			ContentView()
 				.environmentObject(AppState(state:
 												.errorGettingDueTimes(genericError)))
-				.environmentObject(directionBoth)
 				.previewDisplayName("error getting due times (specific)")
 
 			ContentView()
@@ -319,27 +322,22 @@ struct Preview_AppResult: PreviewProvider {
 		Group {
 			ContentView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
-				.environmentObject(directionBoth)
 				.previewDisplayName("found due times - 1:1")
 
 			ContentView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
-				.environmentObject(directionInbound)
 				.previewDisplayName("found due times - 2:1")
 
 			ContentView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
-				.environmentObject(directionOutbound)
 				.previewDisplayName("found due times - 3:2")
 
 			ContentView().previewDevice("Apple Watch Series 3 - 38mm")
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
-				.environmentObject(directionOutbound)
 				.previewDisplayName("Small watch - found due times - 4:4")
 
 			ContentView()
 				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen)))
-				.environmentObject(directionBoth)
 				.previewDisplayName("updating due times")
 
 			ContentView()
@@ -355,3 +353,4 @@ struct Preview_AppResult: PreviewProvider {
 		}
 	}
 }
+#endif
