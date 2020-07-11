@@ -9,8 +9,6 @@ import SnapshotTesting
 
 import LuasKitIOS
 
-@testable import SnapshotTesting
-
 class LuasKitIOSTests: XCTestCase {
 
 	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
@@ -146,7 +144,17 @@ class LuasKitIOSTests: XCTestCase {
 
 		let view = ContentView()
 			.environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+		assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhoneSe), traits: .init(userInterfaceStyle: .light)), named: "iPhoneSe tooFarAway")
 
-		assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhoneSe), traits: .init(userInterfaceStyle: .light)), named: "device")
+		let viewTrains = ContentView()
+			.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
+		assertSnapshot(matching: viewTrains, as: .image(layout: .device(config: .iPhoneSe), traits: .init(userInterfaceStyle: .light)), named: "iPhoneSe trains")
+
+		let viewError = ContentView()
+			.environmentObject(
+				AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+			.environment(\.sizeCategory, .extraExtraLarge)
+		assertSnapshot(matching: viewError, as: .image(layout: .device(config: .iPhoneSe), traits: .init(userInterfaceStyle: .light)), named: "iPhoneSe errorEmpty")
+
 	}
 }
