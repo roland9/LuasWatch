@@ -6,7 +6,14 @@
 import SwiftUI
 import Combine
 import CoreLocation
+
+#if os(iOS)
+import LuasKitIOS
+#endif
+
+#if os(watchOS)
 import LuasKit
+#endif
 
 struct ContentView: View {
 

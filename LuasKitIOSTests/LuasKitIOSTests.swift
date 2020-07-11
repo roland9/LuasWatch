@@ -5,8 +5,11 @@
 
 import XCTest
 import CoreLocation
+import SnapshotTesting
 
 import LuasKitIOS
+
+@testable import SnapshotTesting
 
 class LuasKitIOSTests: XCTestCase {
 
@@ -139,4 +142,11 @@ class LuasKitIOSTests: XCTestCase {
 		wait(for: [apiExpectation], timeout: 1)
 	}
 
+	func testSnapshot() {
+
+		let view = ContentView()
+			.environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+
+		assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhoneSe), traits: .init(userInterfaceStyle: .light)), named: "device")
+	}
 }
