@@ -100,7 +100,6 @@ struct ContentView: View {
 								   direction: self.direction)
 					}.onTapGesture {
 						self.direction = self.direction.next()
-						debugPrint("new direction: \(self.direction.text())")
 						DirectionState.setDirection(for: trains.trainStation.name, to: self.direction)
 					}
 			)
@@ -149,21 +148,49 @@ struct TrainsList: View {
 	let direction: DirectionState.Direction
 
 	var body: some View {
+		// this hack is required because Xcode 11 doesn't like switch statements
+		HStack {
+			trainListForDirection()
+		}
+	}
 
-		List {
-			Section {
+	private func trainListForDirection() -> AnyView {
+		switch direction {
 
-				ForEach(trains.inbound, id: \.id) {
-					Text($0.dueTimeDescription)
-				}
-			}
+			case .both:
+				return AnyView(
+					List {
+						Section {
+							ForEach(self.trains.inbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
 
-			Section(footer: Footer(direction: direction)) {
+						Section(footer: Footer(direction: self.direction)) {
+							ForEach(self.trains.outbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
+					}
+			)
 
-				ForEach(trains.outbound, id: \.id) {
-					Text($0.dueTimeDescription)
-				}
-			}
+			case .inbound:
+				return AnyView(
+					List {
+						ForEach(self.trains.inbound, id: \.id) {
+							Text($0.dueTimeDescription)
+						}
+					}
+			)
+
+			case .outbound:
+				return AnyView(
+					List {
+						ForEach(self.trains.outbound, id: \.id) {
+							Text($0.dueTimeDescription)
+						}
+					}
+			)
 		}
 	}
 }
@@ -292,16 +319,16 @@ struct Preview_AppRunning: PreviewProvider {
 			ContentView()
 				.environmentObject(
 					AppState(state:
-								.gettingDueTimes(TrainStation(stationId: "stationId",
-															  stationIdShort: "LUAS70",
-															  route: .green,
-															  name: "Cabra",
-															  location: location))))
+						.gettingDueTimes(TrainStation(stationId: "stationId",
+													  stationIdShort: "LUAS70",
+													  route: .green,
+													  name: "Cabra",
+													  location: location))))
 				.previewDisplayName("getting info")
 
 			ContentView()
 				.environmentObject(AppState(state:
-												.errorGettingDueTimes(genericError)))
+					.errorGettingDueTimes(genericError)))
 				.previewDisplayName("error getting due times (specific)")
 
 			ContentView()
