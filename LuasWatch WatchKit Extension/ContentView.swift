@@ -148,10 +148,8 @@ struct TrainsList: View {
 	let direction: DirectionState.Direction
 
 	var body: some View {
-		// this hack is required because Xcode 11 doesn't like switch statements
-		HStack {
+		// this hack is required because Xcode 11 doesn't like switch statements in a View
 			trainListForDirection()
-		}
 	}
 
 	private func trainListForDirection() -> AnyView {
