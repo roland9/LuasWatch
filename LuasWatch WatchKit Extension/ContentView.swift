@@ -13,7 +13,7 @@ struct ContentView: View {
 	@EnvironmentObject var appState: AppState
 
 	@State private var isAnimating = false
-	@State var direction: DirectionState.Direction = .both // DirectionState.direction(for: trains.trainStation.name)
+	@State var direction: Direction = .both
 
 	var animation: Animation {
 		Animation
@@ -100,7 +100,7 @@ struct ContentView: View {
 								   direction: self.direction)
 					}.onTapGesture {
 						self.direction = self.direction.next()
-						DirectionState.setDirection(for: trains.trainStation.name, to: self.direction)
+						Direction.setDirection(for: trains.trainStation.name, to: self.direction)
 					}
 			)
 
@@ -117,7 +117,7 @@ struct ContentView: View {
 								   direction: self.direction)
 					}.onTapGesture {
 						self.direction = self.direction.next()
-						DirectionState.setDirection(for: trains.trainStation.name, to: self.direction)
+						Direction.setDirection(for: trains.trainStation.name, to: self.direction)
 					}
 			)
 
@@ -145,7 +145,7 @@ struct Header: View {
 
 struct TrainsList: View {
 	let trains: TrainsByDirection
-	let direction: DirectionState.Direction
+	let direction: Direction
 
 	var body: some View {
 		// this hack is required because Xcode 11 doesn't like switch statements in a View
@@ -195,7 +195,7 @@ struct TrainsList: View {
 
 struct Footer: View {
 	@State private var isExplanationShown = true
-	let direction: DirectionState.Direction
+	let direction: Direction
 
 	var body: some View {
 

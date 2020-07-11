@@ -5,22 +5,11 @@
 
 import Foundation
 
-class DirectionState: ObservableObject {
-
-	enum Direction: Int {
-		case both, inbound, outbound
-	}
-
-	var direction: Direction = .both
-
-	public init() {}
-
-	public init(_ direction: Direction) {
-		self.direction = direction
-	}
+enum Direction: Int {
+	case both, inbound, outbound
 }
 
-extension DirectionState.Direction {
+extension Direction {
 
 	func text() -> String {
 		switch self {
@@ -33,7 +22,7 @@ extension DirectionState.Direction {
 		}
 	}
 
-	func next() -> DirectionState.Direction {
+	func next() -> Direction {
 		switch self {
 			case .both:
 				return .inbound
@@ -45,7 +34,7 @@ extension DirectionState.Direction {
 	}
 }
 
-extension DirectionState {
+extension Direction {
 
 	fileprivate static let userDefaultsKey = "DirectionStates"
 
@@ -54,7 +43,7 @@ extension DirectionState {
 
 		if let directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int],
 			let direction = directions[station] {
-			return DirectionState.Direction(rawValue: direction)!
+			return Direction(rawValue: direction)!
 		}
 
 		// haven't found a value for this station: fallback default is `.both`
