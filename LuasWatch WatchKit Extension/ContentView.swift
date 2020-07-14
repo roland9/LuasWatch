@@ -71,11 +71,9 @@ struct ContentView: View {
 
 			case .errorGettingLocation:
 				return AnyView(
-					ScrollView {
-						Text(self.appState.state.debugDescription)
-							.multilineTextAlignment(.center)
-							.frame(idealHeight: .greatestFiniteMagnitude)
-					}
+					Text(self.appState.state.debugDescription)
+						.multilineTextAlignment(.center)
+						.frame(idealHeight: .greatestFiniteMagnitude)
 			)
 
 			case .errorGettingStation(let errorMessage):
@@ -287,7 +285,7 @@ struct Preview_AppStartup: PreviewProvider {
 				.previewDevice("Apple Watch Series 3 - 38mm")
 				.environmentObject(AppState(state: .gettingLocation))
 				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.previewDisplayName("getting location (38mm)")
+				.previewDisplayName("getting location (38mm) extra large")
 
 			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
 				.previewDisplayName("error getting location - location services disabled")
