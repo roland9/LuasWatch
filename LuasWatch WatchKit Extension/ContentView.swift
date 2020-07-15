@@ -219,21 +219,28 @@ struct DirectionOverlay: View {
 	@State var viewOpacity: Double = 1.0
 
 	var body: some View {
+		GeometryReader { geometry in
 
-		ZStack {
-			Rectangle()
-				.foregroundColor(.black).opacity(0.59)
-			VStack {
-				Text("Showing")
-				Text(direction.text())
-					.fontWeight(.heavy)
+			ZStack {
+				Rectangle()
+					.foregroundColor(.black).opacity(0.59)
+				VStack {
+					Text("Showing")
+						.font(.footnote)
+					Text(self.direction.text())
+						.font(.footnote)
+						.fontWeight(.heavy)
+						.animation(nil)
+				}
 			}
-		}
-			.opacity(viewOpacity)
+			.frame(maxHeight: 50)
+			.offset(y: geometry.size.height - 65)
+			.opacity(self.viewOpacity)
 			.onAppear {
 				withAnimation(Animation.easeOut.delay(1.5)) {
 					self.viewOpacity = 0.0
 				}
+			}
 		}
 	}
 }
