@@ -20,7 +20,7 @@ struct ContentView: View {
 	@EnvironmentObject var appState: AppState
 
 	@State private var isAnimating = false
-	@State var direction: Direction = .both
+	@State var direction: Direction?
 
 	var animation: Animation {
 		Animation
@@ -102,10 +102,11 @@ struct ContentView: View {
 						Header(station: trains.trainStation)
 
 						TrainsList(trains: trains,
-								   direction: self.direction)
+								   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+
 					}.onTapGesture {
-						self.direction = self.direction.next()
-						Direction.setDirection(for: trains.trainStation.name, to: self.direction)
+						self.direction = self.direction != nil ? self.direction?.next() : Direction.direction(for: trains.trainStation.name).next()
+						Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 					}
 			)
 
@@ -118,11 +119,10 @@ struct ContentView: View {
 						Text("Updating...")
 							.font(.system(.footnote))
 
-						TrainsList(trains: trains,
-								   direction: self.direction)
+						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 					}.onTapGesture {
-						self.direction = self.direction.next()
-						Direction.setDirection(for: trains.trainStation.name, to: self.direction)
+						self.direction = self.direction != nil ? self.direction?.next() : Direction.direction(for: trains.trainStation.name).next()
+						Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 					}
 			)
 
@@ -153,7 +153,7 @@ struct TrainsList: View {
 	let direction: Direction
 
 	var body: some View {
-		// this hack is required because Xcode 11 doesn't like switch statements in a View
+		// this hack (extracting to method) is required because Xcode 11 doesn't like switch statements in a View
 			trainListForDirection()
 	}
 
@@ -162,57 +162,69 @@ struct TrainsList: View {
 
 			case .both:
 				return AnyView(
-					List {
-						Section {
-							ForEach(self.trains.inbound, id: \.id) {
-								Text($0.dueTimeDescription)
+					ZStack {
+						List {
+							Section {
+								ForEach(self.trains.inbound, id: \.id) {
+									Text($0.dueTimeDescription)
+								}
 							}
-						}
 
-						Section(footer: Footer(direction: self.direction)) {
-							ForEach(self.trains.outbound, id: \.id) {
-								Text($0.dueTimeDescription)
+							Section {
+								ForEach(self.trains.outbound, id: \.id) {
+									Text($0.dueTimeDescription)
+								}
 							}
 						}
+						DirectionOverlay(direction: direction)
 					}
 			)
 
 			case .inbound:
 				return AnyView(
-					List {
-						ForEach(self.trains.inbound, id: \.id) {
-							Text($0.dueTimeDescription)
+					ZStack {
+						List {
+							ForEach(self.trains.inbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
 						}
+						DirectionOverlay(direction: direction)
 					}
 			)
 
 			case .outbound:
 				return AnyView(
-					List {
-						ForEach(self.trains.outbound, id: \.id) {
-							Text($0.dueTimeDescription)
+					ZStack {
+						List {
+							ForEach(self.trains.outbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
 						}
+						DirectionOverlay(direction: direction)
 					}
 			)
 		}
 	}
 }
 
-struct Footer: View {
+struct DirectionOverlay: View {
 	@State private var isExplanationShown = true
 	let direction: Direction
 
 	var body: some View {
 
-		VStack {
-			Spacer()
-			Text(direction.text())
-				.fontWeight(.heavy)
-				.frame(maxWidth: .infinity, alignment: .center)
+		ZStack {
 			if isExplanationShown {
-				Text("Tap to switch direction")
-					.fontWeight(.thin)
-					.multilineTextAlignment(.center)
+				Rectangle()
+					.foregroundColor(.black).opacity(0.59)
+					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+
+				VStack {
+					Text("Showing")
+					Text(direction.text())
+						.fontWeight(.heavy)
+						.frame(maxWidth: .infinity, alignment: .center)
+				}
 			}
 		}
 		.onAppear {
