@@ -105,8 +105,10 @@ struct ContentView: View {
 								   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 
 					}.onTapGesture {
-						self.direction = self.direction != nil ? self.direction?.next() : Direction.direction(for: trains.trainStation.name).next()
-						Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						withAnimation(.spring()) {
+							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						}
 					}
 			)
 
@@ -120,9 +122,12 @@ struct ContentView: View {
 							.font(.system(.footnote))
 
 						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+
 					}.onTapGesture {
-						self.direction = self.direction != nil ? self.direction?.next() : Direction.direction(for: trains.trainStation.name).next()
-						Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						withAnimation(.spring()) {
+							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						}
 					}
 			)
 
@@ -158,6 +163,7 @@ struct TrainsList: View {
 	}
 
 	private func trainListForDirection() -> AnyView {
+
 		switch direction {
 
 			case .both:
@@ -208,31 +214,27 @@ struct TrainsList: View {
 }
 
 struct DirectionOverlay: View {
-	@State private var isExplanationShown = true
 	let direction: Direction
+
+	@State var viewOpacity: Double = 1.0
 
 	var body: some View {
 
 		ZStack {
-			if isExplanationShown {
-				Rectangle()
-					.foregroundColor(.black).opacity(0.59)
-					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-
-				VStack {
-					Text("Showing")
-					Text(direction.text())
-						.fontWeight(.heavy)
-						.frame(maxWidth: .infinity, alignment: .center)
+			Rectangle()
+				.foregroundColor(.black).opacity(0.59)
+			VStack {
+				Text("Showing")
+				Text(direction.text())
+					.fontWeight(.heavy)
+			}
+		}
+			.opacity(viewOpacity)
+			.onAppear {
+				withAnimation(Animation.easeOut.delay(1.5)) {
+					self.viewOpacity = 0.0
 				}
-			}
 		}
-		.onAppear {
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				self.isExplanationShown = false
-			}
-		}
-
 	}
 }
 
