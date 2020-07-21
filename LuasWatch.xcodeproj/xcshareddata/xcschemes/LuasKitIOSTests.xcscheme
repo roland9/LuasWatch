@@ -37,6 +37,11 @@
                BlueprintName = "LuasKitIOSTests"
                ReferencedContainer = "container:LuasWatch.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "LuasKitIOSTests/testRealAPI()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
