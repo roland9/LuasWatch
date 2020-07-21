@@ -116,10 +116,13 @@ struct ContentView: View {
 				return AnyView(
 					VStack {
 
-						Header(station: trains.trainStation)
-
-						Text("Updating...")
-							.font(.system(.footnote))
+						ZStack {
+							Header(station: trains.trainStation)
+							Rectangle()
+								.foregroundColor(.black).opacity(0.7)
+							Text("Updating...")
+								.font(.system(.footnote))
+						}
 
 						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 
