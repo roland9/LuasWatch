@@ -144,20 +144,20 @@ class LuasKitIOSTests: XCTestCase {
 
 		let view = ContentView()
 			.environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
-		assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhoneXr),
-												  traits: .init(userInterfaceStyle: .light)), named: "iPhoneXR tooFarAway")
+		assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone8),
+												  traits: .init(userInterfaceStyle: .light)), named: "iPhone8 tooFarAway")
 
 		let viewTrains = ContentView()
 			.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
-		assertSnapshot(matching: viewTrains, as: .image(layout: .device(config: .iPhoneXr),
-														traits: .init(userInterfaceStyle: .light)), named: "iPhoneXR trains")
+		assertSnapshot(matching: viewTrains, as: .image(layout: .device(config: .iPhone8),
+														traits: .init(userInterfaceStyle: .light)), named: "iPhone8 trains")
 
 		let viewError = ContentView()
 			.environmentObject(
 				AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 			.environment(\.sizeCategory, .extraExtraLarge)
-		assertSnapshot(matching: viewError, as: .image(layout: .device(config: .iPhoneXr),
-													   traits: .init(userInterfaceStyle: .light)), named: "iPhoneXR errorEmpty")
+		assertSnapshot(matching: viewError, as: .image(layout: .device(config: .iPhone8),
+													   traits: .init(userInterfaceStyle: .light)), named: "iPhone8 errorEmpty")
 
 	}
 }
