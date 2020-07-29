@@ -123,6 +123,7 @@ struct ContentView: View {
 							Text("Updating...")
 								.font(.system(.footnote))
 						}
+						.frame(height: 36)	// avoid jumping
 
 						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 
