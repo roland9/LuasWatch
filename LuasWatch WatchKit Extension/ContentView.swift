@@ -314,33 +314,33 @@ struct Preview_AppStartup: PreviewProvider {
 				.environmentObject(AppState(state: .gettingLocation))
 				.previewDisplayName("getting location")
 
-//			ContentView()
-//				.previewDevice("Apple Watch Series 3 - 38mm")
-//				.environmentObject(AppState(state: .gettingLocation))
-//				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-//				.previewDisplayName("getting location (38mm) extra large")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
-//				.previewDisplayName("error getting location - location services disabled")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationAccessDenied)))
-//				.previewDisplayName("error getting location - location access denied")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingLocation(longGenericError)))
-//				.previewDisplayName("error getting location - location manager error")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationAuthError(genericError))))
-//				.previewDisplayName("error getting location - auth error")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationOtherError)))
-//				.previewDisplayName("error getting location - other error")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
-//				.previewDisplayName("error getting station - too far away")
-//
-//			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
-//				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-//				.previewDisplayName("error getting station - too far away (larger)")
+			ContentView()
+				.previewDevice("Apple Watch Series 3 - 38mm")
+				.environmentObject(AppState(state: .gettingLocation))
+				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
+				.previewDisplayName("getting location (38mm) extra large")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
+				.previewDisplayName("error getting location - location services disabled")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationAccessDenied)))
+				.previewDisplayName("error getting location - location access denied")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(longGenericError)))
+				.previewDisplayName("error getting location - location manager error")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationAuthError(genericError))))
+				.previewDisplayName("error getting location - auth error")
+
+			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationOtherError)))
+				.previewDisplayName("error getting location - other error")
+
+			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+				.previewDisplayName("error getting station - too far away")
+
+			ContentView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
+				.previewDisplayName("error getting station - too far away (larger)")
 		}
 	}
 }
@@ -362,18 +362,18 @@ struct Preview_AppRunning: PreviewProvider {
 													  location: location))))
 				.previewDisplayName("getting info")
 
-//			ContentView()
-//				.environmentObject(AppState(state:
-//					.errorGettingDueTimes(genericError)))
-//				.previewDisplayName("error getting due times (specific)")
-//
-//			ContentView()
-//				.environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
-//				.previewDisplayName("error getting due times (generic)")
-//
-//			ContentView()
-//				.environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorNoInternet)))
-//				.previewDisplayName("error getting due times (offline)")
+			ContentView()
+				.environmentObject(AppState(state:
+					.errorGettingDueTimes(genericError)))
+				.previewDisplayName("error getting due times (specific)")
+
+			ContentView()
+				.environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
+				.previewDisplayName("error getting due times (generic)")
+
+			ContentView()
+				.environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorNoInternet)))
+				.previewDisplayName("error getting due times (offline)")
 		}
 	}
 }
@@ -387,32 +387,32 @@ struct Preview_AppResult: PreviewProvider {
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
 				.previewDisplayName("found due times - 1:1")
 
-//			ContentView()
-//				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
-//				.previewDisplayName("found due times - 2:1")
-//
-//			ContentView()
-//				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
-//				.previewDisplayName("found due times - 3:2")
-//
-//			ContentView().previewDevice("Apple Watch Series 3 - 38mm")
-//				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
-//				.previewDisplayName("Small watch - found due times - 4:4")
-//
-//			ContentView()
-//				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen)))
-//				.previewDisplayName("updating due times")
-//
-//			ContentView()
-//				.environmentObject(
-//					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
-//				.previewDisplayName("error getting due times")
-//
-//			ContentView()
-//				.environmentObject(
-//					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
-//				.environment(\.sizeCategory, .extraExtraLarge)
-//				.previewDisplayName("error getting due times (larger)")
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
+				.previewDisplayName("found due times - 2:1")
+
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
+				.previewDisplayName("found due times - 3:2")
+
+			ContentView().previewDevice("Apple Watch Series 3 - 38mm")
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
+				.previewDisplayName("Small watch - found due times - 4:4")
+
+			ContentView()
+				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen)))
+				.previewDisplayName("updating due times")
+
+			ContentView()
+				.environmentObject(
+					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+				.previewDisplayName("error getting due times")
+
+			ContentView()
+				.environmentObject(
+					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+				.environment(\.sizeCategory, .extraExtraLarge)
+				.previewDisplayName("error getting due times (larger)")
 		}
 	}
 }
