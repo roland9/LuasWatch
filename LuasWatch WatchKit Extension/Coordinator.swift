@@ -114,7 +114,7 @@ extension Coordinator: LocationDelegate {
 	func didGetLocation(_ location: CLLocation) {
 
 		// step 2: we have location -> now find closest station
-		let allStations = TrainStations(fromFile: "luasStops")
+		let allStations = TrainStations.fromFile()
 
 		if let closestStation = allStations.closestStation(from: location) {
 			print("\(#function): found closest station <\(closestStation.name)>")

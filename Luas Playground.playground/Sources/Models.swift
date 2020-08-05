@@ -70,9 +70,13 @@ public struct TrainStation: CustomDebugStringConvertible {
 public struct TrainStations {
 	public let stations: [TrainStation]
 
+	public static func fromFile() -> TrainStations {
+		return TrainStations.init(fromFile: "luasStops")
+	}
+
 	public init(fromFile fileName: String) {
 		guard
-			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
+			let luasStopsFile = Bundle.main.url(forResource: fileName, withExtension: "json"),
 			let data = try? Data(contentsOf: luasStopsFile),
 			let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
 			let stationsArray = json["stations"] as? [JSONDictionary]
@@ -90,10 +94,29 @@ public struct TrainStations {
 		// swiftlint:enable force_cast
 	}
 
-	public func closestStation(from location: CLLocation) -> TrainStation {
+	public init(stations: [TrainStation]) {
+		self.stations = stations
+	}
+
+	public var redLineStations: [TrainStation] {
+		return stations
+			.filter { $0.route == .red }
+	}
+
+	public var greenLineStations: [TrainStation] {
+		return stations
+			.filter { $0.route == .green }
+	}
+
+	public func closestStation(from location: CLLocation) -> TrainStation? {
 		var closestStationSoFar: TrainStation?
 
 		stations.forEach { (station) in
+			// don't consider stations if they're too far away, currently 20km
+			if station.location.distance(from: location) > 20000 {
+				return
+			}
+
 			if let closest = closestStationSoFar {
 				if station.location.distance(from: location) < closest.location.distance(from: location) {
 					closestStationSoFar = station
@@ -103,7 +126,7 @@ public struct TrainStations {
 			}
 		}
 
-		return closestStationSoFar!
+		return closestStationSoFar
 	}
 }
 

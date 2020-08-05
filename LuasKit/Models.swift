@@ -70,6 +70,10 @@ public struct TrainStation: CustomDebugStringConvertible {
 public struct TrainStations {
 	public let stations: [TrainStation]
 
+	public static func fromFile() -> TrainStations {
+		return TrainStations.init(fromFile: "luasStops")
+	}
+
 	public init(fromFile fileName: String) {
 		guard
 			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
@@ -92,6 +96,16 @@ public struct TrainStations {
 
 	public init(stations: [TrainStation]) {
 		self.stations = stations
+	}
+
+	public var redLineStations: [TrainStation] {
+		return stations
+			.filter { $0.route == .red }
+	}
+
+	public var greenLineStations: [TrainStation] {
+		return stations
+			.filter { $0.route == .green }
 	}
 
 	public func closestStation(from location: CLLocation) -> TrainStation? {

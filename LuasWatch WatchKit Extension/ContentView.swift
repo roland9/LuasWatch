@@ -21,6 +21,8 @@ struct ContentView: View {
 
 	@State private var isAnimating = false
 	@State var direction: Direction?
+	@State var isGreenLineModalPresented = false
+	@State var isRedLineModalPresented = false
 
 	var animation: Animation {
 		Animation
@@ -97,19 +99,47 @@ struct ContentView: View {
 
 			case .foundDueTimes(let trains):
 				return AnyView(
-					VStack {
+//					TabView {
+						VStack {
 
-						Header(station: trains.trainStation)
+							Header(station: trains.trainStation)
 
-						TrainsList(trains: trains,
-								   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+							TrainsList(trains: trains,
+									   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 
-					}.onTapGesture {
-						withAnimation(.spring()) {
-							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
-							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
-						}
-					}
+						}.onTapGesture {
+							withAnimation(.spring()) {
+								self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+								Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+							}
+						}.contextMenu(menuItems: {
+							Button(action: {
+								self.isGreenLineModalPresented = true
+							}, label: {
+								VStack {
+									Image(systemName: "arrow.up.arrow.down")
+										.font(.title)
+									Text("Green Line Station")
+								}
+							})
+								.sheet(isPresented: $isGreenLineModalPresented) {
+									GreenLineList()
+							}
+
+							Button(action: {
+								self.isRedLineModalPresented = true
+							}, label: {
+								VStack {
+									Image(systemName: "arrow.right.arrow.left")
+										.font(.title)
+									Text("Red Line Station")
+								}
+							})
+								.sheet(isPresented: $isRedLineModalPresented) {
+									RedLineList()
+							}
+						})
+//					}
 			)
 
 			case .updatingDueTimes(let trains):
@@ -240,6 +270,34 @@ struct DirectionOverlay: View {
 				withAnimation(Animation.easeOut.delay(1.5)) {
 					self.viewOpacity = 0.0
 				}
+			}
+		}
+	}
+}
+
+struct RedLineList: View {
+
+	let stations = TrainStations.fromFile().redLineStations
+
+	var body: some View {
+
+		List {
+			ForEach(self.stations, id: \.stationId) {
+				Text($0.name)
+			}
+		}
+	}
+}
+
+struct GreenLineList: View {
+
+	let stations = TrainStations.fromFile().greenLineStations
+
+	var body: some View {
+
+		List {
+			ForEach(self.stations, id: \.stationId) {
+				Text($0.name)
 			}
 		}
 	}
