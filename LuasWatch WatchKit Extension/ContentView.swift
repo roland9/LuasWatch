@@ -100,49 +100,62 @@ struct ContentView: View {
 			case .foundDueTimes(let trains):
 				return AnyView(
 //					TabView {
-						VStack {
+					VStack {
 
-							Header(station: trains.trainStation)
+						Header(station: trains.trainStation)
 
-							TrainsList(trains: trains,
-									   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+						TrainsList(trains: trains,
+								   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 
-						}.onTapGesture {
-							withAnimation(.spring()) {
-								self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
-								Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+					}.onTapGesture {
+						withAnimation(.spring()) {
+							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						}
+					}.contextMenu(menuItems: {
+						Button(action: {
+							self.isGreenLineModalPresented = true
+						}, label: {
+							VStack {
+								Image(systemName: "arrow.up.arrow.down")
+								Text("Green Line Station")
 							}
-						}.contextMenu(menuItems: {
+						})
+							.sheet(isPresented: $isGreenLineModalPresented) {
+								StationsListModal(stations: TrainStations.fromFile().greenLineStations)
+						}
+
+						Button(action: {
+							self.isRedLineModalPresented = true
+						}, label: {
+							VStack {
+								Image(systemName: "arrow.right.arrow.left")
+								Text("Red Line Station")
+							}
+						})
+							.sheet(isPresented: $isRedLineModalPresented) {
+								StationsListModal(stations: TrainStations.fromFile().redLineStations)
+						}
+
+						if MyUserDefaults.userSelectedSpecificStation() != nil {
 							Button(action: {
-								self.isGreenLineModalPresented = true
+								MyUserDefaults.wipeUserSelectedStation()
 							}, label: {
 								VStack {
-									Image(systemName: "arrow.up.arrow.down")
-										.font(.title)
-									Text("Green Line Station")
-								}
-							})
-								.sheet(isPresented: $isGreenLineModalPresented) {
-									GreenLineList()
-							}
-
-							Button(action: {
-								self.isRedLineModalPresented = true
-							}, label: {
-								VStack {
-									Image(systemName: "arrow.right.arrow.left")
-										.font(.title)
-									Text("Red Line Station")
+									Image(systemName: "location")
+									Text("Closest Station")
 								}
 							})
 								.sheet(isPresented: $isRedLineModalPresented) {
-									RedLineList()
+									StationsListModal(stations: TrainStations.fromFile().redLineStations)
 							}
-						})
+						}
+					})
 //					}
 			)
 
 			case .updatingDueTimes(let trains):
+				// TODO add logic here too?
 				return AnyView(
 					VStack {
 
@@ -275,31 +288,23 @@ struct DirectionOverlay: View {
 	}
 }
 
-struct RedLineList: View {
-
-	let stations = TrainStations.fromFile().redLineStations
-
-	var body: some View {
-
-		List {
-			ForEach(self.stations, id: \.stationId) {
-				Text($0.name)
-			}
-		}
-	}
-}
-
-struct GreenLineList: View {
-
-	let stations = TrainStations.fromFile().greenLineStations
+struct StationsListModal: View {
+	@State var stations: [TrainStation]
 
 	var body: some View {
-
+		// swiftlint:disable multiple_closures_with_trailing_closure
 		List {
-			ForEach(self.stations, id: \.stationId) {
-				Text($0.name)
+			ForEach(self.stations, id: \.stationId) { (station) in
+				// need a button here because just text only supports tap on the text but not full width
+				Button(action: {
+					print("☣️ tap \(station) -> save")
+					MyUserDefaults.saveSelectedStation(station)
+				}) {
+					Text(station.name)
+				}
 			}
 		}
+		// swiftlint:enable multiple_closures_with_trailing_closure
 	}
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB1ECEF324DCA15D00A7C7EC /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1ECEF224DCA15D00A7C7EC /* MyUserDefaults.swift */; };
 		AB364D042308276C00C73EF6 /* LuasWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB364D032308276C00C73EF6 /* LuasWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB364D0A2308276D00C73EF6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB364D082308276D00C73EF6 /* Interface.storyboard */; };
 		AB364D0C2308277000C73EF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D0B2308277000C73EF6 /* Assets.xcassets */; };
@@ -113,6 +114,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB1ECEF224DCA15D00A7C7EC /* MyUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserDefaults.swift; sourceTree = "<group>"; };
 		AB364CFF2308276C00C73EF6 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB364D032308276C00C73EF6 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB364D092308276D00C73EF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				AB364D352308281100C73EF6 /* Coordinator.swift */,
+				AB1ECEF224DCA15D00A7C7EC /* MyUserDefaults.swift */,
 				AB364D172308277000C73EF6 /* ContentView.swift */,
 				ABA0B5F524B51BC50063D173 /* Direction.swift */,
 				AB364D192308277000C73EF6 /* HostingController.swift */,
@@ -534,6 +537,7 @@
 				AB55742923770FED007778DC /* Logging.swift in Sources */,
 				ABA0B5F624B51BC50063D173 /* Direction.swift in Sources */,
 				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
+				AB1ECEF324DCA15D00A7C7EC /* MyUserDefaults.swift in Sources */,
 				AB364D1E2308277000C73EF6 /* ComplicationController.swift in Sources */,
 				AB364D182308277000C73EF6 /* ContentView.swift in Sources */,
 				AB364D1C2308277000C73EF6 /* ExtensionDelegate.swift in Sources */,

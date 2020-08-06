@@ -22,6 +22,7 @@ class Coordinator: NSObject {
 
 	func start() {
 
+		//////////////////////////////////
 		// step 1: determine location
 		location.delegate = self
 
@@ -87,6 +88,32 @@ extension Coordinator: LocationDelegate {
 		}
 	}
 
+	func didGetLocation(_ location: CLLocation) {
+
+		//////////////////////////////////
+		// step 2: we have location -> now find station
+		let allStations = TrainStations.fromFile()
+
+		if let station = MyUserDefaults.userSelectedSpecificStation() {
+			print("step 2a: closest station, but specific one user selected before")
+			handle(station)
+
+		} else {
+			print("step 2b: closest station, doesn't matter which line")
+			if let closestStation = allStations.closestStation(from: location) {
+				print("\(#function): found closest station <\(closestStation.name)>")
+
+				handle(closestStation)
+			} else {
+
+				// no station found -> user too far away!
+				trains = nil
+				appState.state = .errorGettingStation(LuasStrings.tooFarAway)
+			}
+		}
+
+	}
+
 	fileprivate func handle(_ closestStation: TrainStation) {
 		// use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 		if let trains = trains {
@@ -95,6 +122,7 @@ extension Coordinator: LocationDelegate {
 			appState.state = .gettingDueTimes(closestStation)
 		}
 
+		//////////////////////////////////
 		// step 3: get due times from API
 		LuasAPI.dueTime(for: closestStation) { [weak self] (result) in
 			switch result {
@@ -110,22 +138,4 @@ extension Coordinator: LocationDelegate {
 			}
 		}
 	}
-
-	func didGetLocation(_ location: CLLocation) {
-
-		// step 2: we have location -> now find closest station
-		let allStations = TrainStations.fromFile()
-
-		if let closestStation = allStations.closestStation(from: location) {
-			print("\(#function): found closest station <\(closestStation.name)>")
-
-			handle(closestStation)
-		} else {
-
-			// no station found -> user too far away!
-			trains = nil
-			appState.state = .errorGettingStation(LuasStrings.tooFarAway)
-		}
-	}
-
 }
