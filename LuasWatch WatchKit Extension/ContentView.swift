@@ -91,6 +91,8 @@ struct ContentView: View {
 						.multilineTextAlignment(.center)
 			)
 
+			// bit confusing: this enum has parameter, but it's not shown here
+			// because it's surfaced via the debugDescription
 			case .errorGettingDueTimes:
 				return AnyView(
 					Text(self.appState.state.debugDescription)
@@ -159,10 +161,13 @@ struct ContentView: View {
 				return AnyView(
 					VStack {
 
-						Header(station: trains.trainStation)
-
-						Text("Updating...")
-							.font(.system(.footnote))
+						ZStack {
+							Header(station: trains.trainStation)
+							Rectangle().foregroundColor(.black).opacity(0.7)
+							Text("Updating...")
+								.font(.system(.footnote))
+								.foregroundColor(.white)
+						}.frame(height: 36)
 
 						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
 
