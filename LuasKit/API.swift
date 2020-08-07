@@ -13,6 +13,7 @@ public protocol API {
 
 public extension API {
 
+	// swiftlint:disable:next function_body_length
 	static func dueTime(for trainStation: TrainStation, completion: @escaping (Result<TrainsByDirection>) -> Void) {
 
 		Self.getTrains(stationId: trainStation.stationIdShort) { (data, error) in

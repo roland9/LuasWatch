@@ -92,14 +92,14 @@ extension Location: CLLocationManagerDelegate {
 		switch authorizationStatus {
 			case .denied, .notDetermined, .restricted:
 				delegate?.didFail(.authStatus(authorizationStatus))
-		case .authorizedAlways:
-			print("authorizedAlways")
-		case .authorizedWhenInUse:
-			print("authorizedWhenInUse")
-		@unknown default:
-			print("default")
+			case .authorizedAlways:
+				print("authorizedAlways")
+			case .authorizedWhenInUse:
+				print("authorizedWhenInUse")
+			@unknown default:
+				print("default")
 		}
-}
+	}
 
 	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		print("\(#function): \(locations)")

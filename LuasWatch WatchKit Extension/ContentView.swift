@@ -6,54 +6,21 @@
 import SwiftUI
 import Combine
 import CoreLocation
+
+#if os(iOS)
+import LuasKitIOS
+#endif
+
+#if os(watchOS)
 import LuasKit
-
-struct Header: View {
-	var station: TrainStation
-
-	var body: some View {
-		ZStack {
-
-			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
-				.resizable()
-				.aspectRatio(contentMode: .fill)
-				.frame(minWidth: 0, maxWidth: .infinity,
-					   minHeight: 36, maxHeight: 36, alignment: .trailing)
-
-			Text(station.name)
-				.font(.system(.headline))
-				.foregroundColor(.black)
-		}
-	}
-}
-
-struct TrainsList: View {
-	let trains: TrainsByDirection
-
-	var body: some View {
-
-		List {
-			Section {
-
-				ForEach(trains.inbound, id: \.id) {
-					Text($0.dueTimeDescription)
-				}
-			}
-
-			Section {
-
-				ForEach(trains.outbound, id: \.id) {
-					Text($0.dueTimeDescription)
-				}
-			}
-		}
-	}
-}
+#endif
 
 struct ContentView: View {
 
 	@EnvironmentObject var appState: AppState
+
 	@State private var isAnimating = false
+	@State var direction: Direction?
 
 	var animation: Animation {
 		Animation
@@ -72,7 +39,7 @@ struct ContentView: View {
 		switch appState.state {
 
 			case .gettingLocation:
-				return AnyView (
+				return AnyView(
 					VStack {
 						Text(self.appState.state.debugDescription)
 							.multilineTextAlignment(.center)
@@ -103,45 +70,50 @@ struct ContentView: View {
 			)
 
 			case .errorGettingLocation:
-				return AnyView (
-					ScrollView {
-						Text(self.appState.state.debugDescription)
-							.multilineTextAlignment(.center)
-							.frame(idealHeight: .greatestFiniteMagnitude)
-					}
+				return AnyView(
+					Text(self.appState.state.debugDescription)
+						.multilineTextAlignment(.center)
+						.frame(idealHeight: .greatestFiniteMagnitude)
 			)
 
 			case .errorGettingStation(let errorMessage):
-				return AnyView (
+				return AnyView(
 					Text(errorMessage)
 						.multilineTextAlignment(.center)
 						.frame(idealHeight: .greatestFiniteMagnitude)
 			)
 
 			case .gettingDueTimes:
-				return AnyView (
+				return AnyView(
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
 			)
 
 			case .errorGettingDueTimes:
-				return AnyView (
+				return AnyView(
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
 			)
 
 			case .foundDueTimes(let trains):
-				return AnyView (
+				return AnyView(
 					VStack {
 
 						Header(station: trains.trainStation)
 
-						TrainsList(trains: trains)
+						TrainsList(trains: trains,
+								   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+
+					}.onTapGesture {
+						withAnimation(.spring()) {
+							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						}
 					}
 			)
 
 			case .updatingDueTimes(let trains):
-				return AnyView (
+				return AnyView(
 					VStack {
 
 						Header(station: trains.trainStation)
@@ -149,7 +121,13 @@ struct ContentView: View {
 						Text("Updating...")
 							.font(.system(.footnote))
 
-						TrainsList(trains: trains)
+						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+
+					}.onTapGesture {
+						withAnimation(.spring()) {
+							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+						}
 					}
 			)
 
@@ -157,7 +135,118 @@ struct ContentView: View {
 	}
 }
 
+struct Header: View {
+	var station: TrainStation
+
+	var body: some View {
+		ZStack {
+
+			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
+				.resizable()
+				.frame(minWidth: 0, maxWidth: .infinity,
+					   minHeight: 36, maxHeight: 36, alignment: .trailing)
+
+			Text(station.name)
+				.font(.system(.headline))
+				.foregroundColor(.black)
+		}
+	}
+}
+
+struct TrainsList: View {
+	let trains: TrainsByDirection
+	let direction: Direction
+
+	var body: some View {
+		// this hack (extracting to method) is required because Xcode 11 doesn't like switch statements in a View
+			trainListForDirection()
+	}
+
+	private func trainListForDirection() -> AnyView {
+
+		switch direction {
+
+			case .both:
+				return AnyView(
+					ZStack {
+						List {
+							Section {
+								ForEach(self.trains.inbound, id: \.id) {
+									Text($0.dueTimeDescription)
+								}
+							}
+
+							Section {
+								ForEach(self.trains.outbound, id: \.id) {
+									Text($0.dueTimeDescription)
+								}
+							}
+						}
+						DirectionOverlay(direction: direction)
+					}
+			)
+
+			case .inbound:
+				return AnyView(
+					ZStack {
+						List {
+							ForEach(self.trains.inbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
+						DirectionOverlay(direction: direction)
+					}
+			)
+
+			case .outbound:
+				return AnyView(
+					ZStack {
+						List {
+							ForEach(self.trains.outbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
+						DirectionOverlay(direction: direction)
+					}
+			)
+		}
+	}
+}
+
+struct DirectionOverlay: View {
+	let direction: Direction
+
+	@State var viewOpacity: Double = 1.0
+
+	var body: some View {
+		GeometryReader { geometry in
+
+			ZStack {
+				Rectangle()
+					.foregroundColor(.black).opacity(0.59)
+				VStack {
+					Text("Showing")
+						.font(.footnote)
+					Text(self.direction.text())
+						.font(.footnote)
+						.fontWeight(.heavy)
+						.animation(nil)
+				}
+			}
+			.frame(maxHeight: 50)
+			.offset(y: geometry.size.height - 65)
+			.opacity(self.viewOpacity)
+			.onAppear {
+				withAnimation(Animation.easeOut.delay(1.5)) {
+					self.viewOpacity = 0.0
+				}
+			}
+		}
+	}
+}
+
 #if DEBUG
+////  Previews
 let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
 						  longitude: CLLocationDegrees(Double(1.2)))
 
@@ -171,9 +260,18 @@ let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueT
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
 let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
 
-let trainsRed = TrainsByDirection(trainStation: stationRed,
-								  inbound: [trainRed3],
-								  outbound: [trainRed1, trainRed2])
+let trainsRed_1_1 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed3],
+									  outbound: [trainRed2])
+let trainsRed_2_1 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed1, trainRed3],
+									  outbound: [trainRed2])
+let trainsRed_3_2 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed1, trainRed2, trainRed3],
+									  outbound: [trainRed1, trainRed2])
+let trainsRed_4_4 = TrainsByDirection(trainStation: stationRed,
+									  inbound: [trainRed1, trainRed2, trainRed3, trainRed3],
+									  outbound: [trainRed1, trainRed2, trainRed3, trainRed3])
 
 let stationGreen = TrainStation(stationId: "stationId",
 								stationIdShort: "LUAS69",
@@ -189,12 +287,11 @@ let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 									inbound: [trainGreen3],
 									outbound: [trainGreen1, trainGreen2])
 
-extension Error {
-}
-
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
-	static let genericError = "generic error"
+
+	static let genericError = "Some generic error"
+
 	// swiftlint:disable:next line_length
 	static let longGenericError = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
@@ -206,10 +303,10 @@ struct Preview_AppStartup: PreviewProvider {
 				.previewDisplayName("getting location")
 
 			ContentView()
-				.previewDevice("Apple Watch Series 2 - 38mm")
+				.previewDevice("Apple Watch Series 3 - 38mm")
 				.environmentObject(AppState(state: .gettingLocation))
 				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.previewDisplayName("getting location (38mm)")
+				.previewDisplayName("getting location (38mm) extra large")
 
 			ContentView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
 				.previewDisplayName("error getting location - location services disabled")
@@ -238,38 +335,70 @@ struct Preview_AppStartup: PreviewProvider {
 
 // swiftlint:disable:next type_name
 struct Preview_AppRunning: PreviewProvider {
-	static let genericError = "generic error"
+	static let genericError = "Some generic error"
 
 	static var previews: some View {
 
 		Group {
-			ContentView().environmentObject(AppState(state:
-				.gettingDueTimes(TrainStation(stationId: "stationId",
-											  stationIdShort: "LUAS70",
-											  route: .green,
-											  name: "Cabra",
-											  location: location))))
+			ContentView()
+				.environmentObject(
+					AppState(state:
+						.gettingDueTimes(TrainStation(stationId: "stationId",
+													  stationIdShort: "LUAS70",
+													  route: .green,
+													  name: "Cabra",
+													  location: location))))
 				.previewDisplayName("getting info")
 
-			ContentView().environmentObject(AppState(state:
-				.errorGettingDueTimes(genericError)))
+			ContentView()
+				.environmentObject(AppState(state:
+					.errorGettingDueTimes(genericError)))
 				.previewDisplayName("error getting due times (specific)")
 
-			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
+			ContentView()
+				.environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorGettingDueTimes)))
 				.previewDisplayName("error getting due times (generic)")
 
-			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorNoInternet)))
+			ContentView()
+				.environmentObject(AppState(state: .errorGettingDueTimes(LuasStrings.errorNoInternet)))
 				.previewDisplayName("error getting due times (offline)")
+		}
+	}
+}
 
-			ContentView().environmentObject(AppState(state: .foundDueTimes(trainsRed)))
-				.previewDisplayName("found due times")
+// swiftlint:disable:next type_name
+struct Preview_AppResult: PreviewProvider {
+	static var previews: some View {
 
-			ContentView().environmentObject(AppState(state: .updatingDueTimes(trainsGreen))).previewDisplayName("updating due times")
+		Group {
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.previewDisplayName("found due times - 1:1")
 
-			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
+				.previewDisplayName("found due times - 2:1")
+
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
+				.previewDisplayName("found due times - 3:2")
+
+			ContentView().previewDevice("Apple Watch Series 3 - 38mm")
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
+				.previewDisplayName("Small watch - found due times - 4:4")
+
+			ContentView()
+				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen)))
+				.previewDisplayName("updating due times")
+
+			ContentView()
+				.environmentObject(
+					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 				.previewDisplayName("error getting due times")
 
-			ContentView().environmentObject(AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
+			ContentView()
+				.environmentObject(
+					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 				.environment(\.sizeCategory, .extraExtraLarge)
 				.previewDisplayName("error getting due times (larger)")
 		}
