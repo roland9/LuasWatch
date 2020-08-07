@@ -107,11 +107,15 @@ struct ContentView: View {
 						Header(station: trains.trainStation)
 
 						TrainsList(trains: trains,
-								   direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+								   direction: self.direction ?? .both)
 
-					}.onTapGesture {
+					}.onAppear(perform: {
+						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
+						self.direction = Direction.direction(for: trains.trainStation.name)
+						print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
+					}).onTapGesture {
 						withAnimation(.spring()) {
-							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							self.direction = Direction.direction(for: trains.trainStation.name).next()
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
 					}.contextMenu(menuItems: {
@@ -162,17 +166,22 @@ struct ContentView: View {
 
 						ZStack {
 							Header(station: trains.trainStation)
-							Rectangle().foregroundColor(.black).opacity(0.7)
+							Rectangle()
+								.foregroundColor(.black).opacity(0.7)
 							Text("Updating...")
 								.font(.system(.footnote))
-								.foregroundColor(.white)
-						}.frame(height: 36)
+						}
+						.frame(height: 36)	// avoid jumping
 
-						TrainsList(trains: trains, direction: self.direction ?? Direction.direction(for: trains.trainStation.name))
+						TrainsList(trains: trains,
+								   direction: self.direction ?? .both)
 
-					}.onTapGesture {
+					}.onAppear(perform: {
+						self.direction = Direction.direction(for: trains.trainStation.name)
+						print("🟢 updatingDueTimes -> updated direction \(String(describing: self.direction))")
+					}).onTapGesture {
 						withAnimation(.spring()) {
-							self.direction = self.direction?.next() ?? Direction.direction(for: trains.trainStation.name).next()
+							self.direction = Direction.direction(for: trains.trainStation.name).next()
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
 					}
