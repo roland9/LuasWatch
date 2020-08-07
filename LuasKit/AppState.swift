@@ -37,7 +37,7 @@ extension MyState: CustomDebugStringConvertible {
 				return LuasStrings.gettingDueTimes(trainStation)
 
 			case .errorGettingDueTimes(let errorMessage):
-				return errorMessage
+				return "Error from Luas Service:\n\"\(errorMessage)\""
 
 			case .foundDueTimes(let trains):
 				return LuasStrings.foundDueTimes(trains)

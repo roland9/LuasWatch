@@ -157,7 +157,6 @@ struct ContentView: View {
 			)
 
 			case .updatingDueTimes(let trains):
-				// TODO add logic here too?
 				return AnyView(
 					VStack {
 
@@ -177,6 +176,7 @@ struct ContentView: View {
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
 					}
+					// TODO add logic here too for contextMenu?
 			)
 
 		}
