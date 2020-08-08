@@ -128,7 +128,7 @@ struct ContentView: View {
 							}
 						})
 							.sheet(isPresented: $isGreenLineModalPresented) {
-								StationsListModal(stations: TrainStations.fromFile().greenLineStations)
+								StationsListModal(stations: TrainStations.sharedFromFile.greenLineStations)
 						}
 
 						Button(action: {
@@ -140,7 +140,7 @@ struct ContentView: View {
 							}
 						})
 							.sheet(isPresented: $isRedLineModalPresented) {
-								StationsListModal(stations: TrainStations.fromFile().redLineStations)
+								StationsListModal(stations: TrainStations.sharedFromFile.redLineStations)
 						}
 
 						if MyUserDefaults.userSelectedSpecificStation() != nil {
@@ -153,7 +153,7 @@ struct ContentView: View {
 								}
 							})
 								.sheet(isPresented: $isRedLineModalPresented) {
-									StationsListModal(stations: TrainStations.fromFile().redLineStations)
+									StationsListModal(stations: TrainStations.sharedFromFile.redLineStations)
 							}
 						}
 					})

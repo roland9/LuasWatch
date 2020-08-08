@@ -92,7 +92,7 @@ extension Coordinator: LocationDelegate {
 
 		//////////////////////////////////
 		// step 2: we have location -> now find station
-		let allStations = TrainStations.fromFile()
+		let allStations = TrainStations.sharedFromFile
 
 		if let station = MyUserDefaults.userSelectedSpecificStation() {
 			print("step 2a: closest station, but specific one user selected before")

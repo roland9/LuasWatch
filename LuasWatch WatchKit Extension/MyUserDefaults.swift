@@ -11,7 +11,7 @@ struct MyUserDefaults {
 
 	public static func userSelectedSpecificStation() -> TrainStation? {
 		guard let stationId = UserDefaults.standard.string(forKey: userDefaultsKeySelectedStation),
-			let station = TrainStations.fromFile().stations.filter({ $0.stationIdShort == stationId }).first
+			let station = TrainStations.sharedFromFile.stations.filter({ $0.stationIdShort == stationId }).first
 			else { return nil }
 
 		return station

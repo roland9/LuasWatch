@@ -4,8 +4,8 @@ import PlaygroundSupport
 let file = Bundle.main.url(forResource: "luasStops", withExtension: "json")
 
 let allStations = TrainStations(fromFile: "luasStops")
-let redStations = TrainStations.fromFile().redLineStations.map { $0.name }
-let greenStations = TrainStations.fromFile().greenLineStations
+let redStations = TrainStations.sharedFromFile.redLineStations.map { $0.name }
+let greenStations = TrainStations.sharedFromFile.greenLineStations
 
 let userLocation = CLLocation(latitude: CLLocationDegrees(53.3163934083453), longitude: CLLocationDegrees(-6.25344151996991))
 //

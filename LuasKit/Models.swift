@@ -68,9 +68,12 @@ public struct TrainStation: CustomDebugStringConvertible {
 }
 
 public struct TrainStations {
+
 	public let stations: [TrainStation]
 
-	public static func fromFile() -> TrainStations {
+	public static let sharedFromFile = TrainStations.fromFile()
+
+	private static func fromFile() -> TrainStations {
 		return TrainStations.init(fromFile: "luasStops")
 	}
 
