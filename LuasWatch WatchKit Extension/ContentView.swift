@@ -97,6 +97,44 @@ struct ContentView: View {
 				return AnyView(
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
+						// this is ugly: lots of code completion - but how to extract??
+						.contextMenu(menuItems: {
+							Button(action: {
+								self.isGreenLineModalPresented = true
+							}, label: {
+								VStack {
+									Image(systemName: "arrow.up.arrow.down")
+									Text("Green Line Station")
+								}
+							})
+								.sheet(isPresented: $isGreenLineModalPresented) {
+									StationsListModal(stations: TrainStations.sharedFromFile.greenLineStations)
+							}
+
+							Button(action: {
+								self.isRedLineModalPresented = true
+							}, label: {
+								VStack {
+									Image(systemName: "arrow.right.arrow.left")
+									Text("Red Line Station")
+								}
+							})
+								.sheet(isPresented: $isRedLineModalPresented) {
+									StationsListModal(stations: TrainStations.sharedFromFile.redLineStations)
+							}
+
+							if MyUserDefaults.userSelectedSpecificStation() != nil {
+								Button(action: {
+									MyUserDefaults.wipeUserSelectedStation()
+									self.retriggerTimer()
+								}, label: {
+									VStack {
+										Image(systemName: "location")
+										Text("Closest Station")
+									}
+								})
+							}
+						})
 			)
 
 			case .foundDueTimes(let trains):
@@ -146,15 +184,13 @@ struct ContentView: View {
 						if MyUserDefaults.userSelectedSpecificStation() != nil {
 							Button(action: {
 								MyUserDefaults.wipeUserSelectedStation()
+								self.retriggerTimer()
 							}, label: {
 								VStack {
 									Image(systemName: "location")
 									Text("Closest Station")
 								}
 							})
-								.sheet(isPresented: $isRedLineModalPresented) {
-									StationsListModal(stations: TrainStations.sharedFromFile.redLineStations)
-							}
 						}
 					})
 //					}
@@ -307,6 +343,17 @@ struct DirectionOverlay: View {
 	}
 }
 
+extension View {
+	func retriggerTimer() {
+
+		// swiftlint:disable:next force_cast
+		let extensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+
+		// this is ugly, just to get the coordinator and retrigger timer - is there a better way?
+		extensionDelegate.mainCoordinator.retriggerTimer()
+	}
+}
+
 struct StationsListModal: View {
 	@State var stations: [TrainStation]
 
@@ -318,6 +365,7 @@ struct StationsListModal: View {
 				Button(action: {
 					print("☣️ tap \(station) -> save")
 					MyUserDefaults.saveSelectedStation(station)
+					self.retriggerTimer()
 				}) {
 					Text(station.name)
 				}
@@ -494,6 +542,7 @@ struct Preview_AppResult: PreviewProvider {
 struct Preview_AppOverlay: PreviewProvider {
 	static var previews: some View {
 
+		// need to comment the animation if you want to preview this here
 		Group {
 			DirectionOverlay(direction: .both)
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))

@@ -43,6 +43,18 @@ class Coordinator: NSObject {
 									 userInfo: nil, repeats: true)
 	}
 
+	func retriggerTimer() {
+		timer?.invalidate()
+
+		// fire right now...
+		timerDidFire()
+
+		// ... and then schedule again for regular interval
+		timer = Timer.scheduledTimer(timeInterval: 12.0,
+									 target: self, selector: #selector(timerDidFire),
+									 userInfo: nil, repeats: true)
+	}
+
 	@objc func timerDidFire() {
 		location.update()
 	}
