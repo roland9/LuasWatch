@@ -53,17 +53,19 @@ public struct TrainStation: CustomDebugStringConvertible {
 	public let route: Route
 	public let name: String
 	public let location: CLLocation
+	public let isOneWay: Bool
 
 	public var debugDescription: String {
-		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))"
+		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))  isOneWay \(isOneWay)"
 	}
 
-	public init(stationId: String, stationIdShort: String, route: Route, name: String, location: CLLocation) {
+	public init(stationId: String, stationIdShort: String, route: Route, name: String, location: CLLocation, isOneWay: Bool) {
 		self.stationId = stationId
 		self.stationIdShort = stationIdShort
 		self.route = route
 		self.name = name
 		self.location = location
+		self.isOneWay = isOneWay
 	}
 }
 
@@ -92,7 +94,8 @@ public struct TrainStations {
 								route: Route(station["route"] as! String)!,
 								name: station["name"] as! String,
 								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
-													 longitude: CLLocationDegrees(station["long"] as! Double)))
+													 longitude: CLLocationDegrees(station["long"] as! Double)),
+								isOneWay: station["one_way"] as? Bool ?? false)
 		}
 		// swiftlint:enable force_cast
 	}

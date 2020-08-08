@@ -6,7 +6,7 @@
 import Foundation
 
 enum Direction: Int {
-	case both, inbound, outbound
+	case both, inbound, outbound, oneway
 }
 
 extension Direction: CustomDebugStringConvertible {
@@ -22,6 +22,8 @@ extension Direction: CustomDebugStringConvertible {
 				return "Inbound"
 			case .outbound:
 				return "Outbound"
+			case .oneway:
+				return "One-way"
 		}
 	}
 
@@ -32,6 +34,9 @@ extension Direction: CustomDebugStringConvertible {
 			case .inbound:
 				return .outbound
 			case .outbound:
+				return .both
+			case .oneway:
+				assertionFailure("did not expect to be called on 'oneway'")
 				return .both
 		}
 	}

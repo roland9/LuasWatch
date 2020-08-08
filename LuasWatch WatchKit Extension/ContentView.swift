@@ -111,11 +111,11 @@ struct ContentView: View {
 
 					}.onAppear(perform: {
 						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
-						self.direction = Direction.direction(for: trains.trainStation.name)
+						self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name)
 						print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 					}).onTapGesture {
 						withAnimation(.spring()) {
-							self.direction = Direction.direction(for: trains.trainStation.name).next()
+							self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name).next()
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
 					}.contextMenu(menuItems: {
@@ -177,11 +177,11 @@ struct ContentView: View {
 								   direction: self.direction ?? .both)
 
 					}.onAppear(perform: {
-						self.direction = Direction.direction(for: trains.trainStation.name)
+						self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name)
 						print("🟢 updatingDueTimes -> updated direction \(String(describing: self.direction))")
 					}).onTapGesture {
 						withAnimation(.spring()) {
-							self.direction = Direction.direction(for: trains.trainStation.name).next()
+							self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name).next()
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
 					}
@@ -223,7 +223,7 @@ struct TrainsList: View {
 
 		switch direction {
 
-			case .both:
+			case .both, .oneway:
 				return AnyView(
 					ZStack {
 						List {
@@ -282,12 +282,17 @@ struct DirectionOverlay: View {
 				Rectangle()
 					.foregroundColor(.black).opacity(0.59)
 				VStack {
-					Text("Showing")
-						.font(.footnote)
-					Text(self.direction.text())
-						.font(.footnote)
-						.fontWeight(.heavy)
-						.animation(nil)
+					if .oneway == self.direction {
+						Text("Station is one-way")
+							.font(.footnote)
+					} else {
+						Text("Showing")
+							.font(.footnote)
+						Text(self.direction.text())
+							.font(.footnote)
+							.fontWeight(.heavy)
+							.animation(nil)
+					}
 				}
 			}
 			.frame(maxHeight: 50)
@@ -331,7 +336,8 @@ let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",
 							  route: .red,
 							  name: "Bluebell",
-							  location: location)
+							  location: location,
+							  isOneWay: false)
 
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
@@ -354,7 +360,8 @@ let stationGreen = TrainStation(stationId: "stationId",
 								stationIdShort: "LUAS69",
 								route: .green,
 								name: "Phibsboro",
-								location: location)
+								location: location,
+								isOneWay: false)
 
 let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
@@ -424,7 +431,8 @@ struct Preview_AppRunning: PreviewProvider {
 													  stationIdShort: "LUAS70",
 													  route: .green,
 													  name: "Cabra",
-													  location: location))))
+													  location: location,
+													  isOneWay: false))))
 				.previewDisplayName("getting info")
 
 			ContentView()
@@ -481,4 +489,22 @@ struct Preview_AppResult: PreviewProvider {
 		}
 	}
 }
+
+// swiftlint:disable:next type_name
+struct Preview_AppOverlay: PreviewProvider {
+	static var previews: some View {
+
+		Group {
+			DirectionOverlay(direction: .both)
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.previewDisplayName("overlay Both directions")
+
+			DirectionOverlay(direction: .oneway)
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.previewDisplayName("overlay One-way")
+		}
+	}
+}
+
+// swiftlint:disable file_length
 #endif
