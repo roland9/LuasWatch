@@ -4,9 +4,8 @@
 //
 
 import Foundation
-import LuasKit
 
-struct MyUserDefaults {
+public struct MyUserDefaults {
 	fileprivate static let userDefaultsKeySelectedStation = "SelectedStationIdShort"
 
 	public static func userSelectedSpecificStation() -> TrainStation? {

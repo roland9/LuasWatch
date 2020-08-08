@@ -346,11 +346,13 @@ struct DirectionOverlay: View {
 extension View {
 	func retriggerTimer() {
 
+		#if os(watchOS)
 		// swiftlint:disable:next force_cast
 		let extensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
 		// this is ugly, just to get the coordinator and retrigger timer - is there a better way?
 		extensionDelegate.mainCoordinator.retriggerTimer()
+		#endif
 	}
 }
 

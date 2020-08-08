@@ -19,7 +19,8 @@ class LuasKitIOSTests: XCTestCase {
 							   stationIdShort: "LUAS8",
 							   route: .green,
 							   name: "Bluebell",
-							   location: CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2))))
+							   location: CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2))),
+							   isOneWay: false)
 
 	func testDueTimeDescription() {
 
@@ -42,13 +43,15 @@ class LuasKitIOSTests: XCTestCase {
 						 route: .red,
 						 name: "Bluebell",
 						 location: CLLocation(latitude: CLLocationDegrees(Double(53.3292817872831)),
-											  longitude: CLLocationDegrees(Double(-6.33382500275916)))),
+											  longitude: CLLocationDegrees(Double(-6.33382500275916))),
+						 isOneWay: false),
 			TrainStation(stationId: "822GA00440",
 						 stationIdShort: "LUAS25",
 						 route: .green,
 						 name: "Harcourt",
 						 location: CLLocation(latitude: CLLocationDegrees(Double(53.3336246192981)),
-											  longitude: CLLocationDegrees(Double(-6.26273785213714))))
+											  longitude: CLLocationDegrees(Double(-6.26273785213714))),
+						 isOneWay: false)
 		])
 
 		var location = CLLocation(latitude: CLLocationDegrees(53.32928178728), longitude: CLLocationDegrees(-6.333825002759))
