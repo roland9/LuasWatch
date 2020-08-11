@@ -97,49 +97,11 @@ struct ContentView: View {
 				return AnyView(
 					Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
-						// this is ugly: lots of code completion - but how to extract??
-						.contextMenu(menuItems: {
-							Button(action: {
-								self.isGreenLineModalPresented = true
-							}, label: {
-								VStack {
-									Image(systemName: "arrow.up.arrow.down")
-									Text("Green Line Station")
-								}
-							})
-								.sheet(isPresented: $isGreenLineModalPresented) {
-									StationsListModal(stations: TrainStations.sharedFromFile.greenLineStations)
-							}
-
-							Button(action: {
-								self.isRedLineModalPresented = true
-							}, label: {
-								VStack {
-									Image(systemName: "arrow.right.arrow.left")
-									Text("Red Line Station")
-								}
-							})
-								.sheet(isPresented: $isRedLineModalPresented) {
-									StationsListModal(stations: TrainStations.sharedFromFile.redLineStations)
-							}
-
-							if MyUserDefaults.userSelectedSpecificStation() != nil {
-								Button(action: {
-									MyUserDefaults.wipeUserSelectedStation()
-									self.retriggerTimer()
-								}, label: {
-									VStack {
-										Image(systemName: "location")
-										Text("Closest Station")
-									}
-								})
-							}
-						})
+						.contextMenu(menuItems: standardContextMenu)
 			)
 
 			case .foundDueTimes(let trains):
 				return AnyView(
-//					TabView {
 					VStack {
 
 						Header(station: trains.trainStation)
@@ -156,44 +118,8 @@ struct ContentView: View {
 							self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name).next()
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
-					}.contextMenu(menuItems: {
-						Button(action: {
-							self.isGreenLineModalPresented = true
-						}, label: {
-							VStack {
-								Image(systemName: "arrow.up.arrow.down")
-								Text("Green Line Station")
-							}
-						})
-							.sheet(isPresented: $isGreenLineModalPresented) {
-								StationsListModal(stations: TrainStations.sharedFromFile.greenLineStations)
-						}
-
-						Button(action: {
-							self.isRedLineModalPresented = true
-						}, label: {
-							VStack {
-								Image(systemName: "arrow.right.arrow.left")
-								Text("Red Line Station")
-							}
-						})
-							.sheet(isPresented: $isRedLineModalPresented) {
-								StationsListModal(stations: TrainStations.sharedFromFile.redLineStations)
-						}
-
-						if MyUserDefaults.userSelectedSpecificStation() != nil {
-							Button(action: {
-								MyUserDefaults.wipeUserSelectedStation()
-								self.retriggerTimer()
-							}, label: {
-								VStack {
-									Image(systemName: "location")
-									Text("Closest Station")
-								}
-							})
-						}
-					})
-//					}
+					}
+					.contextMenu(menuItems: standardContextMenu)
 			)
 
 			case .updatingDueTimes(let trains):
@@ -221,10 +147,61 @@ struct ContentView: View {
 							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
 						}
 					}
-					// TODO add logic here too for contextMenu?
+					.contextMenu(menuItems: {
+						standardContextMenu()
+					})
 			)
 
 		}
+	}
+
+	@ViewBuilder
+	private func standardContextMenu() -> some View {
+		Button(action: {
+			self.isGreenLineModalPresented = true
+		}, label: {
+			VStack {
+				Image(systemName: "arrow.up.arrow.down")
+				Text("Green Line Station")
+			}
+		})
+			.sheet(isPresented: $isGreenLineModalPresented,
+				   content: greenStationsModal)
+
+		Button(action: {
+			self.isRedLineModalPresented = true
+		}, label: {
+			VStack {
+				Image(systemName: "arrow.right.arrow.left")
+				Text("Red Line Station")
+			}
+		})
+			.sheet(isPresented: $isRedLineModalPresented,
+				   content: redStationsModal)
+
+		if MyUserDefaults.userSelectedSpecificStation() != nil {
+			Button(action: {
+				MyUserDefaults.wipeUserSelectedStation()
+				self.retriggerTimer()
+			}, label: {
+				VStack {
+					Image(systemName: "location")
+					Text("Closest Station")
+				}
+			})
+		}
+	}
+
+	@ViewBuilder
+	private func greenStationsModal() -> some View {
+		StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
+					  isSheetShowing: $isGreenLineModalPresented)
+	}
+
+	@ViewBuilder
+	private func redStationsModal() -> some View {
+		StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
+					  isSheetShowing: $isRedLineModalPresented)
 	}
 }
 
@@ -356,8 +333,9 @@ extension View {
 	}
 }
 
-struct StationsListModal: View {
+struct StationsModal: View {
 	@State var stations: [TrainStation]
+	@Binding var isSheetShowing: Bool
 
 	var body: some View {
 		// swiftlint:disable multiple_closures_with_trailing_closure
@@ -367,7 +345,8 @@ struct StationsListModal: View {
 				Button(action: {
 					print("☣️ tap \(station) -> save")
 					MyUserDefaults.saveSelectedStation(station)
-					self.retriggerTimer()
+					self.retriggerTimer()			// start 12sec timer right now
+					self.isSheetShowing = false		// so we dismiss sheet
 				}) {
 					Text(station.name)
 				}
