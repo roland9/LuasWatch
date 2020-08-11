@@ -1,7 +1,14 @@
 {"stations": [
-	{"stationIdShort": "LUAS1", "stationId": "823GA00344", "route": "Red", "name": "Tallaght", "lat": 53.2874574706805, "long": -6.37464564744776},
+	{"stationIdShort": "LUAS53", "stationId": "823GA00418", "route": "Red", "name": "Saggart", "lat": 53.2847775062216, "long": -6.43773921457577, "final": true},
+	{"stationIdShort": "LUAS52", "stationId": "823GA00415", "route": "Red", "name": "Fortunestown", "lat": 53.2842559530261, "long": -6.42474013039955},
+	{"stationIdShort": "LUAS51", "stationId": "823GA00412", "route": "Red", "name": "Citywest Campus", "lat": 53.2877997570853, "long": -6.41882011133547},
+	{"stationIdShort": "LUAS50", "stationId": "823GA00395", "route": "Red", "name": "Cheeverstown", "lat": 53.2910061402436, "long": -6.4064915096011},
+	{"stationIdShort": "LUAS49", "stationId": "823GA00392", "route": "Red", "name": "Fettercairn", "lat": 53.2933175201804, "long": -6.39587472807755},
+
+	{"stationIdShort": "LUAS1", "stationId": "823GA00344", "route": "Red", "name": "Tallaght", "lat": 53.2874574706805, "long": -6.37464564744776, "final": true},
 	{"stationIdShort": "LUAS2", "stationId": "823GA00341", "route": "Red", "name": "Hospital", "lat": 53.2893482491041, "long": -6.37884879054193},
 	{"stationIdShort": "LUAS3", "stationId": "823GA00338", "route": "Red", "name": "Cookstown", "lat": 53.2932931595014, "long": -6.38408479509437},
+
 	{"stationIdShort": "LUAS4", "stationId": "823GA00347", "route": "Red", "name": "Belgard", "lat": 53.2992453188537, "long": -6.37497819204135},
 	{"stationIdShort": "LUAS5", "stationId": "823GA00350", "route": "Red", "name": "Kingswood", "lat": 53.3036450480884, "long": -6.36544815713673},
 	{"stationIdShort": "LUAS6", "stationId": "823GA00353", "route": "Red", "name": "Red Cow", "lat": 53.3167459644448, "long": -6.36978055275248},
@@ -21,31 +28,29 @@
 	{"stationIdShort": "LUAS20", "stationId": "822GA00404", "route": "Red", "name": "Jervis", "lat": 53.3476830068047, "long": -6.26527546402985},
 	{"stationIdShort": "LUAS21", "stationId": "822GA00408", "route": "Red", "name": "Abbey Street", "lat": 53.3485637203993, "long": -6.2584803582757},
 	{"stationIdShort": "LUAS22", "stationId": "822GA00420", "route": "Red", "name": "Busáras", "lat": 53.3501166497177, "long": -6.25158234663218},
-	{"stationIdShort": "LUAS23", "stationId": "822GA00423", "route": "Red", "name": "Connolly", "lat": 53.3509834907561, "long": -6.25001465932888, "one_way": true},
 
-	{"stationIdShort": "LUAS49", "stationId": "823GA00392", "route": "Red", "name": "Fettercairn", "lat": 53.2933175201804, "long": -6.39587472807755},
-	{"stationIdShort": "LUAS50", "stationId": "823GA00395", "route": "Red", "name": "Cheeverstown", "lat": 53.2910061402436, "long": -6.4064915096011},
-	{"stationIdShort": "LUAS51", "stationId": "823GA00412", "route": "Red", "name": "Citywest Campus", "lat": 53.2877997570853, "long": -6.41882011133547},
-	{"stationIdShort": "LUAS52", "stationId": "823GA00415", "route": "Red", "name": "Fortunestown", "lat": 53.2842559530261, "long": -6.42474013039955},
-	{"stationIdShort": "LUAS53", "stationId": "823GA00418", "route": "Red", "name": "Saggart", "lat": 53.2847775062216, "long": -6.43773921457577},
+	{"stationIdShort": "LUAS23", "stationId": "822GA00423", "route": "Red", "name": "Connolly", "lat": 53.3509834907561, "long": -6.25001465932888, "final": true},
+
 	{"stationIdShort": "LUAS54", "stationId": "822GA00427", "route": "Red", "name": "George's Dock", "lat": 53.3494286142281, "long": -6.24756983199852},
 	{"stationIdShort": "LUAS55", "stationId": "822GA00430", "route": "Red", "name": "Mayor Square - NCI", "lat": 53.3491676359234, "long": -6.24326950689034},
 	{"stationIdShort": "LUAS56", "stationId": "822GA00433", "route": "Red", "name": "Spencer Dock", "lat": 53.3487804260116, "long": -6.23712686504906},
-	{"stationIdShort": "LUAS57", "stationId": "822GA00436", "route": "Red", "name": "The Point", "lat": 53.3482763518136, "long": -6.22918667965209},
+	{"stationIdShort": "LUAS57", "stationId": "822GA00436", "route": "Red", "name": "The Point", "lat": 53.3482763518136, "long": -6.22918667965209, "final": true},
 
-
-	{"stationIdShort": "LUAS71", "stationId": "gen:57102:3588:1", "route": "Green", "name": "Broombridge", "lat": 53.3722378096567, "long": -6.2976872701795},
+	{"stationIdShort": "LUAS71", "stationId": "gen:57102:3588:1", "route": "Green", "name": "Broombridge", "lat": 53.3722378096567, "long": -6.2976872701795, "final": true},
 	{"stationIdShort": "LUAS70", "stationId": "gen:57102:3587:1", "route": "Green", "name": "Cabra", "lat": 53.3643367750274, "long": -6.28196929164465},
 	{"stationIdShort": "LUAS69", "stationId": "gen:57102:3586:1", "route": "Green", "name": "Phibsborough", "lat": 53.3603735102972, "long": -6.2788833745237},
 	{"stationIdShort": "LUAS68", "stationId": "gen:57102:3585:1", "route": "Green", "name": "Grangegorman", "lat": 53.3571964802048, "long": -6.27734377414817},
 	{"stationIdShort": "LUAS67", "stationId": "gen:57102:3584:1", "route": "Green", "name": "Broadstone - DIT", "lat": 53.3540707527996, "long": -6.27375924291229},
 	{"stationIdShort": "LUAS66", "stationId": "gen:57102:3577:1", "route": "Green", "name": "Dominick", "lat": 53.3513451173962, "long": -6.265547356884},
+
 	{"stationIdShort": "LUAS65", "stationId": "gen:57102:3573:1", "route": "Green", "name": "Parnell", "lat": 53.3531052634032, "long": -6.26050348365009, "one_way": true},
+	{"stationIdShort": "LUAS62", "stationId": "gen:57102:3575:1", "route": "Green", "name": "Marlborough", "lat": 53.3492448734525, "long": -6.25773158174389, "one_way": true},
+	{"stationIdShort": "LUAS60", "stationId": "gen:57102:3576:1", "route": "Green", "name": "Trinity Luas Stop", "lat": 53.3452797501246, "long": -6.25825374630148, "one_way": true},
+
 	{"stationIdShort": "LUAS64", "stationId": "gen:57102:3571:1", "route": "Green", "name": "O'Connell Upper", "lat": 53.3516119242553, "long": -6.26102997364648, "one_way": true},
 	{"stationIdShort": "LUAS63", "stationId": "gen:57102:3570:1", "route": "Green", "name": "O'Connell - GPO", "lat": 53.3488448095802, "long": -6.25988086113834, "one_way": true},
-	{"stationIdShort": "LUAS62", "stationId": "gen:57102:3575:1", "route": "Green", "name": "Marlborough", "lat": 53.3492448734525, "long": -6.25773158174389, "one_way": true},
 	{"stationIdShort": "LUAS61", "stationId": "gen:57102:3569:1", "route": "Green", "name": "Westmoreland", "lat": 53.3463598738878, "long": -6.25897573265942, "one_way": true},
-	{"stationIdShort": "LUAS60", "stationId": "gen:57102:3576:1", "route": "Green", "name": "Trinity Luas Stop", "lat": 53.3452797501246, "long": -6.25825374630148, "one_way": true},
+
 	{"stationIdShort": "LUAS59", "stationId": "gen:57102:3567:1", "route": "Green", "name": "Dawson", "lat": 53.3421747760092, "long": -6.25797481079348},
 	{"stationIdShort": "LUAS24", "stationId": "822GA00058", "route": "Green", "name": "St.Stephen's Green", "lat": 53.339128708973, "long": -6.26111748798404},
 	{"stationIdShort": "LUAS25", "stationId": "822GA00440", "route": "Green", "name": "Harcourt", "lat": 53.3336246192981, "long": -6.26273785213714},
@@ -57,19 +62,16 @@
 	{"stationIdShort": "LUAS31", "stationId": "825GA00281", "route": "Green", "name": "Windy Arbour", "lat": 53.3017475638249, "long": -6.2507083607334},
 	{"stationIdShort": "LUAS32", "stationId": "825GA00286", "route": "Green", "name": "Dundrum", "lat": 53.2923905211743, "long": -6.24518032276029},
 	{"stationIdShort": "LUAS33", "stationId": "825GA00291", "route": "Green", "name": "Balally", "lat": 53.2860547121413, "long": -6.23671065468435},
-	{"stationIdShort": "LUAS34", "stationId": "825GA00293", "route": "Green", "name": "Sandyford", "lat": 53.2776301919892, "long": -6.20462123372981},
 	{"stationIdShort": "LUAS35", "stationId": "825GA00295", "route": "Green", "name": "Kilmacud", "lat": 53.2829105207139, "long": -6.22410700107201},
 	{"stationIdShort": "LUAS36", "stationId": "825GA00297", "route": "Green", "name": "Stillorgan", "lat": 53.2793614400627, "long": -6.21036733964785},
+	{"stationIdShort": "LUAS34", "stationId": "825GA00293", "route": "Green", "name": "Sandyford", "lat": 53.2776301919892, "long": -6.20462123372981},
 	{"stationIdShort": "LUAS37", "stationId": "825GA00310", "route": "Green", "name": "Central Park", "lat": 53.2701680261693, "long": -6.20389941956604},
 	{"stationIdShort": "LUAS38", "stationId": "825GA00313", "route": "Green", "name": "Glencairn", "lat": 53.2663248994713, "long": -6.21013229223215},
 	{"stationIdShort": "LUAS39", "stationId": "825GA00316", "route": "Green", "name": "The Gallops", "lat": 53.2610932093991, "long": -6.20591369676934},
 	{"stationIdShort": "LUAS40", "stationId": "825GA00319", "route": "Green", "name": "Leopardstown Valley", "lat": 53.2582472581284, "long": -6.19838832357201},
-
 	{"stationIdShort": "LUAS42", "stationId": "825GA00322", "route": "Green", "name": "Ballyogan Wood", "lat": 53.2549979541227, "long": -6.18446604619674},
-
 	{"stationIdShort": "LUAS44", "stationId": "825GA00325", "route": "Green", "name": "Carrickmines", "lat": 53.2543609054348, "long": -6.17160341902405},
-
 	{"stationIdShort": "LUAS46", "stationId": "825GA00329", "route": "Green", "name": "Laughanstown", "lat": 53.2505997126709, "long": -6.15500876900899},
 	{"stationIdShort": "LUAS47", "stationId": "825GA00332", "route": "Green", "name": "Cherrywood", "lat": 53.2453444110287, "long": -6.14592931488556},
-	{"stationIdShort": "LUAS48", "stationId": "825GA00335", "route": "Green", "name": "Bride's Glen", "lat": 53.2418708352915, "long": -6.14278309230559}
+	{"stationIdShort": "LUAS48", "stationId": "825GA00335", "route": "Green", "name": "Bride's Glen", "lat": 53.2418708352915, "long": -6.14278309230559, "final": true}
 ]}
