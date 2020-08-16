@@ -111,12 +111,14 @@ struct ContentView: View {
 
 					}.onAppear(perform: {
 						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
-						self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name)
+						self.direction = Direction.direction(for: trains.trainStation.name)
 						print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 					}).onTapGesture {
 						withAnimation(.spring()) {
-							self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name).next()
-							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+							if trains.trainStation.allowsSwitchingDirection {
+								self.direction = Direction.direction(for: trains.trainStation.name).next()
+								Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+							}
 						}
 					}
 					.contextMenu(menuItems: standardContextMenu)
@@ -139,12 +141,14 @@ struct ContentView: View {
 								   direction: self.direction ?? .both)
 
 					}.onAppear(perform: {
-						self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name)
+						self.direction = Direction.direction(for: trains.trainStation.name)
 						print("🟢 updatingDueTimes -> updated direction \(String(describing: self.direction))")
 					}).onTapGesture {
 						withAnimation(.spring()) {
-							self.direction = trains.trainStation.isOneWay ? .oneway : Direction.direction(for: trains.trainStation.name).next()
-							Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+							if trains.trainStation.allowsSwitchingDirection {
+								self.direction = Direction.direction(for: trains.trainStation.name).next()
+								Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
+							}
 						}
 					}
 					.contextMenu(menuItems: {
@@ -234,9 +238,46 @@ struct TrainsList: View {
 
 	private func trainListForDirection() -> AnyView {
 
+		if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
+			// find the trains, either inbound or outbound
+
+			if trains.inbound.count > 0 {
+				return AnyView(
+					ZStack {
+						List {
+							ForEach(self.trains.inbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
+						DirectionOverlay(station: trains.trainStation, direction: direction)
+					}
+				)
+			}
+
+			if trains.outbound.count > 0 {
+				return AnyView(
+					ZStack {
+						List {
+							ForEach(self.trains.outbound, id: \.id) {
+								Text($0.dueTimeDescription)
+							}
+						}
+						DirectionOverlay(station: trains.trainStation, direction: direction)
+					}
+				)
+			}
+
+			assert(false, "we should have found either trains in inbound or outbound direction")
+			return AnyView(
+				Text("No Trains found")
+					// how to allow user to see standardContextMenu
+			)
+		}
+
+		// train station allows switching direction, so let's find out what the user has chosen
 		switch direction {
 
-			case .both, .oneway:
+			case .both:
 				return AnyView(
 					ZStack {
 						List {
@@ -252,7 +293,7 @@ struct TrainsList: View {
 								}
 							}
 						}
-						DirectionOverlay(direction: direction)
+						DirectionOverlay(station: trains.trainStation, direction: direction)
 					}
 			)
 
@@ -264,7 +305,7 @@ struct TrainsList: View {
 								Text($0.dueTimeDescription)
 							}
 						}
-						DirectionOverlay(direction: direction)
+						DirectionOverlay(station: trains.trainStation, direction: direction)
 					}
 			)
 
@@ -276,7 +317,7 @@ struct TrainsList: View {
 								Text($0.dueTimeDescription)
 							}
 						}
-						DirectionOverlay(direction: direction)
+						DirectionOverlay(station: trains.trainStation, direction: direction)
 					}
 			)
 		}
@@ -284,6 +325,7 @@ struct TrainsList: View {
 }
 
 struct DirectionOverlay: View {
+	let station: TrainStation
 	let direction: Direction
 
 	@State var viewOpacity: Double = 1.0
@@ -295,8 +337,13 @@ struct DirectionOverlay: View {
 				Rectangle()
 					.foregroundColor(.black).opacity(0.59)
 				VStack {
-					if .oneway == self.direction {
+					if self.station.isOneWayStop {
+						// if the station is one-way, we don't allow switching between directions
 						Text("Station is one-way")
+							.font(.footnote)
+					} else if self.station.isFinalStop {
+						// if the station is final stop, we don't allow switching between directions
+						Text("Station is final stop")
 							.font(.footnote)
 					} else {
 						Text("Showing")
@@ -365,8 +412,7 @@ let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",
 							  route: .red,
 							  name: "Bluebell",
-							  location: location,
-							  isOneWay: false)
+							  location: location)
 
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
@@ -389,8 +435,20 @@ let stationGreen = TrainStation(stationId: "stationId",
 								stationIdShort: "LUAS69",
 								route: .green,
 								name: "Phibsboro",
-								location: location,
-								isOneWay: false)
+								location: location)
+
+let finalStopStation = TrainStation(stationId: "stationId",
+									stationIdShort: "LUAS69",
+									route: .red,
+									name: "Tallaght",
+									location: location,
+									stationType: .terminal)
+let oneWayStation = TrainStation(stationId: "stationId",
+									stationIdShort: "LUAS69",
+									route: .green,
+									name: "Marlborough",
+									location: location,
+									stationType: .oneway_inbound)
 
 let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
@@ -460,8 +518,7 @@ struct Preview_AppRunning: PreviewProvider {
 													  stationIdShort: "LUAS70",
 													  route: .green,
 													  name: "Cabra",
-													  location: location,
-													  isOneWay: false))))
+													  location: location))))
 				.previewDisplayName("getting info")
 
 			ContentView()
@@ -525,13 +582,17 @@ struct Preview_AppOverlay: PreviewProvider {
 
 		// need to comment the animation if you want to preview this here
 		Group {
-			DirectionOverlay(direction: .both)
+			DirectionOverlay(station: stationGreen, direction: .both)
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
 				.previewDisplayName("overlay Both directions")
 
-			DirectionOverlay(direction: .oneway)
+			DirectionOverlay(station: oneWayStation, direction: .inbound)
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
 				.previewDisplayName("overlay One-way")
+
+			DirectionOverlay(station: finalStopStation, direction: .outbound)
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.previewDisplayName("overlay Final stop")
 		}
 	}
 }

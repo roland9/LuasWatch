@@ -1,13 +1,17 @@
 import CoreLocation
 import PlaygroundSupport
 
-let file = Bundle.main.url(forResource: "luasStops", withExtension: "json")
-
 let allStations = TrainStations(fromFile: "luasStops")
 let redStations = TrainStations.sharedFromFile.redLineStations.map { $0.name }
 let greenStations = TrainStations.sharedFromFile.greenLineStations
-let oneWayStations = TrainStations.sharedFromFile.stations.filter { $0.isOneWay == true }
+let oneWayStations = TrainStations.sharedFromFile.stations.filter { $0.stationType == .oneway_inbound || $0.stationType == .oneway_outbound }
 print(oneWayStations)
+
+let finalStations = TrainStations.sharedFromFile.stations.filter { $0.stationType == .terminal }
+print(finalStations)
+
+oneWayStations.first!.isFinalStop
+oneWayStations.first!.isOneWayStop
 
 let userLocation = CLLocation(latitude: CLLocationDegrees(53.3163934083453), longitude: CLLocationDegrees(-6.25344151996991))
 print("closest station: \(String(describing: allStations.closestStation(from: userLocation)))")
@@ -18,8 +22,7 @@ let station = TrainStation(stationId: "stationId",
 						   stationIdShort: "LUAS70",
 						   route: .green,
 						   name: "Cabra",
-						   location: userLocation,
-						   isOneWay: false)
+						   location: userLocation)
 
 LuasAPI.dueTime(for: station) { (result) in
 	switch result {

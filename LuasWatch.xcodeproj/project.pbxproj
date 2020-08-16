@@ -39,10 +39,9 @@
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB99CE8C24BA717600025521 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB99CE8B24BA717600025521 /* SnapshotTesting */; };
-		AB99CE8E24BA732F00025521 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0B5F524B51BC50063D173 /* Direction.swift */; };
-		ABA0B5F624B51BC50063D173 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0B5F524B51BC50063D173 /* Direction.swift */; };
 		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */; };
+		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 		ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -145,8 +144,8 @@
 		AB57F12E230B43AA00BA8B53 /* LuasKitIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasKitIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB57F132230B43AA00BA8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
-		ABA0B5F524B51BC50063D173 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
+		ABE5585924E944C1008F3789 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,7 +225,6 @@
 			children = (
 				AB364D352308281100C73EF6 /* Coordinator.swift */,
 				AB364D172308277000C73EF6 /* ContentView.swift */,
-				ABA0B5F524B51BC50063D173 /* Direction.swift */,
 				AB364D192308277000C73EF6 /* HostingController.swift */,
 				AB364D1B2308277000C73EF6 /* ExtensionDelegate.swift */,
 				AB364D1D2308277000C73EF6 /* ComplicationController.swift */,
@@ -255,6 +253,7 @@
 				AB364D392308281100C73EF6 /* Location.swift */,
 				AB364D362308281100C73EF6 /* API.swift */,
 				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
+				ABE5585924E944C1008F3789 /* Direction.swift */,
 				ABFB67BE2359122800906CD6 /* LuasExtensions.swift */,
 				AB55742723770C48007778DC /* Logging.swift */,
 				AB22502924DF650700ADA854 /* MyUserDefaults.swift */,
@@ -535,7 +534,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB364D1A2308277000C73EF6 /* HostingController.swift in Sources */,
-				ABA0B5F624B51BC50063D173 /* Direction.swift in Sources */,
 				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
 				AB364D1E2308277000C73EF6 /* ComplicationController.swift in Sources */,
 				AB364D182308277000C73EF6 /* ContentView.swift in Sources */,
@@ -555,6 +553,7 @@
 				AB57F0EC230B3C3F00BA8B53 /* API.swift in Sources */,
 				AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */,
 				AB57F0ED230B3C8600BA8B53 /* AppState.swift in Sources */,
+				ABE5585A24E944C1008F3789 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +577,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB22502624DF63E500ADA854 /* ContentView.swift in Sources */,
-				AB99CE8E24BA732F00025521 /* Direction.swift in Sources */,
 				ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

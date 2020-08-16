@@ -48,24 +48,42 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 }
 
 public struct TrainStation: CustomDebugStringConvertible {
+
+	public enum StationType: String {
+		case twoway, oneway_inbound, oneway_outbound, terminal
+	}
+
 	public let stationId: String		// not sure what that 'id' is for?
 	public let stationIdShort: String 	// that is the 'id' required for the API
 	public let route: Route
 	public let name: String
 	public let location: CLLocation
-	public let isOneWay: Bool
+	public let stationType: StationType
 
 	public var debugDescription: String {
-		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))  isOneWay \(isOneWay)"
+		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))  type \(stationType)"
 	}
 
-	public init(stationId: String, stationIdShort: String, route: Route, name: String, location: CLLocation, isOneWay: Bool) {
+	public init(stationId: String, stationIdShort: String, route: Route, name: String,
+				location: CLLocation, stationType: StationType = .twoway) {
 		self.stationId = stationId
 		self.stationIdShort = stationIdShort
 		self.route = route
 		self.name = name
 		self.location = location
-		self.isOneWay = isOneWay
+		self.stationType = stationType
+	}
+
+	public var isFinalStop: Bool {
+		return .terminal == stationType
+	}
+
+	public var isOneWayStop: Bool {
+		return .oneway_outbound == stationType || .oneway_inbound == stationType || .terminal == stationType
+	}
+
+	public var allowsSwitchingDirection: Bool {
+		return .twoway == stationType
 	}
 }
 
@@ -89,13 +107,21 @@ public struct TrainStations {
 
 		// swiftlint:disable force_cast
 		stations = stationsArray.compactMap { (station) in
+
+			var stationTypeValue: TrainStation.StationType = .twoway
+
+			if let stationTypeString = station["type"] as? String,
+				let stationType = TrainStation.StationType(rawValue: stationTypeString) {
+				stationTypeValue = stationType
+			}
+
 			return TrainStation(stationId: station["stationId"] as! String,
 								stationIdShort: station["stationIdShort"] as! String,
 								route: Route(station["route"] as! String)!,
 								name: station["name"] as! String,
 								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
 													 longitude: CLLocationDegrees(station["long"] as! Double)),
-								isOneWay: station["one_way"] as? Bool ?? false)
+								stationType: stationTypeValue)
 		}
 		// swiftlint:enable force_cast
 	}
