@@ -79,7 +79,7 @@ public struct TrainStation: CustomDebugStringConvertible {
 	}
 
 	public var isOneWayStop: Bool {
-		return .oneway_outbound == stationType || .oneway_inbound == stationType || .terminal == stationType
+		return .oneway_outbound == stationType || .oneway_inbound == stationType
 	}
 
 	public var allowsSwitchingDirection: Bool {

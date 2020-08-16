@@ -4,7 +4,8 @@ import PlaygroundSupport
 let allStations = TrainStations(fromFile: "luasStops")
 let redStations = TrainStations.sharedFromFile.redLineStations.map { $0.name }
 let greenStations = TrainStations.sharedFromFile.greenLineStations
-let oneWayStations = TrainStations.sharedFromFile.stations.filter { $0.stationType == .oneway_inbound || $0.stationType == .oneway_outbound }
+let oneWayStations = TrainStations.sharedFromFile.stations
+	.filter { $0.stationType == .oneway_inbound || $0.stationType == .oneway_outbound }
 print(oneWayStations)
 
 let finalStations = TrainStations.sharedFromFile.stations.filter { $0.stationType == .terminal }

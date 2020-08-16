@@ -242,29 +242,11 @@ struct TrainsList: View {
 			// find the trains, either inbound or outbound
 
 			if trains.inbound.count > 0 {
-				return AnyView(
-					ZStack {
-						List {
-							ForEach(self.trains.inbound, id: \.id) {
-								Text($0.dueTimeDescription)
-							}
-						}
-						DirectionOverlay(station: trains.trainStation, direction: direction)
-					}
-				)
+				return oneWayTrainsView(trains.inbound)
 			}
 
 			if trains.outbound.count > 0 {
-				return AnyView(
-					ZStack {
-						List {
-							ForEach(self.trains.outbound, id: \.id) {
-								Text($0.dueTimeDescription)
-							}
-						}
-						DirectionOverlay(station: trains.trainStation, direction: direction)
-					}
-				)
+				return oneWayTrainsView(trains.outbound)
 			}
 
 			assert(false, "we should have found either trains in inbound or outbound direction")
@@ -278,49 +260,48 @@ struct TrainsList: View {
 		switch direction {
 
 			case .both:
-				return AnyView(
-					ZStack {
-						List {
-							Section {
-								ForEach(self.trains.inbound, id: \.id) {
-									Text($0.dueTimeDescription)
-								}
-							}
-
-							Section {
-								ForEach(self.trains.outbound, id: \.id) {
-									Text($0.dueTimeDescription)
-								}
-							}
-						}
-						DirectionOverlay(station: trains.trainStation, direction: direction)
-					}
-			)
+				return twoWayTrainsView()
 
 			case .inbound:
-				return AnyView(
-					ZStack {
-						List {
-							ForEach(self.trains.inbound, id: \.id) {
-								Text($0.dueTimeDescription)
-							}
-						}
-						DirectionOverlay(station: trains.trainStation, direction: direction)
-					}
-			)
+				return oneWayTrainsView(trains.inbound)
 
 			case .outbound:
-				return AnyView(
-					ZStack {
-						List {
-							ForEach(self.trains.outbound, id: \.id) {
-								Text($0.dueTimeDescription)
-							}
-						}
-						DirectionOverlay(station: trains.trainStation, direction: direction)
-					}
-			)
+				return oneWayTrainsView(trains.outbound)
 		}
+	}
+
+	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
+		AnyView(
+			ZStack {
+				List {
+					ForEach(trainsList, id: \.id) {
+						Text($0.dueTimeDescription)
+					}
+				}
+				DirectionOverlay(station: trains.trainStation, direction: direction)
+			}
+		)
+	}
+
+	private func twoWayTrainsView() -> AnyView {
+		return AnyView(
+			ZStack {
+				List {
+					Section {
+						ForEach(self.trains.inbound, id: \.id) {
+							Text($0.dueTimeDescription)
+						}
+					}
+
+					Section {
+						ForEach(self.trains.outbound, id: \.id) {
+							Text($0.dueTimeDescription)
+						}
+					}
+				}
+				DirectionOverlay(station: trains.trainStation, direction: direction)
+			}
+		)
 	}
 }
 
