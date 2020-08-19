@@ -43,13 +43,13 @@
 	{"stationIdShort": "LUAS67", "stationId": "gen:57102:3584:1", "route": "Green", "name": "Broadstone - DIT", "lat": 53.3540707527996, "long": -6.27375924291229},
 	{"stationIdShort": "LUAS66", "stationId": "gen:57102:3577:1", "route": "Green", "name": "Dominick", "lat": 53.3513451173962, "long": -6.265547356884},
 
-	{"stationIdShort": "LUAS65", "stationId": "gen:57102:3573:1", "route": "Green", "name": "Parnell", "lat": 53.3531052634032, "long": -6.26050348365009, "type": "oneway_inbound"},
-	{"stationIdShort": "LUAS62", "stationId": "gen:57102:3575:1", "route": "Green", "name": "Marlborough", "lat": 53.3492448734525, "long": -6.25773158174389, "type": "oneway_inbound"},
-	{"stationIdShort": "LUAS60", "stationId": "gen:57102:3576:1", "route": "Green", "name": "Trinity Luas Stop", "lat": 53.3452797501246, "long": -6.25825374630148, "type": "oneway_inbound"},
+	{"stationIdShort": "LUAS65", "stationId": "gen:57102:3573:1", "route": "Green", "name": "Parnell", "lat": 53.3531052634032, "long": -6.26050348365009, "type": "oneway"},
+	{"stationIdShort": "LUAS62", "stationId": "gen:57102:3575:1", "route": "Green", "name": "Marlborough", "lat": 53.3492448734525, "long": -6.25773158174389, "type": "oneway"},
+	{"stationIdShort": "LUAS60", "stationId": "gen:57102:3576:1", "route": "Green", "name": "Trinity Luas Stop", "lat": 53.3452797501246, "long": -6.25825374630148, "type": "oneway"},
 
-	{"stationIdShort": "LUAS64", "stationId": "gen:57102:3571:1", "route": "Green", "name": "O'Connell Upper", "lat": 53.3516119242553, "long": -6.26102997364648, "type": "oneway_inbound"},
-	{"stationIdShort": "LUAS63", "stationId": "gen:57102:3570:1", "route": "Green", "name": "O'Connell - GPO", "lat": 53.3488448095802, "long": -6.25988086113834, "type": "oneway_inbound"},
-	{"stationIdShort": "LUAS61", "stationId": "gen:57102:3569:1", "route": "Green", "name": "Westmoreland", "lat": 53.3463598738878, "long": -6.25897573265942, "type": "oneway_inbound"},
+	{"stationIdShort": "LUAS64", "stationId": "gen:57102:3571:1", "route": "Green", "name": "O'Connell Upper", "lat": 53.3516119242553, "long": -6.26102997364648, "type": "oneway"},
+	{"stationIdShort": "LUAS63", "stationId": "gen:57102:3570:1", "route": "Green", "name": "O'Connell - GPO", "lat": 53.3488448095802, "long": -6.25988086113834, "type": "oneway"},
+	{"stationIdShort": "LUAS61", "stationId": "gen:57102:3569:1", "route": "Green", "name": "Westmoreland", "lat": 53.3463598738878, "long": -6.25897573265942, "type": "oneway"},
 
 	{"stationIdShort": "LUAS59", "stationId": "gen:57102:3567:1", "route": "Green", "name": "Dawson", "lat": 53.3421747760092, "long": -6.25797481079348},
 	{"stationIdShort": "LUAS24", "stationId": "822GA00058", "route": "Green", "name": "St.Stephen's Green", "lat": 53.339128708973, "long": -6.26111748798404},

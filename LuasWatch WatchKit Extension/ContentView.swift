@@ -318,15 +318,9 @@ struct DirectionOverlay: View {
 				Rectangle()
 					.foregroundColor(.black).opacity(0.59)
 				VStack {
-					if self.station.isOneWayStop {
-						// if the station is one-way, we don't allow switching between directions
-						Text("Station is one-way")
-							.font(.footnote)
-					} else if self.station.isFinalStop {
-						// if the station is final stop, we don't allow switching between directions
-						Text("Station is final stop")
-							.font(.footnote)
-					} else {
+					// we only show this overlay for two-way stations
+					// because for the othr types (terminal, one-way), we show an explanation once user taps
+					if .twoway == self.station.stationType {
 						Text("Showing")
 							.font(.footnote)
 						Text(self.direction.text())
