@@ -50,7 +50,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 public struct TrainStation: CustomDebugStringConvertible {
 
 	public enum StationType: String {
-		case twoway, oneway_inbound, oneway_outbound, terminal
+		case twoway, oneway, terminal
 	}
 
 	public let stationId: String		// not sure what that 'id' is for?
@@ -79,7 +79,7 @@ public struct TrainStation: CustomDebugStringConvertible {
 	}
 
 	public var isOneWayStop: Bool {
-		return .oneway_outbound == stationType || .oneway_inbound == stationType || .terminal == stationType
+		return .oneway == stationType
 	}
 
 	public var allowsSwitchingDirection: Bool {

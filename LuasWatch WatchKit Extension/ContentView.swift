@@ -429,7 +429,7 @@ let oneWayStation = TrainStation(stationId: "stationId",
 									route: .green,
 									name: "Marlborough",
 									location: location,
-									stationType: .oneway_inbound)
+									stationType: .oneway)
 
 let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
