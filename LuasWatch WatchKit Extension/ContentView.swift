@@ -23,6 +23,7 @@ struct ContentView: View {
 	@State var direction: Direction?
 	@State var isGreenLineModalPresented = false
 	@State var isRedLineModalPresented = false
+	@State var overlayTextAfterTap: String?
 
 	var animation: Animation {
 		Animation
@@ -107,19 +108,17 @@ struct ContentView: View {
 						Header(station: trains.trainStation)
 
 						TrainsList(trains: trains,
-								   direction: self.direction ?? .both)
+								   direction: self.direction ?? .both,
+								   overlayTextAfterTap: $overlayTextAfterTap)
 
 					}.onAppear(perform: {
 						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
-						self.direction = Direction.direction(for: trains.trainStation.name)
-						print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
-					}).onTapGesture {
-						withAnimation(.spring()) {
-							if trains.trainStation.allowsSwitchingDirection {
-								self.direction = Direction.direction(for: trains.trainStation.name).next()
-								Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
-							}
+						if self.direction != Direction.direction(for: trains.trainStation.name) {
+							self.direction = Direction.direction(for: trains.trainStation.name)
+							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
+					}).onTapGesture {
+						withAnimation(.spring()) { self.handleTap(trains.trainStation) }
 					}
 					.contextMenu(menuItems: standardContextMenu)
 			)
@@ -138,24 +137,32 @@ struct ContentView: View {
 						.frame(height: 36)	// avoid jumping
 
 						TrainsList(trains: trains,
-								   direction: self.direction ?? .both)
+								   direction: self.direction ?? .both,
+								   overlayTextAfterTap: $overlayTextAfterTap)
 
 					}.onAppear(perform: {
-						self.direction = Direction.direction(for: trains.trainStation.name)
-						print("🟢 updatingDueTimes -> updated direction \(String(describing: self.direction))")
-					}).onTapGesture {
-						withAnimation(.spring()) {
-							if trains.trainStation.allowsSwitchingDirection {
-								self.direction = Direction.direction(for: trains.trainStation.name).next()
-								Direction.setDirection(for: trains.trainStation.name, to: self.direction!)
-							}
+						if self.direction != Direction.direction(for: trains.trainStation.name) {
+							self.direction = Direction.direction(for: trains.trainStation.name)
+							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
+					}).onTapGesture {
+						withAnimation(.spring()) { self.handleTap(trains.trainStation) }
 					}
-					.contextMenu(menuItems: {
-						standardContextMenu()
-					})
+					.contextMenu(menuItems: standardContextMenu)
 			)
 
+		}
+	}
+
+	fileprivate func handleTap(_ trainStation: TrainStation) {
+		if trainStation.allowsSwitchingDirection {
+			self.direction = Direction.direction(for: trainStation.name).next()
+			Direction.setDirection(for: trainStation.name, to: self.direction!)
+		} else {
+			// we don't allow switching direction -> show toast as an explanation
+			self.overlayTextAfterTap =
+				trainStation.isFinalStop ?
+					"Switching directions not allowed for final stops" : "Switching directions not allowed for one-way stops"
 		}
 	}
 
@@ -231,9 +238,15 @@ struct TrainsList: View {
 	let trains: TrainsByDirection
 	let direction: Direction
 
+	@Binding var overlayTextAfterTap: String?
+	@State var overlayTextViewOpacity: Double = 1.0
+
 	var body: some View {
-		// this hack (extracting to method) is required because Xcode 11 doesn't like switch statements in a View
+		ZStack {
 			trainListForDirection()
+
+			tapOverlayView()
+		}
 	}
 
 	private func trainListForDirection() -> AnyView {
@@ -242,11 +255,11 @@ struct TrainsList: View {
 			// find the trains, either inbound or outbound
 
 			if trains.inbound.count > 0 {
-				return oneWayTrainsView(trains.inbound)
+				return oneWayTrainsView(trains.inbound, showOverlay: false)
 			}
 
 			if trains.outbound.count > 0 {
-				return oneWayTrainsView(trains.outbound)
+				return oneWayTrainsView(trains.outbound, showOverlay: false)
 			}
 
 			assert(false, "we should have found either trains in inbound or outbound direction")
@@ -270,7 +283,7 @@ struct TrainsList: View {
 		}
 	}
 
-	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
+	private func oneWayTrainsView(_ trainsList: [Train], showOverlay: Bool = true) -> AnyView {
 		AnyView(
 			ZStack {
 				List {
@@ -278,8 +291,11 @@ struct TrainsList: View {
 						Text($0.dueTimeDescription)
 					}
 				}
-				DirectionOverlay(station: trains.trainStation, direction: direction)
+				if showOverlay {
+					DirectionOverlay(station: trains.trainStation, direction: direction)
+				}
 			}
+			.buttonStyle(PlainButtonStyle())
 		)
 	}
 
@@ -299,7 +315,39 @@ struct TrainsList: View {
 						}
 					}
 				}
+				.buttonStyle(PlainButtonStyle())
+
 				DirectionOverlay(station: trains.trainStation, direction: direction)
+			}
+		)
+	}
+
+	private func tapOverlayView() -> AnyView? {
+		guard let text = overlayTextAfterTap else { return nil }
+
+		return AnyView(
+
+			ZStack {
+				Rectangle()
+					.foregroundColor(.black).opacity(0.59)
+				VStack {
+					Text(text)
+						.font(.footnote)
+						.multilineTextAlignment(.center)
+				}
+			}
+			.frame(maxHeight: 70)
+			.opacity(self.overlayTextViewOpacity)
+			.onAppear {
+				withAnimation(Animation.easeOut.delay(1.5)) {
+					self.overlayTextViewOpacity = 0.0
+				}
+
+				// a bit ugly: reset so we're ready to show if user taps again
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+					self.overlayTextAfterTap = nil
+					self.overlayTextViewOpacity = 1.0
+				}
 			}
 		)
 	}
@@ -388,7 +436,6 @@ let stationRed = TrainStation(stationId: "stationId",
 							  route: .red,
 							  name: "Bluebell",
 							  location: location)
-
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
 let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
@@ -424,7 +471,6 @@ let oneWayStation = TrainStation(stationId: "stationId",
 									name: "Marlborough",
 									location: location,
 									stationType: .oneway)
-
 let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
 let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
@@ -432,6 +478,16 @@ let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", due
 let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 									inbound: [trainGreen3],
 									outbound: [trainGreen1, trainGreen2])
+
+let stationFinalStop = TrainStation(stationId: "stationId",
+									stationIdShort: "stationIdShort",
+									route: .green,
+									name: "Broombridge",
+									location: location,
+									stationType: .terminal)
+let trainsFinalStop = TrainsByDirection(trainStation: stationFinalStop,
+										inbound: [trainGreen3],
+										outbound: [])
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
@@ -547,6 +603,10 @@ struct Preview_AppResult: PreviewProvider {
 					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 				.environment(\.sizeCategory, .extraExtraLarge)
 				.previewDisplayName("error getting due times (larger)")
+
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsFinalStop)))
+				.previewDisplayName("found due times - final stop")
 		}
 	}
 }
@@ -564,10 +624,6 @@ struct Preview_AppOverlay: PreviewProvider {
 			DirectionOverlay(station: oneWayStation, direction: .inbound)
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
 				.previewDisplayName("overlay One-way")
-
-			DirectionOverlay(station: finalStopStation, direction: .outbound)
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
-				.previewDisplayName("overlay Final stop")
 		}
 	}
 }
