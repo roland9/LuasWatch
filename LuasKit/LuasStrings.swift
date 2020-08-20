@@ -52,4 +52,8 @@ public struct LuasStrings {
 	public static func updatingDueTimes(_ trains: TrainsByDirection) -> String {
 		NSLocalizedString("Updating times (current trains: \(trains))", comment: "")
 	}
+
+	public static let switchingDirectionsNotAllowedForFinalStop = NSLocalizedString("Cannot switch directions for final stops", comment: "")
+
+	public static let switchingDirectionsNotAllowedForOnewayStop = NSLocalizedString("Cannot switch directions for one-way stops", comment: "")
 }

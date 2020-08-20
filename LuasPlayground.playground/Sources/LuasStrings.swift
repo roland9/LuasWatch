@@ -10,12 +10,12 @@ public struct LuasStrings {
 
 	public static let emptyDueTimesErrorMessage =
 		NSLocalizedString("Couldn’t get any trains for the %@ station. " +
-		"Either Luas is not operating, or there is a problem with the RTPI Service.\n\n" +
+			"Either Luas is not operating, or there is a problem with the RTPI Service.\n\n" +
 			"Please try again later.", comment: "")
 
 	public static let tooFarAway =
-	NSLocalizedString("Looks like the closest Luas station is quite far away.\n\n" +
-		"Please try again later when you’re closer to the Dublin Area.", comment: "")
+		NSLocalizedString("Looks like the closest Luas station is quite far away.\n\n" +
+			"Please try again later when you’re closer to the Dublin Area.", comment: "")
 
 	public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
 
@@ -52,4 +52,8 @@ public struct LuasStrings {
 	public static func updatingDueTimes(_ trains: TrainsByDirection) -> String {
 		NSLocalizedString("Updating times (current trains: \(trains))", comment: "")
 	}
+
+	public static let switchingDirectionsNotAllowedForFinalStop = NSLocalizedString("Cannot switch directions for final stops", comment: "")
+
+	public static let switchingDirectionsNotAllowedForOnewayStop = NSLocalizedString("Cannot switch directions for one-way stops", comment: "")
 }

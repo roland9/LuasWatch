@@ -161,8 +161,7 @@ struct ContentView: View {
 		} else {
 			// we don't allow switching direction -> show toast as an explanation
 			self.overlayTextAfterTap =
-				trainStation.isFinalStop ?
-					"Switching directions not allowed for final stops" : "Switching directions not allowed for one-way stops"
+				trainStation.isFinalStop ? LuasStrings.switchingDirectionsNotAllowedForFinalStop : LuasStrings.switchingDirectionsNotAllowedForOnewayStop
 		}
 	}
 
@@ -295,7 +294,6 @@ struct TrainsList: View {
 					DirectionOverlay(station: trains.trainStation, direction: direction)
 				}
 			}
-			.buttonStyle(PlainButtonStyle())
 		)
 	}
 
@@ -315,14 +313,13 @@ struct TrainsList: View {
 						}
 					}
 				}
-				.buttonStyle(PlainButtonStyle())
 
 				DirectionOverlay(station: trains.trainStation, direction: direction)
 			}
 		)
 	}
 
-	private func tapOverlayView() -> AnyView? {
+	public func tapOverlayView() -> AnyView? {
 		guard let text = overlayTextAfterTap else { return nil }
 
 		return AnyView(
@@ -332,11 +329,11 @@ struct TrainsList: View {
 					.foregroundColor(.black).opacity(0.59)
 				VStack {
 					Text(text)
-						.font(.footnote)
+						.font(.body)
 						.multilineTextAlignment(.center)
 				}
 			}
-			.frame(maxHeight: 70)
+			.frame(maxHeight: 100)
 			.opacity(self.overlayTextViewOpacity)
 			.onAppear {
 				withAnimation(Animation.easeOut.delay(1.5)) {
@@ -364,7 +361,7 @@ struct DirectionOverlay: View {
 
 			ZStack {
 				Rectangle()
-					.foregroundColor(.black).opacity(0.59)
+					.foregroundColor(.black).opacity(0.75)
 				VStack {
 					// we only show this overlay for two-way stations
 					// because for the othr types (terminal, one-way), we show an explanation once user taps
@@ -379,7 +376,7 @@ struct DirectionOverlay: View {
 				}
 			}
 			.frame(maxHeight: 50)
-			.offset(y: geometry.size.height - 65)
+			.offset(y: geometry.size.height/2 - 15)
 			.opacity(self.viewOpacity)
 			.onAppear {
 				withAnimation(Animation.easeOut.delay(1.5)) {
@@ -488,6 +485,7 @@ let stationFinalStop = TrainStation(stationId: "stationId",
 let trainsFinalStop = TrainsByDirection(trainStation: stationFinalStop,
 										inbound: [trainGreen3],
 										outbound: [])
+let directionBoth: Direction = .both
 
 // swiftlint:disable:next type_name
 struct Preview_AppStartup: PreviewProvider {
@@ -613,17 +611,31 @@ struct Preview_AppResult: PreviewProvider {
 
 // swiftlint:disable:next type_name
 struct Preview_AppOverlay: PreviewProvider {
+
+	@State static var overlayTextFinalStop: String? = LuasStrings.switchingDirectionsNotAllowedForFinalStop
+	@State static var overlayTextOnewayStop: String? = LuasStrings.switchingDirectionsNotAllowedForOnewayStop
+
 	static var previews: some View {
 
 		// need to comment the animation if you want to preview this here
 		Group {
 			DirectionOverlay(station: stationGreen, direction: .both)
+				.previewDevice("Apple Watch Series 3 - 38mm")
+//				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
-				.previewDisplayName("overlay Both directions")
+				.previewDisplayName("'Both directions' S3 38mm")
 
-			DirectionOverlay(station: oneWayStation, direction: .inbound)
+			DirectionOverlay(station: stationGreen, direction: .both)
+				.previewDevice("Apple Watch Series 4 - 44mm")
+				//				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
-				.previewDisplayName("overlay One-way")
+				.previewDisplayName("'Both directions' S4 44m")
+
+			TrainsList(trains: trainsGreen, direction: directionBoth, overlayTextAfterTap: $overlayTextFinalStop)
+				.previewDisplayName("Overlay 'final stop'")
+
+			TrainsList(trains: trainsGreen, direction: directionBoth, overlayTextAfterTap: $overlayTextOnewayStop)
+				.previewDisplayName("Overlay 'one-way stop'")
 		}
 	}
 }
