@@ -105,10 +105,9 @@ struct ContentView: View {
 				return AnyView(
 					VStack {
 
-						Header(station: trains.trainStation)
+						Header(station: trains.trainStation, direction: self.direction ?? .both)
 
-						TrainsList(trains: trains,
-								   direction: self.direction ?? .both,
+						TrainsList(trains: trains, direction: self.direction ?? .both,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
 					}.onAppear(perform: {
@@ -128,7 +127,7 @@ struct ContentView: View {
 					VStack {
 
 						ZStack {
-							Header(station: trains.trainStation)
+							Header(station: trains.trainStation, direction: self.direction ?? .both)
 							Rectangle()
 								.foregroundColor(.black).opacity(0.7)
 							Text("Updating...")
@@ -136,8 +135,7 @@ struct ContentView: View {
 						}
 						.frame(height: 36)	// avoid jumping
 
-						TrainsList(trains: trains,
-								   direction: self.direction ?? .both,
+						TrainsList(trains: trains, direction: self.direction ?? .both,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
 					}.onAppear(perform: {
@@ -158,10 +156,23 @@ struct ContentView: View {
 		if trainStation.allowsSwitchingDirection {
 			self.direction = Direction.direction(for: trainStation.name).next()
 			Direction.setDirection(for: trainStation.name, to: self.direction!)
+			self.overlayTextAfterTap = text(for: self.direction!)
 		} else {
 			// we don't allow switching direction -> show toast as an explanation
-			self.overlayTextAfterTap =
-				trainStation.isFinalStop ? LuasStrings.switchingDirectionsNotAllowedForFinalStop : LuasStrings.switchingDirectionsNotAllowedForOnewayStop
+			self.overlayTextAfterTap = trainStation.isFinalStop ?
+				LuasStrings.switchingDirectionsNotAllowedForFinalStop :
+				LuasStrings.switchingDirectionsNotAllowedForOnewayStop
+		}
+	}
+
+	fileprivate func text(for direction: Direction) -> String {
+		switch direction {
+			case .both:
+				return "Showing both directions"
+			case .inbound:
+				return "Showing inbound trains only"
+			case .outbound:
+				return "Showing outbound trains only"
 		}
 	}
 
@@ -217,18 +228,43 @@ struct ContentView: View {
 
 struct Header: View {
 	var station: TrainStation
+	var direction: Direction
 
 	var body: some View {
 		ZStack {
 
 			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
 				.resizable()
-				.frame(minWidth: 0, maxWidth: .infinity,
-					   minHeight: 36, maxHeight: 36, alignment: .trailing)
+				.frame(maxWidth: .infinity, minHeight: 36, maxHeight: 36, alignment: .trailing)
 
-			Text(station.name)
-				.font(.system(.headline))
-				.foregroundColor(.black)
+			HStack {
+
+				Image(systemName: imageName(for: direction))
+					.resizable()
+					.foregroundColor(.gray)
+					.frame(width: 25, height: 25)
+					.offset(x: 12)
+
+				Spacer(minLength: 20)
+
+				Text(station.name)
+					.font(.system(.headline))
+					.foregroundColor(.black)
+					.frame(maxWidth: .infinity, alignment: .leading)
+
+			}
+
+		}
+	}
+
+	fileprivate func imageName(for direction: Direction) -> String {
+		switch direction {
+			case .both:
+				return "arrow.right.arrow.left.circle.fill"
+			case .inbound:
+				return "arrow.right.circle.fill"
+			case .outbound:
+				return "arrow.left.circle.fill"
 		}
 	}
 }
@@ -254,11 +290,11 @@ struct TrainsList: View {
 			// find the trains, either inbound or outbound
 
 			if trains.inbound.count > 0 {
-				return oneWayTrainsView(trains.inbound, showOverlay: false)
+				return oneWayTrainsView(trains.inbound)
 			}
 
 			if trains.outbound.count > 0 {
-				return oneWayTrainsView(trains.outbound, showOverlay: false)
+				return oneWayTrainsView(trains.outbound)
 			}
 
 			assert(false, "we should have found either trains in inbound or outbound direction")
@@ -282,16 +318,13 @@ struct TrainsList: View {
 		}
 	}
 
-	private func oneWayTrainsView(_ trainsList: [Train], showOverlay: Bool = true) -> AnyView {
+	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
 		AnyView(
 			ZStack {
 				List {
 					ForEach(trainsList, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
-				}
-				if showOverlay {
-					DirectionOverlay(station: trains.trainStation, direction: direction)
 				}
 			}
 		)
@@ -313,8 +346,6 @@ struct TrainsList: View {
 						}
 					}
 				}
-
-				DirectionOverlay(station: trains.trainStation, direction: direction)
 			}
 		)
 	}
@@ -347,43 +378,6 @@ struct TrainsList: View {
 				}
 			}
 		)
-	}
-}
-
-struct DirectionOverlay: View {
-	let station: TrainStation
-	let direction: Direction
-
-	@State var viewOpacity: Double = 1.0
-
-	var body: some View {
-		GeometryReader { geometry in
-
-			ZStack {
-				Rectangle()
-					.foregroundColor(.black).opacity(0.75)
-				VStack {
-					// we only show this overlay for two-way stations
-					// because for the othr types (terminal, one-way), we show an explanation once user taps
-					if .twoway == self.station.stationType {
-						Text("Showing")
-							.font(.footnote)
-						Text(self.direction.text())
-							.font(.footnote)
-							.fontWeight(.heavy)
-							.animation(nil)
-					}
-				}
-			}
-			.frame(maxHeight: 50)
-			.offset(y: geometry.size.height/2 - 15)
-			.opacity(self.viewOpacity)
-			.onAppear {
-				withAnimation(Animation.easeOut.delay(1.5)) {
-					self.viewOpacity = 0.0
-				}
-			}
-		}
 	}
 }
 
@@ -619,17 +613,6 @@ struct Preview_AppOverlay: PreviewProvider {
 
 		// need to comment the animation if you want to preview this here
 		Group {
-			DirectionOverlay(station: stationGreen, direction: .both)
-				.previewDevice("Apple Watch Series 3 - 38mm")
-//				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
-				.previewDisplayName("'Both directions' S3 38mm")
-
-			DirectionOverlay(station: stationGreen, direction: .both)
-				.previewDevice("Apple Watch Series 4 - 44mm")
-				//				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
-				.previewDisplayName("'Both directions' S4 44m")
 
 			TrainsList(trains: trainsGreen, direction: directionBoth, overlayTextAfterTap: $overlayTextFinalStop)
 				.previewDisplayName("Overlay 'final stop'")
