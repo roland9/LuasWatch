@@ -117,7 +117,7 @@ struct ContentView: View {
 							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
 					}).onTapGesture {
-						withAnimation(.spring()) { self.handleTap(trains.trainStation) }
+						self.handleTap(trains.trainStation)
 					}
 					.contextMenu(menuItems: standardContextMenu)
 			)
@@ -144,7 +144,7 @@ struct ContentView: View {
 							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
 					}).onTapGesture {
-						withAnimation(.spring()) { self.handleTap(trains.trainStation) }
+						self.handleTap(trains.trainStation)
 					}
 					.contextMenu(menuItems: standardContextMenu)
 			)
