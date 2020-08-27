@@ -239,7 +239,8 @@ struct Header: View {
 
 			HStack {
 
-				Image(systemName: imageName(for: direction))
+				Image(systemName: imageName(for: direction,
+											allowsSwitchingDirection: self.station.allowsSwitchingDirection))
 					.resizable()
 					.foregroundColor(.gray)
 					.frame(width: 25, height: 25)
@@ -257,7 +258,13 @@ struct Header: View {
 		}
 	}
 
-	fileprivate func imageName(for direction: Direction) -> String {
+	fileprivate func imageName(for direction: Direction,
+							   allowsSwitchingDirection: Bool) -> String {
+		if !allowsSwitchingDirection {
+			// let's not be specific (yet) whether this station is outbound or inbound only
+			return "arrow.right.circle.fill"
+		}
+
 		switch direction {
 			case .both:
 				return "arrow.right.arrow.left.circle.fill"
@@ -450,18 +457,6 @@ let stationGreen = TrainStation(stationId: "stationId",
 								name: "Phibsboro",
 								location: location)
 
-let finalStopStation = TrainStation(stationId: "stationId",
-									stationIdShort: "LUAS69",
-									route: .red,
-									name: "Tallaght",
-									location: location,
-									stationType: .terminal)
-let oneWayStation = TrainStation(stationId: "stationId",
-									stationIdShort: "LUAS69",
-									route: .green,
-									name: "Marlborough",
-									location: location,
-									stationType: .oneway)
 let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
 let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
@@ -470,14 +465,24 @@ let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 									inbound: [trainGreen3],
 									outbound: [trainGreen1, trainGreen2])
 
+let stationOneWay = TrainStation(stationId: "stationId",
+								 stationIdShort: "LUAS69",
+								 route: .green,
+								 name: "Marlborough",
+								 location: location,
+								 stationType: .oneway)
+let trainsOneWayStation = TrainsByDirection(trainStation: stationOneWay,
+											inbound: [trainGreen2, trainGreen3],
+											outbound: [])
+
 let stationFinalStop = TrainStation(stationId: "stationId",
 									stationIdShort: "stationIdShort",
-									route: .green,
-									name: "Broombridge",
+									route: .red,
+									name: "Tallaght",
 									location: location,
 									stationType: .terminal)
 let trainsFinalStop = TrainsByDirection(trainStation: stationFinalStop,
-										inbound: [trainGreen3],
+										inbound: [trainRed1, trainRed3],
 										outbound: [])
 let directionBoth: Direction = .both
 
@@ -595,6 +600,10 @@ struct Preview_AppResult: PreviewProvider {
 					AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 				.environment(\.sizeCategory, .extraExtraLarge)
 				.previewDisplayName("error getting due times (larger)")
+
+			ContentView()
+				.environmentObject(AppState(state: .foundDueTimes(trainsOneWayStation)))
+				.previewDisplayName("found due times - one way stop")
 
 			ContentView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsFinalStop)))
