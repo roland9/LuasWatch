@@ -5,16 +5,16 @@
 
 import Foundation
 
-enum Direction: Int {
+public enum Direction: Int {
 	case both, inbound, outbound
 }
 
 extension Direction: CustomDebugStringConvertible {
-	var debugDescription: String {
+	public var debugDescription: String {
 		return text()
 	}
 
-	func text() -> String {
+	public func text() -> String {
 		switch self {
 			case .both:
 				return "Both directions"
@@ -25,7 +25,7 @@ extension Direction: CustomDebugStringConvertible {
 		}
 	}
 
-	func next() -> Direction {
+	public func next() -> Direction {
 		switch self {
 			case .both:
 				return .inbound
@@ -41,7 +41,7 @@ extension Direction {
 
 	fileprivate static let userDefaultsKey = "DirectionStates"
 
-	static func direction(for station: String) -> Direction {
+	public static func direction(for station: String) -> Direction {
 		let userDefaults = UserDefaults.standard
 
 		if let directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int],
@@ -53,7 +53,7 @@ extension Direction {
 		return .both
 	}
 
-	static func setDirection(for station: String, to direction: Direction) {
+	public static func setDirection(for station: String, to direction: Direction) {
 		let userDefaults = UserDefaults.standard
 
 		if var directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int] {
@@ -66,6 +66,5 @@ extension Direction {
 			userDefaults.set(direction, forKey: userDefaultsKey)
 			print("setting direction \(direction)")
 		}
-
 	}
 }
