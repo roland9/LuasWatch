@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location access allows the app to find the closest LUAS stop</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -23,6 +23,6 @@
 	<key>NSLocationUsageDescription</key>
 	<string>Location access allows the app to find the closest LUAS stop</string>
 	<key>CFBundleVersion</key>
-	<string>44</string>
+	<string>57</string>
 </dict>
 </plist>
