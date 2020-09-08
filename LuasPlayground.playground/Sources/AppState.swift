@@ -25,19 +25,25 @@ extension MyState: CustomDebugStringConvertible {
 		switch self {
 
 			case .gettingLocation:
-				return NSLocalizedString("Getting your location...", comment: "")
+				return LuasStrings.gettingLocation
+
 			case .errorGettingLocation(let errorMessage):
 				return errorMessage
+
 			case .errorGettingStation:
-				return NSLocalizedString("Error finding station.\n\nPlease try again later.", comment: "")
+				return LuasStrings.errorGettingStation
+
 			case .gettingDueTimes(let trainStation):
-				return NSLocalizedString("Getting due times for \(trainStation.name)...", comment: "")
+				return LuasStrings.gettingDueTimes(trainStation)
+
 			case .errorGettingDueTimes(let errorMessage):
 				return errorMessage
+
 			case .foundDueTimes(let trains):
-				return NSLocalizedString("Found due times: \(trains)", comment: "")
+				return LuasStrings.foundDueTimes(trains)
+
 			case .updatingDueTimes(let trains):
-				return NSLocalizedString("Updating due times (current trains: \(trains))", comment: "")
+				return LuasStrings.updatingDueTimes(trains)
 		}
 	}
 }

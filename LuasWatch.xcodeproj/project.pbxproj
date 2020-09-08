@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB22502624DF63E500ADA854 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D172308277000C73EF6 /* ContentView.swift */; };
+		AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
+		AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
 		AB364D042308276C00C73EF6 /* LuasWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB364D032308276C00C73EF6 /* LuasWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB364D0A2308276D00C73EF6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB364D082308276D00C73EF6 /* Interface.storyboard */; };
 		AB364D0C2308277000C73EF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D0B2308277000C73EF6 /* Assets.xcassets */; };
@@ -20,7 +23,6 @@
 		AB364D3A2308281100C73EF6 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
 		AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D352308281100C73EF6 /* Coordinator.swift */; };
 		AB55742823770C48007778DC /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
-		AB55742923770FED007778DC /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		AB57F0E1230B3C1900BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F0E4230B3C1900BA8B53 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB57F0E5230B3C1900BA8B53 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -33,14 +35,14 @@
 		AB57F120230B432E00BA8B53 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D362308281100C73EF6 /* API.swift */; };
 		AB57F121230B432E00BA8B53 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* Models.swift */; };
 		AB57F122230B432E00BA8B53 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D382308281100C73EF6 /* AppState.swift */; };
-		AB57F131230B43AA00BA8B53 /* LuasKitIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57F130230B43AA00BA8B53 /* LuasKitIOSTests.swift */; };
 		AB57F133230B43AA00BA8B53 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB99CE8C24BA717600025521 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB99CE8B24BA717600025521 /* SnapshotTesting */; };
-		AB99CE8D24BA72A100025521 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D172308277000C73EF6 /* ContentView.swift */; };
-		AB99CE8E24BA732F00025521 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0B5F524B51BC50063D173 /* Direction.swift */; };
-		ABA0B5F624B51BC50063D173 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0B5F524B51BC50063D173 /* Direction.swift */; };
+		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
+		ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */; };
+		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
+		ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 		ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -113,6 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB22502924DF650700ADA854 /* MyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUserDefaults.swift; sourceTree = "<group>"; };
 		AB364CFF2308276C00C73EF6 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB364D032308276C00C73EF6 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB364D092308276D00C73EF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -126,7 +129,6 @@
 		AB364D1F2308277100C73EF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB364D222308277100C73EF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB364D242308277100C73EF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB364D32230827D700C73EF6 /* Luas Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Luas Playground.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AB364D332308281000C73EF6 /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
 		AB364D342308281000C73EF6 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		AB364D352308281100C73EF6 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -140,10 +142,11 @@
 		AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LuasKitIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB57F129230B432F00BA8B53 /* LuasKitIOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LuasKitIOS-Info.plist"; path = "/Users/rolandg/src/LuasWatch/LuasKitIOS-Info.plist"; sourceTree = "<absolute>"; };
 		AB57F12E230B43AA00BA8B53 /* LuasKitIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasKitIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB57F130230B43AA00BA8B53 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
 		AB57F132230B43AA00BA8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
-		ABA0B5F524B51BC50063D173 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
+		ABE5585924E944C1008F3789 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,7 +188,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
-				AB364D32230827D700C73EF6 /* Luas Playground.playground */,
+				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
 				AB364D072308276D00C73EF6 /* LuasWatch WatchKit App */,
 				AB364D162308277000C73EF6 /* LuasWatch WatchKit Extension */,
 				AB57F0DE230B3C1900BA8B53 /* LuasKit */,
@@ -223,7 +226,6 @@
 			children = (
 				AB364D352308281100C73EF6 /* Coordinator.swift */,
 				AB364D172308277000C73EF6 /* ContentView.swift */,
-				ABA0B5F524B51BC50063D173 /* Direction.swift */,
 				AB364D192308277000C73EF6 /* HostingController.swift */,
 				AB364D1B2308277000C73EF6 /* ExtensionDelegate.swift */,
 				AB364D1D2308277000C73EF6 /* ComplicationController.swift */,
@@ -252,8 +254,10 @@
 				AB364D392308281100C73EF6 /* Location.swift */,
 				AB364D362308281100C73EF6 /* API.swift */,
 				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
+				ABE5585924E944C1008F3789 /* Direction.swift */,
 				ABFB67BE2359122800906CD6 /* LuasExtensions.swift */,
 				AB55742723770C48007778DC /* Logging.swift */,
+				AB22502924DF650700ADA854 /* MyUserDefaults.swift */,
 				AB57F0E0230B3C1900BA8B53 /* Info.plist */,
 			);
 			path = LuasKit;
@@ -262,7 +266,7 @@
 		AB57F12F230B43AA00BA8B53 /* LuasKitIOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				AB57F130230B43AA00BA8B53 /* LuasKitIOSTests.swift */,
+				ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */,
 				AB57F132230B43AA00BA8B53 /* Info.plist */,
 			);
 			path = LuasKitIOSTests;
@@ -531,8 +535,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB364D1A2308277000C73EF6 /* HostingController.swift in Sources */,
-				AB55742923770FED007778DC /* Logging.swift in Sources */,
-				ABA0B5F624B51BC50063D173 /* Direction.swift in Sources */,
 				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
 				AB364D1E2308277000C73EF6 /* ComplicationController.swift in Sources */,
 				AB364D182308277000C73EF6 /* ContentView.swift in Sources */,
@@ -548,9 +550,11 @@
 				AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */,
 				AB55742823770C48007778DC /* Logging.swift in Sources */,
+				AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */,
 				AB57F0EC230B3C3F00BA8B53 /* API.swift in Sources */,
 				AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */,
 				AB57F0ED230B3C8600BA8B53 /* AppState.swift in Sources */,
+				ABE5585A24E944C1008F3789 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,9 +565,12 @@
 				ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */,
 				AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F11F230B432E00BA8B53 /* Location.swift in Sources */,
+				ABAED72824DF61AF006FE91C /* Logging.swift in Sources */,
+				AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */,
 				AB57F120230B432E00BA8B53 /* API.swift in Sources */,
 				AB57F121230B432E00BA8B53 /* Models.swift in Sources */,
 				AB57F122230B432E00BA8B53 /* AppState.swift in Sources */,
+				ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,9 +578,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB99CE8D24BA72A100025521 /* ContentView.swift in Sources */,
-				AB57F131230B43AA00BA8B53 /* LuasKitIOSTests.swift in Sources */,
-				AB99CE8E24BA732F00025521 /* Direction.swift in Sources */,
+				AB22502624DF63E500ADA854 /* ContentView.swift in Sources */,
+				ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,9 +822,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -828,9 +834,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -841,11 +847,11 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 58;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 44;
+				DYLIB_CURRENT_VERSION = 58;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LuasKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -870,11 +876,11 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 58;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 44;
+				DYLIB_CURRENT_VERSION = 58;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LuasKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -899,11 +905,11 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 58;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 44;
+				DYLIB_CURRENT_VERSION = 58;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "LuasKitIOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -927,11 +933,11 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 58;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 44;
+				DYLIB_CURRENT_VERSION = 58;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "LuasKitIOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

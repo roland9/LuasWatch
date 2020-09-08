@@ -32,7 +32,7 @@ platform :ios do
 
   desc "Run unit tests"
   lane :test do
-    run_tests(devices: ["iPhone 8"],
+    run_tests(devices: ["iPhone 8 (13.6)"],
               scheme: "LuasKitIOSTests")
   end
 

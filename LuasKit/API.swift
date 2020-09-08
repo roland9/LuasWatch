@@ -24,7 +24,7 @@ public extension API {
 					errorMessage.count > 0 {
 
 					DispatchQueue.main.async {
-						completion(.error(errorMessage))
+						completion(.error("Error from Luas Service:\n\(errorMessage)"))
 					}
 					return
 				}
