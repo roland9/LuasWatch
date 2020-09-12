@@ -17,6 +17,7 @@ class LuasKitIOSTests: XCTestCase {
 
 	let station = TrainStation(stationId: "stationId",
 							   stationIdShort: "LUAS8",
+							   shortCode: "BLU",
 							   route: .green,
 							   name: "Bluebell",
 							   location: CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2))))
@@ -39,12 +40,14 @@ class LuasKitIOSTests: XCTestCase {
 		let allStations = TrainStations(stations: [
 			TrainStation(stationId: "822GA00360",
 						 stationIdShort: "LUAS8",
+						 shortCode: "BLU",
 						 route: .red,
 						 name: "Bluebell",
 						 location: CLLocation(latitude: CLLocationDegrees(Double(53.3292817872831)),
 											  longitude: CLLocationDegrees(Double(-6.33382500275916)))),
 			TrainStation(stationId: "822GA00440",
 						 stationIdShort: "LUAS25",
+						 shortCode: "HAR",
 						 route: .green,
 						 name: "Harcourt",
 						 location: CLLocation(latitude: CLLocationDegrees(Double(53.3336246192981)),
@@ -64,6 +67,7 @@ class LuasKitIOSTests: XCTestCase {
 	func testRealAPI() {
 		let apiExpectation = expectation(description: "API call expectation")
 
+//		LuasAPI2
 		LuasAPI.dueTime(for: station) { (result) in
 			switch result {
 

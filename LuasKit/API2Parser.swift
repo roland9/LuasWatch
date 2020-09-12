@@ -118,4 +118,3 @@ struct API2Parser {
 		}
 	}
 }
-

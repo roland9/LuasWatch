@@ -176,7 +176,7 @@ public struct TrainsByDirection {
 	public init(trainStation: TrainStation,
 				inbound: [Train],
 				outbound: [Train],
-				message: String?) {
+				message: String? = nil) {
 		self.trainStation = trainStation
 		self.inbound = inbound
 		self.outbound = outbound

@@ -22,6 +22,9 @@
 		AB364D232308277100C73EF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D222308277100C73EF6 /* Preview Assets.xcassets */; };
 		AB364D3A2308281100C73EF6 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
 		AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D352308281100C73EF6 /* Coordinator.swift */; };
+		AB50E3CD250D394800BFA30F /* API2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API2.swift */; };
+		AB50E3CE250D394800BFA30F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CB250D394800BFA30F /* Parser.swift */; };
+		AB50E3CF250D394800BFA30F /* API2Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* API2Parser.swift */; };
 		AB55742823770C48007778DC /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		AB57F0E1230B3C1900BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F0E4230B3C1900BA8B53 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
@@ -135,6 +138,9 @@
 		AB364D362308281100C73EF6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB364D382308281100C73EF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB364D392308281100C73EF6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		AB50E3CA250D394800BFA30F /* API2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API2.swift; sourceTree = "<group>"; };
+		AB50E3CB250D394800BFA30F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		AB50E3CC250D394800BFA30F /* API2Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API2Parser.swift; sourceTree = "<group>"; };
 		AB55742723770C48007778DC /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LuasKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB57F0DF230B3C1900BA8B53 /* LuasKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuasKit.h; sourceTree = "<group>"; };
@@ -253,6 +259,9 @@
 				AB364D342308281000C73EF6 /* Models.swift */,
 				AB364D392308281100C73EF6 /* Location.swift */,
 				AB364D362308281100C73EF6 /* API.swift */,
+				AB50E3CA250D394800BFA30F /* API2.swift */,
+				AB50E3CC250D394800BFA30F /* API2Parser.swift */,
+				AB50E3CB250D394800BFA30F /* Parser.swift */,
 				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
 				ABE5585924E944C1008F3789 /* Direction.swift */,
 				ABFB67BE2359122800906CD6 /* LuasExtensions.swift */,
@@ -547,8 +556,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */,
+				AB50E3CE250D394800BFA30F /* Parser.swift in Sources */,
 				AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */,
+				AB50E3CF250D394800BFA30F /* API2Parser.swift in Sources */,
+				AB50E3CD250D394800BFA30F /* API2.swift in Sources */,
 				AB55742823770C48007778DC /* Logging.swift in Sources */,
 				AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */,
 				AB57F0EC230B3C3F00BA8B53 /* API.swift in Sources */,

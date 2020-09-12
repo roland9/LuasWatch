@@ -136,7 +136,7 @@ extension Coordinator: LocationDelegate {
 
 		//////////////////////////////////
 		// step 3: get due times from API
-		LuasAPI.dueTime(for: closestStation) { [weak self] (result) in
+		LuasAPI2.dueTime(for: closestStation) { [weak self] (result) in
 			switch result {
 				case .error(let error):
 					print("\(#function): \(error)")

@@ -431,6 +431,7 @@ let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
 
 let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",
+							  shortCode: "BLU",
 							  route: .red,
 							  name: "Bluebell",
 							  location: location)
@@ -453,6 +454,7 @@ let trainsRed_4_4 = TrainsByDirection(trainStation: stationRed,
 
 let stationGreen = TrainStation(stationId: "stationId",
 								stationIdShort: "LUAS69",
+								shortCode: "PHI",
 								route: .green,
 								name: "Phibsboro",
 								location: location)
@@ -467,6 +469,7 @@ let trainsGreen = TrainsByDirection(trainStation: stationGreen,
 
 let stationOneWay = TrainStation(stationId: "stationId",
 								 stationIdShort: "LUAS69",
+								 shortCode: "MAR",
 								 route: .green,
 								 name: "Marlborough",
 								 location: location,
@@ -477,6 +480,7 @@ let trainsOneWayStation = TrainsByDirection(trainStation: stationOneWay,
 
 let stationFinalStop = TrainStation(stationId: "stationId",
 									stationIdShort: "stationIdShort",
+									shortCode: "TAL",
 									route: .red,
 									name: "Tallaght",
 									location: location,
@@ -544,6 +548,7 @@ struct Preview_AppRunning: PreviewProvider {
 					AppState(state:
 						.gettingDueTimes(TrainStation(stationId: "stationId",
 													  stationIdShort: "LUAS70",
+													  shortCode: "CAB",
 													  route: .green,
 													  name: "Cabra",
 													  location: location))))
