@@ -55,6 +55,7 @@ public struct TrainStation: CustomDebugStringConvertible {
 
 	public let stationId: String		// not sure what that 'id' is for?
 	public let stationIdShort: String 	// that is the 'id' required for the API
+	public let shortCode: String		// three-letter code, such as 'RAN'; for the XML API
 	public let route: Route
 	public let name: String
 	public let location: CLLocation
@@ -64,10 +65,12 @@ public struct TrainStation: CustomDebugStringConvertible {
 		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))  type \(stationType)"
 	}
 
-	public init(stationId: String, stationIdShort: String, route: Route, name: String,
+	public init(stationId: String, stationIdShort: String, shortCode: String,
+				route: Route, name: String,
 				location: CLLocation, stationType: StationType = .twoway) {
 		self.stationId = stationId
 		self.stationIdShort = stationIdShort
+		self.shortCode = shortCode
 		self.route = route
 		self.name = name
 		self.location = location
@@ -117,6 +120,7 @@ public struct TrainStations {
 
 			return TrainStation(stationId: station["stationId"] as! String,
 								stationIdShort: station["stationIdShort"] as! String,
+								shortCode: station["shortCode"] as! String,
 								route: Route(station["route"] as! String)!,
 								name: station["name"] as! String,
 								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
@@ -167,12 +171,15 @@ public struct TrainsByDirection {
 
 	public let inbound: [Train]
 	public let outbound: [Train]
+	public let message: String?	// XML api gives message
 
 	public init(trainStation: TrainStation,
 				inbound: [Train],
-				outbound: [Train]) {
+				outbound: [Train],
+				message: String?) {
 		self.trainStation = trainStation
 		self.inbound = inbound
 		self.outbound = outbound
+		self.message = message
 	}
 }
