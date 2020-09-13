@@ -11,7 +11,7 @@ import LuasKitIOS
 
 class LuasKitIOSTests: XCTestCase {
 
-	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
+	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "DUE")
 	let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
 	let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
 
@@ -28,12 +28,12 @@ class LuasKitIOSTests: XCTestCase {
 									   inbound: [train3],
 									   outbound: [train1, train2])
 
-		XCTAssert(trains.inbound.count == 1)
-		XCTAssert(trains.inbound[0].dueTimeDescription == "Sandyford: 12 mins")
+		XCTAssertEqual(trains.inbound.count, 1)
+		XCTAssertEqual(trains.inbound[0].dueTimeDescription, "Sandyford: 12 mins")
 
-		XCTAssert(trains.outbound.count == 2)
-		XCTAssert(trains.outbound[0].dueTimeDescription == "Broombridge: Due")
-		XCTAssert(trains.outbound[1].dueTimeDescription == "Broombridge: 9 mins")
+		XCTAssertEqual(trains.outbound.count, 2)
+		XCTAssertEqual(trains.outbound[0].dueTimeDescription, "Broombridge: Due")
+		XCTAssertEqual(trains.outbound[1].dueTimeDescription, "Broombridge: 9 mins")
 	}
 
 	func testClosestStation() {
@@ -55,10 +55,10 @@ class LuasKitIOSTests: XCTestCase {
 		])
 
 		var location = CLLocation(latitude: CLLocationDegrees(53.32928178728), longitude: CLLocationDegrees(-6.333825002759))
-		XCTAssert(allStations.closestStation(from: location)!.name == "Bluebell")
+		XCTAssertEqual(allStations.closestStation(from: location)!.name, "Bluebell")
 
 		location = CLLocation(latitude: CLLocationDegrees(53.329), longitude: CLLocationDegrees(-6.333))
-		XCTAssert(allStations.closestStation(from: location)!.name == "Bluebell")
+		XCTAssertEqual(allStations.closestStation(from: location)!.name, "Bluebell")
 
 		location = CLLocation(latitude: CLLocationDegrees(53.1), longitude: CLLocationDegrees(-6.333))
 		XCTAssertNil(allStations.closestStation(from: location))
@@ -111,12 +111,12 @@ class LuasKitIOSTests: XCTestCase {
 				print("error: \(message)")
 
 			case .success(let trains):
-				XCTAssert(trains.inbound.count == 1)
-				XCTAssert(trains.inbound[0] == Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6"))
+				XCTAssertEqual(trains.inbound.count, 1)
+				XCTAssertEqual(trains.inbound[0], Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6"))
 
-				XCTAssert(trains.outbound.count == 2)
-				XCTAssert(trains.outbound[0] == Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due"))
-				XCTAssert(trains.outbound[1] == Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15"))
+				XCTAssertEqual(trains.outbound.count, 2)
+				XCTAssertEqual(trains.outbound[0], Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due"))
+				XCTAssertEqual(trains.outbound[1], Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15"))
 
 				apiExpectation.fulfill()
 				print(trains)

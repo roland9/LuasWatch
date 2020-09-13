@@ -16,9 +16,7 @@ public extension API2 {
 
 				switch result {
 					case .error(let message):
-		//			DispatchQueue.main.async {
 						completion(.error(message))
-		//			}
 					case .success(let trainsByDirection):
 						completion(.success(trainsByDirection))
 				}

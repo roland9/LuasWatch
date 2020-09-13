@@ -37,7 +37,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	}
 
 	public var dueTimeDescription: String {
-		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + (dueTime == "Due" ? "Due" : "\(dueTime) mins")
+		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + ((dueTime == "Due" || dueTime == "DUE") ? "Due" : "\(dueTime) mins")
 	}
 
 	public init(destination: String, direction: String, dueTime: String) {
