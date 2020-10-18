@@ -67,13 +67,13 @@ class LuasKitIOSTests: XCTestCase {
 	func testRealAPI() {
 		let apiExpectation = expectation(description: "API call expectation")
 
-//		LuasAPI2
-		LuasAPI.dueTime(for: station) { (result) in
+		LuasAPI2.dueTime(for: station) { (result) in
 			switch result {
 
 			case .error(let message):
 				print("error: \(message)")
 				XCTFail("did not expect error")
+				apiExpectation.fulfill()
 			case .success(let trains):
 				print(trains)
 				apiExpectation.fulfill()

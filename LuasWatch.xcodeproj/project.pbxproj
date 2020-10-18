@@ -10,6 +10,9 @@
 		AB22502624DF63E500ADA854 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D172308277000C73EF6 /* ContentView.swift */; };
 		AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
 		AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
+		AB2E18BD253C61580006F615 /* API2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API2.swift */; };
+		AB2E18C3253C61600006F615 /* API2Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* API2Parser.swift */; };
+		AB2E18C9253C61690006F615 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CB250D394800BFA30F /* Parser.swift */; };
 		AB364D042308276C00C73EF6 /* LuasWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB364D032308276C00C73EF6 /* LuasWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB364D0A2308276D00C73EF6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB364D082308276D00C73EF6 /* Interface.storyboard */; };
 		AB364D0C2308277000C73EF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D0B2308277000C73EF6 /* Assets.xcassets */; };
@@ -577,9 +580,12 @@
 				ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */,
 				AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F11F230B432E00BA8B53 /* Location.swift in Sources */,
+				AB2E18BD253C61580006F615 /* API2.swift in Sources */,
 				ABAED72824DF61AF006FE91C /* Logging.swift in Sources */,
 				AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */,
 				AB57F120230B432E00BA8B53 /* API.swift in Sources */,
+				AB2E18C3253C61600006F615 /* API2Parser.swift in Sources */,
+				AB2E18C9253C61690006F615 /* Parser.swift in Sources */,
 				AB57F121230B432E00BA8B53 /* Models.swift in Sources */,
 				AB57F122230B432E00BA8B53 /* AppState.swift in Sources */,
 				ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */,
