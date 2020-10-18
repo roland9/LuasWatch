@@ -102,6 +102,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 //				assertionFailure("unsupported complication family")
 				handler(nil)
 
+			case .graphicExtraLarge:
+//				assertionFailure("unsupported complication family")
+				handler(nil)
+
 			@unknown default:
 //				assertionFailure("unsupported complication family")
 				handler(nil)
