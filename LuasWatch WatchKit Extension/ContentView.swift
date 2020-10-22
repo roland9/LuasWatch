@@ -21,8 +21,6 @@ struct ContentView: View {
 
 	@State private var isAnimating = false
 	@State var direction: Direction?
-	@State var isGreenLineModalPresented = false
-	@State var isRedLineModalPresented = false
 	@State var overlayTextAfterTap: String?
 
 	var animation: Animation {
@@ -96,10 +94,14 @@ struct ContentView: View {
 			// because it's surfaced via the debugDescription
 			case .errorGettingDueTimes:
 				return AnyView(
-					Text(self.appState.state.debugDescription)
+
+					VStack {
+						Text(self.appState.state.debugDescription)
 						.multilineTextAlignment(.center)
-						.contextMenu(menuItems: standardContextMenu)
-			)
+
+//						ButtonFooter(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+					}
+				)
 
 			case .foundDueTimes(let trains):
 				return AnyView(
@@ -119,7 +121,6 @@ struct ContentView: View {
 					}).onTapGesture {
 						self.handleTap(trains.trainStation)
 					}
-					.contextMenu(menuItems: standardContextMenu)
 			)
 
 			case .updatingDueTimes(let trains):
@@ -146,7 +147,7 @@ struct ContentView: View {
 					}).onTapGesture {
 						self.handleTap(trains.trainStation)
 					}
-					.contextMenu(menuItems: standardContextMenu)
+//					.contextMenu(menuItems: standardContextMenu)
 			)
 
 		}
@@ -174,55 +175,6 @@ struct ContentView: View {
 			case .outbound:
 				return "Showing outbound trains only"
 		}
-	}
-
-	@ViewBuilder
-	private func standardContextMenu() -> some View {
-		Button(action: {
-			self.isGreenLineModalPresented = true
-		}, label: {
-			VStack {
-				Image(systemName: "arrow.up.arrow.down")
-				Text("Green Line Station")
-			}
-		})
-			.sheet(isPresented: $isGreenLineModalPresented,
-				   content: greenStationsModal)
-
-		Button(action: {
-			self.isRedLineModalPresented = true
-		}, label: {
-			VStack {
-				Image(systemName: "arrow.right.arrow.left")
-				Text("Red Line Station")
-			}
-		})
-			.sheet(isPresented: $isRedLineModalPresented,
-				   content: redStationsModal)
-
-		if MyUserDefaults.userSelectedSpecificStation() != nil {
-			Button(action: {
-				MyUserDefaults.wipeUserSelectedStation()
-				self.retriggerTimer()
-			}, label: {
-				VStack {
-					Image(systemName: "location")
-					Text("Closest Station")
-				}
-			})
-		}
-	}
-
-	@ViewBuilder
-	private func greenStationsModal() -> some View {
-		StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
-					  isSheetShowing: $isGreenLineModalPresented)
-	}
-
-	@ViewBuilder
-	private func redStationsModal() -> some View {
-		StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
-					  isSheetShowing: $isRedLineModalPresented)
 	}
 }
 
@@ -283,6 +235,8 @@ struct TrainsList: View {
 	@Binding var overlayTextAfterTap: String?
 	@State var overlayTextViewOpacity: Double = 1.0
 
+	@State var isStationSelectionModalPresented = false
+
 	var body: some View {
 		ZStack {
 			trainListForDirection()
@@ -327,8 +281,8 @@ struct TrainsList: View {
 
 	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
 		AnyView(
-			ZStack {
-				List {
+			List {
+				Section(footer: ButtonFooter(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
 					ForEach(trainsList, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
@@ -339,22 +293,85 @@ struct TrainsList: View {
 
 	private func twoWayTrainsView() -> AnyView {
 		return AnyView(
-			ZStack {
-				List {
-					Section {
-						ForEach(self.trains.inbound, id: \.id) {
-							Text($0.dueTimeDescription)
-						}
-					}
 
-					Section {
-						ForEach(self.trains.outbound, id: \.id) {
-							Text($0.dueTimeDescription)
-						}
+			List {
+				Section {
+					ForEach(self.trains.inbound, id: \.id) {
+						Text($0.dueTimeDescription)
+					}
+				}
+
+				Section(footer: ButtonFooter(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+					ForEach(self.trains.outbound, id: \.id) {
+						Text($0.dueTimeDescription)
 					}
 				}
 			}
 		)
+	}
+
+	struct ButtonFooter: View {
+
+		@Binding var isStationSelectionModalPresented: Bool
+
+		var body: some View {
+
+			VStack {
+
+				Spacer(minLength: 30)
+
+				Button("Select other station") {
+					isStationSelectionModalPresented = true
+				}
+				.frame(maxHeight: 32)
+				.background(Color(red: 82/255, green: 53/255, blue: 214/255, opacity: 0.8))
+				.cornerRadius(12)
+			}
+			.sheet(isPresented: $isStationSelectionModalPresented, content: {
+				StationsSelectionModal(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+			})
+		}
+	}
+
+	struct StationsSelectionModal: View {
+
+		@Binding var isStationSelectionModalPresented: Bool
+
+		var body: some View {
+
+			NavigationView(content: {
+				NavigationLink(destination: greenStationsModal()) { Text("Green Line Stations") }
+
+				NavigationLink(destination: redStationsModal()) { Text("Red Line Stations") }
+
+				if MyUserDefaults.userSelectedSpecificStation() != nil {
+					Button(action: {
+						MyUserDefaults.wipeUserSelectedStation()
+						retriggerTimer()
+						isStationSelectionModalPresented = false
+					}, label: {
+						VStack {
+							Image(systemName: "location")
+							Text("Closest Station")
+						}
+					})
+				}
+
+			})
+
+		}
+
+		@ViewBuilder
+		private func greenStationsModal() -> some View {
+			StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
+						  isSheetPresented: $isStationSelectionModalPresented)
+		}
+
+		@ViewBuilder
+		private func redStationsModal() -> some View {
+			StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
+						  isSheetPresented: $isStationSelectionModalPresented)
+		}
 	}
 
 	public func tapOverlayView() -> AnyView? {
@@ -403,7 +420,7 @@ extension View {
 
 struct StationsModal: View {
 	@State var stations: [TrainStation]
-	@Binding var isSheetShowing: Bool
+	@Binding var isSheetPresented: Bool
 
 	var body: some View {
 		// swiftlint:disable multiple_closures_with_trailing_closure
@@ -413,8 +430,8 @@ struct StationsModal: View {
 				Button(action: {
 					print("☣️ tap \(station) -> save")
 					MyUserDefaults.saveSelectedStation(station)
-					self.retriggerTimer()			// start 12sec timer right now
-					self.isSheetShowing = false		// so we dismiss sheet
+					retriggerTimer()			// start 12sec timer right now
+					isSheetPresented = false		// so we dismiss sheet
 				}) {
 					Text(station.name)
 				}

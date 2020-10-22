@@ -185,6 +185,10 @@ private extension ComplicationController {
 				assertionFailure("unsupported complication family")
 				return nil
 
+			case .graphicExtraLarge:
+				assertionFailure("unsupported complication family")
+				return nil
+
 			@unknown default:
 				assertionFailure("unsupported complication family")
 				return nil
