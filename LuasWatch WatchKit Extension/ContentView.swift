@@ -382,9 +382,19 @@ struct ButtonChangeStation: View {
 		var body: some View {
 
 			NavigationView(content: {
-				NavigationLink(destination: greenStationsModal()) { Text("Green Line Stations") }
+				NavigationLink(destination: greenStationsModal()) {
+					VStack {
+						Image(systemName: "arrow.up.arrow.down")
+						Text("Green Line Stations")
+					}
+				}
 
-				NavigationLink(destination: redStationsModal()) { Text("Red Line Stations") }
+				NavigationLink(destination: redStationsModal()) {
+					VStack {
+						Image(systemName: "arrow.right.arrow.left")
+						Text("Red Line Stations")
+					}
+				}
 
 				if MyUserDefaults.userSelectedSpecificStation() != nil {
 					Button(action: {
