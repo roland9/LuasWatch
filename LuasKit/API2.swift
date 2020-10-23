@@ -20,7 +20,7 @@ public extension API2 {
 					case .success(let trainsByDirection):
 						//	previously in API v1 we had this condition; not sure it might also happen in v2
 						if trainsByDirection.inbound.isEmpty && trainsByDirection.outbound.isEmpty {
-							completion(.error("result empty"))
+							completion(.error("No trains found"))
 						} else {
 							completion(.success(trainsByDirection))
 						}
