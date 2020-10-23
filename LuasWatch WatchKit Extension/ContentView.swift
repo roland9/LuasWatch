@@ -22,6 +22,7 @@ struct ContentView: View {
 	@State private var isAnimating = false
 	@State var direction: Direction?
 	@State var overlayTextAfterTap: String?
+	@State var isStationSelectionModalPresented = false
 
 	var animation: Animation {
 		Animation
@@ -95,11 +96,13 @@ struct ContentView: View {
 			case .errorGettingDueTimes:
 				return AnyView(
 
-					VStack {
-						Text(self.appState.state.debugDescription)
-						.multilineTextAlignment(.center)
+					ScrollView {
+						VStack {
+							Text(self.appState.state.debugDescription)
+								.multilineTextAlignment(.center)
 
-//						ButtonFooter(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+							ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+						}
 					}
 				)
 
@@ -147,7 +150,6 @@ struct ContentView: View {
 					}).onTapGesture {
 						self.handleTap(trains.trainStation)
 					}
-//					.contextMenu(menuItems: standardContextMenu)
 			)
 
 		}
@@ -259,9 +261,17 @@ struct TrainsList: View {
 			}
 
 			assert(false, "we should have found either trains in inbound or outbound direction")
+
 			return AnyView(
-				Text("No Trains found")
-					// how to allow user to see standardContextMenu
+
+				VStack {
+
+					Spacer(minLength: 10)
+					Text("No Trains found")
+					Spacer(minLength: 10)
+
+					ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+				}
 			)
 		}
 
@@ -282,7 +292,8 @@ struct TrainsList: View {
 	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
 		AnyView(
 			List {
-				Section(footer: ButtonFooter(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+				Section(footer: ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+
 					ForEach(trainsList, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
@@ -301,7 +312,8 @@ struct TrainsList: View {
 					}
 				}
 
-				Section(footer: ButtonFooter(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+				Section(footer: ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+
 					ForEach(self.trains.outbound, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
@@ -310,27 +322,57 @@ struct TrainsList: View {
 		)
 	}
 
-	struct ButtonFooter: View {
+	public func tapOverlayView() -> AnyView? {
+		guard let text = overlayTextAfterTap else { return nil }
 
-		@Binding var isStationSelectionModalPresented: Bool
+		return AnyView(
 
-		var body: some View {
-
-			VStack {
-
-				Spacer(minLength: 30)
-
-				Button("Select other station") {
-					isStationSelectionModalPresented = true
+			ZStack {
+				Rectangle()
+					.foregroundColor(.black).opacity(0.59)
+				VStack {
+					Text(text)
+						.font(.body)
+						.multilineTextAlignment(.center)
 				}
-				.frame(maxHeight: 32)
-				.background(Color(red: 82/255, green: 53/255, blue: 214/255, opacity: 0.8))
-				.cornerRadius(12)
 			}
-			.sheet(isPresented: $isStationSelectionModalPresented, content: {
-				StationsSelectionModal(isStationSelectionModalPresented: $isStationSelectionModalPresented)
-			})
+			.frame(maxHeight: 100)
+			.opacity(self.overlayTextViewOpacity)
+			.onAppear {
+				withAnimation(Animation.easeOut.delay(1.5)) {
+					self.overlayTextViewOpacity = 0.0
+				}
+
+				// a bit ugly: reset so we're ready to show if user taps again
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+					self.overlayTextAfterTap = nil
+					self.overlayTextViewOpacity = 1.0
+				}
+			}
+		)
+	}
+}
+
+struct ButtonChangeStation: View {
+
+	@Binding var isStationSelectionModalPresented: Bool
+
+	var body: some View {
+
+		VStack {
+
+			Spacer(minLength: 30)
+
+			Button("Select other station") {
+				isStationSelectionModalPresented = true
+			}
+			.frame(maxHeight: 32)
+			.background(Color(red: 82/255, green: 53/255, blue: 214/255, opacity: 0.8))
+			.cornerRadius(12)
 		}
+		.sheet(isPresented: $isStationSelectionModalPresented, content: {
+			StationsSelectionModal(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+		})
 	}
 
 	struct StationsSelectionModal: View {
@@ -374,34 +416,27 @@ struct TrainsList: View {
 		}
 	}
 
-	public func tapOverlayView() -> AnyView? {
-		guard let text = overlayTextAfterTap else { return nil }
+	struct StationsModal: View {
+		@State var stations: [TrainStation]
+		@Binding var isSheetPresented: Bool
 
-		return AnyView(
-
-			ZStack {
-				Rectangle()
-					.foregroundColor(.black).opacity(0.59)
-				VStack {
-					Text(text)
-						.font(.body)
-						.multilineTextAlignment(.center)
+		var body: some View {
+			// swiftlint:disable multiple_closures_with_trailing_closure
+			List {
+				ForEach(self.stations, id: \.stationId) { (station) in
+					// need a button here because just text only supports tap on the text but not full width
+					Button(action: {
+						print("☣️ tap \(station) -> save")
+						MyUserDefaults.saveSelectedStation(station)
+						retriggerTimer()			// start 12sec timer right now
+						isSheetPresented = false		// so we dismiss sheet
+					}) {
+						Text(station.name)
+					}
 				}
 			}
-			.frame(maxHeight: 100)
-			.opacity(self.overlayTextViewOpacity)
-			.onAppear {
-				withAnimation(Animation.easeOut.delay(1.5)) {
-					self.overlayTextViewOpacity = 0.0
-				}
-
-				// a bit ugly: reset so we're ready to show if user taps again
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-					self.overlayTextAfterTap = nil
-					self.overlayTextViewOpacity = 1.0
-				}
-			}
-		)
+			// swiftlint:enable multiple_closures_with_trailing_closure
+		}
 	}
 }
 
@@ -415,29 +450,6 @@ extension View {
 		// this is ugly, just to get the coordinator and retrigger timer - is there a better way?
 		extensionDelegate.mainCoordinator.retriggerTimer()
 		#endif
-	}
-}
-
-struct StationsModal: View {
-	@State var stations: [TrainStation]
-	@Binding var isSheetPresented: Bool
-
-	var body: some View {
-		// swiftlint:disable multiple_closures_with_trailing_closure
-		List {
-			ForEach(self.stations, id: \.stationId) { (station) in
-				// need a button here because just text only supports tap on the text but not full width
-				Button(action: {
-					print("☣️ tap \(station) -> save")
-					MyUserDefaults.saveSelectedStation(station)
-					retriggerTimer()			// start 12sec timer right now
-					isSheetPresented = false		// so we dismiss sheet
-				}) {
-					Text(station.name)
-				}
-			}
-		}
-		// swiftlint:enable multiple_closures_with_trailing_closure
 	}
 }
 
