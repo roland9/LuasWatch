@@ -101,7 +101,7 @@ struct ContentView: View {
 							Text(self.appState.state.debugDescription)
 								.multilineTextAlignment(.center)
 
-							ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+							ButtonChangeStation(isStationModalPresented: $isStationSelectionModalPresented)
 						}
 					}
 				)
@@ -237,7 +237,7 @@ struct TrainsList: View {
 	@Binding var overlayTextAfterTap: String?
 	@State var overlayTextViewOpacity: Double = 1.0
 
-	@State var isStationSelectionModalPresented = false
+	@State var isStationModalPresented = false
 
 	var body: some View {
 		ZStack {
@@ -270,7 +270,7 @@ struct TrainsList: View {
 					Text("No Trains found")
 					Spacer(minLength: 10)
 
-					ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+					ButtonChangeStation(isStationModalPresented: $isStationModalPresented)
 				}
 			)
 		}
@@ -292,7 +292,7 @@ struct TrainsList: View {
 	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
 		AnyView(
 			List {
-				Section(footer: ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+				Section(footer: ButtonChangeStation(isStationModalPresented: $isStationModalPresented)) {
 
 					ForEach(trainsList, id: \.id) {
 						Text($0.dueTimeDescription)
@@ -312,7 +312,7 @@ struct TrainsList: View {
 					}
 				}
 
-				Section(footer: ButtonChangeStation(isStationSelectionModalPresented: $isStationSelectionModalPresented)) {
+				Section(footer: ButtonChangeStation(isStationModalPresented: $isStationModalPresented)) {
 
 					ForEach(self.trains.outbound, id: \.id) {
 						Text($0.dueTimeDescription)
@@ -355,7 +355,7 @@ struct TrainsList: View {
 
 struct ButtonChangeStation: View {
 
-	@Binding var isStationSelectionModalPresented: Bool
+	@Binding var isStationModalPresented: Bool
 
 	var body: some View {
 
@@ -364,20 +364,20 @@ struct ButtonChangeStation: View {
 			Spacer(minLength: 30)
 
 			Button("Select other station") {
-				isStationSelectionModalPresented = true
+				isStationModalPresented = true
 			}
 			.frame(maxHeight: 32)
 			.background(Color(red: 82/255, green: 53/255, blue: 214/255, opacity: 0.8))
 			.cornerRadius(12)
 		}
-		.sheet(isPresented: $isStationSelectionModalPresented, content: {
-			StationsSelectionModal(isStationSelectionModalPresented: $isStationSelectionModalPresented)
+		.sheet(isPresented: $isStationModalPresented, content: {
+			StationsSelectionModal(isStationModalPresented: $isStationModalPresented)
 		})
 	}
 
 	struct StationsSelectionModal: View {
 
-		@Binding var isStationSelectionModalPresented: Bool
+		@Binding var isStationModalPresented: Bool
 
 		var body: some View {
 
@@ -390,7 +390,7 @@ struct ButtonChangeStation: View {
 					Button(action: {
 						MyUserDefaults.wipeUserSelectedStation()
 						retriggerTimer()
-						isStationSelectionModalPresented = false
+						isStationModalPresented = false
 					}, label: {
 						VStack {
 							Image(systemName: "location")
@@ -406,13 +406,13 @@ struct ButtonChangeStation: View {
 		@ViewBuilder
 		private func greenStationsModal() -> some View {
 			StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
-						  isSheetPresented: $isStationSelectionModalPresented)
+						  isSheetPresented: $isStationModalPresented)
 		}
 
 		@ViewBuilder
 		private func redStationsModal() -> some View {
 			StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
-						  isSheetPresented: $isStationSelectionModalPresented)
+						  isSheetPresented: $isStationModalPresented)
 		}
 	}
 
