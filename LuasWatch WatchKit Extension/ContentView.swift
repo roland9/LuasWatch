@@ -112,7 +112,7 @@ struct ContentView: View {
 
 						Header(station: trains.trainStation, direction: self.direction ?? .both)
 
-						TrainsList(trains: trains, direction: self.direction ?? .both,
+						TrainsList(trains: trains, direction: $direction,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
 					}.onAppear(perform: {
@@ -121,9 +121,7 @@ struct ContentView: View {
 							self.direction = Direction.direction(for: trains.trainStation.name)
 							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
-					}).onTapGesture {
-						self.handleTap(trains.trainStation)
-					}
+					})
 			)
 
 			case .updatingDueTimes(let trains):
@@ -139,7 +137,7 @@ struct ContentView: View {
 						}
 						.frame(height: 36)	// avoid jumping
 
-						TrainsList(trains: trains, direction: self.direction ?? .both,
+						TrainsList(trains: trains, direction: $direction,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
 					}.onAppear(perform: {
@@ -147,35 +145,9 @@ struct ContentView: View {
 							self.direction = Direction.direction(for: trains.trainStation.name)
 							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
-					}).onTapGesture {
-						self.handleTap(trains.trainStation)
-					}
+					})
 			)
 
-		}
-	}
-
-	fileprivate func handleTap(_ trainStation: TrainStation) {
-		if trainStation.allowsSwitchingDirection {
-			self.direction = Direction.direction(for: trainStation.name).next()
-			Direction.setDirection(for: trainStation.name, to: self.direction!)
-			self.overlayTextAfterTap = text(for: self.direction!)
-		} else {
-			// we don't allow switching direction -> show toast as an explanation
-			self.overlayTextAfterTap = trainStation.isFinalStop ?
-				LuasStrings.switchingDirectionsNotAllowedForFinalStop :
-				LuasStrings.switchingDirectionsNotAllowedForOnewayStop
-		}
-	}
-
-	fileprivate func text(for direction: Direction) -> String {
-		switch direction {
-			case .both:
-				return "Showing both directions"
-			case .inbound:
-				return "Showing inbound trains only"
-			case .outbound:
-				return "Showing outbound trains only"
 		}
 	}
 }
@@ -232,8 +204,8 @@ struct Header: View {
 
 struct TrainsList: View {
 	let trains: TrainsByDirection
-	let direction: Direction
 
+	@Binding var direction: Direction?
 	@Binding var overlayTextAfterTap: String?
 	@State var overlayTextViewOpacity: Double = 1.0
 
@@ -266,9 +238,13 @@ struct TrainsList: View {
 
 				VStack {
 
-					Spacer(minLength: 10)
-					Text("No Trains found")
-					Spacer(minLength: 10)
+					VStack {
+						Spacer(minLength: 10)
+						Text("No Trains found")
+						Spacer(minLength: 10)
+					}.onTapGesture {
+						handleTap(trains.trainStation)
+					}
 
 					ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)
 				}
@@ -286,6 +262,9 @@ struct TrainsList: View {
 
 			case .outbound:
 				return oneWayTrainsView(trains.outbound)
+
+			case .none:
+				return AnyView(Text("empty"))
 		}
 	}
 
@@ -297,6 +276,8 @@ struct TrainsList: View {
 					ForEach(trainsList, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
+				}.onTapGesture {
+					handleTap(trains.trainStation)
 				}
 			}
 		)
@@ -310,6 +291,8 @@ struct TrainsList: View {
 					ForEach(self.trains.inbound, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
+				}.onTapGesture {
+					handleTap(trains.trainStation)
 				}
 
 				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
@@ -317,6 +300,8 @@ struct TrainsList: View {
 					ForEach(self.trains.outbound, id: \.id) {
 						Text($0.dueTimeDescription)
 					}
+				}.onTapGesture {
+					handleTap(trains.trainStation)
 				}
 			}
 		)
@@ -350,6 +335,30 @@ struct TrainsList: View {
 				}
 			}
 		)
+	}
+
+	fileprivate func handleTap(_ trainStation: TrainStation) {
+		if trainStation.allowsSwitchingDirection {
+			direction = Direction.direction(for: trainStation.name).next()
+			Direction.setDirection(for: trainStation.name, to: direction!)
+			overlayTextAfterTap = text(for: direction!)
+		} else {
+			// we don't allow switching direction -> show toast as an explanation
+			overlayTextAfterTap = trainStation.isFinalStop ?
+				LuasStrings.switchingDirectionsNotAllowedForFinalStop :
+				LuasStrings.switchingDirectionsNotAllowedForOnewayStop
+		}
+	}
+
+	fileprivate func text(for direction: Direction) -> String {
+		switch direction {
+			case .both:
+				return "Showing both directions"
+			case .inbound:
+				return "Showing inbound trains only"
+			case .outbound:
+				return "Showing outbound trains only"
+		}
 	}
 }
 
