@@ -19,10 +19,13 @@ struct ContentView: View {
 
 	@EnvironmentObject var appState: AppState
 
+	@State private var direction: Direction?
+
 	@State private var isAnimating = false
-	@State var direction: Direction?
-	@State var overlayTextAfterTap: String?
-	@State var isStationsModalPresented = false
+	@State private var isStationsModalPresented = false
+
+	@State private var overlayTextAfterTap: String?
+	@State private var overlayTextViewOpacity: Double = 1.0
 
 	var animation: Animation {
 		Animation
@@ -108,28 +111,34 @@ struct ContentView: View {
 
 			case .foundDueTimes(let trains):
 				return AnyView(
-					VStack {
 
-						Header(station: trains.trainStation, direction: self.direction ?? .both)
+					ZStack {
+						VStack {
 
-						TrainsList(trains: trains, direction: $direction,
+							Header(station: trains.trainStation, direction: $direction,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
-					}.onAppear(perform: {
-						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
-						if self.direction != Direction.direction(for: trains.trainStation.name) {
-							self.direction = Direction.direction(for: trains.trainStation.name)
-							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
-						}
-					})
-			)
+							TrainsList(trains: trains, direction: direction ?? .both)
+
+						}.onAppear(perform: {
+							// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
+							if self.direction != Direction.direction(for: trains.trainStation.name) {
+								self.direction = Direction.direction(for: trains.trainStation.name)
+								print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
+							}
+						})
+
+						tapOverlayView()
+					}
+				)
 
 			case .updatingDueTimes(let trains):
 				return AnyView(
 					VStack {
 
 						ZStack {
-							Header(station: trains.trainStation, direction: self.direction ?? .both)
+							Header(station: trains.trainStation, direction: $direction,
+								   overlayTextAfterTap: $overlayTextAfterTap)
 							Rectangle()
 								.foregroundColor(.black).opacity(0.7)
 							Text("Updating...")
@@ -137,8 +146,7 @@ struct ContentView: View {
 						}
 						.frame(height: 36)	// avoid jumping
 
-						TrainsList(trains: trains, direction: $direction,
-								   overlayTextAfterTap: $overlayTextAfterTap)
+						TrainsList(trains: trains, direction: direction ?? .both)
 
 					}.onAppear(perform: {
 						if self.direction != Direction.direction(for: trains.trainStation.name) {
@@ -150,11 +158,43 @@ struct ContentView: View {
 
 		}
 	}
+
+	fileprivate func tapOverlayView() -> AnyView? {
+		guard let text = overlayTextAfterTap else { return nil }
+
+		return AnyView(
+
+			ZStack {
+				Rectangle()
+					.foregroundColor(.black).opacity(0.59)
+				VStack {
+					Text(text)
+						.font(.body)
+						.multilineTextAlignment(.center)
+				}
+			}
+			.frame(maxHeight: 70)
+			.opacity(overlayTextViewOpacity)
+			.onAppear {
+				withAnimation(Animation.easeOut.delay(1.5)) {
+					overlayTextViewOpacity = 0.0
+				}
+
+				// a bit ugly: reset so we're ready to show if user taps again
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+					overlayTextAfterTap = nil
+					overlayTextViewOpacity = 1.0
+				}
+			}
+		)
+	}
 }
 
 struct Header: View {
 	var station: TrainStation
-	var direction: Direction
+
+	@Binding var direction: Direction?
+	@Binding var overlayTextAfterTap: String?
 
 	var body: some View {
 		ZStack {
@@ -165,7 +205,7 @@ struct Header: View {
 
 			HStack {
 
-				Image(systemName: imageName(for: direction,
+				Image(systemName: imageName(for: direction ?? .both,
 											allowsSwitchingDirection: self.station.allowsSwitchingDirection))
 					.resizable()
 					.foregroundColor(.gray)
@@ -180,7 +220,8 @@ struct Header: View {
 					.frame(maxWidth: .infinity, alignment: .leading)
 
 			}
-
+		}.onTapGesture {
+			handleTap(station)
 		}
 	}
 
@@ -199,142 +240,6 @@ struct Header: View {
 			case .outbound:
 				return "arrow.left.circle.fill"
 		}
-	}
-}
-
-struct TrainsList: View {
-	let trains: TrainsByDirection
-
-	@Binding var direction: Direction?
-	@Binding var overlayTextAfterTap: String?
-	@State var overlayTextViewOpacity: Double = 1.0
-
-	@State var isStationsModalPresented = false
-
-	var body: some View {
-		ZStack {
-			trainListForDirection()
-
-			tapOverlayView()
-		}
-	}
-
-	private func trainListForDirection() -> AnyView {
-
-		if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
-			// find the trains, either inbound or outbound
-
-			if trains.inbound.count > 0 {
-				return oneWayTrainsView(trains.inbound)
-			}
-
-			if trains.outbound.count > 0 {
-				return oneWayTrainsView(trains.outbound)
-			}
-
-			assert(false, "we should have found either trains in inbound or outbound direction")
-
-			return AnyView(
-
-				VStack {
-
-					VStack {
-						Spacer(minLength: 10)
-						Text("No Trains found")
-						Spacer(minLength: 10)
-					}.onTapGesture {
-						handleTap(trains.trainStation)
-					}
-
-					ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)
-				}
-			)
-		}
-
-		// train station allows switching direction, so let's find out what the user has chosen
-		switch direction {
-
-			case .both:
-				return twoWayTrainsView()
-
-			case .inbound:
-				return oneWayTrainsView(trains.inbound)
-
-			case .outbound:
-				return oneWayTrainsView(trains.outbound)
-
-			case .none:
-				return AnyView(Text("empty"))
-		}
-	}
-
-	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
-		AnyView(
-			List {
-				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
-
-					ForEach(trainsList, id: \.id) {
-						Text($0.dueTimeDescription)
-					}
-				}.onTapGesture {
-					handleTap(trains.trainStation)
-				}
-			}
-		)
-	}
-
-	private func twoWayTrainsView() -> AnyView {
-		return AnyView(
-
-			List {
-				Section {
-					ForEach(self.trains.inbound, id: \.id) {
-						Text($0.dueTimeDescription)
-					}
-				}.onTapGesture {
-					handleTap(trains.trainStation)
-				}
-
-				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
-
-					ForEach(self.trains.outbound, id: \.id) {
-						Text($0.dueTimeDescription)
-					}
-				}.onTapGesture {
-					handleTap(trains.trainStation)
-				}
-			}
-		)
-	}
-
-	public func tapOverlayView() -> AnyView? {
-		guard let text = overlayTextAfterTap else { return nil }
-
-		return AnyView(
-
-			ZStack {
-				Rectangle()
-					.foregroundColor(.black).opacity(0.59)
-				VStack {
-					Text(text)
-						.font(.body)
-						.multilineTextAlignment(.center)
-				}
-			}
-			.frame(maxHeight: 100)
-			.opacity(self.overlayTextViewOpacity)
-			.onAppear {
-				withAnimation(Animation.easeOut.delay(1.5)) {
-					self.overlayTextViewOpacity = 0.0
-				}
-
-				// a bit ugly: reset so we're ready to show if user taps again
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-					self.overlayTextAfterTap = nil
-					self.overlayTextViewOpacity = 1.0
-				}
-			}
-		)
 	}
 
 	fileprivate func handleTap(_ trainStation: TrainStation) {
@@ -360,6 +265,90 @@ struct TrainsList: View {
 				return "Showing outbound trains only"
 		}
 	}
+}
+
+struct TrainsList: View {
+	let trains: TrainsByDirection
+	let direction: Direction
+
+	@State var isStationsModalPresented = false
+
+	var body: some View {
+
+		if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
+			// find the trains, either inbound or outbound
+
+			if trains.inbound.count > 0 {
+				return oneWayTrainsView(trains.inbound)
+			}
+
+			if trains.outbound.count > 0 {
+				return oneWayTrainsView(trains.outbound)
+			}
+
+			assert(false, "we should have found either trains in inbound or outbound direction")
+
+			return AnyView(
+				VStack {
+
+					VStack {
+						Spacer(minLength: 10)
+						Text("No Trains found")
+						Spacer(minLength: 10)
+					}
+
+					ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)
+				}
+			)
+		}
+
+		// train station allows switching direction, so let's find out what the user has chosen
+		switch direction {
+
+			case .both:
+				return twoWayTrainsView()
+
+			case .inbound:
+				return oneWayTrainsView(trains.inbound)
+
+			case .outbound:
+				return oneWayTrainsView(trains.outbound)
+		}
+	}
+
+	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
+		AnyView(
+			List {
+				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
+
+					ForEach(trainsList, id: \.id) {
+						Text($0.dueTimeDescription)
+					}
+				}
+			}
+		)
+	}
+
+	private func twoWayTrainsView() -> AnyView {
+		return AnyView(
+
+			List {
+				Section {
+					ForEach(self.trains.inbound, id: \.id) {
+						Text($0.dueTimeDescription)
+					}
+				}
+
+				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
+
+					ForEach(self.trains.outbound, id: \.id) {
+						Text($0.dueTimeDescription)
+					}
+				}
+			}
+		)
+	}
+
 }
 
 struct ButtonChangeStation: View {
