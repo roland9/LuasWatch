@@ -654,25 +654,5 @@ struct Preview_AppResult: PreviewProvider {
 	}
 }
 
-// swiftlint:disable:next type_name
-struct Preview_AppOverlay: PreviewProvider {
-
-	@State static var overlayTextFinalStop: String? = LuasStrings.switchingDirectionsNotAllowedForFinalStop
-	@State static var overlayTextOnewayStop: String? = LuasStrings.switchingDirectionsNotAllowedForOnewayStop
-
-	static var previews: some View {
-
-		// need to comment the animation if you want to preview this here
-		Group {
-
-			TrainsList(trains: trainsGreen, direction: directionBoth, overlayTextAfterTap: $overlayTextFinalStop)
-				.previewDisplayName("Overlay 'final stop'")
-
-			TrainsList(trains: trainsGreen, direction: directionBoth, overlayTextAfterTap: $overlayTextOnewayStop)
-				.previewDisplayName("Overlay 'one-way stop'")
-		}
-	}
-}
-
 // swiftlint:disable file_length
 #endif
