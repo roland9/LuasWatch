@@ -440,6 +440,7 @@ struct ButtonChangeStation: View {
 						retriggerTimer()			// start 12sec timer right now
 					}) {
 						Text(station.name)
+							.font(.system(.headline))
 					}
 				}
 			}
@@ -650,6 +651,24 @@ struct Preview_AppResult: PreviewProvider {
 			ContentView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsFinalStop)))
 				.previewDisplayName("found due times - final stop")
+		}
+	}
+}
+
+// swiftlint:disable:next type_name
+struct Preview_StationsModal: PreviewProvider {
+	@State static var isPresented: Bool = true
+
+	static var previews: some View {
+
+		Group {
+			ButtonChangeStation.StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
+											  isSheetPresented: $isPresented)
+				.previewDisplayName("StationsModal = Green Line")
+
+			ButtonChangeStation.StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
+											  isSheetPresented: $isPresented)
+				.previewDisplayName("StationsModal = Red Line")
 		}
 	}
 }
