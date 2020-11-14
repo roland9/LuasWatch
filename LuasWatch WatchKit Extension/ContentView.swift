@@ -22,7 +22,6 @@ struct ContentView: View {
 	@State private var direction: Direction?
 
 	@State private var isAnimating = false
-	@State private var isStationsModalPresented = false
 
 	@State private var overlayTextAfterTap: String?
 	@State private var overlayTextViewOpacity: Double = 1.0
@@ -104,7 +103,7 @@ struct ContentView: View {
 							Text(self.appState.state.debugDescription)
 								.multilineTextAlignment(.center)
 
-							ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)
+							ButtonChangeStation(isStationsModalPresented: $appState.isStationsModalPresented)
 						}
 					}
 				)
@@ -118,7 +117,7 @@ struct ContentView: View {
 							Header(station: trains.trainStation, direction: $direction,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
-							TrainsList(trains: trains, direction: direction ?? .both)
+							TrainsList(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
 
 						}.onAppear(perform: {
 							// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
@@ -146,7 +145,7 @@ struct ContentView: View {
 						}
 						.frame(height: 36)	// avoid jumping
 
-						TrainsList(trains: trains, direction: direction ?? .both)
+						TrainsList(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
 
 					}.onAppear(perform: {
 						if self.direction != Direction.direction(for: trains.trainStation.name) {
@@ -271,7 +270,8 @@ struct TrainsList: View {
 	let trains: TrainsByDirection
 	let direction: Direction
 
-	@State var isStationsModalPresented = false
+//	@State var isStationsModalPresented = false
+	@Binding var isStationsModalPresented: Bool
 
 	var body: some View {
 
@@ -397,8 +397,8 @@ struct ButtonChangeStation: View {
 				if MyUserDefaults.userSelectedSpecificStation() != nil {
 					Button(action: {
 						MyUserDefaults.wipeUserSelectedStation()
-						retriggerTimer()
 						isStationsModalPresented = false
+						retriggerTimer()
 					}, label: {
 						VStack {
 							Image(systemName: "location")
@@ -436,8 +436,8 @@ struct ButtonChangeStation: View {
 					Button(action: {
 						print("☣️ tap \(station) -> save")
 						MyUserDefaults.saveSelectedStation(station)
-						retriggerTimer()			// start 12sec timer right now
 						isSheetPresented = false		// so we dismiss sheet
+						retriggerTimer()			// start 12sec timer right now
 					}) {
 						Text(station.name)
 					}

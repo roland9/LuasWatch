@@ -56,6 +56,12 @@ class Coordinator: NSObject {
 	}
 
 	@objc func timerDidFire() {
+
+		guard appState.isStationsModalPresented == false else {
+			print("💔 StationsModal is up (isStationsModalPresented == true) -> ignore location update timer")
+			return
+		}
+
 		location.update()
 	}
 }
