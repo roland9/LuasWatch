@@ -146,22 +146,24 @@ class LuasKitIOSTests: XCTestCase {
 
 	func testSnapshot() {
 
+		let shouldRecord = false
+
 		let view = ContentView()
 			.environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
 		assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone8),
-												  traits: .init(userInterfaceStyle: .light)), named: "iPhone8 tooFarAway")
+												  traits: .init(userInterfaceStyle: .light)), named: "iPhone8 tooFarAway", record: shouldRecord)
 
 		let viewTrains = ContentView()
 			.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
 		assertSnapshot(matching: viewTrains, as: .image(layout: .device(config: .iPhone8),
-														traits: .init(userInterfaceStyle: .light)), named: "iPhone8 trains")
+														traits: .init(userInterfaceStyle: .light)), named: "iPhone8 trains", record: shouldRecord)
 
 		let viewError = ContentView()
 			.environmentObject(
 				AppState(state: .errorGettingDueTimes(String(format: LuasStrings.emptyDueTimesErrorMessage, "Cabra"))))
 			.environment(\.sizeCategory, .extraExtraLarge)
 		assertSnapshot(matching: viewError, as: .image(layout: .device(config: .iPhone8),
-													   traits: .init(userInterfaceStyle: .light)), named: "iPhone8 errorEmpty")
+													   traits: .init(userInterfaceStyle: .light)), named: "iPhone8 errorEmpty", record: shouldRecord)
 
 	}
 }
