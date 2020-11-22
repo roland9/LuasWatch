@@ -47,7 +47,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
 	// MARK: - Placeholder Templates
 
-	// swiftlint:disable:next cyclomatic_complexity function_body_length
+	// swiftlint:disable:next cyclomatic_complexity
 	func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
 		// This method will be called once per supported complication, and the results will be cached
 		switch complication.family {

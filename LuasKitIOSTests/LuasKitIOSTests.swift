@@ -87,36 +87,41 @@ class LuasKitIOSTests: XCTestCase {
 		let apiExpectation = expectation(description: "API call expectation")
 
 		/*
-			[
-				"destination": "LUAS Bride's Glen",
-				"direction": "Outbound",
-				"duetime": "Due"
-			],
-			[
-				"destination": "LUAS Broombridge",
-				"direction": "Inbound",
-				"duetime": "6"
-			],
-			[
-				"destination": "LUAS Bride's Glen",
-				"direction": "Outbound",
-				"duetime": "15"
-			]
+		<stopInfo created="2020-08-16T22:07:29" stop="Ranelagh" stopAbv="RAN">
+		<message>Green Line services operating normally</message>
+		<direction name="Inbound">
+		<tram dueMins="Due" destination="Broombridge" />
+		</direction>
+		<direction name="Inbound">
+		<tram dueMins="5" destination="Broombridge" />
+		</direction>
+		<direction name="Outbound">
+		<tram dueMins="7" destination="Bride's Glen" />
+		</direction>
+		<direction name="Outbound">
+		<tram dueMins="9" destination="Sandyford" />
+		</direction>
+		<direction name="Outbound">
+		<tram dueMins="15" destination="Bride's Glen" />
+		</direction>
+		</stopInfo>
 		*/
 
-		LuasMockAPI.dueTime(for: station) { (result) in
+		LuasMockAPI2.dueTime(for: station) { (result) in
 			switch result {
 
 			case .error(let message):
 				print("error: \(message)")
 
 			case .success(let trains):
-				XCTAssertEqual(trains.inbound.count, 1)
-				XCTAssertEqual(trains.inbound[0], Train(destination: "LUAS Broombridge", direction: "Inbound", dueTime: "6"))
+				XCTAssertEqual(trains.inbound.count, 2)
+				XCTAssertEqual(trains.inbound[0], Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"))
+				XCTAssertEqual(trains.inbound[1], Train(destination: "Broombridge", direction: "Inbound", dueTime: "5"))
 
-				XCTAssertEqual(trains.outbound.count, 2)
-				XCTAssertEqual(trains.outbound[0], Train(destination: "LUAS Bride's Glen", direction: "Outbound", dueTime: "Due"))
-				XCTAssertEqual(trains.outbound[1], Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "15"))
+				XCTAssertEqual(trains.outbound.count, 3)
+				XCTAssertEqual(trains.outbound[0], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"))
+				XCTAssertEqual(trains.outbound[1], Train(destination: "Sandyford", direction: "Outbound", dueTime: "9"))
+				XCTAssertEqual(trains.outbound[2], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "15"))
 
 				apiExpectation.fulfill()
 				print(trains)

@@ -68,7 +68,7 @@ public struct LuasMockAPI2: API2 {
 				<tram dueMins="7" destination="Bride's Glen" />
 			</direction>
 			<direction name="Outbound">
-				<tram dueMins="9" destination="Bride's Glen" />
+				<tram dueMins="9" destination="Sandyford" />
 			</direction>
 			<direction name="Outbound">
 				<tram dueMins="15" destination="Bride's Glen" />

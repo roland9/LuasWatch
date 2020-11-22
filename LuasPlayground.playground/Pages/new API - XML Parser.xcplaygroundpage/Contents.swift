@@ -127,7 +127,8 @@ class DirectionParser: NSObject, NodeParser {
 		print("🔛 \(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
 
 		if elementName == "tram" {
-			if let destination = attributeDict["destination"], let dueMins = attributeDict["dueMins"] {
+			if // let destination = attributeDict["destination"],
+			   let dueMins = attributeDict["dueMins"] {
 				if description != "No trams forecast" && dueMins != "" {
 					let train = Train(destination: attributeDict["destination"]!, direction: direction, dueTime: attributeDict["dueMins"]!)
 					result?.append(train)
@@ -185,7 +186,7 @@ class StopInfoParser: NSObject, NodeParser {
 
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
 
-		var message: String? = messageParser.result
+		let message: String? = messageParser.result
 
 		result =
 			TrainsByDirection(trainStation: trainStation,

@@ -65,8 +65,7 @@ public extension API {
 
 					let trainsByDirection = TrainsByDirection(trainStation: trainStation,
 															  inbound: inboundTrains,
-															  outbound: outboundTrains,
-															  message: nil)
+															  outbound: outboundTrains)
 					DispatchQueue.main.async {
 						completion(.success(trainsByDirection))
 					}
