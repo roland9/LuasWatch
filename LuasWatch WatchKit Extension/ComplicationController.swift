@@ -58,7 +58,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(template)
 
 			case .modularLarge:
-				assertionFailure("unsupported complication family")
+//				assertionFailure("unsupported complication family")
 				handler(nil)
 
 			case .utilitarianSmall:
@@ -67,11 +67,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(template)
 
 			case .utilitarianSmallFlat:
-				assertionFailure("unsupported complication family")
+//				assertionFailure("unsupported complication family")
 				handler(nil)
 
 			case .utilitarianLarge:
-				assertionFailure("unsupported complication family")
+//				assertionFailure("unsupported complication family")
 				handler(nil)
 
 			case .circularSmall:
@@ -90,7 +90,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(template)
 
 			case .graphicBezel:
-				assertionFailure("unsupported complication family")
+//				assertionFailure("unsupported complication family")
 				handler(nil)
 
 			case .graphicCircular:
@@ -99,11 +99,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(nil)
 
 			case .graphicRectangular:
-				assertionFailure("unsupported complication family")
+//				assertionFailure("unsupported complication family")
+				handler(nil)
+
+			case .graphicExtraLarge:
+//				assertionFailure("unsupported complication family")
 				handler(nil)
 
 			@unknown default:
-				assertionFailure("unsupported complication family")
+//				assertionFailure("unsupported complication family")
 				handler(nil)
 
 		}
@@ -178,6 +182,10 @@ private extension ComplicationController {
 													complicationTemplate: template)
 
 			case .graphicRectangular:
+				assertionFailure("unsupported complication family")
+				return nil
+
+			case .graphicExtraLarge:
 				assertionFailure("unsupported complication family")
 				return nil
 

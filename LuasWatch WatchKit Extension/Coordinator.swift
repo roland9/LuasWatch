@@ -56,6 +56,12 @@ class Coordinator: NSObject {
 	}
 
 	@objc func timerDidFire() {
+
+		guard appState.isStationsModalPresented == false else {
+			print("💔 StationsModal is up (isStationsModalPresented == true) -> ignore location update timer")
+			return
+		}
+
 		location.update()
 	}
 }
@@ -136,17 +142,20 @@ extension Coordinator: LocationDelegate {
 
 		//////////////////////////////////
 		// step 3: get due times from API
-		LuasAPI.dueTime(for: closestStation) { [weak self] (result) in
-			switch result {
-				case .error(let error):
-					print("\(#function): \(error)")
-					self?.trains = nil
-					self?.appState.state = .errorGettingDueTimes(error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+		LuasAPI2.dueTime(for: closestStation) { [weak self] (result) in
 
-				case .success(let trains):
-					print("\(#function): \(trains)")
-					self?.trains = trains
-					self?.appState.state = .foundDueTimes(trains)
+			DispatchQueue.main.async {
+				switch result {
+					case .error(let error):
+						print("\(#function): \(error)")
+						self?.trains = nil
+						self?.appState.state = .errorGettingDueTimes(error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+
+					case .success(let trains):
+						print("\(#function): \(trains)")
+						self?.trains = trains
+						self?.appState.state = .foundDueTimes(trains)
+				}
 			}
 		}
 	}
