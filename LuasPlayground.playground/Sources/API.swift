@@ -13,17 +13,18 @@ public protocol API {
 
 public extension API {
 
+	// swiftlint:disable:next function_body_length
 	static func dueTime(for trainStation: TrainStation, completion: @escaping (Result<TrainsByDirection>) -> Void) {
 
 		Self.getTrains(stationId: trainStation.stationIdShort) { (data, error) in
 			if let data = data,
-				let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary {
-				//			print("\(json)")
+			   let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary {
 
 				if let errorMessage = json["errormessage"] as? String,
-					errorMessage.count > 0 {
+				   errorMessage.count > 0 {
+
 					DispatchQueue.main.async {
-						completion(.error(errorMessage))
+						completion(.error("Error from Luas Service:\n\(errorMessage)"))
 					}
 					return
 				}
@@ -31,14 +32,17 @@ public extension API {
 				if let results = (json["results"] as? [JSONDictionary]) {
 
 					let trains: [Train] = results.compactMap { (train) in
+
 						if let destination = train["destination"] as? String,
-							let direction = train["direction"] as? String,
-							let dueTime = train["duetime"] as? String {
+						   let direction = train["direction"] as? String,
+						   let dueTime = train["duetime"] as? String {
 							return Train(destination: destination, direction: direction, dueTime: dueTime)
 						} else {
 							return nil
 						}
+
 					}
+
 					let groupedTrains = Dictionary(grouping: trains, by: { $0.direction })
 
 					var inboundTrains = [Train]()
@@ -54,15 +58,14 @@ public extension API {
 
 					if inboundTrains.isEmpty && outboundTrains.isEmpty {
 						DispatchQueue.main.async {
-							completion(.error("result empty"))
+							completion(.error(String(format: LuasStrings.emptyDueTimesErrorMessage, trainStation.name)))
 						}
 						return
 					}
 
 					let trainsByDirection = TrainsByDirection(trainStation: trainStation,
 															  inbound: inboundTrains,
-															  outbound: outboundTrains,
-															  message: nil) // that's only for the new API
+															  outbound: outboundTrains)
 					DispatchQueue.main.async {
 						completion(.success(trainsByDirection))
 					}
@@ -73,6 +76,19 @@ public extension API {
 					}
 				}
 
+			} else {
+
+				DispatchQueue.main.async {
+					if let error = error {
+						if (error as NSError).code == NSURLErrorNotConnectedToInternet {
+							completion(.error(LuasStrings.errorNoInternet))
+						} else {
+							completion(.error(NSLocalizedString("Error getting due times from internet: \(error.localizedDescription)", comment: "")))
+						}
+					} else {
+						completion(.error(NSLocalizedString("Error getting due times from internet.\n\nPlease try agin later.", comment: "")))
+					}
+				}
 			}
 		}
 	}
@@ -119,7 +135,7 @@ public struct LuasMockAPI: API {
 						"route": "Red"
 					]
 				]
-		]
+			]
 
 		// swiftlint:disable force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
@@ -137,10 +153,22 @@ public struct LuasMockEmptyAPI: API {
 			[
 				"errormessage": "",
 				"results": []
-		]
+			]
 
 		// swiftlint:disable force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
+	}
+
+	public init() {
+		//
+	}
+}
+
+public struct LuasMockErrorAPI: API {
+
+	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
+
+		completion(nil, NSError(domain: "luaswatch", code: 100, userInfo: nil))
 	}
 
 	public init() {

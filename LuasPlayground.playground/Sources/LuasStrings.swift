@@ -10,12 +10,12 @@ public struct LuasStrings {
 
 	public static let emptyDueTimesErrorMessage =
 		NSLocalizedString("Couldn’t get any trains for the %@ station. " +
-			"Either Luas is not operating, or there is a problem with the RTPI Service.\n\n" +
-			"Please try again later.", comment: "")
+							"Either Luas is not operating, or there is a problem with the RTPI Service.\n\n" +
+							"Please try again later.", comment: "")
 
 	public static let tooFarAway =
 		NSLocalizedString("Looks like the closest Luas station is quite far away.\n\n" +
-			"Please try again later when you’re closer to the Dublin Area.", comment: "")
+							"Please try again later when you’re closer to the Dublin Area.", comment: "")
 
 	public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
 

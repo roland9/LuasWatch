@@ -50,6 +50,7 @@ extension MyState: CustomDebugStringConvertible {
 
 public class AppState: ObservableObject {
 	@Published public var state: MyState = .gettingLocation
+	@Published public var isStationsModalPresented: Bool = false
 
 	public init() {}
 

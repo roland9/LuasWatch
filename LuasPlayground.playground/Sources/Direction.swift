@@ -45,7 +45,7 @@ extension Direction {
 		let userDefaults = UserDefaults.standard
 
 		if let directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int],
-			let direction = directions[station] {
+		   let direction = directions[station] {
 			return Direction(rawValue: direction)!
 		}
 

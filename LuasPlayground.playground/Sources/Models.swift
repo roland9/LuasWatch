@@ -107,7 +107,7 @@ public struct TrainStations {
 			let data = try? Data(contentsOf: luasStopsFile),
 			let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
 			let stationsArray = json["stations"] as? [JSONDictionary]
-			else { fatalError("could not parse JSON file") }
+		else { fatalError("could not parse JSON file") }
 
 		// swiftlint:disable force_cast
 		stations = stationsArray.compactMap { (station) in
@@ -115,7 +115,7 @@ public struct TrainStations {
 			var stationTypeValue: TrainStation.StationType = .twoway
 
 			if let stationTypeString = station["type"] as? String,
-				let stationType = TrainStation.StationType(rawValue: stationTypeString) {
+			   let stationType = TrainStation.StationType(rawValue: stationTypeString) {
 				stationTypeValue = stationType
 			}
 

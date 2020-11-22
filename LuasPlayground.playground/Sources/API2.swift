@@ -18,15 +18,18 @@ public extension API2 {
 					case .error(let message):
 						completion(.error(message))
 					case .success(let trainsByDirection):
-						completion(.success(trainsByDirection))
+						//	previously in API v1 we had this condition; not sure it might also happen in v2
+						if trainsByDirection.inbound.isEmpty && trainsByDirection.outbound.isEmpty {
+							completion(.error("No trains found"))
+						} else {
+							completion(.success(trainsByDirection))
+						}
 				}
 
-	//					if inboundTrains.isEmpty && outboundTrains.isEmpty {
-	//							completion(.error("result empty"))
-	//					}
-
+			} else if let error = error {
+				completion(.error("Error getting results from server: \(error.localizedDescription)"))
 			} else {
-				completion(.error("Error parsing results"))
+				completion(.error("Error getting results from server"))
 			}
 		}
 	}
@@ -65,7 +68,7 @@ public struct LuasMockAPI2: API2 {
 				<tram dueMins="7" destination="Bride's Glen" />
 			</direction>
 			<direction name="Outbound">
-				<tram dueMins="9" destination="Bride's Glen" />
+				<tram dueMins="9" destination="Sandyford" />
 			</direction>
 			<direction name="Outbound">
 				<tram dueMins="15" destination="Bride's Glen" />
