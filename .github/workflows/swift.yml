@@ -13,5 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        xcode-version: '12,2'
     - name: Run tests
       run: bundle install && bundle exec fastlane test
