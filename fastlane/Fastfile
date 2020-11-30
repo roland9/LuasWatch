@@ -7,6 +7,10 @@ default_platform(:ios)
 
 platform :ios do
 
+  before_all do |lane, options|
+    xcversion(version: "12.2")
+  end
+
   def build_app
     increment_build_number 
     gym(
