@@ -7,6 +7,20 @@ import ClockKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
 
+	// MARK: - Configure available complication families
+
+	func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
+		let descriptors = [CLKComplicationDescriptor(identifier: "luasImage", displayName: "LUAS Times", supportedFamilies:
+														[.modularSmall,
+														 .utilitarianSmall,
+														 .circularSmall,
+														 .extraLarge,
+														 .graphicCorner,
+														 .graphicCircular])]
+
+		handler(descriptors)
+	}
+
 	// MARK: - Timeline Configuration
 
 	func getSupportedTimeTravelDirections(for complication: CLKComplication,
@@ -53,8 +67,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		switch complication.family {
 
 			case .modularSmall:
-				let template = CLKComplicationTemplateModularSmallSimpleImage()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateModularSmallSimpleImage(imageProvider: standardImageProvider())
 				handler(template)
 
 			case .modularLarge:
@@ -62,8 +75,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(nil)
 
 			case .utilitarianSmall:
-				let template = CLKComplicationTemplateUtilitarianSmallSquare()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateUtilitarianSmallSquare(imageProvider: standardImageProvider())
 				handler(template)
 
 			case .utilitarianSmallFlat:
@@ -75,18 +87,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(nil)
 
 			case .circularSmall:
-				let template = CLKComplicationTemplateCircularSmallSimpleImage()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateCircularSmallSimpleImage(imageProvider: standardImageProvider())
 				handler(template)
 
 			case .extraLarge:
-				let template = CLKComplicationTemplateExtraLargeSimpleImage()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateExtraLargeSimpleImage(imageProvider: standardImageProvider())
 				handler(template)
 
 			case .graphicCorner:
-				let template = CLKComplicationTemplateGraphicCornerCircularImage()
-				template.imageProvider = graphicCornerImageProvider()
+				let template = CLKComplicationTemplateGraphicCornerCircularImage(imageProvider: graphicCornerImageProvider())
 				handler(template)
 
 			case .graphicBezel:
@@ -94,9 +103,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				handler(nil)
 
 			case .graphicCircular:
-				let template = CLKComplicationTemplateGraphicCircularImage()
-				template.imageProvider = graphicCornerImageProvider()
-				handler(nil)
+				let template = CLKComplicationTemplateGraphicCircularImage(imageProvider: graphicCornerImageProvider())
+				handler(template)
 
 			case .graphicRectangular:
 //				assertionFailure("unsupported complication family")
@@ -130,8 +138,7 @@ private extension ComplicationController {
 
 		switch family {
 			case .modularSmall:
-				let template = CLKComplicationTemplateModularSmallSimpleImage()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateModularSmallSimpleImage(imageProvider: standardImageProvider())
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
@@ -140,8 +147,7 @@ private extension ComplicationController {
 				return nil
 
 			case .utilitarianSmall:
-				let template = CLKComplicationTemplateUtilitarianSmallSquare()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateUtilitarianSmallSquare(imageProvider: standardImageProvider())
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
@@ -154,20 +160,17 @@ private extension ComplicationController {
 				return nil
 
 			case .circularSmall:
-				let template = CLKComplicationTemplateCircularSmallSimpleImage()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateCircularSmallSimpleImage(imageProvider: standardImageProvider())
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
 			case .extraLarge:
-				let template = CLKComplicationTemplateExtraLargeSimpleImage()
-				template.imageProvider = standardImageProvider()
+				let template = CLKComplicationTemplateExtraLargeSimpleImage(imageProvider: standardImageProvider())
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
 			case .graphicCorner:
-				let template = CLKComplicationTemplateGraphicCornerCircularImage()
-				template.imageProvider = graphicCornerImageProvider()
+				let template = CLKComplicationTemplateGraphicCornerCircularImage(imageProvider: graphicCornerImageProvider())
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
@@ -176,8 +179,7 @@ private extension ComplicationController {
 				return nil
 
 			case .graphicCircular:
-				let template = CLKComplicationTemplateGraphicCircularImage()
-				template.imageProvider = graphicCornerImageProvider()
+				let template = CLKComplicationTemplateGraphicCircularImage(imageProvider: graphicCornerImageProvider())
 				return CLKComplicationTimelineEntry(date: Date(),
 													complicationTemplate: template)
 
