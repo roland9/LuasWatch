@@ -5,7 +5,7 @@
 
 import CoreLocation
 
-public protocol LocationDelegate: class {
+public protocol LocationDelegate: AnyObject {
 	func didFail(_ error: LocationDelegateError)
 	func didGetLocation(_ location: CLLocation)
 }

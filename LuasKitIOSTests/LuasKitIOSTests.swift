@@ -138,7 +138,7 @@ class LuasKitIOSTests: XCTestCase {
 			switch result {
 
 				case .error(let message):
-					print("error: \(message)")
+					XCTAssertEqual(message, "Error getting due times from internet: The operation couldn’t be completed. (luaswatch error 100.)")
 					apiExpectation.fulfill()
 
 				case .success:

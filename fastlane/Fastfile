@@ -8,14 +8,15 @@ default_platform(:ios)
 platform :ios do
 
   before_all do |lane, options|
-    xcversion(version: "12.2")
+    xcversion(version: "12.5")
   end
 
   def build_app
     increment_build_number 
     gym(
       scheme: "LuasWatch WatchKit App",
-      # export_xcargs: "-allowProvisioningUpdates",
+	destination: "generic/platform=watchOS",
+      export_xcargs: "-allowProvisioningUpdates",
       # output_directory: "build/",
       # output_name: "LuasWatchRelease.ipa",
       # archive_path: "build/LuasWatchRelease.xcarchive"
@@ -36,7 +37,7 @@ platform :ios do
 
   desc "Run unit tests"
   lane :test do
-    run_tests(devices: ["iPhone 8 (14.2)"],
+    run_tests(devices: ["iPhone 8 (14.5)"],
               scheme: "LuasKitIOSTests")
   end
 
