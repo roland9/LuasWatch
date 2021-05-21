@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "71F6F8FF-91C6-4BC2-8C28-0DDBA6FAD39B",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:LuasWatch.xcodeproj",
+        "identifier" : "AB57F12D230B43AA00BA8B53",
+        "name" : "LuasKitIOSTests"
+      }
+    }
+  ],
+  "version" : 1
+}

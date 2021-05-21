@@ -154,6 +154,7 @@
 		AB57F132230B43AA00BA8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ABBD74822657CCFD00D003EE /* LuasKitIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = LuasKitIOSTests.xctestplan; path = LuasWatch.xcodeproj/LuasKitIOSTests.xctestplan; sourceTree = "<group>"; };
 		ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
 		ABE5585924E944C1008F3789 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				ABBD74822657CCFD00D003EE /* LuasKitIOSTests.xctestplan */,
 				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
 				AB364D072308276D00C73EF6 /* LuasWatch WatchKit App */,
 				AB364D162308277000C73EF6 /* LuasWatch WatchKit Extension */,
