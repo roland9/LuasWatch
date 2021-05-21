@@ -21,14 +21,14 @@ LuasAPI.dueTime(for: station) { (result) in
 	}
 }
 
-// LuasMockAPI.dueTime(for: station) { (result) in
-// 	switch result {
-//	 case .error(let message):
-//	 	print(message)
-//	 case .success(let trains):
+//LuasMockAPI.dueTime(for: station) { (result) in
+//	switch result {
+//	case .error(let message):
+//		print(message)
+//	case .success(let trains):
 //		print(trains)
 //	}
-// }
+//}
 
 LuasMockEmptyAPI.dueTime(for: station) { (result) in
 	switch result {

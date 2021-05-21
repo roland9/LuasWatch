@@ -1,44 +1,40 @@
 import Foundation
 import CoreLocation
 
-/* example input
- <stopInfo created="2020-08-16T22:07:29" stop="Ranelagh" stopAbv="RAN">
- <message>Green Line services operating normally</message>
- <direction name="Inbound">
- <tram dueMins="Due" destination="Broombridge" />
- 	</direction>
- <direction name="Inbound">
- <tram dueMins="5" destination="Broombridge" />
- 	</direction>
- <direction name="Outbound">
- <tram dueMins="7" destination="Bride's Glen" />
- 	</direction>
- <direction name="Outbound">
- <tram dueMins="9" destination="Bride's Glen" />
- 	</direction>
- <direction name="Outbound">
- <tram dueMins="15" destination="Bride's Glen" />
- 	</direction>
- </stopInfo>
-*/
+//<stopInfo created="2020-08-16T22:07:29" stop="Ranelagh" stopAbv="RAN">
+//<message>Green Line services operating normally</message>
+//<direction name="Inbound">
+//<tram dueMins="Due" destination="Broombridge" />
+//	</direction>
+//<direction name="Inbound">
+//<tram dueMins="5" destination="Broombridge" />
+//	</direction>
+//<direction name="Outbound">
+//<tram dueMins="7" destination="Bride's Glen" />
+//	</direction>
+//<direction name="Outbound">
+//<tram dueMins="9" destination="Bride's Glen" />
+//	</direction>
+//<direction name="Outbound">
+//<tram dueMins="15" destination="Bride's Glen" />
+//	</direction>
+//</stopInfo>
 
-/* another example input
- <stopInfo created="2020-09-10T20:35:43" stop="St. Stephen's Green" stopAbv="STS">
- <message>Green Line services operating with delays</message>
- <direction name="Inbound">
- <tram dueMins="DUE" destination="Broombridge" />
- <tram dueMins="6" destination="Parnell" />
- <tram dueMins="11" destination="Broombridge" />
- <tram dueMins="18" destination="Parnell" />
- </direction>
- <direction name="Outbound">
- <tram dueMins="1" destination="Bride's Glen" />
- <tram dueMins="3" destination="Sandyford" />
- <tram dueMins="10" destination="Bride's Glen" />
- <tram dueMins="17" destination="Sandyford" />
- </direction>
- </stopInfo>
-*/
+//<stopInfo created="2020-09-10T20:35:43" stop="St. Stephen's Green" stopAbv="STS">
+//<message>Green Line services operating with delays</message>
+//<direction name="Inbound">
+//<tram dueMins="DUE" destination="Broombridge" />
+//<tram dueMins="6" destination="Parnell" />
+//<tram dueMins="11" destination="Broombridge" />
+//<tram dueMins="18" destination="Parnell" />
+//</direction>
+//<direction name="Outbound">
+//<tram dueMins="1" destination="Bride's Glen" />
+//<tram dueMins="3" destination="Sandyford" />
+//<tram dueMins="10" destination="Bride's Glen" />
+//<tram dueMins="17" destination="Sandyford" />
+//</direction>
+//</stopInfo>
 
 let xml = """
 <stopInfo created="2020-09-10T20:39:57" stop="Tallaght" stopAbv="TAL">

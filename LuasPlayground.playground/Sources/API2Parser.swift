@@ -36,7 +36,7 @@ struct API2Parser {
 			// print("🔛 \(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
 
 			if elementName == "tram" {
-				if // let destination = attributeDict["destination"],
+				if //let destination = attributeDict["destination"],
 					let dueMins = attributeDict["dueMins"] {
 					if description != "No trams forecast" && dueMins != "" {
 						let train = Train(destination: attributeDict["destination"]!, direction: direction, dueTime: attributeDict["dueMins"]!)
