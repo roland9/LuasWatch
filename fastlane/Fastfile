@@ -16,7 +16,7 @@ platform :ios do
     gym(
       scheme: "LuasWatch WatchKit App",
 	destination: "generic/platform=watchOS",
-      # export_xcargs: "-allowProvisioningUpdates",
+      export_xcargs: "-allowProvisioningUpdates",
       # output_directory: "build/",
       # output_name: "LuasWatchRelease.ipa",
       # archive_path: "build/LuasWatchRelease.xcarchive"
