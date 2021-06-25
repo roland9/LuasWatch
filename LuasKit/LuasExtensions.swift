@@ -5,7 +5,14 @@
 
 import SwiftUI
 
-public extension UIColor {
+public struct Colors {
+
+	public static let luasRed = Color(UIColor(rgb: 0xEE4251))
+	public static let luasGreen = Color(UIColor(rgb: 0x00A666))
+	public static let luasPurple = Color(UIColor(rgb: 0x5235D6))
+}
+
+extension UIColor {
 
 	convenience init(red: Int, green: Int, blue: Int) {
 		assert(red >= 0 && red <= 255, "Invalid red component")
@@ -22,8 +29,4 @@ public extension UIColor {
 			blue: rgb & 0xFF
 		)
 	}
-
-	static let luasRed = UIColor(rgb: 0xEE4251)
-	static let luasGreen = UIColor(rgb: 0x00A666)
-	static let luasPurple = UIColor(rgb: 0x5235D6)
 }

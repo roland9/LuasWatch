@@ -26,135 +26,85 @@ struct ContentView: View {
 	@State private var overlayTextAfterTap: String?
 	@State private var overlayTextViewOpacity: Double = 1.0
 
-	var animation: Animation {
-		Animation
-			.easeInOut(duration: 0.7)
-			.repeatForever()
-	}
-
-	var slowAnimation: Animation {
-		Animation
-			.easeInOut(duration: 1.4)
-			.repeatForever()
-	}
-
 	var body: some View {
 
-		switch appState.state {
+		Group {
+			switch appState.state {
 
 			case .gettingLocation:
-				return AnyView(
-					VStack {
-						Text(self.appState.state.debugDescription)
-							.multilineTextAlignment(.center)
-							.padding()
-
-						ZStack {
-
-							Circle()
-								.stroke(Color(UIColor.luasPurple), lineWidth: 6)
-								.scaleEffect(isAnimating ? 2.8 : 1)
-								.animation(slowAnimation)
-								.blur(radius: 8)
-
-							Circle()
-								.fill(Color(UIColor.luasGreen))
-								.scaleEffect(isAnimating ? 1.5 : 1)
-								.animation(animation)
-
-							Circle()
-								.stroke(Color(UIColor.luasRed), lineWidth: 3)
-								.scaleEffect(isAnimating ? 2.0 : 1)
-								.animation(slowAnimation)
-
-						}.frame(width: CGFloat(20), height: CGFloat(20))
-							.onAppear { self.isAnimating = true }
-							.padding(25)
-					}
-			)
+				loadingAnimationView()
 
 			case .errorGettingLocation:
-				return AnyView(
-					Text(self.appState.state.debugDescription)
-						.multilineTextAlignment(.center)
-						.frame(idealHeight: .greatestFiniteMagnitude)
-			)
+				Text(self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
+					.frame(idealHeight: .greatestFiniteMagnitude)
 
 			case .errorGettingStation(let errorMessage):
-				return AnyView(
-					Text(errorMessage)
-						.multilineTextAlignment(.center)
-						.frame(idealHeight: .greatestFiniteMagnitude)
-			)
+				Text(errorMessage)
+					.multilineTextAlignment(.center)
+					.frame(idealHeight: .greatestFiniteMagnitude)
 
 			case .gettingDueTimes:
-				return AnyView(
-					Text(self.appState.state.debugDescription)
-						.multilineTextAlignment(.center)
-			)
+				Text(self.appState.state.debugDescription)
+					.multilineTextAlignment(.center)
 
 			// bit confusing: this enum has parameter, but it's not shown here
 			// because it's surfaced via the debugDescription
 			case .errorGettingDueTimes:
-				return AnyView(
 
-					ScrollView {
-						VStack {
-							Text(self.appState.state.debugDescription)
-								.multilineTextAlignment(.center)
+				ScrollView {
+					VStack {
+						Text(self.appState.state.debugDescription)
+							.multilineTextAlignment(.center)
 
-							ButtonChangeStation(isStationsModalPresented: $appState.isStationsModalPresented)
-						}
+						ButtonChangeStation(isStationsModalPresented: $appState.isStationsModalPresented)
 					}
-				)
+				}
 
 			case .foundDueTimes(let trains):
-				return AnyView(
 
-					ZStack {
-						VStack {
-
-							Header(station: trains.trainStation, direction: $direction,
-								   overlayTextAfterTap: $overlayTextAfterTap)
-
-							TrainsList(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
-
-						}.onAppear(perform: {
-							// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
-							if self.direction != Direction.direction(for: trains.trainStation.name) {
-								self.direction = Direction.direction(for: trains.trainStation.name)
-								print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
-							}
-						})
-
-						tapOverlayView()
-					}
-				)
-
-			case .updatingDueTimes(let trains):
-				return AnyView(
+				ZStack {
 					VStack {
 
-						ZStack {
-							Header(station: trains.trainStation, direction: $direction,
-								   overlayTextAfterTap: $overlayTextAfterTap)
-							Rectangle()
-								.foregroundColor(.black).opacity(0.7)
-							Text("Updating...")
-								.font(.system(.footnote))
-						}
-						.frame(height: 36)	// avoid jumping
+						Header(station: trains.trainStation, direction: $direction,
+							   overlayTextAfterTap: $overlayTextAfterTap)
 
 						TrainsList(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
 
 					}.onAppear(perform: {
+						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
 						if self.direction != Direction.direction(for: trains.trainStation.name) {
 							self.direction = Direction.direction(for: trains.trainStation.name)
 							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 						}
 					})
-			)
 
+					tapOverlayView()
+				}
+
+			case .updatingDueTimes(let trains):
+				VStack {
+
+					ZStack {
+						Header(station: trains.trainStation, direction: $direction,
+							   overlayTextAfterTap: $overlayTextAfterTap)
+						Rectangle()
+							.foregroundColor(.black).opacity(0.7)
+						Text("Updating...")
+							.font(.system(.footnote))
+					}
+					.frame(height: 36)	// avoid jumping
+
+					TrainsList(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
+
+				}.onAppear(perform: {
+					if self.direction != Direction.direction(for: trains.trainStation.name) {
+						self.direction = Direction.direction(for: trains.trainStation.name)
+						print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
+					}
+				})
+
+			}
 		}
 	}
 
@@ -186,6 +136,49 @@ struct ContentView: View {
 				}
 			}
 		)
+	}
+
+	@ViewBuilder
+	func loadingAnimationView() -> some View {
+		VStack {
+			Text(self.appState.state.debugDescription)
+				.multilineTextAlignment(.center)
+				.padding()
+
+			ZStack {
+
+				Circle()
+					.stroke(Colors.luasPurple, lineWidth: 6)
+					.scaleEffect(isAnimating ? 2.8 : 1)
+					.animation(slowAnimation)
+					.blur(radius: 8)
+
+				Circle()
+					.fill(Colors.luasGreen)
+					.scaleEffect(isAnimating ? 1.5 : 1)
+					.animation(standardAnimation)
+
+				Circle()
+					.stroke(Colors.luasRed, lineWidth: 3)
+					.scaleEffect(isAnimating ? 2.0 : 1)
+					.animation(slowAnimation)
+
+			}.frame(width: CGFloat(20), height: CGFloat(20))
+			.onAppear { self.isAnimating = true }
+			.padding(25)
+		}
+	}
+
+	fileprivate var standardAnimation: Animation {
+		Animation
+			.easeInOut(duration: 0.7)
+			.repeatForever()
+	}
+
+	fileprivate var slowAnimation: Animation {
+		Animation
+			.easeInOut(duration: 1.4)
+			.repeatForever()
 	}
 }
 
@@ -232,12 +225,12 @@ struct Header: View {
 		}
 
 		switch direction {
-			case .both:
-				return "arrow.right.arrow.left.circle.fill"
-			case .inbound:
-				return "arrow.right.circle.fill"
-			case .outbound:
-				return "arrow.left.circle.fill"
+		case .both:
+			return "arrow.right.arrow.left.circle.fill"
+		case .inbound:
+			return "arrow.right.circle.fill"
+		case .outbound:
+			return "arrow.left.circle.fill"
 		}
 	}
 
@@ -256,12 +249,12 @@ struct Header: View {
 
 	fileprivate func text(for direction: Direction) -> String {
 		switch direction {
-			case .both:
-				return "Showing both directions"
-			case .inbound:
-				return "Showing inbound trains only"
-			case .outbound:
-				return "Showing outbound trains only"
+		case .both:
+			return "Showing both directions"
+		case .inbound:
+			return "Showing inbound trains only"
+		case .outbound:
+			return "Showing outbound trains only"
 		}
 	}
 }
@@ -270,7 +263,7 @@ struct TrainsList: View {
 	let trains: TrainsByDirection
 	let direction: Direction
 
-//	@State var isStationsModalPresented = false
+	//	@State var isStationsModalPresented = false
 	@Binding var isStationsModalPresented: Bool
 
 	var body: some View {
@@ -305,14 +298,14 @@ struct TrainsList: View {
 		// train station allows switching direction, so let's find out what the user has chosen
 		switch direction {
 
-			case .both:
-				return twoWayTrainsView()
+		case .both:
+			return twoWayTrainsView()
 
-			case .inbound:
-				return oneWayTrainsView(trains.inbound)
+		case .inbound:
+			return oneWayTrainsView(trains.inbound)
 
-			case .outbound:
-				return oneWayTrainsView(trains.outbound)
+		case .outbound:
+			return oneWayTrainsView(trains.outbound)
 		}
 	}
 
@@ -584,17 +577,17 @@ struct Preview_AppRunning: PreviewProvider {
 			ContentView()
 				.environmentObject(
 					AppState(state:
-						.gettingDueTimes(TrainStation(stationId: "stationId",
-													  stationIdShort: "LUAS70",
-													  shortCode: "CAB",
-													  route: .green,
-													  name: "Cabra",
-													  location: location))))
+								.gettingDueTimes(TrainStation(stationId: "stationId",
+															  stationIdShort: "LUAS70",
+															  shortCode: "CAB",
+															  route: .green,
+															  name: "Cabra",
+															  location: location))))
 				.previewDisplayName("getting info")
 
 			ContentView()
 				.environmentObject(AppState(state:
-					.errorGettingDueTimes(genericError)))
+												.errorGettingDueTimes(genericError)))
 				.previewDisplayName("error getting due times (specific)")
 
 			ContentView()
