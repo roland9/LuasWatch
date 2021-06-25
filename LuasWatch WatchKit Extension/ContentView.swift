@@ -83,6 +83,7 @@ struct ContentView: View {
 				}
 
 			case .updatingDueTimes(let trains):
+				// not ideal: lots of repetition compared to above
 				VStack {
 
 					ZStack {
@@ -108,10 +109,10 @@ struct ContentView: View {
 		}
 	}
 
-	fileprivate func tapOverlayView() -> AnyView? {
-		guard let text = overlayTextAfterTap else { return nil }
+	@ViewBuilder
+	fileprivate func tapOverlayView() -> some View {
 
-		return AnyView(
+		if let text = overlayTextAfterTap {
 
 			ZStack {
 				Rectangle()
@@ -135,11 +136,12 @@ struct ContentView: View {
 					overlayTextViewOpacity = 1.0
 				}
 			}
-		)
+		}
 	}
 
 	@ViewBuilder
-	func loadingAnimationView() -> some View {
+	fileprivate func loadingAnimationView() -> some View {
+
 		VStack {
 			Text(self.appState.state.debugDescription)
 				.multilineTextAlignment(.center)
@@ -268,20 +270,21 @@ struct TrainsList: View {
 
 	var body: some View {
 
-		if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
-			// find the trains, either inbound or outbound
+		Group {
 
-			if trains.inbound.count > 0 {
-				return oneWayTrainsView(trains.inbound)
-			}
+			if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
+				// find the trains, either inbound or outbound
 
-			if trains.outbound.count > 0 {
-				return oneWayTrainsView(trains.outbound)
-			}
+				if trains.inbound.count > 0 {
+					oneWayTrainsView(trains.inbound)
+				}
 
-			assert(false, "we should have found either trains in inbound or outbound direction")
+				if trains.outbound.count > 0 {
+					oneWayTrainsView(trains.outbound)
+				}
 
-			return AnyView(
+//				assert(false, "we should have found either trains in inbound or outbound direction")
+
 				VStack {
 
 					VStack {
@@ -292,54 +295,53 @@ struct TrainsList: View {
 
 					ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)
 				}
-			)
-		}
+			}
 
-		// train station allows switching direction, so let's find out what the user has chosen
-		switch direction {
+			// train station allows switching direction, so let's find out what the user has chosen
+			switch direction {
 
-		case .both:
-			return twoWayTrainsView()
+			case .both:
+				twoWayTrainsView()
 
-		case .inbound:
-			return oneWayTrainsView(trains.inbound)
+			case .inbound:
+				oneWayTrainsView(trains.inbound)
 
-		case .outbound:
-			return oneWayTrainsView(trains.outbound)
+			case .outbound:
+				oneWayTrainsView(trains.outbound)
+			}
+
 		}
 	}
 
-	private func oneWayTrainsView(_ trainsList: [Train]) -> AnyView {
-		AnyView(
-			List {
-				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
+	@ViewBuilder
+	private func oneWayTrainsView(_ trainsList: [Train]) -> some View {
+		List {
+			Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
 
-					ForEach(trainsList, id: \.id) {
-						Text($0.dueTimeDescription)
-					}
+				ForEach(trainsList, id: \.id) {
+					Text($0.dueTimeDescription)
 				}
 			}
-		)
+		}
 	}
 
-	private func twoWayTrainsView() -> AnyView {
-		return AnyView(
+	@ViewBuilder
+	private func twoWayTrainsView() -> some View {
 
-			List {
-				Section {
-					ForEach(self.trains.inbound, id: \.id) {
-						Text($0.dueTimeDescription)
-					}
-				}
-
-				Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
-
-					ForEach(self.trains.outbound, id: \.id) {
-						Text($0.dueTimeDescription)
-					}
+		List {
+			Section {
+				ForEach(self.trains.inbound, id: \.id) {
+					Text($0.dueTimeDescription)
 				}
 			}
-		)
+
+			Section(footer: ButtonChangeStation(isStationsModalPresented: $isStationsModalPresented)) {
+
+				ForEach(self.trains.outbound, id: \.id) {
+					Text($0.dueTimeDescription)
+				}
+			}
+		}
 	}
 
 }
