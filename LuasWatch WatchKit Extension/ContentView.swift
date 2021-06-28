@@ -270,19 +270,17 @@ struct TrainsList: View {
 
 	var body: some View {
 
-		Group {
+		if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
+			// find the trains, either inbound or outbound
 
-			if trains.trainStation.isFinalStop || trains.trainStation.isOneWayStop {
-				// find the trains, either inbound or outbound
+			if trains.inbound.count > 0 {
+				oneWayTrainsView(trains.inbound)
 
-				if trains.inbound.count > 0 {
-					oneWayTrainsView(trains.inbound)
-				}
+			} else if trains.outbound.count > 0 {
+				oneWayTrainsView(trains.outbound)
+			} else {
 
-				if trains.outbound.count > 0 {
-					oneWayTrainsView(trains.outbound)
-				}
-
+				// cannot use assert here??
 //				assert(false, "we should have found either trains in inbound or outbound direction")
 
 				VStack {
@@ -297,6 +295,8 @@ struct TrainsList: View {
 				}
 			}
 
+		} else {
+
 			// train station allows switching direction, so let's find out what the user has chosen
 			switch direction {
 
@@ -309,7 +309,6 @@ struct TrainsList: View {
 			case .outbound:
 				oneWayTrainsView(trains.outbound)
 			}
-
 		}
 	}
 
