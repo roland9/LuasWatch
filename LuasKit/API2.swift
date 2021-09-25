@@ -18,9 +18,15 @@ public extension API2 {
 					case .error(let message):
 						completion(.error(message))
 					case .success(let trainsByDirection):
-						//	previously in API v1 we had this condition; not sure it might also happen in v2
 						if trainsByDirection.inbound.isEmpty && trainsByDirection.outbound.isEmpty {
-							completion(.error("No trains found"))
+							if let message = trainsByDirection.message {
+								completion(.error(message))
+							} else {
+								let errorString = LuasStrings.noTrainsErrorMessage + "\n\n" +
+								LuasStrings.noTrainsFallbackExplanation
+								completion(.error(errorString))
+							}
+
 						} else {
 							completion(.success(trainsByDirection))
 						}

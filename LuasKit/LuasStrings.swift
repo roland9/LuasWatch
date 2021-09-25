@@ -13,6 +13,12 @@ public struct LuasStrings {
 		"Either Luas is not operating, or there is a problem with the RTPI Service.\n\n" +
 			"Please try again later.", comment: "")
 
+	public static let noTrainsErrorMessage =
+	NSLocalizedString("Couldn’t get any trains.", comment: "")
+
+	public static let noTrainsFallbackExplanation =
+	NSLocalizedString("Either Luas is not operating, or there is a problem with the Luas website.", comment: "")
+
 	public static let tooFarAway =
 	NSLocalizedString("Looks like the closest Luas station is quite far away.\n\n" +
 		"Please try again later when you’re closer to the Dublin Area.", comment: "")

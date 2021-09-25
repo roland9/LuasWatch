@@ -123,6 +123,8 @@ class LuasKitIOSTests: XCTestCase {
 				XCTAssertEqual(trains.outbound[1], Train(destination: "Sandyford", direction: "Outbound", dueTime: "9"))
 				XCTAssertEqual(trains.outbound[2], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "15"))
 
+				XCTAssertEqual(trains.message, "Green Line services operating normally")
+
 				apiExpectation.fulfill()
 				print(trains)
 			}

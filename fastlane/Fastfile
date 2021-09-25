@@ -8,7 +8,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do |lane, options|
-    xcversion(version: "12.4")
+    xcversion(version: "13.0")
   end
 
   def build_app
@@ -37,7 +37,7 @@ platform :ios do
 
   desc "Run unit tests"
   lane :test do
-    run_tests(devices: ["iPhone 8 (14.4)"],
+    run_tests(devices: ["iPhone 8 (15.0)"],
               scheme: "LuasKitIOSTests")
   end
 

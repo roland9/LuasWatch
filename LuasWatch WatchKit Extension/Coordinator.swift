@@ -149,7 +149,8 @@ extension Coordinator: LocationDelegate {
 					case .error(let error):
 						print("\(#function): \(error)")
 						self?.trains = nil
-						self?.appState.state = .errorGettingDueTimes(error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+						self?.appState.state = .errorGettingDueTimes(closestStation,
+																	 error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
 
 					case .success(let trains):
 						print("\(#function): \(trains)")
