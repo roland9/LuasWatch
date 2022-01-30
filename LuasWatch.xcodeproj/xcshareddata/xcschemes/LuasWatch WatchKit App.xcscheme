@@ -42,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AB15B86C26868022005BF013"
+               BuildableName = "LuasWatchWatchKitExtensionTests.xctest"
+               BlueprintName = "LuasWatchWatchKitExtensionTests"
+               ReferencedContainer = "container:LuasWatch.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
