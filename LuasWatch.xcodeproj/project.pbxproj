@@ -52,6 +52,11 @@
 		AB5C8B8D26FFBD9F0097A7C4 /* PreviewsAppRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8C26FFBD9F0097A7C4 /* PreviewsAppRunning.swift */; };
 		AB5C8B8F26FFBDE70097A7C4 /* PreviewsAppResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8E26FFBDE70097A7C4 /* PreviewsAppResult.swift */; };
 		AB5C8B9126FFBE130097A7C4 /* PreviewsStationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */; };
+		AB5D908127A71039006C621F /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B7E26FFB8770097A7C4 /* LoadingAnimationView.swift */; };
+		AB5D908227A7105C006C621F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8226FFB9CE0097A7C4 /* HeaderView.swift */; };
+		AB5D908327A71062006C621F /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8426FFB9F90097A7C4 /* TrainsListView.swift */; };
+		AB5D908527A7106B006C621F /* ChangeStationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8626FFBA570097A7C4 /* ChangeStationButton.swift */; };
+		AB5D908627A7107A006C621F /* TapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8026FFB9530097A7C4 /* TapOverlayView.swift */; };
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */; };
@@ -183,6 +188,7 @@
 		AB5C8B8C26FFBD9F0097A7C4 /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
 		AB5C8B8E26FFBDE70097A7C4 /* PreviewsAppResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAppResult.swift; sourceTree = "<group>"; };
 		AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationsModal.swift; sourceTree = "<group>"; };
+		AB5D908027A70C73006C621F /* LuasWatch WatchKit App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch WatchKit App.xctestplan"; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABBD74822657CCFD00D003EE /* LuasKitIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = LuasKitIOSTests.xctestplan; path = LuasWatch.xcodeproj/LuasKitIOSTests.xctestplan; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 			children = (
 				AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */,
 				AB15B87126868022005BF013 /* Info.plist */,
+				AB5D908027A70C73006C621F /* LuasWatch WatchKit App.xctestplan */,
 			);
 			path = LuasWatchWatchKitExtensionTests;
 			sourceTree = "<group>";
@@ -731,8 +738,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB5D908527A7106B006C621F /* ChangeStationButton.swift in Sources */,
+				AB5D908127A71039006C621F /* LoadingAnimationView.swift in Sources */,
 				AB22502624DF63E500ADA854 /* LuasView.swift in Sources */,
+				AB5D908627A7107A006C621F /* TapOverlayView.swift in Sources */,
 				ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */,
+				AB5D908327A71062006C621F /* TrainsListView.swift in Sources */,
+				AB5D908227A7105C006C621F /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

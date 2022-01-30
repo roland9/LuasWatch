@@ -4,7 +4,14 @@
 //
 
 import SwiftUI
+
+#if os(iOS)
+import LuasKitIOS
+#endif
+
+#if os(watchOS)
 import LuasKit
+#endif
 
 extension LuasView {
 
