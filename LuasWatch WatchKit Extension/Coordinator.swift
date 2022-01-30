@@ -4,7 +4,17 @@
 //
 
 import CoreLocation
+
+#if os(iOS)
+import LuasKitIOS
+#endif
+
+#if os(watchOS)
 import LuasKit
+#endif
+
+#warning("this is a shared file now - WIP")
+
 
 class Coordinator: NSObject {
 

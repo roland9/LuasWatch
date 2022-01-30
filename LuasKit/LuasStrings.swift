@@ -25,6 +25,7 @@ public struct LuasStrings {
 
 	public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
 
+#warning("need to handle iOS case here - mention iPhone not watch?")
 	public static let errorNoInternet =
 		NSLocalizedString("Looks like your watch is not connected to the internet.\n\nPlease check your internet connection and try again.", comment: "")
 
