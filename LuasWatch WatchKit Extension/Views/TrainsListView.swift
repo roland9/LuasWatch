@@ -17,8 +17,7 @@ struct TrainsListView: View {
 	let trains: TrainsByDirection
 	let direction: Direction
 
-	//	@State var isStationsModalPresented = false
-	@Binding var isStationsModalPresented: Bool
+	@EnvironmentObject var appState: AppState
 
 	var body: some View {
 
@@ -43,7 +42,7 @@ struct TrainsListView: View {
 						Spacer(minLength: 10)
 					}
 
-					ChangeStationButton(isStationsModalPresented: $isStationsModalPresented)
+					ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
 				}
 			}
 
@@ -67,7 +66,7 @@ struct TrainsListView: View {
 	@ViewBuilder
 	private func oneWayTrainsView(_ trainsList: [Train]) -> some View {
 		List {
-			Section(footer: ChangeStationButton(isStationsModalPresented: $isStationsModalPresented)) {
+			Section(footer: ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)) {
 
 				ForEach(trainsList, id: \.id) {
 					Text($0.dueTimeDescription)
@@ -86,7 +85,7 @@ struct TrainsListView: View {
 				}
 			}
 
-			Section(footer: ChangeStationButton(isStationsModalPresented: $isStationsModalPresented)) {
+			Section(footer: ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)) {
 
 				ForEach(self.trains.outbound, id: \.id) {
 					Text($0.dueTimeDescription)

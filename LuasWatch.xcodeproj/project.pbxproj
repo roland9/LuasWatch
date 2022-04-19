@@ -367,8 +367,8 @@
 			isa = PBXGroup;
 			children = (
 				AB364D172308277000C73EF6 /* LuasView.swift */,
-				AB5C8B8626FFBA570097A7C4 /* ChangeStationButton.swift */,
 				AB5C8B8426FFB9F90097A7C4 /* TrainsListView.swift */,
+				AB5C8B8626FFBA570097A7C4 /* ChangeStationButton.swift */,
 				AB5C8B8226FFB9CE0097A7C4 /* HeaderView.swift */,
 				AB5C8B7E26FFB8770097A7C4 /* LoadingAnimationView.swift */,
 				AB5C8B8026FFB9530097A7C4 /* TapOverlayView.swift */,
