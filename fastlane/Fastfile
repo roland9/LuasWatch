@@ -8,7 +8,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do |lane, options|
-    xcversion(version: "13.2.1")
+    xcversion(version: "13.3")
   end
 
   def build_app
@@ -41,7 +41,7 @@ platform :ios do
     run_tests(devices: ["Apple Watch Series 7 - 41mm"],
               scheme: "LuasWatch WatchKit App",
               testplan: "LuasWatch WatchKit App")
-    run_tests(devices: ["iPhone 8 (15.2)"],
+    run_tests(devices: ["iPhone 8"],
               scheme: "LuasKitIOSTests")
   end
 
