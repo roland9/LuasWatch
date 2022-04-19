@@ -4,14 +4,7 @@
 //
 
 import SwiftUI
-
-#if os(iOS)
 import LuasKitIOS
-#endif
-
-#if os(watchOS)
-import LuasKit
-#endif
 
 struct HeaderView: View {
 	var station: TrainStation
