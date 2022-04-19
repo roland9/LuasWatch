@@ -25,6 +25,7 @@ platform :ios do
 
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    clear_derived_data
     build_app
     upload_to_testflight(skip_waiting_for_build_processing: true)
     commit_version_bump(
