@@ -14,12 +14,10 @@ struct Preview_StationsModal: PreviewProvider {
 	static var previews: some View {
 
 		Group {
-			ChangeStationButton.StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
-											  isSheetPresented: $isPresented)
+			ChangeStationButton.StationsModal(stations: TrainStations.sharedFromFile.greenLineStations) {}
 				.previewDisplayName("StationsModal = Green Line")
 
-			ChangeStationButton.StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
-											  isSheetPresented: $isPresented)
+			ChangeStationButton.StationsModal(stations: TrainStations.sharedFromFile.redLineStations) {}
 				.previewDisplayName("StationsModal = Red Line")
 		}
 	}

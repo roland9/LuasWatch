@@ -6,7 +6,9 @@
 import XCTest
 import CoreLocation
 // unfortunately https://github.com/pointfreeco/swift-snapshot-testing doesn't support watchOS :'(
+// https://github.com/pointfreeco/swift-snapshot-testing/blob/main/Package.swift
 // import SnapshotTesting
+// so we cannot run the snapshot tests on watchOS; but we can run the API tests!
 
 import LuasKit
 

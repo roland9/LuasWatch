@@ -74,7 +74,7 @@ struct LuasView: View {
 						HeaderView(station: trains.trainStation, direction: $direction,
 								   overlayTextAfterTap: $overlayTextAfterTap)
 
-						TrainsListView(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
+						TrainsListView(trains: trains, direction: direction ?? .both)
 
 					}.onAppear(perform: {
 						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
@@ -101,7 +101,7 @@ struct LuasView: View {
 					}
 					.frame(height: 36)	// avoid jumping
 
-					TrainsListView(trains: trains, direction: direction ?? .both, isStationsModalPresented: $appState.isStationsModalPresented)
+					TrainsListView(trains: trains, direction: direction ?? .both)
 
 				}.onAppear(perform: {
 					if self.direction != Direction.direction(for: trains.trainStation.name) {
