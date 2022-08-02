@@ -67,50 +67,59 @@ struct LuasView: View {
 				}
 
 			case .foundDueTimes(let trains):
-
-				ZStack {
-					VStack {
-
-						HeaderView(station: trains.trainStation, direction: $direction,
-								   overlayTextAfterTap: $overlayTextAfterTap)
-
-						TrainsListView(trains: trains, direction: direction ?? .both)
-
-					}.onAppear(perform: {
-						// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
-						if self.direction != Direction.direction(for: trains.trainStation.name) {
-							self.direction = Direction.direction(for: trains.trainStation.name)
-							print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
-						}
-					})
-
-					tapOverlayView()
-				}
+					TabView {
+						foundDueTimesView(for: trains)
+					}.tabViewStyle(PageTabViewStyle())
 
 			case .updatingDueTimes(let trains):
-				// not ideal: lots of repetition compared to above
-				VStack {
-
-					ZStack {
-						HeaderView(station: trains.trainStation, direction: $direction,
-								   overlayTextAfterTap: $overlayTextAfterTap)
-						Rectangle()
-							.foregroundColor(.black).opacity(0.7)
-						Text("Updating...")
-							.font(.system(.footnote))
-					}
-					.frame(height: 36)	// avoid jumping
-
-					TrainsListView(trains: trains, direction: direction ?? .both)
-
-				}.onAppear(perform: {
-					if self.direction != Direction.direction(for: trains.trainStation.name) {
-						self.direction = Direction.direction(for: trains.trainStation.name)
-						print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
-					}
-				})
-
+					updatingDueTimesView(for: trains)
 			}
+		}
+	}
+
+	@ViewBuilder
+	fileprivate func foundDueTimesView(for trains: TrainsByDirection) -> some View {
+		ZStack {
+			VStack {
+				HeaderView(station: trains.trainStation, direction: $direction,
+						   overlayTextAfterTap: $overlayTextAfterTap)
+
+				TrainsListView(trains: trains, direction: direction ?? .both)
+
+			}.onAppear {
+				forceUpdateDirection(trainStationName: trains.trainStation.name)
+			}
+
+			tapOverlayView()
+		}
+	}
+
+	// not ideal: lots of repetition compared to above
+	@ViewBuilder
+	fileprivate func updatingDueTimesView(for trains: TrainsByDirection) -> some View {
+		VStack {
+			ZStack {
+				HeaderView(station: trains.trainStation, direction: $direction,
+						   overlayTextAfterTap: $overlayTextAfterTap)
+				Rectangle()
+					.foregroundColor(.black).opacity(0.7)
+				Text("Updating...")
+					.font(.system(.footnote))
+			}
+			.frame(height: 36)	// avoid jumping
+
+			TrainsListView(trains: trains, direction: direction ?? .both)
+
+		}.onAppear {
+			forceUpdateDirection(trainStationName: trains.trainStation.name)
+		}
+	}
+
+	// challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
+	fileprivate func forceUpdateDirection(trainStationName: String) {
+		if self.direction != Direction.direction(for: trainStationName) {
+			self.direction = Direction.direction(for: trainStationName)
+			print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 		}
 	}
 }

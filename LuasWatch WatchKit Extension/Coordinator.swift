@@ -83,6 +83,7 @@ extension CLAuthorizationStatus {
 		}
 	}
 }
+
 extension Coordinator: LocationDelegate {
 
 	func didFail(_ delegateError: LocationDelegateError) {
