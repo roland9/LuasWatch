@@ -14,6 +14,9 @@ struct Preview_StationsModal: PreviewProvider {
 	static var previews: some View {
 
 		Group {
+			ChangeStationButton.StationsSelectionModal()
+				.previewDisplayName("StationsSelectionModal")
+
 			ChangeStationButton.StationsModal(stations: TrainStations.sharedFromFile.greenLineStations) {}
 				.previewDisplayName("StationsModal = Green Line")
 

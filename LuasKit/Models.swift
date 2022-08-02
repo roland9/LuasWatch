@@ -20,6 +20,15 @@ extension Route {
 			return nil
 		}
 	}
+
+	public var other: Route {
+		switch self {
+			case .red:
+				return .green
+			case .green:
+				return .red
+		}
+	}
 }
 
 public struct Train: CustomDebugStringConvertible, Hashable, Codable {

@@ -37,6 +37,7 @@ struct ChangeStationButton: View {
 
 	struct StationsSelectionModal: View {
 		@Environment(\.dismiss) private var dismiss
+		@EnvironmentObject var appState: AppState
 
 		var body: some View {
 
@@ -55,11 +56,35 @@ struct ChangeStationButton: View {
 					}
 				}
 
+				Button(action: {
+					switch appState.state {
+						case .foundDueTimes(let trains, let location),
+								.updatingDueTimes(let trains, let location):
+							guard let closest = TrainStations.sharedFromFile.closestStation(from: location, route: trains.trainStation.route.other) else {
+								assertionFailure("expected to find closest station from *other* line")
+								return
+							}
+							MyUserDefaults.saveSelectedStation(closest)
+							dismiss()
+							retriggerTimer()
+
+						default:
+							assertionFailure("expected foundDueTimes here")
+							return
+					}
+
+				}, label: {
+					VStack {
+						Image(systemName: "location")
+						Text("Closest Other Line Station")
+							.font(.footnote)
+					}
+				})
+
 				if MyUserDefaults.userSelectedSpecificStation() != nil {
 					Button(action: {
 						MyUserDefaults.wipeUserSelectedStation()
 						dismiss()
-
 						retriggerTimer()
 					}, label: {
 						VStack {

@@ -66,12 +66,11 @@ struct LuasView: View {
 					}
 				}
 
-			case .foundDueTimes(let trains):
-					TabView {
-						foundDueTimesView(for: trains)
-					}.tabViewStyle(PageTabViewStyle())
+					// we don't use the second parameter, the location, here -  but we grab it from the model in StationsSelectionModal
+			case .foundDueTimes(let trains, _):
+					foundDueTimesView(for: trains)
 
-			case .updatingDueTimes(let trains):
+			case .updatingDueTimes(let trains, _):
 					updatingDueTimesView(for: trains)
 			}
 		}
