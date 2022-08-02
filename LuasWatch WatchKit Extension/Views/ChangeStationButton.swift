@@ -42,58 +42,60 @@ struct ChangeStationButton: View {
 		var body: some View {
 
 			NavigationView(content: {
-				NavigationLink(destination: greenStationsModal()) {
-					VStack {
-						Image(systemName: "arrow.up.arrow.down")
-						Text("Green Line Stations")
-					}
-				}
 
-				NavigationLink(destination: redStationsModal()) {
-					VStack {
-						Image(systemName: "arrow.right.arrow.left")
-						Text("Red Line Stations")
-					}
-				}
-
-				Button(action: {
-					switch appState.state {
-						case .foundDueTimes(let trains, let location),
-								.updatingDueTimes(let trains, let location):
-							guard let closest = TrainStations.sharedFromFile.closestStation(from: location, route: trains.trainStation.route.other) else {
-								assertionFailure("expected to find closest station from *other* line")
-								return
-							}
-							MyUserDefaults.saveSelectedStation(closest)
-							dismiss()
-							retriggerTimer()
-
-						default:
-							assertionFailure("expected foundDueTimes here")
-							return
+				ScrollView {
+					NavigationLink(destination: greenStationsModal()) {
+						VStack {
+							Image(systemName: "arrow.up.arrow.down")
+							Text("Green Line Stations")
+						}
 					}
 
-				}, label: {
-					VStack {
-						Image(systemName: "location")
-						Text("Closest Other Line Station")
-							.font(.footnote)
+					NavigationLink(destination: redStationsModal()) {
+						VStack {
+							Image(systemName: "arrow.right.arrow.left")
+							Text("Red Line Stations")
+						}
 					}
-				})
 
-				if MyUserDefaults.userSelectedSpecificStation() != nil {
 					Button(action: {
-						MyUserDefaults.wipeUserSelectedStation()
-						dismiss()
-						retriggerTimer()
+						switch appState.state {
+							case .foundDueTimes(let trains, let location),
+									.updatingDueTimes(let trains, let location):
+								guard let closest = TrainStations.sharedFromFile.closestStation(from: location, route: trains.trainStation.route.other) else {
+									assertionFailure("expected to find closest station from *other* line")
+									return
+								}
+								MyUserDefaults.saveSelectedStation(closest)
+								dismiss()
+								retriggerTimer()
+
+							default:
+								assertionFailure("expected foundDueTimes here")
+								return
+						}
+
 					}, label: {
 						VStack {
 							Image(systemName: "location")
-							Text("Closest Station")
+							Text("Closest Other Line Station")
+								.font(.footnote)
 						}
 					})
-				}
 
+					if MyUserDefaults.userSelectedSpecificStation() != nil {
+						Button(action: {
+							MyUserDefaults.wipeUserSelectedStation()
+							dismiss()
+							retriggerTimer()
+						}, label: {
+							VStack {
+								Image(systemName: "location")
+								Text("Closest Station")
+							}
+						})
+					}
+				}
 			})
 
 		}
