@@ -125,7 +125,6 @@ extension Location: CLLocationManagerDelegate {
 		} else {
 			print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
 		}
-
 	}
 
 }

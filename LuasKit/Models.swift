@@ -98,10 +98,10 @@ public struct TrainStations {
 	public static let sharedFromFile = TrainStations.fromFile()
 
 	private static func fromFile() -> TrainStations {
-		return TrainStations.init(fromFile: "luasStops")
+		TrainStations(fromFile: "luasStops")
 	}
 
-	public init(fromFile fileName: String) {
+	private init(fromFile fileName: String) {
 		guard
 			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
 			let data = try? Data(contentsOf: luasStopsFile),
