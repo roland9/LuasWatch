@@ -12,22 +12,30 @@ import CoreLocation
 
 import LuasKit
 
+fileprivate extension TrainStations {
+	func station(named: String) -> TrainStation {
+		stations.filter({ $0.name == named }).first!
+	}
+}
+
 class LuasWatchWatchKitExtensionTests: XCTestCase {
 
 	let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "DUE")
 	let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
 	let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
 
-	let station = TrainStation(stationId: "stationId",
-							   stationIdShort: "LUAS8",
-							   shortCode: "BLU",
-							   route: .green,
-							   name: "Bluebell",
-							   location: CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2))))
+	let stationBluebell = TrainStation(stationId: "822GA00360",
+									   stationIdShort: "LUAS8",
+									   shortCode: "BLU",
+									   route: .red,
+									   name: "Bluebell",
+									   location: CLLocation(latitude: 53.3292817872831,
+															longitude: -6.33382500275916))
+	let stationHarcourt = TrainStations.sharedFromFile.station(named: "Harcourt")
+	let stationWestmoreland = TrainStations.sharedFromFile.station(named: "Westmoreland")
 
 	func testDueTimeDescription() {
-
-		let trains = TrainsByDirection(trainStation: station,
+		let trains = TrainsByDirection(trainStation: stationBluebell,
 									   inbound: [train3],
 									   outbound: [train1, train2])
 
@@ -40,37 +48,38 @@ class LuasWatchWatchKitExtensionTests: XCTestCase {
 	}
 
 	func testClosestStation() {
-		let allStations = TrainStations(stations: [
-			TrainStation(stationId: "822GA00360",
-						 stationIdShort: "LUAS8",
-						 shortCode: "BLU",
-						 route: .red,
-						 name: "Bluebell",
-						 location: CLLocation(latitude: CLLocationDegrees(Double(53.3292817872831)),
-											  longitude: CLLocationDegrees(Double(-6.33382500275916)))),
-			TrainStation(stationId: "822GA00440",
-						 stationIdShort: "LUAS25",
-						 shortCode: "HAR",
-						 route: .green,
-						 name: "Harcourt",
-						 location: CLLocation(latitude: CLLocationDegrees(Double(53.3336246192981)),
-											  longitude: CLLocationDegrees(Double(-6.26273785213714))))
-		])
+		let allStations = TrainStations(stations: [stationBluebell, stationHarcourt])
 
-		var location = CLLocation(latitude: CLLocationDegrees(53.32928178728), longitude: CLLocationDegrees(-6.333825002759))
-		XCTAssertEqual(allStations.closestStation(from: location)!.name, "Bluebell")
+		var location = CLLocation(latitude: 53.32928178728, longitude: -6.333825002759)
+		XCTAssertEqual(allStations.closestStation(from: location)?.name, "Bluebell")
 
-		location = CLLocation(latitude: CLLocationDegrees(53.329), longitude: CLLocationDegrees(-6.333))
-		XCTAssertEqual(allStations.closestStation(from: location)!.name, "Bluebell")
+		location = CLLocation(latitude: 53.329, longitude: -6.333)
+		XCTAssertEqual(allStations.closestStation(from: location)?.name, "Bluebell")
 
-		location = CLLocation(latitude: CLLocationDegrees(53.1), longitude: CLLocationDegrees(-6.333))
+		location = CLLocation(latitude: 53.1, longitude: -6.333)
 		XCTAssertNil(allStations.closestStation(from: location))
+	}
+
+	func testClosestStationFromOtherLine() {
+		let allStations = TrainStations.sharedFromFile
+		XCTAssertEqual(allStations.stations.count, 67)
+
+		let locationNearWestmoreland =
+		CLLocation(latitude: stationWestmoreland.location.coordinate.latitude + 0.001,
+				   longitude: stationWestmoreland.location.coordinate.longitude + 0.001)
+		XCTAssertEqual(allStations.closestStation(from: locationNearWestmoreland)?.name,
+					   "Westmoreland")
+
+		XCTAssertEqual(allStations.closestStation(from: locationNearWestmoreland, route: .green)?.name,
+					   "Westmoreland")
+		XCTAssertEqual(allStations.closestStation(from: locationNearWestmoreland, route: .red)?.name,
+					   "Abbey Street")
 	}
 
 	func testRealAPI() {
 		let apiExpectation = expectation(description: "API call expectation")
 
-		LuasAPI2.dueTime(for: station) { (result) in
+		LuasAPI2.dueTime(for: stationBluebell) { (result) in
 			switch result {
 
 			case .error(let message):
@@ -110,7 +119,7 @@ class LuasWatchWatchKitExtensionTests: XCTestCase {
 		</stopInfo>
 		*/
 
-		LuasMockAPI2.dueTime(for: station) { (result) in
+		LuasMockAPI2.dueTime(for: stationBluebell) { (result) in
 			switch result {
 
 			case .error(let message):
@@ -137,7 +146,7 @@ class LuasWatchWatchKitExtensionTests: XCTestCase {
 	func testMockErrorAPI() {
 		let apiExpectation = expectation(description: "API call expectation")
 
-		LuasMockErrorAPI.dueTime(for: station) { (result) in
+		LuasMockErrorAPI.dueTime(for: stationBluebell) { (result) in
 			switch result {
 
 			case .error(let message):

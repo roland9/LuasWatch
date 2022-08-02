@@ -146,6 +146,11 @@ public struct TrainStations {
 	}
 
 	public func closestStation(from location: CLLocation) -> TrainStation? {
+		closestStation(from: location, stations: stations)
+	}
+
+	public func closestStation(from location: CLLocation,
+							   stations: [TrainStation]) -> TrainStation? {
 		var closestStationSoFar: TrainStation?
 
 		stations.forEach { (station) in
@@ -164,6 +169,15 @@ public struct TrainStations {
 		}
 
 		return closestStationSoFar
+	}
+
+	public func closestStation(from location: CLLocation, route: Route) -> TrainStation? {
+		switch route {
+			case .red:
+				return closestStation(from: location, stations: redLineStations)
+			case .green:
+				return closestStation(from: location, stations: greenLineStations)
+		}
 	}
 }
 
