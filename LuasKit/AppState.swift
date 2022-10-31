@@ -12,12 +12,12 @@ public enum MyState {
 
 	case errorGettingStation(String)		// in case the user is too far away
 
-	case gettingDueTimes(TrainStation)
+	case gettingDueTimes(TrainStation, CLLocation)
 	case errorGettingDueTimes(TrainStation, String)
 
-	case foundDueTimes(TrainsByDirection)
+	case foundDueTimes(TrainsByDirection, CLLocation)
 
-	case updatingDueTimes(TrainsByDirection)
+	case updatingDueTimes(TrainsByDirection, CLLocation)
 }
 
 extension MyState: CustomDebugStringConvertible {
@@ -33,16 +33,16 @@ extension MyState: CustomDebugStringConvertible {
 		case .errorGettingStation:
 			return LuasStrings.errorGettingStation
 
-		case .gettingDueTimes(let trainStation):
+		case .gettingDueTimes(let trainStation, _):
 			return LuasStrings.gettingDueTimes(trainStation)
 
 		case .errorGettingDueTimes(_, let errorMessage):
 			return errorMessage
 
-		case .foundDueTimes(let trains):
+		case .foundDueTimes(let trains, _):
 			return LuasStrings.foundDueTimes(trains)
 
-		case .updatingDueTimes(let trains):
+		case .updatingDueTimes(let trains, _):
 			return LuasStrings.updatingDueTimes(trains)
 		}
 	}

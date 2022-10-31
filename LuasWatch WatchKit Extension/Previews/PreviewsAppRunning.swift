@@ -22,7 +22,8 @@ struct Preview_AppRunning: PreviewProvider {
 															 shortCode: "CAB",
 															 route: .green,
 															 name: "Cabra",
-															 location: location))))
+															 location: location),
+												location)))
 				.previewDisplayName("while getting info...")
 
 			LuasView()

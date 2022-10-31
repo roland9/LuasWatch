@@ -1,6 +1,6 @@
 import CoreLocation
 
-let allStations = TrainStations(fromFile: "luasStops")
+let allStations = TrainStations.sharedFromFile
 let redStations = TrainStations.sharedFromFile.redLineStations.map { $0.name }
 let greenStations = TrainStations.sharedFromFile.greenLineStations
 let oneWayStations = TrainStations.sharedFromFile.stations

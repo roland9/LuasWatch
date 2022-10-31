@@ -31,64 +31,96 @@ struct ChangeStationButton: View {
 			.cornerRadius(12)
 		}
 		.sheet(isPresented: $isStationsModalPresented, content: {
-			StationsSelectionModal(isStationsModalPresented: $isStationsModalPresented)
+			StationsSelectionModal()
 		})
 	}
 
 	struct StationsSelectionModal: View {
-
-		@Binding var isStationsModalPresented: Bool
+		@Environment(\.dismiss) private var dismiss
+		@EnvironmentObject var appState: AppState
 
 		var body: some View {
 
 			NavigationView(content: {
-				NavigationLink(destination: greenStationsModal()) {
-					VStack {
-						Image(systemName: "arrow.up.arrow.down")
-						Text("Green Line Stations")
-					}
-				}
 
-				NavigationLink(destination: redStationsModal()) {
-					VStack {
-						Image(systemName: "arrow.right.arrow.left")
-						Text("Red Line Stations")
+				ScrollView {
+					NavigationLink(destination: greenStationsModal()) {
+						VStack {
+							Image(systemName: "arrow.up.arrow.down")
+							Text("Green Line Stations")
+						}
 					}
-				}
 
-				if MyUserDefaults.userSelectedSpecificStation() != nil {
+					NavigationLink(destination: redStationsModal()) {
+						VStack {
+							Image(systemName: "arrow.right.arrow.left")
+							Text("Red Line Stations")
+						}
+					}
+
 					Button(action: {
-						MyUserDefaults.wipeUserSelectedStation()
-						isStationsModalPresented = false
-						retriggerTimer()
+						switch appState.state {
+							case .foundDueTimes(let trains, let location),
+									.updatingDueTimes(let trains, let location):
+								guard let closest = TrainStations.sharedFromFile.closestStation(from: location, route: trains.trainStation.route.other) else {
+									assertionFailure("expected to find closest station from *other* line")
+									return
+								}
+								MyUserDefaults.saveSelectedStation(closest)
+								dismiss()
+								retriggerTimer()
+
+							default:
+								assertionFailure("expected foundDueTimes here")
+								return
+						}
+
 					}, label: {
 						VStack {
 							Image(systemName: "location")
-							Text("Closest Station")
+							Text("Closest Other Line Station")
+								.font(.footnote)
 						}
 					})
-				}
 
+					if MyUserDefaults.userSelectedSpecificStation() != nil {
+						Button(action: {
+							MyUserDefaults.wipeUserSelectedStation()
+							dismiss()
+							retriggerTimer()
+						}, label: {
+							VStack {
+								Image(systemName: "location")
+								Text("Closest Station")
+							}
+						})
+					}
+				}
 			})
 
 		}
 
 		@ViewBuilder
 		private func greenStationsModal() -> some View {
-			StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
-						  isSheetPresented: $isStationsModalPresented)
+			StationsModal(stations: TrainStations.sharedFromFile.greenLineStations) {
+				dismiss()
+			}
 		}
 
 		@ViewBuilder
 		private func redStationsModal() -> some View {
-			StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
-						  isSheetPresented: $isStationsModalPresented)
+			StationsModal(stations: TrainStations.sharedFromFile.redLineStations) {
+				dismiss()
+			}
 		}
 	}
 
 	struct StationsModal: View {
 		@State var stations: [TrainStation]
-		@Binding var isSheetPresented: Bool
+
+		/// challenge here: we could use Environment(\.dismiss); but that only dismisses this Stations nav view,
+		/// so it's then back to StationsSelection modal.  instead, we want to dismiss the *entire* flow
+		var dismissAllModal: () -> Void
 
 		var body: some View {
 			// swiftlint:disable multiple_closures_with_trailing_closure
@@ -98,7 +130,7 @@ struct ChangeStationButton: View {
 					Button(action: {
 						print("☣️ tap \(station) -> save")
 						MyUserDefaults.saveSelectedStation(station)
-						isSheetPresented = false		// so we dismiss sheet
+						dismissAllModal()
 						retriggerTimer()			// start 12sec timer right now
 					}) {
 						Text(station.name)

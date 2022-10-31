@@ -22,6 +22,8 @@ class Coordinator: NSObject {
 	private var location: Location
 	private var timer: Timer?
 
+	private var latestLocation: CLLocation?
+
 	private var trains: TrainsByDirection?
 
 	init(appState: AppState,
@@ -72,7 +74,17 @@ class Coordinator: NSObject {
 			return
 		}
 
-		location.update()
+		// if user has selected a specific station & the location we have is not too old -> don't want for another location update
+		if let station = MyUserDefaults.userSelectedSpecificStation(),
+		   let latestLocation = latestLocation,
+		   latestLocation.timestamp.timeIntervalSinceNow < 25.0 {
+			print("🥳 we have user selected station & recent location -> skip location update")
+			handle(station, latestLocation)
+		} else {
+			// user has NOT selected a specific station;  or the location we have it quite outdated -> wait for new location update
+			print("😇 only outdated location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
+			location.update()
+		}
 	}
 }
 
@@ -93,9 +105,13 @@ extension CLAuthorizationStatus {
 		}
 	}
 }
+
 extension Coordinator: LocationDelegate {
 
 	func didFail(_ delegateError: LocationDelegateError) {
+
+		latestLocation = nil
+
 		switch delegateError {
 
 			case .locationServicesNotEnabled:
@@ -118,20 +134,22 @@ extension Coordinator: LocationDelegate {
 
 	func didGetLocation(_ location: CLLocation) {
 
+		latestLocation = location
+
 		//////////////////////////////////
 		// step 2: we have location -> now find station
 		let allStations = TrainStations.sharedFromFile
 
 		if let station = MyUserDefaults.userSelectedSpecificStation() {
 			print("step 2a: closest station, but specific one user selected before")
-			handle(station)
+			handle(station, location)
 
 		} else {
 			print("step 2b: closest station, doesn't matter which line")
 			if let closestStation = allStations.closestStation(from: location) {
 				print("\(#function): found closest station <\(closestStation.name)>")
 
-				handle(closestStation)
+				handle(closestStation, location)
 			} else {
 
 				// no station found -> user too far away!
@@ -142,12 +160,13 @@ extension Coordinator: LocationDelegate {
 
 	}
 
-	fileprivate func handle(_ closestStation: TrainStation) {
+	fileprivate func handle(_ closestStation: TrainStation,
+							_ location: CLLocation) {
 		// use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 		if let trains = trains {
-			appState.state = .updatingDueTimes(trains)
+			appState.state = .updatingDueTimes(trains, location)
 		} else {
-			appState.state = .gettingDueTimes(closestStation)
+			appState.state = .gettingDueTimes(closestStation, location)
 		}
 
 		//////////////////////////////////
@@ -165,7 +184,7 @@ extension Coordinator: LocationDelegate {
 					case .success(let trains):
 						print("\(#function): \(trains)")
 						self?.trains = trains
-						self?.appState.state = .foundDueTimes(trains)
+						self?.appState.state = .foundDueTimes(trains, location)
 				}
 			}
 		}
