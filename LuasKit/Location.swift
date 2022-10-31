@@ -85,9 +85,9 @@ extension Location: CLLocationManagerDelegate {
 	}
 
 	public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		print("\(CLLocationManager.authorizationStatus())")
+		let authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
 
-		let authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+		print("\(#function): \(authorizationStatus)")
 
 		switch authorizationStatus {
 			case .denied, .notDetermined, .restricted:
@@ -125,7 +125,6 @@ extension Location: CLLocationManagerDelegate {
 		} else {
 			print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
 		}
-
 	}
 
 }

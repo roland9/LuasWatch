@@ -13,23 +13,23 @@ struct Preview_AppResult: PreviewProvider {
 
 		Group {
 			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, location)))
 				.previewDisplayName("found due times - 1:1")
 
 			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1)))
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1, location)))
 				.previewDisplayName("found due times - 2:1")
 
 			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2)))
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2, location)))
 				.previewDisplayName("found due times - 3:2")
 
 			LuasView().previewDevice("Apple Watch Series 3 - 38mm")
-				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4)))
+				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4, location)))
 				.previewDisplayName("Small watch - found due times - 4:4")
 
 			LuasView()
-				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen)))
+				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen, location)))
 				.previewDisplayName("updating due times")
 
 			LuasView()
@@ -55,11 +55,11 @@ struct Preview_AppResult: PreviewProvider {
 				.previewDisplayName("error getting due times (larger) - not working??")
 
 			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsOneWayStation)))
+				.environmentObject(AppState(state: .foundDueTimes(trainsOneWayStation, location)))
 				.previewDisplayName("found due times - one way stop")
 
 			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsFinalStop)))
+				.environmentObject(AppState(state: .foundDueTimes(trainsFinalStop, location)))
 				.previewDisplayName("found due times - final stop")
 		}
 	}

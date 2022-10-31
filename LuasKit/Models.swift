@@ -20,6 +20,15 @@ extension Route {
 			return nil
 		}
 	}
+
+	public var other: Route {
+		switch self {
+			case .red:
+				return .green
+			case .green:
+				return .red
+		}
+	}
 }
 
 public struct Train: CustomDebugStringConvertible, Hashable, Codable {
@@ -98,10 +107,10 @@ public struct TrainStations {
 	public static let sharedFromFile = TrainStations.fromFile()
 
 	private static func fromFile() -> TrainStations {
-		return TrainStations.init(fromFile: "luasStops")
+		TrainStations(fromFile: "luasStops")
 	}
 
-	public init(fromFile fileName: String) {
+	private init(fromFile fileName: String) {
 		guard
 			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
 			let data = try? Data(contentsOf: luasStopsFile),
@@ -146,6 +155,11 @@ public struct TrainStations {
 	}
 
 	public func closestStation(from location: CLLocation) -> TrainStation? {
+		closestStation(from: location, stations: stations)
+	}
+
+	public func closestStation(from location: CLLocation,
+							   stations: [TrainStation]) -> TrainStation? {
 		var closestStationSoFar: TrainStation?
 
 		stations.forEach { (station) in
@@ -164,6 +178,15 @@ public struct TrainStations {
 		}
 
 		return closestStationSoFar
+	}
+
+	public func closestStation(from location: CLLocation, route: Route) -> TrainStation? {
+		switch route {
+			case .red:
+				return closestStation(from: location, stations: redLineStations)
+			case .green:
+				return closestStation(from: location, stations: greenLineStations)
+		}
 	}
 }
 
