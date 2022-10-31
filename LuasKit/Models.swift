@@ -98,6 +98,10 @@ public struct TrainStation: CustomDebugStringConvertible {
 	public var allowsSwitchingDirection: Bool {
 		return .twoway == stationType
 	}
+
+	public func distance(from userLocation: CLLocation) -> CLLocationDistance {
+		location.distance(from: userLocation)
+	}
 }
 
 public struct TrainStations {

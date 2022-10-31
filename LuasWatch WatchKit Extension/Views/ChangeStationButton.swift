@@ -131,7 +131,8 @@ struct ChangeStationButton: View {
 						print("☣️ tap \(station) -> save")
 						MyUserDefaults.saveSelectedStation(station)
 						dismissAllModal()
-						retriggerTimer()			// start 12sec timer right now
+						// start 12sec timer right now; this also has logic in there to immediately show this selected station if  we have (quite current) current location
+						retriggerTimer()
 					}) {
 						Text(station.name)
 							.font(.system(.headline))

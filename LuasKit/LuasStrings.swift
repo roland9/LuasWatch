@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 // swiftlint:disable line_length
 public struct LuasStrings {
@@ -62,4 +63,8 @@ public struct LuasStrings {
 	public static let switchingDirectionsNotAllowedForFinalStop = NSLocalizedString("Cannot switch directions for final stops", comment: "")
 
 	public static let switchingDirectionsNotAllowedForOnewayStop = NSLocalizedString("Cannot switch directions for one-way stops", comment: "")
+
+	public static func distance(station: TrainStation, distance: String) -> String {
+		NSLocalizedString("\(station.name) stop is \(distance) away", comment: "String indicating distance of this Luas station (in meters) - input1: station name; input2: distance string")
+	}
 }

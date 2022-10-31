@@ -5,6 +5,7 @@
 
 import XCTest
 import CoreLocation
+
 // unfortunately https://github.com/pointfreeco/swift-snapshot-testing doesn't support watchOS :'(
 // https://github.com/pointfreeco/swift-snapshot-testing/blob/main/Package.swift
 // import SnapshotTesting
