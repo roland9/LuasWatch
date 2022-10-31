@@ -15,23 +15,22 @@ fileprivate extension TrainStations {
 	}
 }
 
-let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
-						  longitude: CLLocationDegrees(Double(1.2)))
+let location = CLLocation(latitude: CLLocationDegrees(1.1), longitude: CLLocationDegrees(1.2))
 
 let stationBlueBell = TrainStation(stationId: "822GA00360",
 								   stationIdShort: "LUAS8",
 								   shortCode: "BLU",
 								   route: .red,
 								   name: "Bluebell",
-								   location: CLLocation(latitude: CLLocationDegrees(Double(53.3292817872831)),
-														longitude: CLLocationDegrees(Double(-6.33382500275916))))
+								   location: CLLocation(latitude: CLLocationDegrees(53.3292817872831),
+														longitude: CLLocationDegrees(-6.33382500275916)))
 let stationHarcourt = TrainStation(stationId: "822GA00440",
 								   stationIdShort: "LUAS25",
 								   shortCode: "HAR",
 								   route: .green,
 								   name: "Harcourt",
-								   location: CLLocation(latitude: CLLocationDegrees(Double(53.3336246192981)),
-														longitude: CLLocationDegrees(Double(-6.26273785213714))))
+								   location: CLLocation(latitude: CLLocationDegrees(53.3336246192981),
+														longitude: CLLocationDegrees(-6.26273785213714)))
 
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
@@ -68,7 +67,8 @@ class LuasKitIOSTests: XCTestCase {
 							   shortCode: "BLU",
 							   route: .green,
 							   name: "Bluebell",
-							   location: CLLocation(latitude: CLLocationDegrees(Double(1.1)), longitude: CLLocationDegrees(Double(1.2))))
+							   location: CLLocation(latitude: CLLocationDegrees(1.1),
+													longitude: CLLocationDegrees(1.2)))
 
 	func testDueTimeDescription() {
 
@@ -85,7 +85,7 @@ class LuasKitIOSTests: XCTestCase {
 	}
 
 	func testClosestStation() {
-		let allStations = TrainStations(stations: [stationBlueBell,stationHarcourt])
+		let allStations = TrainStations(stations: [stationBlueBell, stationHarcourt])
 
 		var location = CLLocation(latitude: CLLocationDegrees(53.32928178728), longitude: CLLocationDegrees(-6.333825002759))
 		XCTAssertEqual(allStations.closestStation(from: location)!.name, "Bluebell")
@@ -96,15 +96,25 @@ class LuasKitIOSTests: XCTestCase {
 		location = CLLocation(latitude: CLLocationDegrees(53.1), longitude: CLLocationDegrees(-6.333))
 		XCTAssertNil(allStations.closestStation(from: location))
 	}
-	
+
 	func testDistanceFromUserLocation() {
 		let locationNearHarcourt =
 		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.001,
 				   longitude: stationHarcourt.location.coordinate.longitude + 0.001)
-		
-		XCTAssertEqual(stationHarcourt.distance(from: locationNearHarcourt),
-					   CLLocationDistance(floatLiteral: 129),
-					   accuracy: 1)
+
+		XCTAssertEqual(stationHarcourt.distance(from: locationNearHarcourt), nil)
+
+		let locationFurtherAway =
+		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.01,
+				   longitude: stationHarcourt.location.coordinate.longitude + 0.01)
+
+		XCTAssertEqual(stationHarcourt.distance(from: locationFurtherAway), "1.3 km")
+
+		let locationFarAway =
+		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.1,
+				   longitude: stationHarcourt.location.coordinate.longitude + 0.1)
+
+		XCTAssertEqual(stationHarcourt.distance(from: locationFarAway), "13 km")
 	}
 
 	func testRealAPI() {

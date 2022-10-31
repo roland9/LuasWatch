@@ -7,9 +7,13 @@ import SwiftUI
 import LuasKit
 
 #if DEBUG
-////  Previews
-let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
-						  longitude: CLLocationDegrees(Double(1.2)))
+
+// Bluebell station
+let location = CLLocation(latitude: CLLocationDegrees(53.3292817872831),
+						  longitude: CLLocationDegrees(-6.33382500275916))
+
+let userLocation = CLLocation(latitude: location.coordinate.latitude + 0.01,
+							  longitude: location.coordinate.longitude + 0.01)
 
 let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",

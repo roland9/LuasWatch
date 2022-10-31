@@ -99,9 +99,27 @@ public struct TrainStation: CustomDebugStringConvertible {
 		return .twoway == stationType
 	}
 
-	public func distance(from userLocation: CLLocation) -> CLLocationDistance {
-		location.distance(from: userLocation)
+	// will return nil if the distance is quite small, i.e. if the user is quite close to the station
+	public func distance(from userLocation: CLLocation) -> String? {
+		let minimumDistance = Measurement<UnitLength>(value: 200, unit: .meters)
+		let distance = Measurement<UnitLength>(value: location.distance(from: userLocation),
+											unit: .meters)
+
+		guard distance > minimumDistance else { return nil }
+
+		return Self.distanceFormatter.string(from: distance)
 	}
+
+	private static let distanceFormatter: MeasurementFormatter = {
+		let formatter = MeasurementFormatter()
+		formatter.locale = Locale(identifier: "en_IE")
+		formatter.unitOptions = .naturalScale
+		formatter.unitStyle = .medium
+		formatter.numberFormatter.usesSignificantDigits = true
+		formatter.numberFormatter.maximumSignificantDigits = 3
+
+		return formatter
+	}()
 }
 
 public struct TrainStations {
