@@ -130,13 +130,17 @@ struct ChangeStationButton: View {
 					Button(action: {
 						print("☣️ tap \(station) -> save")
 
+						MyUserDefaults.saveSelectedStation(station)
+
 						/// sometimes crash on watchOS 9
 						/// [SwiftUI] Publishing changes from within view updates is not allowed, this will cause undefined behavior
-						MyUserDefaults.saveSelectedStation(station)
-						dismissAllModal()
-						/// start 12sec timer right now
-						/// this also has logic in there to immediately show this selected station if  we have (quite current) current location
-						retriggerTimer()
+						DispatchQueue.main.async {
+							dismissAllModal()
+							/// start 12sec timer right now
+							/// this also has logic in there to immediately show this selected station if  we have (quite current) current location
+
+							retriggerTimer()
+						}
 					}) {
 						Text(station.name)
 							.font(.system(.headline))

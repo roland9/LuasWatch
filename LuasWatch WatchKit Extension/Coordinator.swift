@@ -153,28 +153,36 @@ extension Coordinator: LocationDelegate {
 	fileprivate func handle(_ closestStation: TrainStation,
 							_ location: CLLocation) {
 		// use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
-		if let trains = trains {
-			appState.state = .updatingDueTimes(trains, location)
-		} else {
-			appState.state = .gettingDueTimes(closestStation, location)
-		}
 
-		//////////////////////////////////
-		// step 3: get due times from API
-		LuasAPI2.dueTime(for: closestStation) { [weak self] (result) in
+		// sometimes crash on watchOS 9
+		// [SwiftUI] Publishing changes from within view updates is not allowed, this will cause undefined behavior
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
 
-			DispatchQueue.main.async {
-				switch result {
-					case .error(let error):
-						print("\(#function): \(error)")
-						self?.trains = nil
-						self?.appState.state = .errorGettingDueTimes(closestStation,
-																	 error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+			guard let self = self else { return }
 
-					case .success(let trains):
-						print("\(#function): \(trains)")
-						self?.trains = trains
-						self?.appState.state = .foundDueTimes(trains, location)
+			if let trains = self.trains {
+				self.appState.state = .updatingDueTimes(trains, location)
+			} else {
+				self.appState.state = .gettingDueTimes(closestStation, location)
+			}
+
+			//////////////////////////////////
+			// step 3: get due times from API
+			LuasAPI2.dueTime(for: closestStation) { [weak self] (result) in
+
+				DispatchQueue.main.async {
+					switch result {
+						case .error(let error):
+							print("\(#function): \(error)")
+							self?.trains = nil
+							self?.appState.state = .errorGettingDueTimes(closestStation,
+																		 error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+
+						case .success(let trains):
+							print("\(#function): \(trains)")
+							self?.trains = trains
+							self?.appState.state = .foundDueTimes(trains, location)
+					}
 				}
 			}
 		}
