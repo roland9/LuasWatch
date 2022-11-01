@@ -354,11 +354,11 @@
 		AB5C8B9226FFBE4A0097A7C4 /* Previews */ = {
 			isa = PBXGroup;
 			children = (
-				AB5C8B8826FFBB640097A7C4 /* PreviewsData.swift */,
 				AB5C8B8A26FFBD4F0097A7C4 /* PreviewsAppStartup.swift */,
 				AB5C8B8C26FFBD9F0097A7C4 /* PreviewsAppRunning.swift */,
 				AB5C8B8E26FFBDE70097A7C4 /* PreviewsAppResult.swift */,
 				AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */,
+				AB5C8B8826FFBB640097A7C4 /* PreviewsData.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";

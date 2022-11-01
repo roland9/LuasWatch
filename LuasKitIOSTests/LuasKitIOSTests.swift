@@ -105,16 +105,16 @@ class LuasKitIOSTests: XCTestCase {
 		XCTAssertEqual(stationHarcourt.distance(from: locationNearHarcourt), nil)
 
 		let locationFurtherAway =
-		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.01,
-				   longitude: stationHarcourt.location.coordinate.longitude + 0.01)
+		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.00425,
+				   longitude: stationHarcourt.location.coordinate.longitude + 0.005)
 
-		XCTAssertEqual(stationHarcourt.distance(from: locationFurtherAway), "1.3 km")
+		XCTAssertEqual(stationHarcourt.distance(from: locationFurtherAway), "600 m")
 
 		let locationFarAway =
-		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.1,
-				   longitude: stationHarcourt.location.coordinate.longitude + 0.1)
+		CLLocation(latitude: stationHarcourt.location.coordinate.latitude + 0.0425,
+				   longitude: stationHarcourt.location.coordinate.longitude + 0.05)
 
-		XCTAssertEqual(stationHarcourt.distance(from: locationFarAway), "13 km")
+		XCTAssertEqual(stationHarcourt.distance(from: locationFarAway), "6 km")
 	}
 
 	func testRealAPI() {

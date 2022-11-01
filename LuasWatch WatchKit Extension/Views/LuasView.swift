@@ -44,6 +44,7 @@ struct LuasView: View {
 					.multilineTextAlignment(.center)
 					.frame(idealHeight: .greatestFiniteMagnitude)
 
+					// we do get location here in this enum as well, but we ignore it in the UI
 			case .gettingDueTimes:
 				Text(self.appState.state.debugDescription)
 					.multilineTextAlignment(.center)
