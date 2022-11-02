@@ -147,10 +147,10 @@ struct ChangeStationButton: View {
 					}
 				}
 			}
-			// swiftlint:enable multiple_closures_with_trailing_closure
 		}
 	}
 }
+// swiftlint:enable multiple_closures_with_trailing_closure
 
 private extension View {
 	func retriggerTimer() {

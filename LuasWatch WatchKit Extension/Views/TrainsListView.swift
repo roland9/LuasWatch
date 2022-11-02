@@ -107,6 +107,7 @@ struct TrainsListView: View {
 			ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
 
 			if let distanceFooter {
+				Spacer(minLength: 12)
 				Text(distanceFooter)
 					.font(.footnote)
 			}
