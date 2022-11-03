@@ -9,7 +9,15 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:LuasWatch.xcodeproj",
+          "identifier" : "AB57F11B230B432E00BA8B53",
+          "name" : "LuasKitIOS"
+        }
+      ]
+    }
   },
   "testTargets" : [
     {

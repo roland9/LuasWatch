@@ -34,7 +34,7 @@ extension Route {
 public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 
 	public var id: String {
-		return direction + dueTime
+		direction + dueTime
 	}
 
 	public let destination: String
@@ -42,11 +42,11 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	public let dueTime: String
 
 	public var debugDescription: String {
-		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
+		"\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
 	}
 
 	public var dueTimeDescription: String {
-		return "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " +
+		"\(destination.replacingOccurrences(of: "LUAS ", with: "")): " +
 			((dueTime == "Due" || dueTime == "DUE") ? "Due" : "\(dueTime) mins")
 	}
 
@@ -88,16 +88,38 @@ public struct TrainStation: CustomDebugStringConvertible {
 	}
 
 	public var isFinalStop: Bool {
-		return .terminal == stationType
+		.terminal == stationType
 	}
 
 	public var isOneWayStop: Bool {
-		return .oneway == stationType
+		.oneway == stationType
 	}
 
 	public var allowsSwitchingDirection: Bool {
-		return .twoway == stationType
+		.twoway == stationType
 	}
+
+	// will return nil if the distance is quite small, i.e. if the user is quite close to the station
+	public func distance(from userLocation: CLLocation) -> String? {
+		let minimumDistance = Measurement<UnitLength>(value: 200, unit: .meters)
+		let distance = Measurement<UnitLength>(value: location.distance(from: userLocation),
+											unit: .meters)
+
+		guard distance > minimumDistance else { return nil }
+
+		return Self.distanceFormatter.string(from: distance)
+	}
+
+	private static let distanceFormatter: MeasurementFormatter = {
+		let formatter = MeasurementFormatter()
+		formatter.locale = Locale(identifier: "en_IE")	// not correct we hard coded the locale here!
+		formatter.unitOptions = .naturalScale
+		formatter.unitStyle = .medium
+		formatter.numberFormatter.usesSignificantDigits = true
+		formatter.numberFormatter.maximumSignificantDigits = 1
+
+		return formatter
+	}()
 }
 
 public struct TrainStations {
@@ -145,12 +167,12 @@ public struct TrainStations {
 	}
 
 	public var redLineStations: [TrainStation] {
-		return stations
+		stations
 			.filter { $0.route == .red }
 	}
 
 	public var greenLineStations: [TrainStation] {
-		return stations
+		stations
 			.filter { $0.route == .green }
 	}
 

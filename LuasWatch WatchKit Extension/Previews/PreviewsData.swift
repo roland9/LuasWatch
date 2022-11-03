@@ -7,15 +7,19 @@ import SwiftUI
 import LuasKit
 
 #if DEBUG
-////  Previews
-let location = CLLocation(latitude: CLLocationDegrees(Double(1.1)),
-						  longitude: CLLocationDegrees(Double(1.2)))
+
+// Bluebell station
+let location = CLLocation(latitude: CLLocationDegrees(53.3292817872831),
+						  longitude: CLLocationDegrees(-6.33382500275916))
+
+let userLocation = CLLocation(latitude: location.coordinate.latitude + 0.00425,
+							  longitude: location.coordinate.longitude + 0.005)
 
 let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",
 							  shortCode: "BLU",
 							  route: .red,
-							  name: "Bluebell",
+							  name: "Trinity Luas Stop",
 							  location: location)
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")

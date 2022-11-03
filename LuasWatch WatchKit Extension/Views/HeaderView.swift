@@ -35,12 +35,14 @@ struct HeaderView: View {
 					.frame(width: 25, height: 25)
 					.offset(x: 12)
 
-				Spacer(minLength: 20)
+				Spacer(minLength: 16)
 
 				Text(station.name)
+					.lineLimit(1)
 					.font(.system(.headline))
 					.foregroundColor(.black)
 					.frame(maxWidth: .infinity, alignment: .leading)
+					.padding(.trailing, 24)
 
 			}
 		}.onTapGesture {

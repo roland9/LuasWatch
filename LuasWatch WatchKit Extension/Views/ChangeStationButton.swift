@@ -129,19 +129,28 @@ struct ChangeStationButton: View {
 					// need a button here because just text only supports tap on the text but not full width
 					Button(action: {
 						print("☣️ tap \(station) -> save")
+
 						MyUserDefaults.saveSelectedStation(station)
-						dismissAllModal()
-						retriggerTimer()			// start 12sec timer right now
+
+						/// sometimes crash on watchOS 9
+						/// [SwiftUI] Publishing changes from within view updates is not allowed, this will cause undefined behavior
+						DispatchQueue.main.async {
+							dismissAllModal()
+							/// start 12sec timer right now
+							/// this also has logic in there to immediately show this selected station if  we have (quite current) current location
+
+							retriggerTimer()
+						}
 					}) {
 						Text(station.name)
 							.font(.system(.headline))
 					}
 				}
 			}
-			// swiftlint:enable multiple_closures_with_trailing_closure
 		}
 	}
 }
+// swiftlint:enable multiple_closures_with_trailing_closure
 
 private extension View {
 	func retriggerTimer() {

@@ -12,6 +12,9 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: Run tests
-      run: bundle install && bundle exec fastlane test
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7.2'
+    - uses: maierj/fastlane-action@v2.3.0
+      with:
+        lane: 'test'

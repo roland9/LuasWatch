@@ -44,6 +44,7 @@ struct LuasView: View {
 					.multilineTextAlignment(.center)
 					.frame(idealHeight: .greatestFiniteMagnitude)
 
+					// we do get location here in this enum as well, but we ignore it in the UI
 			case .gettingDueTimes:
 				Text(self.appState.state.debugDescription)
 					.multilineTextAlignment(.center)
@@ -66,24 +67,23 @@ struct LuasView: View {
 					}
 				}
 
-					// we don't use the second parameter, the location, here -  but we grab it from the model in StationsSelectionModal
-			case .foundDueTimes(let trains, _):
-					foundDueTimesView(for: trains)
+			case .foundDueTimes(let trains, let location):
+					foundDueTimesView(for: trains, location: location)
 
-			case .updatingDueTimes(let trains, _):
-					updatingDueTimesView(for: trains)
+			case .updatingDueTimes(let trains, let location):
+					updatingDueTimesView(for: trains, location: location)
 			}
 		}
 	}
 
-	@ViewBuilder
-	fileprivate func foundDueTimesView(for trains: TrainsByDirection) -> some View {
+	fileprivate func foundDueTimesView(for trains: TrainsByDirection, location: CLLocation) -> some View {
 		ZStack {
 			VStack {
 				HeaderView(station: trains.trainStation, direction: $direction,
 						   overlayTextAfterTap: $overlayTextAfterTap)
 
-				TrainsListView(trains: trains, direction: direction ?? .both)
+				TrainsListView(trains: trains, direction: direction ?? .both,
+							   location: location)
 
 			}.onAppear {
 				forceUpdateDirection(trainStationName: trains.trainStation.name)
@@ -95,7 +95,7 @@ struct LuasView: View {
 
 	// not ideal: lots of repetition compared to above
 	@ViewBuilder
-	fileprivate func updatingDueTimesView(for trains: TrainsByDirection) -> some View {
+	fileprivate func updatingDueTimesView(for trains: TrainsByDirection, location: CLLocation) -> some View {
 		VStack {
 			ZStack {
 				HeaderView(station: trains.trainStation, direction: $direction,
@@ -107,7 +107,8 @@ struct LuasView: View {
 			}
 			.frame(height: 36)	// avoid jumping
 
-			TrainsListView(trains: trains, direction: direction ?? .both)
+			TrainsListView(trains: trains, direction: direction ?? .both,
+						   location: location)
 
 		}.onAppear {
 			forceUpdateDirection(trainStationName: trains.trainStation.name)

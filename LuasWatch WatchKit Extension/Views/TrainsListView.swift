@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 #if os(iOS)
 import LuasKitIOS
@@ -16,8 +17,15 @@ import LuasKit
 struct TrainsListView: View {
 	let trains: TrainsByDirection
 	let direction: Direction
+	let location: CLLocation	// current user location
 
 	@EnvironmentObject var appState: AppState
+
+	var distance: String? {
+		guard let distance = trains.trainStation.distance(from: location) else { return nil }
+
+		return LuasStrings.distance(station: trains.trainStation, distance: distance)
+	}
 
 	var body: some View {
 
@@ -25,10 +33,10 @@ struct TrainsListView: View {
 			// find the trains, either inbound or outbound
 
 			if trains.inbound.count > 0 {
-				oneWayTrainsView(trains.inbound)
+				oneWayTrainsView(trains.inbound, distanceFooter: distance)
 
 			} else if trains.outbound.count > 0 {
-				oneWayTrainsView(trains.outbound)
+				oneWayTrainsView(trains.outbound, distanceFooter: distance)
 			} else {
 
 				// cannot use assert here??
@@ -52,21 +60,21 @@ struct TrainsListView: View {
 			switch direction {
 
 			case .both:
-				twoWayTrainsView()
+					twoWayTrainsView(distanceFooter: distance)
 
 			case .inbound:
-				oneWayTrainsView(trains.inbound)
+					oneWayTrainsView(trains.inbound, distanceFooter: distance)
 
 			case .outbound:
-				oneWayTrainsView(trains.outbound)
+					oneWayTrainsView(trains.outbound, distanceFooter: distance)
 			}
 		}
 	}
 
 	@ViewBuilder
-	private func oneWayTrainsView(_ trainsList: [Train]) -> some View {
+	private func oneWayTrainsView(_ trainsList: [Train], distanceFooter: String?) -> some View {
 		List {
-			Section(footer: ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)) {
+			Section(footer: ChangeStationButtonWithDistance(distanceFooter: distanceFooter)) {
 
 				ForEach(trainsList, id: \.id) {
 					Text($0.dueTimeDescription)
@@ -76,8 +84,7 @@ struct TrainsListView: View {
 	}
 
 	@ViewBuilder
-	private func twoWayTrainsView() -> some View {
-
+	private func twoWayTrainsView(distanceFooter: String?) -> some View {
 		List {
 			Section {
 				ForEach(self.trains.inbound, id: \.id) {
@@ -85,7 +92,7 @@ struct TrainsListView: View {
 				}
 			}
 
-			Section(footer: ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)) {
+			Section(footer: ChangeStationButtonWithDistance(distanceFooter: distanceFooter)) {
 
 				ForEach(self.trains.outbound, id: \.id) {
 					Text($0.dueTimeDescription)
@@ -94,5 +101,17 @@ struct TrainsListView: View {
 		}
 	}
 
+	@ViewBuilder
+	fileprivate func ChangeStationButtonWithDistance(distanceFooter: String?) -> some View {
+		VStack {
+			ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
+
+			if let distanceFooter {
+				Spacer(minLength: 12)
+				Text(distanceFooter)
+					.font(.footnote)
+			}
+		}
+	}
 }
 
