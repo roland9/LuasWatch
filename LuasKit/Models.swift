@@ -57,12 +57,13 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	}
 }
 
-public struct TrainStation: CustomDebugStringConvertible {
+public struct TrainStation: CustomDebugStringConvertible, Identifiable {
 
 	public enum StationType: String {
 		case twoway, oneway, terminal
 	}
 
+    public let id: String
 	public let stationId: String		// not sure what that 'id' is for?
 	public let stationIdShort: String 	// that is the 'id' required for the API
 	public let shortCode: String		// three-letter code, such as 'RAN'; for the XML API
@@ -78,6 +79,7 @@ public struct TrainStation: CustomDebugStringConvertible {
 	public init(stationId: String, stationIdShort: String, shortCode: String,
 				route: Route, name: String,
 				location: CLLocation, stationType: StationType = .twoway) {
+        self.id = stationId
 		self.stationId = stationId
 		self.stationIdShort = stationIdShort
 		self.shortCode = shortCode
@@ -127,6 +129,11 @@ public struct TrainStations {
 	public let stations: [TrainStation]
 
 	public static let sharedFromFile = TrainStations.fromFile()
+    public static let cityCentre: TrainStation = TrainStations
+        .fromFile()
+        .stations
+        .filter { $0.name == "O'Connell - GPO" }
+        .first!
 
 	private static func fromFile() -> TrainStations {
 		TrainStations(fromFile: "luasStops")

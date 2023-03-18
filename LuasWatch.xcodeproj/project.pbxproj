@@ -61,6 +61,8 @@
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */; };
 		AB99CE8C24BA717600025521 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB99CE8B24BA717600025521 /* SnapshotTesting */; };
+		ABAA4BE029C6641900ECDA23 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAA4BDF29C6641900ECDA23 /* MapView.swift */; };
+		ABAA4BE229C6645100ECDA23 /* PreviewsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAA4BE129C6645100ECDA23 /* PreviewsMapView.swift */; };
 		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
@@ -190,6 +192,8 @@
 		AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationsModal.swift; sourceTree = "<group>"; };
 		AB5D908027A70C73006C621F /* LuasWatch WatchKit App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch WatchKit App.xctestplan"; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
+		ABAA4BDF29C6641900ECDA23 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		ABAA4BE129C6645100ECDA23 /* PreviewsMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsMapView.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABBD74822657CCFD00D003EE /* LuasKitIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = LuasKitIOSTests.xctestplan; path = LuasWatch.xcodeproj/LuasKitIOSTests.xctestplan; sourceTree = "<group>"; };
 		ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 				AB5C8B8A26FFBD4F0097A7C4 /* PreviewsAppStartup.swift */,
 				AB5C8B8C26FFBD9F0097A7C4 /* PreviewsAppRunning.swift */,
 				AB5C8B8E26FFBDE70097A7C4 /* PreviewsAppResult.swift */,
+				ABAA4BE129C6645100ECDA23 /* PreviewsMapView.swift */,
 				AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */,
 				AB5C8B8826FFBB640097A7C4 /* PreviewsData.swift */,
 			);
@@ -368,6 +373,7 @@
 			children = (
 				AB364D172308277000C73EF6 /* LuasView.swift */,
 				AB5C8B8426FFB9F90097A7C4 /* TrainsListView.swift */,
+				ABAA4BDF29C6641900ECDA23 /* MapView.swift */,
 				AB5C8B8626FFBA570097A7C4 /* ChangeStationButton.swift */,
 				AB5C8B8226FFB9CE0097A7C4 /* HeaderView.swift */,
 				AB5C8B7E26FFB8770097A7C4 /* LoadingAnimationView.swift */,
@@ -679,6 +685,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB5C8B7F26FFB8770097A7C4 /* LoadingAnimationView.swift in Sources */,
+				ABAA4BE029C6641900ECDA23 /* MapView.swift in Sources */,
+				ABAA4BE229C6645100ECDA23 /* PreviewsMapView.swift in Sources */,
 				AB364D1A2308277000C73EF6 /* HostingController.swift in Sources */,
 				AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */,
 				AB5C8B8926FFBB640097A7C4 /* PreviewsData.swift in Sources */,

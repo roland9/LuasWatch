@@ -83,6 +83,14 @@ struct ChangeStationButton: View {
 						}
 					})
 
+                    NavigationLink(destination: MapView()) {
+                        VStack {
+                            Image(systemName: "mappin.and.ellipse")
+                            Text("Select on map")
+                                .font(.footnote)
+                        }
+                    }
+
 					if MyUserDefaults.userSelectedSpecificStation() != nil {
 						Button(action: {
 							MyUserDefaults.wipeUserSelectedStation()
