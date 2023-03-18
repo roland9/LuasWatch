@@ -64,10 +64,10 @@ class Coordinator: NSObject {
 			return
 		}
 
-		// if user has selected a specific station & the location we have is not too old -> don't want for another location update
+		// if user has selected a specific station & the location we have is not too old -> don't wait  for another location update
 		if let station = MyUserDefaults.userSelectedSpecificStation(),
 		   let latestLocation = latestLocation,
-		   latestLocation.timestamp.timeIntervalSinceNow < 25.0 {
+		   latestLocation.timestamp.timeIntervalSinceNow < -25.0 {
 			print("🥳 we have user selected station & recent location -> skip location update")
 			handle(station, latestLocation)
 		} else {
