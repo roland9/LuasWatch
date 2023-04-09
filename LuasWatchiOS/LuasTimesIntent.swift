@@ -12,46 +12,60 @@ import LuasKitIOS
 struct LuasTimesIntent: AppIntent {
 
     // TODO localize
-    static var title: LocalizedStringResource = "Show departure times of closes LUAS station"
+    static var title: LocalizedStringResource = "Luas Times"
 
     static var description =
     IntentDescription("Determines user's location & shows the departure times of the closes LUAS stop.")
 
     func perform() async throws -> some IntentResult & ReturnsValue {
 
-        let location = CLLocation(latitude: CLLocationDegrees(53.3643367750274),
-                                  longitude: CLLocationDegrees(-6.28196929164465))
+        let appState = AppState()
+        let location = Location()
 
-        let cabraStation = TrainStation(stationId: "gen:57102:3587:1",
-                                        stationIdShort: "LUAS70",
-                                        shortCode: "CAB",
-                                        route: .green,
-                                        name: "Cabra",
-                                        location: location)
+        let coordinator = CoordinatorAppIntent(appState: appState,
+                                               location: location)
 
-        let departureTimes = TrainsByDirection(trainStation: cabraStation,
-                                                inbound: [Train(destination: "Sandyford", direction: "outbound", dueTime: "10 min")],
-                                                outbound: [])
+        let output = await coordinator.start()
 
-
-
-        return .result(value: departureTimes.shortcutOutput())
+        return .result(value: output)
     }
 }
+
+extension MyState {
+
+    var shortcutOutput: String {
+
+        switch self {
+
+            case .gettingLocation,
+                    .errorGettingLocation(_),
+                    .errorGettingStation(_),
+                    .gettingDueTimes(_, _),
+                    .errorGettingDueTimes(_, _),
+                    .updatingDueTimes(_, _):
+                return debugDescription
+
+            case .foundDueTimes(let trains, let location):
+                return trains.shortcutOutput()
+        }
+    }
+}
+
 
 extension TrainsByDirection {
 
     func shortcutOutput() -> String {
         var output = ""
 
-        output += inbound
-            .compactMap { "Luas to \($0.destination) in \($0.dueTime)." }
-            .joined()
+        // Cabra into City Centre only for now
+//        output += inbound
+//            .compactMap { "Luas to \($0.destination) in \($0.dueTime).\n" }
+//            .joined()
 
         output += outbound
-            .compactMap { "Luas to \($0.destination) in \($0.dueTime)." }
+            .compactMap { "\($0.destination) in \($0.dueTime).\n" }
             .joined()
 
-        return output.count > 0 ? output : "No Luas trains found for station \(trainStation)"
+        return output.count > 0 ? output : "No Luas trains found for station \(trainStation).\n"
     }
 }
