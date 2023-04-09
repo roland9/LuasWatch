@@ -17,15 +17,23 @@ struct LuasTimesIntent: AppIntent {
     static var description =
     IntentDescription("Determines user's location & shows the departure times of the closes LUAS stop.")
 
+    @Parameter(title: "LUAS Stop", optionsProvider: LuasStopOptionsProvider())
+    var luasStop: String
+
+    private struct LuasStopOptionsProvider: DynamicOptionsProvider {
+        func results() async throws -> [String] {
+            TrainStations.sharedFromFile
+                .stations
+                .map { $0.name }
+                .sorted()
+        }
+    }
+
     func perform() async throws -> some IntentResult & ReturnsValue {
 
-        let appState = AppState()
-        let location = Location()
+        let coordinator = CoordinatorAppIntent()
 
-        let coordinator = CoordinatorAppIntent(appState: appState,
-                                               location: location)
-
-        let output = await coordinator.start()
+        let output = try await coordinator.loadTrainTimes(for: luasStop)
 
         return .result(value: output)
     }
@@ -38,14 +46,14 @@ extension MyState {
         switch self {
 
             case .gettingLocation,
-                    .errorGettingLocation(_),
-                    .errorGettingStation(_),
-                    .gettingDueTimes(_, _),
-                    .errorGettingDueTimes(_, _),
-                    .updatingDueTimes(_, _):
+                    .errorGettingLocation,
+                    .errorGettingStation,
+                    .gettingDueTimes,
+                    .errorGettingDueTimes,
+                    .updatingDueTimes:
                 return debugDescription
 
-            case .foundDueTimes(let trains, let location):
+            case .foundDueTimes(let trains, _):
                 return trains.shortcutOutput()
         }
     }
@@ -66,6 +74,6 @@ extension TrainsByDirection {
             .compactMap { "\($0.destination) in \($0.dueTime).\n" }
             .joined()
 
-        return output.count > 0 ? output : "No Luas trains found for station \(trainStation).\n"
+        return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
     }
 }

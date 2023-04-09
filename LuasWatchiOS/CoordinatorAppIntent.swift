@@ -9,36 +9,46 @@ import LuasKitIOS
 
 class CoordinatorAppIntent: NSObject {
 
-    private var location: Location
-
-    internal let appState: AppState
-    internal var latestLocation: CLLocation?
-    internal var trains: TrainsByDirection?
-
-    init(appState: AppState,
-         location: Location) {
-        self.appState = appState
-        self.location = location
+    enum CoordinationError: Error {
+        case stationNotFound(String)
     }
 
-    func start() async -> String {
-        // for now, let's use hard coded location
-//        location.delegate = self
-//
-//        location.start()
+    func loadTrainTimes(for luasStop: String) async throws -> String {
 
-        let location = CLLocation(latitude: CLLocationDegrees(53.3643367750274),
-                                  longitude: CLLocationDegrees(-6.28196929164465))
+        let station = TrainStations.sharedFromFile
+            .stations
+            .filter { $0.name == luasStop }
+            .first
 
-        let cabraStation = TrainStation(stationId: "gen:57102:3587:1",
-                                        stationIdShort: "LUAS70",
-                                        shortCode: "CAB",
-                                        route: .green,
-                                        name: "Cabra",
-                                        location: location)
+        guard let station else { throw CoordinationError.stationNotFound(luasStop) }
 
-        let output = await handleAppIntent(cabraStation, location)
+        let output = await station.loadTrainTimes()
 
         return output.shortcutOutput
+    }
+}
+
+extension TrainStation {
+
+    internal func loadTrainTimes() async -> MyState {
+
+        await withCheckedContinuation { (continuation: CheckedContinuation<MyState, Never>) in
+
+            LuasAPI2.dueTime(for: self) { (result) in
+
+                switch result {
+                    case .error(let error):
+                        print("\(#function): \(error)")
+                        continuation.resume(returning:
+                                .errorGettingDueTimes(self,
+                                                      error.count > 0 ? error : LuasStrings.errorGettingDueTimes))
+
+                    case .success(let trains):
+                        print("\(#function): \(trains)")
+                        continuation.resume(returning:
+                                .foundDueTimes(trains, location))
+                }
+            }
+        }
     }
 }
