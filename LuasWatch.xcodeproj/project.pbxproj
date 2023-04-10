@@ -457,9 +457,9 @@
 			isa = PBXGroup;
 			children = (
 				AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */,
+				AB5EE5D329E45A5300896798 /* ModelsTests.swift */,
 				ABC25BF224DF676A00F51EB4 /* APITests.swift */,
 				AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */,
-				AB5EE5D329E45A5300896798 /* ModelsTests.swift */,
 				AB57F132230B43AA00BA8B53 /* Info.plist */,
 			);
 			path = LuasKitIOSTests;

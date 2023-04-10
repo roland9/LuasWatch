@@ -17,12 +17,12 @@ class SnapshotTests: XCTestCase {
         let view = LuasView()
             .environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
         assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhone8),
-                                                  traits: .init(userInterfaceStyle: .light)), named: "iPhone8 tooFarAway", record: shouldRecord)
+                                                  traits: .init(userInterfaceStyle: .light)), named: "iPhone14Pro tooFarAway", record: shouldRecord)
 
         let viewTrains = LuasView()
             .environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1, location)))
         assertSnapshot(matching: viewTrains, as: .image(layout: .device(config: .iPhone8),
-                                                        traits: .init(userInterfaceStyle: .light)), named: "iPhone8 trains", record: shouldRecord)
+                                                        traits: .init(userInterfaceStyle: .light)), named: "iPhone14Pro trains", record: shouldRecord)
 
         //        let viewError = LuasView()
         //            .environmentObject(
