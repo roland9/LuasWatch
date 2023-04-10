@@ -72,21 +72,3 @@ extension TrainStation {
         }
     }
 }
-
-extension TrainsByDirection {
-
-    func shortcutOutput() -> String {
-        var output = ""
-
-        // Cabra into City Centre only for now
-//        output += inbound
-//            .compactMap { "Luas to \($0.destination) in \($0.dueTime).\n" }
-//            .joined()
-
-        output += outbound
-            .compactMap { "\($0.destination) in \($0.dueTime).\n" }
-            .joined()
-
-        return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
-    }
-}
