@@ -233,22 +233,3 @@ public struct TrainsByDirection {
 		self.message = message
 	}
 }
-
-public extension TrainsByDirection {
-
-    func shortcutOutput() -> String {
-        var output = ""
-
-        // Cabra into City Centre only for now??
-
-        output += inbound
-            .compactMap { $0.destinationDueTimeDescription + ".\n" }
-            .joined()
-
-        output += outbound
-            .compactMap { $0.destinationDueTimeDescription + ".\n" }
-            .joined()
-
-        return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
-    }
-}

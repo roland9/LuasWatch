@@ -8,6 +8,19 @@ import CoreLocation
 
 import LuasKitIOS
 
+enum DirectionEnum: String, CaseIterable, AppEnum {
+
+    case both, inbound, outbound
+
+    static var typeDisplayName: LocalizedStringResource = "Direction"
+
+    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Direction of the train (for stations that have both)")
+
+    public static var caseDisplayRepresentations: [DirectionEnum: DisplayRepresentation] {
+        [.inbound: "inbound trains", .outbound: "outbound trains", .both: "both directions"]
+    }
+}
+
 struct LuasWatchAppIntent: AppIntent {
 
     static var title: LocalizedStringResource = "Luas Times"
@@ -17,6 +30,9 @@ struct LuasWatchAppIntent: AppIntent {
 
     @Parameter(title: "LUAS Stop", optionsProvider: LuasStopOptionsProvider())
     var luasStop: String
+
+    @Parameter(title: "Train Direction (if Station has both)")
+    var direction: DirectionEnum
 
     private struct LuasStopOptionsProvider: DynamicOptionsProvider {
 
@@ -40,7 +56,7 @@ struct LuasWatchAppIntent: AppIntent {
         guard let station else { throw CoordinationError.stationNotFound(luasStop) }
 
         // call async API to get due times
-        let output = await station.loadTrainTimesFromAPI()
+        let output = await station.loadTrainTimesFromAPI(direction: direction)
 
         return .result(value: output)
     }
@@ -52,7 +68,7 @@ struct LuasWatchAppIntent: AppIntent {
 
 extension TrainStation {
 
-    internal func loadTrainTimesFromAPI() async -> String {
+    internal func loadTrainTimesFromAPI(direction: DirectionEnum) async -> String {
 
         await withCheckedContinuation { (continuation: CheckedContinuation<String, Never>) in
 
@@ -66,9 +82,30 @@ extension TrainStation {
 
                     case .success(let trains):
                         print("\(#function): \(trains)")
-                        continuation.resume(returning: trains.shortcutOutput())
+                        continuation.resume(returning: trains.shortcutOutput(direction))
                 }
             }
         }
+    }
+}
+
+extension TrainsByDirection {
+
+    func shortcutOutput(_ direction: DirectionEnum) -> String {
+        var output = ""
+
+        if direction == .inbound || direction == .both {
+            output += inbound
+                .compactMap { $0.destinationDueTimeDescription + ".\n" }
+                .joined()
+        }
+
+        if direction == .outbound || direction == .both  {
+            output += outbound
+                .compactMap { $0.destinationDueTimeDescription + ".\n" }
+                .joined()
+        }
+
+        return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
     }
 }

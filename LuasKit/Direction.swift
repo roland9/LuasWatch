@@ -5,8 +5,9 @@
 
 import Foundation
 
-public enum Direction: Int {
-	case both, inbound, outbound
+public enum Direction: Int, CaseIterable {
+
+    case both, inbound, outbound
 }
 
 extension Direction: CustomDebugStringConvertible {
