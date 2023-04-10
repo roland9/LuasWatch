@@ -63,20 +63,22 @@ class ModelsTests: XCTestCase {
 
     func testShortcutOutput() {
 
-        let trains =
-        TrainsByDirection(trainStation: stationHarcourt,
-                          inbound: [Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"),
-                                    Train(destination: "Broombridge", direction: "Inbound", dueTime: "12")],
+        let trains = TrainsByDirection(
+            trainStation: stationHarcourt,
+            inbound: [Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"),
+                      Train(destination: "Broombridge", direction: "Inbound", dueTime: "12")],
 
-                          outbound: [Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"),
-                                     Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "14")],
-                          message: "Phibsborough lift works until 28/04/23. See news.")
+            outbound: [Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"),
+                       Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "14")],
+            message: "Phibsborough lift works until 28/04/23. See news.")
 
         let output = trains.shortcutOutput()
         let expected =
             """
-            Bride's Glen in 7.
-            Bride's Glen in 14.
+            Luas to Broombridge is Due.
+            Luas to Broombridge in 12.
+            Luas to Bride's Glen in 7.
+            Luas to Bride's Glen in 14.
 
             """
 

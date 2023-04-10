@@ -19,6 +19,7 @@ struct LuasWatchAppIntent: AppIntent {
     var luasStop: String
 
     private struct LuasStopOptionsProvider: DynamicOptionsProvider {
+
         func results() async throws -> [String] {
             TrainStations.sharedFromFile
                 .stations
@@ -28,25 +29,24 @@ struct LuasWatchAppIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ReturnsValue {
-        let output = try await loadTrainTimes(for: luasStop)
+
+        // find station by name (which is the parameter for our AppIntent)
+        let station = TrainStations.sharedFromFile
+            .stations
+            .filter { $0.name == luasStop }
+            .first
+
+        // throw error if not found - shouldn't happen actually
+        guard let station else { throw CoordinationError.stationNotFound(luasStop) }
+
+        // call async API to get due times
+        let output = await station.loadTrainTimesFromAPI()
 
         return .result(value: output)
     }
 
     enum CoordinationError: Error {
         case stationNotFound(String)
-    }
-
-    func loadTrainTimes(for luasStop: String) async throws -> String {
-
-        let station = TrainStations.sharedFromFile
-            .stations
-            .filter { $0.name == luasStop }
-            .first
-
-        guard let station else { throw CoordinationError.stationNotFound(luasStop) }
-
-        return await station.loadTrainTimesFromAPI()
     }
 }
 
