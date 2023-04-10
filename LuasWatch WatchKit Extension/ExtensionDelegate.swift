@@ -9,7 +9,8 @@
 import WatchKit
 import LuasKit
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+@main
+class ExtensionDelegate: NSObject, WKApplicationDelegate {
 
 	let appState = AppState()
 	let location = Location()
