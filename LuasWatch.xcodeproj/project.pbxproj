@@ -68,12 +68,14 @@
 		AB5D908527A7106B006C621F /* ChangeStationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8626FFBA570097A7C4 /* ChangeStationButton.swift */; };
 		AB5D908627A7107A006C621F /* TapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B8026FFB9530097A7C4 /* TapOverlayView.swift */; };
 		AB5EE5D429E45A5300896798 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D329E45A5300896798 /* ModelsTests.swift */; };
+		AB5EE5D629E45DCF00896798 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */; };
+		AB5EE5D829E45E5B00896798 /* TestDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */; };
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */; };
 		AB99CE8C24BA717600025521 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB99CE8B24BA717600025521 /* SnapshotTesting */; };
 		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
-		ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */; };
+		ABC25BF324DF676A00F51EB4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* APITests.swift */; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB67BE2359122800906CD6 /* LuasExtensions.swift */; };
@@ -247,10 +249,12 @@
 		AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationsModal.swift; sourceTree = "<group>"; };
 		AB5D908027A70C73006C621F /* LuasWatch WatchKit App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch WatchKit App.xctestplan"; sourceTree = "<group>"; };
 		AB5EE5D329E45A5300896798 /* ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
+		AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
+		AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDefinitions.swift; sourceTree = "<group>"; };
 		AB832B24232058BF005E1BB7 /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABBD74822657CCFD00D003EE /* LuasKitIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = LuasKitIOSTests.xctestplan; path = LuasWatch.xcodeproj/LuasKitIOSTests.xctestplan; sourceTree = "<group>"; };
-		ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasKitIOSTests.swift; sourceTree = "<group>"; };
+		ABC25BF224DF676A00F51EB4 /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		ABE5585924E944C1008F3789 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -452,7 +456,9 @@
 		AB57F12F230B43AA00BA8B53 /* LuasKitIOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */,
+				AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */,
+				ABC25BF224DF676A00F51EB4 /* APITests.swift */,
+				AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */,
 				AB5EE5D329E45A5300896798 /* ModelsTests.swift */,
 				AB57F132230B43AA00BA8B53 /* Info.plist */,
 			);
@@ -928,12 +934,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB5D908527A7106B006C621F /* ChangeStationButton.swift in Sources */,
+				AB5EE5D629E45DCF00896798 /* SnapshotTests.swift in Sources */,
 				AB5D908127A71039006C621F /* LoadingAnimationView.swift in Sources */,
 				AB22502624DF63E500ADA854 /* LuasView.swift in Sources */,
 				AB5EE5D429E45A5300896798 /* ModelsTests.swift in Sources */,
 				AB5D908627A7107A006C621F /* TapOverlayView.swift in Sources */,
-				ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */,
+				ABC25BF324DF676A00F51EB4 /* APITests.swift in Sources */,
 				AB5D908327A71062006C621F /* TrainsListView.swift in Sources */,
+				AB5EE5D829E45E5B00896798 /* TestDefinitions.swift in Sources */,
 				AB5D908227A7105C006C621F /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
