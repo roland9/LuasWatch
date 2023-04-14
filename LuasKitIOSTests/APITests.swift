@@ -9,90 +9,107 @@ import XCTest
 
 class APITests: XCTestCase {
 
-	func testRealAPI() {
-		let apiExpectation = expectation(description: "API call expectation")
+    func testRealAPI() async {
 
-		LuasAPI2.dueTime(for: stationBlueBell) { (result) in
-			switch result {
+		let result = await LuasAPI2.dueTimes(for: stationBlueBell)
 
-				case .error(let message):
-					print("error: \(message)")
-					XCTFail("did not expect error")
-					apiExpectation.fulfill()
-				case .success(let trains):
-					print(trains)
-					apiExpectation.fulfill()
-			}
-		}
+        switch result {
 
-		wait(for: [apiExpectation], timeout: 15)
+            case .error(let message):
+                XCTFail("did not expect error: \(message)")
+
+            case .success(let trains):
+                XCTAssertEqual(trains.trainStation.name, "Bluebell")
+        }
 	}
 
-	func testMockAPI() {
-		let apiExpectation = expectation(description: "API call expectation")
+	func testMockAPI_RanelaghTrains() async {
 
-		/*
-		 <stopInfo created="2020-08-16T22:07:29" stop="Ranelagh" stopAbv="RAN">
-		 <message>Green Line services operating normally</message>
-		 <direction name="Inbound">
-		 <tram dueMins="Due" destination="Broombridge" />
-		 </direction>
-		 <direction name="Inbound">
-		 <tram dueMins="5" destination="Broombridge" />
-		 </direction>
-		 <direction name="Outbound">
-		 <tram dueMins="7" destination="Bride's Glen" />
-		 </direction>
-		 <direction name="Outbound">
-		 <tram dueMins="9" destination="Sandyford" />
-		 </direction>
-		 <direction name="Outbound">
-		 <tram dueMins="15" destination="Bride's Glen" />
-		 </direction>
-		 </stopInfo>
-		 */
+        LuasMockAPI2.scenario = .ranelaghTrains
+		let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
 
-		LuasMockAPI2.dueTime(for: stationBlueBell) { (result) in
-			switch result {
+        switch result {
 
-				case .error(let message):
-					print("error: \(message)")
+            case .error(let message):
+                XCTFail("did not expect error: \(message)")
 
-				case .success(let trains):
-					XCTAssertEqual(trains.inbound.count, 2)
-					XCTAssertEqual(trains.inbound[0], Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"))
-					XCTAssertEqual(trains.inbound[1], Train(destination: "Broombridge", direction: "Inbound", dueTime: "5"))
+            case .success(let trains):
+                XCTAssertEqual(trains.inbound.count, 2)
+                XCTAssertEqual(trains.inbound[0], Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"))
+                XCTAssertEqual(trains.inbound[1], Train(destination: "Broombridge", direction: "Inbound", dueTime: "5"))
 
-					XCTAssertEqual(trains.outbound.count, 3)
-					XCTAssertEqual(trains.outbound[0], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"))
-					XCTAssertEqual(trains.outbound[1], Train(destination: "Sandyford", direction: "Outbound", dueTime: "9"))
-					XCTAssertEqual(trains.outbound[2], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "15"))
+                XCTAssertEqual(trains.outbound.count, 3)
+                XCTAssertEqual(trains.outbound[0], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"))
+                XCTAssertEqual(trains.outbound[1], Train(destination: "Sandyford", direction: "Outbound", dueTime: "9"))
+                XCTAssertEqual(trains.outbound[2], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "15"))
 
-					XCTAssertEqual(trains.message, "Green Line services operating normally")
-
-					apiExpectation.fulfill()
-					print(trains)
-			}
+                XCTAssertEqual(trains.message, "Green Line services operating normally")
 		}
-
-		wait(for: [apiExpectation], timeout: 1)
 	}
 
-	func testMockErrorAPI() {
-		let apiExpectation = expectation(description: "API call expectation")
+    func testMockAPI_NoTrains() async {
 
-		LuasMockErrorAPI.dueTime(for: stationBlueBell) { (result) in
-			switch result {
+        LuasMockAPI2.scenario = .noTrainsButMessage
+        let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
 
-				case .error(let message):
-					XCTAssertEqual(message, "Error getting due times from internet: The operation couldn’t be completed. (luaswatch error 100.)")
-					apiExpectation.fulfill()
+        switch result {
 
-				case .success:
-					XCTFail("did not expect success for this test case")
-			}
-		}
+            case .error(let message):
+                XCTAssertEqual(message, "Green Line services operating normally")
 
-		wait(for: [apiExpectation], timeout: 1)
-	}
+            case .success(let trains):
+                XCTFail("did not expect trains \(trains)")
+        }
+    }
+
+    func testMockAPI_NoTrainsNoMessage() async {
+
+        LuasMockAPI2.scenario = .noTrainsNoMessage
+        let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
+
+        switch result {
+
+            case .error(let message):
+                // no message from API: should have fallback message
+                XCTAssertEqual(message, "Couldn’t get any trains.\n\n" +
+                               "Either Luas is not operating, or there is a problem with the Luas website.")
+
+            case .success(let trains):
+                XCTFail("did not expect trains \(trains)")
+        }
+    }
+
+    func testMockAPI_ServerError() async {
+
+        LuasMockAPI2.scenario = .serverError
+        let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
+
+        switch result {
+                
+            case .error(let message):
+                XCTAssertEqual(message, "Error getting results from server: The operation couldn’t be completed. (LuasKitIOS.LuasMockAPI2.LuasError error 0.)")
+
+            case .success(let trains):
+                XCTFail("did not expect trains \(trains)")
+        }
+    }
+
+    // WIP convert to async/await - but it's an old API
+//	func testMockErrorAPI() {
+//		let apiExpectation = expectation(description: "API call expectation")
+//
+//		LuasMockErrorAPI.dueTime(for: stationBlueBell) { (result) in
+//			switch result {
+//
+//				case .error(let message):
+//					XCTAssertEqual(message, "Error getting due times from internet: The operation couldn’t be completed. (luaswatch error 100.)")
+//					apiExpectation.fulfill()
+//
+//				case .success:
+//					XCTFail("did not expect success for this test case")
+//			}
+//		}
+//
+//		wait(for: [apiExpectation], timeout: 1)
+//	}
 }
