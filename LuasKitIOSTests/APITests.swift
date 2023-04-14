@@ -11,7 +11,7 @@ class APITests: XCTestCase {
 
     func testRealAPI() async {
 
-		let result = await LuasAPI2.dueTimes(for: stationBlueBell)
+		let result = await LuasAPI.dueTimes(for: stationBlueBell)
 
         switch result {
 
@@ -25,8 +25,8 @@ class APITests: XCTestCase {
 
 	func testMockAPI_RanelaghTrains() async {
 
-        LuasMockAPI2.scenario = .ranelaghTrains
-		let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
+        LuasMockAPI.scenario = .ranelaghTrains
+		let result = await LuasMockAPI.dueTimes(for: stationBlueBell)
 
         switch result {
 
@@ -49,8 +49,8 @@ class APITests: XCTestCase {
 
     func testMockAPI_NoTrains() async {
 
-        LuasMockAPI2.scenario = .noTrainsButMessage
-        let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
+        LuasMockAPI.scenario = .noTrainsButMessage
+        let result = await LuasMockAPI.dueTimes(for: stationBlueBell)
 
         switch result {
 
@@ -64,8 +64,8 @@ class APITests: XCTestCase {
 
     func testMockAPI_NoTrainsNoMessage() async {
 
-        LuasMockAPI2.scenario = .noTrainsNoMessage
-        let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
+        LuasMockAPI.scenario = .noTrainsNoMessage
+        let result = await LuasMockAPI.dueTimes(for: stationBlueBell)
 
         switch result {
 
@@ -81,8 +81,8 @@ class APITests: XCTestCase {
 
     func testMockAPI_ServerError() async {
 
-        LuasMockAPI2.scenario = .serverError
-        let result = await LuasMockAPI2.dueTimes(for: stationBlueBell)
+        LuasMockAPI.scenario = .serverError
+        let result = await LuasMockAPI.dueTimes(for: stationBlueBell)
 
         switch result {
                 
