@@ -68,3 +68,4 @@ public struct LuasStrings {
 		NSLocalizedString("\(station.name) stop is \(distance) away", comment: "String indicating distance of this Luas station (in meters) - input1: station name; input2: distance string")
 	}
 }
+// swiftlint:enable line_length

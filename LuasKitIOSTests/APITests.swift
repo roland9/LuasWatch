@@ -85,31 +85,12 @@ class APITests: XCTestCase {
         let result = await LuasMockAPI.dueTimes(for: stationBlueBell)
 
         switch result {
-                
+
             case .error(let message):
-                XCTAssertEqual(message, "Error getting results from server: The operation couldn’t be completed. (LuasKitIOS.LuasMockAPI2.LuasError error 0.)")
+                XCTAssertEqual(message, "Error getting results from server: The operation couldn’t be completed. (LuasKitIOS.LuasMockAPI.LuasError error 0.)")
 
             case .success(let trains):
                 XCTFail("did not expect trains \(trains)")
         }
     }
-
-    // WIP convert to async/await - but it's an old API
-//	func testMockErrorAPI() {
-//		let apiExpectation = expectation(description: "API call expectation")
-//
-//		LuasMockErrorAPI.dueTime(for: stationBlueBell) { (result) in
-//			switch result {
-//
-//				case .error(let message):
-//					XCTAssertEqual(message, "Error getting due times from internet: The operation couldn’t be completed. (luaswatch error 100.)")
-//					apiExpectation.fulfill()
-//
-//				case .success:
-//					XCTFail("did not expect success for this test case")
-//			}
-//		}
-//
-//		wait(for: [apiExpectation], timeout: 1)
-//	}
 }

@@ -133,7 +133,7 @@ private extension ComplicationController {
 		return CLKFullColorImageProvider(fullColorImage: UIImage(named: "IconRound (Complication)")!)
 	}
 
-	// swiftlint:disable:next cyclomatic_complexity function_body_length
+	// swiftlint:disable:next cyclomatic_complexity
 	func timelineEntry(for family: CLKComplicationFamily) -> CLKComplicationTimelineEntry? {
 
 		switch family {

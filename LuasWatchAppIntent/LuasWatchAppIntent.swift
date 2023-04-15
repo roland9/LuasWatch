@@ -100,7 +100,7 @@ extension TrainsByDirection {
                 .joined()
         }
 
-        if direction == .outbound || direction == .both  {
+        if direction == .outbound || direction == .both {
             output += outbound
                 .compactMap { $0.destinationDueTimeDescription + ".\n" }
                 .joined()

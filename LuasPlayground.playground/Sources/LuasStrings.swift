@@ -63,4 +63,4 @@ public struct LuasStrings {
 
 	public static let switchingDirectionsNotAllowedForOnewayStop = NSLocalizedString("Cannot switch directions for one-way stops", comment: "")
 }
-
+// swiftlint:enable line_length

@@ -7,6 +7,7 @@ public enum Result<T> {
 
 typealias JSONDictionary = [String: Any]
 
+// swiftlint:disable:next type_name
 public protocol API_deprecated {
 	static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void)
 }
@@ -94,6 +95,7 @@ public extension API_deprecated {
 	}
 }
 
+// swiftlint:disable:next type_name
 public struct LuasAPI_deprecated: API_deprecated {
 
 	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
@@ -109,6 +111,7 @@ public struct LuasAPI_deprecated: API_deprecated {
 	}
 }
 
+// swiftlint:disable:next type_name
 public struct LuasMockAPI_deprecated: API_deprecated {
 
 	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
@@ -137,7 +140,7 @@ public struct LuasMockAPI_deprecated: API_deprecated {
 				]
 		]
 
-		// swiftlint:disable force_try
+		// swiftlint:disable:next force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
 	}
 
@@ -155,8 +158,8 @@ public struct LuasMockEmptyAPI: API_deprecated {
 				"results": []
 		]
 
-		// swiftlint:disable force_try
-		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
+        // swiftlint:disable:next force_try
+        completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
 	}
 
 	public init() {

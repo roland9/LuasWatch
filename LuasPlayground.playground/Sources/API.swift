@@ -96,17 +96,13 @@ public extension API {
 
 public struct LuasAPI: API {
 
-	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
-		let url = URL(string: "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=\(stationId)&format=json")!
-		let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
-			completion(data, error)
-		}
-		dataTask.resume()
-	}
-
-	public init() {
-		//
-	}
+    public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
+        let url = URL(string: "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=\(stationId)&format=json")!
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
+            completion(data, error)
+        }
+        dataTask.resume()
+    }
 }
 
 public struct LuasMockAPI: API {
@@ -137,12 +133,8 @@ public struct LuasMockAPI: API {
 				]
 			]
 
-		// swiftlint:disable force_try
+		// swiftlint:disable:next force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
-	}
-
-	public init() {
-		//
 	}
 }
 
@@ -155,12 +147,8 @@ public struct LuasMockEmptyAPI: API {
 				"results": []
 			]
 
-		// swiftlint:disable force_try
+		// swiftlint:disable:next force_try
 		completion(try! JSONSerialization.data(withJSONObject: json, options: []), nil)
-	}
-
-	public init() {
-		//
 	}
 }
 
@@ -169,9 +157,5 @@ public struct LuasMockErrorAPI: API {
 	public static func getTrains(stationId: String, completion: @escaping (Data?, Error?) -> Void) {
 
 		completion(nil, NSError(domain: "luaswatch", code: 100, userInfo: nil))
-	}
-
-	public init() {
-		//
 	}
 }
