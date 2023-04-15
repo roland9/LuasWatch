@@ -43,11 +43,9 @@
 		AB57F0E5230B3C1900BA8B53 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* Models.swift */; };
 		AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D392308281100C73EF6 /* Location.swift */; };
-		AB57F0EC230B3C3F00BA8B53 /* API_deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D362308281100C73EF6 /* API_deprecated.swift */; };
 		AB57F0ED230B3C8600BA8B53 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D382308281100C73EF6 /* AppState.swift */; };
 		AB57F11D230B432E00BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F11F230B432E00BA8B53 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D392308281100C73EF6 /* Location.swift */; };
-		AB57F120230B432E00BA8B53 /* API_deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D362308281100C73EF6 /* API_deprecated.swift */; };
 		AB57F121230B432E00BA8B53 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* Models.swift */; };
 		AB57F122230B432E00BA8B53 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D382308281100C73EF6 /* AppState.swift */; };
 		AB57F133230B43AA00BA8B53 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
@@ -201,7 +199,6 @@
 		AB364D332308281000C73EF6 /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
 		AB364D342308281000C73EF6 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		AB364D352308281100C73EF6 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		AB364D362308281100C73EF6 /* API_deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API_deprecated.swift; sourceTree = "<group>"; };
 		AB364D382308281100C73EF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB364D392308281100C73EF6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		AB3E8BDA29E3078800F1AC7B /* LuasWatchiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatchiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -429,7 +426,6 @@
 				AB364D382308281100C73EF6 /* AppState.swift */,
 				AB364D342308281000C73EF6 /* Models.swift */,
 				AB364D392308281100C73EF6 /* Location.swift */,
-				AB364D362308281100C73EF6 /* API_deprecated.swift */,
 				AB50E3CA250D394800BFA30F /* API.swift */,
 				ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */,
 				AB50E3CC250D394800BFA30F /* API2Parser.swift */,
@@ -869,7 +865,6 @@
 				AB50E3CD250D394800BFA30F /* API.swift in Sources */,
 				AB55742823770C48007778DC /* Logging.swift in Sources */,
 				AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */,
-				AB57F0EC230B3C3F00BA8B53 /* API_deprecated.swift in Sources */,
 				AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */,
 				AB57F0ED230B3C8600BA8B53 /* AppState.swift in Sources */,
 				ABE5585A24E944C1008F3789 /* Direction.swift in Sources */,
@@ -887,7 +882,6 @@
 				AB2E18BD253C61580006F615 /* API.swift in Sources */,
 				ABAED72824DF61AF006FE91C /* Logging.swift in Sources */,
 				AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */,
-				AB57F120230B432E00BA8B53 /* API_deprecated.swift in Sources */,
 				AB2E18C3253C61600006F615 /* API2Parser.swift in Sources */,
 				AB2E18C9253C61690006F615 /* Parser.swift in Sources */,
 				AB57F121230B432E00BA8B53 /* Models.swift in Sources */,

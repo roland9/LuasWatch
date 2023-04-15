@@ -1,5 +1,12 @@
 import Foundation
 
+public enum Result<T> {
+    case error(String)
+    case success(T)
+}
+
+typealias JSONDictionary = [String: Any]
+
 public protocol API {
     static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection>
 }
