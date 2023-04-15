@@ -70,21 +70,17 @@ extension TrainStation {
 
     internal func loadTrainTimesFromAPI(direction: DirectionEnum) async -> String {
 
-        await withCheckedContinuation { (continuation: CheckedContinuation<String, Never>) in
+        let result = await LuasAPI.dueTimes(for: self)
 
-            LuasAPI2.dueTime(for: self) { (result) in
+        switch result {
+                // TODO need to test this!
+            case .failure(let apiError):
+                print("\(#function): \(apiError.localizedDescription)")
+                return apiError.localizedDescription.count > 0 ? apiError.localizedDescription : LuasStrings.errorGettingDueTimes
 
-                switch result {
-                    case .error(let error):
-                        print("\(#function): \(error)")
-                        continuation.resume(returning: error.count > 0 ? error :
-                                                LuasStrings.errorGettingDueTimes)
-
-                    case .success(let trains):
-                        print("\(#function): \(trains)")
-                        continuation.resume(returning: trains.shortcutOutput(direction))
-                }
-            }
+            case .success(let trains):
+                print("\(#function): \(trains)")
+                return trains.shortcutOutput(direction)
         }
     }
 }

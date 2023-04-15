@@ -1,14 +1,15 @@
 import Foundation
 
-public enum Result<T> {
-    case error(String)
-    case success(T)
+public enum ParserError: Error {
+    case invalidXML(String)
 }
 
-typealias JSONDictionary = [String: Any]
+public enum APIError: Error {
+    case noTrains(String), serverFailure(String), parserError(ParserError)
+}
 
 public protocol API {
-    static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection>
+    static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError>
 }
 
 protocol APIInternal: API {
@@ -17,16 +18,16 @@ protocol APIInternal: API {
 
 extension APIInternal {
 
-    public static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection> {
+    public static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError> {
 
         do {
             let data = try await getTrains(shortCode: trainStation.shortCode)
 
-            let result = API2Parser.parse(xml: data, for: trainStation)
+            let result = APIParser.parse(xml: data, for: trainStation)
 
             switch result {
-                case .error(let message):
-                    return .error(message)
+                case .failure(let message):
+                    return .failure(.parserError(message))
 
                 case .success(let trainsByDirection):
 
@@ -35,9 +36,9 @@ extension APIInternal {
 
                         // if we get message, we return that as an error
                         // otherwise we return an error: no trains
-                        return .error(trainsByDirection.message ??
+                        return .failure(.noTrains(trainsByDirection.message ??
                                       LuasStrings.noTrainsErrorMessage + "\n\n" +
-                                      LuasStrings.noTrainsFallbackExplanation)
+                                      LuasStrings.noTrainsFallbackExplanation))
 
                     } else {
                         return .success(trainsByDirection)
@@ -46,7 +47,8 @@ extension APIInternal {
 
         } catch {
 
-            return .error("Error getting results from server: \(error.localizedDescription)")
+            return .failure(.serverFailure(LuasStrings.noTrainsErrorMessage + "\n\n" +
+                                           LuasStrings.noTrainsFallbackExplanation))
         }
     }
 }

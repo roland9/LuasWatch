@@ -17,7 +17,7 @@
 		AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
 		AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
 		AB2E18BD253C61580006F615 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API.swift */; };
-		AB2E18C3253C61600006F615 /* API2Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* API2Parser.swift */; };
+		AB2E18C3253C61600006F615 /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* APIParser.swift */; };
 		AB2E18C9253C61690006F615 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CB250D394800BFA30F /* Parser.swift */; };
 		AB364D042308276C00C73EF6 /* LuasWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB364D032308276C00C73EF6 /* LuasWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB364D0A2308276D00C73EF6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB364D082308276D00C73EF6 /* Interface.storyboard */; };
@@ -36,7 +36,7 @@
 		AB3E8BE429E3078900F1AC7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3E8BE329E3078900F1AC7B /* Preview Assets.xcassets */; };
 		AB50E3CD250D394800BFA30F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API.swift */; };
 		AB50E3CE250D394800BFA30F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CB250D394800BFA30F /* Parser.swift */; };
-		AB50E3CF250D394800BFA30F /* API2Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* API2Parser.swift */; };
+		AB50E3CF250D394800BFA30F /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* APIParser.swift */; };
 		AB55742823770C48007778DC /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		AB57F0E1230B3C1900BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F0E4230B3C1900BA8B53 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
@@ -73,6 +73,8 @@
 		AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */; };
 		AB99CE8C24BA717600025521 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB99CE8B24BA717600025521 /* SnapshotTesting */; };
 		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
+		ABC02D3729EB1966008E175C /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */; };
+		ABC02D3829EB1971008E175C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API.swift */; };
 		ABC25BF324DF676A00F51EB4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* APITests.swift */; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
@@ -208,7 +210,7 @@
 		AB3E8BE329E3078900F1AC7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB50E3CA250D394800BFA30F /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB50E3CB250D394800BFA30F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		AB50E3CC250D394800BFA30F /* API2Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API2Parser.swift; sourceTree = "<group>"; };
+		AB50E3CC250D394800BFA30F /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		AB55742723770C48007778DC /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LuasKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB57F0DF230B3C1900BA8B53 /* LuasKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuasKit.h; sourceTree = "<group>"; };
@@ -425,13 +427,10 @@
 				AB57F0DF230B3C1900BA8B53 /* LuasKit.h */,
 				AB364D382308281100C73EF6 /* AppState.swift */,
 				AB364D342308281000C73EF6 /* Models.swift */,
-				AB364D392308281100C73EF6 /* Location.swift */,
-				AB50E3CA250D394800BFA30F /* API.swift */,
-				ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */,
-				AB50E3CC250D394800BFA30F /* API2Parser.swift */,
-				AB50E3CB250D394800BFA30F /* Parser.swift */,
-				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
 				ABE5585924E944C1008F3789 /* Direction.swift */,
+				AB364D392308281100C73EF6 /* Location.swift */,
+				ABC02D3629EB0DBA008E175C /* API */,
+				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
 				ABFB67BE2359122800906CD6 /* LuasExtensions.swift */,
 				AB55742723770C48007778DC /* Logging.swift */,
 				AB22502924DF650700ADA854 /* MyUserDefaults.swift */,
@@ -475,6 +474,17 @@
 				AB5C8B8026FFB9530097A7C4 /* TapOverlayView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		ABC02D3629EB0DBA008E175C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				AB50E3CA250D394800BFA30F /* API.swift */,
+				ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */,
+				AB50E3CC250D394800BFA30F /* APIParser.swift */,
+				AB50E3CB250D394800BFA30F /* Parser.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -818,6 +828,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */,
+				ABC02D3829EB1971008E175C /* API.swift in Sources */,
+				ABC02D3729EB1966008E175C /* LuasMockAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,7 +872,7 @@
 				AB50E3CE250D394800BFA30F /* Parser.swift in Sources */,
 				AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */,
-				AB50E3CF250D394800BFA30F /* API2Parser.swift in Sources */,
+				AB50E3CF250D394800BFA30F /* APIParser.swift in Sources */,
 				ABF215EB29EA1CBA00B1A77F /* LuasMockAPI.swift in Sources */,
 				AB50E3CD250D394800BFA30F /* API.swift in Sources */,
 				AB55742823770C48007778DC /* Logging.swift in Sources */,
@@ -882,7 +894,7 @@
 				AB2E18BD253C61580006F615 /* API.swift in Sources */,
 				ABAED72824DF61AF006FE91C /* Logging.swift in Sources */,
 				AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */,
-				AB2E18C3253C61600006F615 /* API2Parser.swift in Sources */,
+				AB2E18C3253C61600006F615 /* APIParser.swift in Sources */,
 				AB2E18C9253C61690006F615 /* Parser.swift in Sources */,
 				AB57F121230B432E00BA8B53 /* Models.swift in Sources */,
 				AB57F122230B432E00BA8B53 /* AppState.swift in Sources */,
@@ -1109,7 +1121,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
 			};
 			name = Debug;
 		};
@@ -1166,7 +1178,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
 			};
 			name = Release;
 		};

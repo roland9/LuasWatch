@@ -1,6 +1,6 @@
 import Foundation
 
-struct API2Parser {
+struct APIParser {
 
 	class MessageParser: NSObject, NodeParser {
 		var delegateStack: ParserDelegateStack?
@@ -105,7 +105,7 @@ struct API2Parser {
 		}
 	}
 
-	public static func parse(xml: Data, for trainStation: TrainStation) -> Result<TrainsByDirection> {
+	public static func parse(xml: Data, for trainStation: TrainStation) -> Result<TrainsByDirection, ParserError> {
 		let xmlParser = XMLParser(data: xml)
 		let delegateStack = ParserDelegateStack(xmlParser: xmlParser)
 		let stopInfoParser = StopInfoParser(trainStation: trainStation)
@@ -114,7 +114,7 @@ struct API2Parser {
 		if xmlParser.parse() {
 			return .success(stopInfoParser.result!)
 		} else {
-			return .error("Invalid xml: \(xmlParser.parserError?.localizedDescription ?? "")")
+            return .failure(.invalidXML("Invalid XML: \(xmlParser.parserError?.localizedDescription ?? "")"))
 		}
 	}
 }

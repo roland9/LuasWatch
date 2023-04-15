@@ -16,7 +16,7 @@ fileprivate extension TrainStations {
 
 let location = CLLocation(latitude: CLLocationDegrees(1.1), longitude: CLLocationDegrees(1.2))
 
-let stationBlueBell = TrainStation(stationId: "822GA00360",
+let stationBluebell = TrainStation(stationId: "822GA00360",
                                    stationIdShort: "LUAS8",
                                    shortCode: "BLU",
                                    route: .red,

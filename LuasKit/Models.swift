@@ -6,6 +6,8 @@
 import Foundation
 import CoreLocation
 
+typealias JSONDictionary = [String: Any]
+
 public enum Route: Int, Codable {
 	case red, green
 }

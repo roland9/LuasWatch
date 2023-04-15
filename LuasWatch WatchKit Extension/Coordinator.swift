@@ -172,11 +172,25 @@ extension Coordinator: LocationDelegate {
             DispatchQueue.main.async { [weak self] in
 
                 switch result {
-                    case .error(let error):
-                        print("\(#function): \(error)")
+
+                    case .failure(let apiError):
+                        print("\(#function): \(apiError)")
                         self?.trains = nil
-                        self?.appState.state = .errorGettingDueTimes(closestStation,
-                                                               error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+
+                        switch apiError {
+                            case .noTrains(let message):
+                                self?.appState.state =
+                                    .errorGettingDueTimes(closestStation,
+                                                          message.count > 0 ? message : LuasStrings.errorGettingDueTimes)
+                            case .serverFailure(let message):
+                                self?.appState.state =
+                                    .errorGettingDueTimes(closestStation,
+                                                          message.count > 0 ? message : LuasStrings.errorGettingDueTimes)
+                            case .parserError(let parserError):
+                                self?.appState.state =
+                                    .errorGettingDueTimes(closestStation,
+                                                          parserError.localizedDescription)
+                        }
 
                     case .success(let trains):
                         print("\(#function): \(trains)")

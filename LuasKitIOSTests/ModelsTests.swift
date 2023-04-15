@@ -16,7 +16,7 @@ class ModelsTests: XCTestCase {
         let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
         let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
 
-        let trains = TrainsByDirection(trainStation: stationBlueBell,
+        let trains = TrainsByDirection(trainStation: stationBluebell,
                                        inbound: [train3],
                                        outbound: [train1, train2])
 
@@ -29,7 +29,7 @@ class ModelsTests: XCTestCase {
     }
 
     func testClosestStation() {
-        let allStations = TrainStations(stations: [stationBlueBell, stationHarcourt])
+        let allStations = TrainStations(stations: [stationBluebell, stationHarcourt])
 
         var location = CLLocation(latitude: CLLocationDegrees(53.32928178728), longitude: CLLocationDegrees(-6.333825002759))
         XCTAssertEqual(allStations.closestStation(from: location)!.name, "Bluebell")
