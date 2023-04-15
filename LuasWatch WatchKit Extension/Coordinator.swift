@@ -8,6 +8,8 @@ import LuasKit
 
 class Coordinator: NSObject {
 
+    private let api = LuasAPI(apiWorker: RealAPIWorker())
+
 	private let appState: AppState
 	private var location: Location
 	private var timer: Timer?
@@ -167,7 +169,7 @@ extension Coordinator: LocationDelegate {
         //////////////////////////////////
         // step 3: get due times from API
         Task {
-            let result = await LuasAPI.dueTimes(for: closestStation)
+            let result = await api.dueTimes(for: closestStation)
 
             DispatchQueue.main.async { [weak self] in
 

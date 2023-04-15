@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct LuasMockAPI: API, APIInternal {
+struct MockAPIWorker: APIWorker {
 
     enum Scenario {
         case ranelaghTrains, noTrainsButMessage, noTrainsNoMessage // etc.
@@ -13,9 +13,9 @@ struct LuasMockAPI: API, APIInternal {
     }
 
     // in the unit test, we can define the scenario we want to test
-    static var scenario: Scenario = .ranelaghTrains
+    var scenario: Scenario = .ranelaghTrains
 
-    static func getTrains(shortCode: String) async throws -> Data {
+    func getTrains(shortCode: String) async throws -> Data {
 
         var xml: String
 

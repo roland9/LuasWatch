@@ -11,11 +11,21 @@ class APITests: XCTestCase {
 
     func testRealAPI() async {
 
-		let result = await LuasAPI.dueTimes(for: stationBluebell)
+        let api = LuasAPI(apiWorker: RealAPIWorker())
+        let result = await api.dueTimes(for: stationHarcourt)
 
         switch result {
 
             case .failure(let apiError):
+
+                switch apiError {
+                    case .noTrains(let message):
+                        print("noTrains: " + message)
+                    case .serverFailure(let message):
+                        print("serverFailure: " + message)
+                    case .parserError(let parserError):
+                        print("parserError: " + parserError.localizedDescription)
+                }
                 XCTFail("did not expect error: \(apiError.localizedDescription)")
 
             case .success(let trains):
@@ -25,8 +35,8 @@ class APITests: XCTestCase {
 
 	func testMockAPI_RanelaghTrains() async {
 
-        LuasMockAPI.scenario = .ranelaghTrains
-		let result = await LuasMockAPI.dueTimes(for: stationBluebell)
+        let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .ranelaghTrains))
+        let result = await api.dueTimes(for: stationHarcourt)
 
         switch result {
 
@@ -49,8 +59,8 @@ class APITests: XCTestCase {
 
     func testMockAPI_NoTrains() async {
 
-        LuasMockAPI.scenario = .noTrainsButMessage
-        let result = await LuasMockAPI.dueTimes(for: stationBluebell)
+        let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .noTrainsButMessage))
+        let result = await api.dueTimes(for: stationBluebell)
 
         switch result {
 
@@ -71,8 +81,8 @@ class APITests: XCTestCase {
 
     func testMockAPI_NoTrainsNoMessage() async {
 
-        LuasMockAPI.scenario = .noTrainsNoMessage
-        let result = await LuasMockAPI.dueTimes(for: stationBluebell)
+        let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .noTrainsNoMessage))
+        let result = await api.dueTimes(for: stationBluebell)
 
         switch result {
 
@@ -95,8 +105,8 @@ class APITests: XCTestCase {
 
     func testMockAPI_ServerError() async {
 
-        LuasMockAPI.scenario = .serverError
-        let result = await LuasMockAPI.dueTimes(for: stationBluebell)
+        let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .serverError))
+        let result = await api.dueTimes(for: stationBluebell)
 
         switch result {
 

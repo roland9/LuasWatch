@@ -1,4 +1,21 @@
+//
+//  Created by Roland Gropmair on 19/08/2019.
+//  Copyright © 2019 mApps.ie. All rights reserved.
+//
+
 import Foundation
+
+public protocol API {
+    var apiWorker: APIWorker { get set }
+
+    func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError>
+
+    init(apiWorker: APIWorker)
+}
+
+public protocol APIWorker {
+    func getTrains(shortCode: String) async throws -> Data
+}
 
 public enum ParserError: Error {
     case invalidXML(String)
@@ -8,20 +25,18 @@ public enum APIError: Error {
     case noTrains(String), serverFailure(String), parserError(ParserError)
 }
 
-public protocol API {
-    static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError>
-}
+public struct LuasAPI: API {
 
-protocol APIInternal: API {
-    static func getTrains(shortCode: String) async throws -> Data
-}
+    public var apiWorker: APIWorker
 
-extension APIInternal {
+    public init(apiWorker: APIWorker) {
+        self.apiWorker = apiWorker
+    }
 
-    public static func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError> {
+    public func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError> {
 
         do {
-            let data = try await getTrains(shortCode: trainStation.shortCode)
+            let data = try await apiWorker.getTrains(shortCode: trainStation.shortCode)
 
             let result = APIParser.parse(xml: data, for: trainStation)
 
@@ -37,9 +52,8 @@ extension APIInternal {
                         // if we get message, we return that as an error
                         // otherwise we return an error: no trains
                         return .failure(.noTrains(trainsByDirection.message ??
-                                      LuasStrings.noTrainsErrorMessage + "\n\n" +
-                                      LuasStrings.noTrainsFallbackExplanation))
-
+                                                  LuasStrings.noTrainsErrorMessage + "\n\n" +
+                                                  LuasStrings.noTrainsFallbackExplanation))
                     } else {
                         return .success(trainsByDirection)
                     }
@@ -53,14 +67,16 @@ extension APIInternal {
     }
 }
 
-public struct LuasAPI: API, APIInternal {
+public struct RealAPIWorker: APIWorker {
 
-    static func getTrains(shortCode: String) async throws -> Data {
+    public func getTrains(shortCode: String) async throws -> Data {
 
-		let url = URL(string: "https://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=\(shortCode)&encrypt=false")!
+        let url = URL(string: "https://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=\(shortCode)&encrypt=false")!
 
         let (data, _) = try await URLSession.shared.data(from: url)
 
         return data
-	}
+    }
+    
+    public init() {}
 }
