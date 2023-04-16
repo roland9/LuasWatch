@@ -13,9 +13,7 @@ class ParserTests: XCTestCase {
 
         let apiResponse = """
         <stopInfo created=\"2023-04-15T23:27:12\" stop=\"Beechwood\" stopAbv=\"BEE\">
-            <message>
-                No service Stephen’s Green – Beechwood. See news
-            </message>
+            <message>No service Stephen’s Green – Beechwood. See news</message>
             <direction name=\"Inbound\">
                 <tram destination=\"See news for information\" dueMins=\"\" />
             </direction>
@@ -26,6 +24,15 @@ class ParserTests: XCTestCase {
         """.data(using: .utf8)!
 
         let result = APIParser.parse(xml: apiResponse, for: stationBluebell)
-        print(result)
+
+        switch result {
+
+            case .success(let trains):
+                XCTAssertEqual(trains.inbound.count, 0)
+                XCTAssertEqual(trains.outbound.count, 0)
+                XCTAssertEqual(trains.message, "No service Stephen’s Green – Beechwood. See news")
+            case .failure:
+                XCTFail()
+        }
     }
 }
