@@ -5,8 +5,9 @@
 
 import Foundation
 
-public enum Direction: Int {
-	case both, inbound, outbound
+public enum Direction: Int, CaseIterable {
+
+    case both, inbound, outbound
 }
 
 extension Direction: CustomDebugStringConvertible {
@@ -45,7 +46,7 @@ extension Direction {
 		let userDefaults = UserDefaults.standard
 
 		if let directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int],
-		   let direction = directions[station] {
+			let direction = directions[station] {
 			return Direction(rawValue: direction)!
 		}
 

@@ -78,16 +78,16 @@ extension Location: CLLocationManagerDelegate {
 			nsError.code == CLError.Code.denied.rawValue {
 			delegate?.didFail(.locationAccessDenied)
 		} else if nsError.domain == kCLErrorDomain &&
-					nsError.code == CLError.Code.locationUnknown.rawValue {
+			nsError.code == CLError.Code.locationUnknown.rawValue {
 		} else {
 			delegate?.didFail(.locationManagerError(error))
 		}
 	}
 
 	public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		print("\(CLLocationManager.authorizationStatus())")
+		let authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
 
-		let authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+		print("\(#function): \(authorizationStatus)")
 
 		switch authorizationStatus {
 			case .denied, .notDetermined, .restricted:
@@ -125,7 +125,6 @@ extension Location: CLLocationManagerDelegate {
 		} else {
 			print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
 		}
-
 	}
 
 }

@@ -96,7 +96,6 @@ struct APIParser {
 				case "stopInfo":
 					// we don't need to parse that info; we hand that in based on the API call we're making for the station
                     if shouldLog { print("skip stopInfo") }
-					break
 
 				case "message":
 					delegateStack?.push(messageParser)

@@ -77,6 +77,6 @@ public struct RealAPIWorker: APIWorker {
 
         return data
     }
-    
+
     public init() {}
 }

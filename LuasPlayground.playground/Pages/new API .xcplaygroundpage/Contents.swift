@@ -12,23 +12,31 @@ let station = TrainStation(stationId: "stationId",
 						   name: "Beechwood",
 						   location: userLocation)
 
-switch await LuasAPI2.dueTimes(for: station) {
-    case .error(let message):
-        print(message)
-    case .success(let trains):
-        print(trains)
-}
+let realAPI = LuasAPI(apiWorker: RealAPIWorker())
+print(await realAPI.dueTimes(for: station))
 
-switch await LuasMockAPI2.dueTimes(for: station) {
-    case .error(let message):
-        print(message)
-    case .success(let trains):
-        print(trains)
-}
+let ranelaghMockAPI = LuasAPI(apiWorker: MockAPIWorker(scenario: .ranelaghTrains))
+print(await ranelaghMockAPI.dueTimes(for: station))
 
-switch await LuasMockEmptyAPI2.dueTimes(for: station) {
-    case .error(let message):
-        print(message)
-    case .success(let trains):
-        print(trains)
+let noTrainsMockAPI = LuasAPI(apiWorker: MockAPIWorker(scenario: .noTrainsButMessage))
+print(await noTrainsMockAPI.dueTimes(for: station))
+
+func print(_ result: Result<TrainsByDirection, APIError>) {
+
+    switch result {
+        case .failure(let apiError):
+            print("\(#function): \(apiError)")
+
+            switch apiError {
+                case .noTrains(let message):
+                    print(message)
+                case .serverFailure(let message):
+                    print(message)
+                case .parserError(let parserError):
+                    print(parserError)
+            }
+
+        case .success(let trains):
+            print("\(#function): \(trains)")
+    }
 }

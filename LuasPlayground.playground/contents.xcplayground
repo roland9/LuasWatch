@@ -3,7 +3,6 @@
     <pages>
         <page name='new API '/>
         <page name='new API - XML Parser'/>
-        <page name='deprecated RTPI API'/>
         <page name='reading Luas JSON file'/>
     </pages>
 </playground>
