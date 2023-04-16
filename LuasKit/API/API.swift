@@ -8,7 +8,7 @@ import Foundation
 public protocol API {
     var apiWorker: APIWorker { get set }
 
-    func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError>
+    func dueTimes(for trainStation: TrainStation) async throws -> TrainsByDirection
 
     init(apiWorker: APIWorker)
 }
@@ -17,12 +17,8 @@ public protocol APIWorker {
     func getTrains(shortCode: String) async throws -> Data
 }
 
-public enum ParserError: Error {
-    case invalidXML(String)
-}
-
 public enum APIError: Error {
-    case noTrains(String), serverFailure(String), parserError(ParserError)
+    case noTrains(String), invalidXML(String)
 }
 
 public struct LuasAPI: API {
@@ -33,36 +29,21 @@ public struct LuasAPI: API {
         self.apiWorker = apiWorker
     }
 
-    public func dueTimes(for trainStation: TrainStation) async -> Result<TrainsByDirection, APIError> {
+    public func dueTimes(for trainStation: TrainStation) async throws -> TrainsByDirection {
 
-        do {
-            let data = try await apiWorker.getTrains(shortCode: trainStation.shortCode)
+        let data = try await apiWorker.getTrains(shortCode: trainStation.shortCode)
 
-            let result = APIParser.parse(xml: data, for: trainStation)
+        let trainsByDirection = try APIParser.parse(xml: data, for: trainStation)
 
-            switch result {
-                case .failure(let message):
-                    return .failure(.parserError(message))
+        // success - but no trains!
+        if trainsByDirection.inbound.isEmpty && trainsByDirection.outbound.isEmpty {
 
-                case .success(let trainsByDirection):
-
-                    // success - but no trains!
-                    if trainsByDirection.inbound.isEmpty && trainsByDirection.outbound.isEmpty {
-
-                        // if we get message, we return that as an error
-                        // otherwise we return an error: no trains
-                        return .failure(.noTrains(trainsByDirection.message ??
-                                                  LuasStrings.noTrainsErrorMessage + "\n\n" +
-                                                  LuasStrings.noTrainsFallbackExplanation))
-                    } else {
-                        return .success(trainsByDirection)
-                    }
-            }
-
-        } catch {
-
-            return .failure(.serverFailure(LuasStrings.noTrainsErrorMessage + "\n\n" +
-                                           LuasStrings.noTrainsFallbackExplanation))
+            // if we get message, we return that as an error
+            // otherwise we return an error: no trains
+            throw APIError.noTrains(trainsByDirection.message ??
+                                    "\(LuasStrings.noTrainsErrorMessage)\n\n\(LuasStrings.noTrainsFallbackExplanation)")
+        } else {
+            return trainsByDirection
         }
     }
 }

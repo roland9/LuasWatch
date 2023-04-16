@@ -9,7 +9,7 @@ import XCTest
 
 class ParserTests: XCTestCase {
 
-    func testMessageParsing() {
+    func testMessageParsing() throws {
 
         let apiResponse = """
         <stopInfo created=\"2023-04-15T23:27:12\" stop=\"Beechwood\" stopAbv=\"BEE\">
@@ -23,16 +23,10 @@ class ParserTests: XCTestCase {
         </stopInfo>
         """.data(using: .utf8)!
 
-        let result = APIParser.parse(xml: apiResponse, for: stationBluebell)
+        let trainsByDirection = try APIParser.parse(xml: apiResponse, for: stationBluebell)
 
-        switch result {
-
-            case .success(let trains):
-                XCTAssertEqual(trains.inbound.count, 0)
-                XCTAssertEqual(trains.outbound.count, 0)
-                XCTAssertEqual(trains.message, "No service Stephen’s Green – Beechwood. See news")
-            case .failure:
-                XCTFail()
-        }
+        XCTAssertEqual(trainsByDirection.inbound.count, 0)
+        XCTAssertEqual(trainsByDirection.outbound.count, 0)
+        XCTAssertEqual(trainsByDirection.message, "No service Stephen’s Green – Beechwood. See news")
     }
 }

@@ -70,7 +70,8 @@ extension TrainStation {
 
     internal func loadTrainTimesFromAPI(direction: DirectionEnum) async -> String {
 
-        let result = await LuasAPI.dueTimes(for: self)
+        let api = LuasAPI(apiWorker: RealAPIWorker())
+        let result = await api.dueTimes(for: self)
 
         switch result {
                 // TODO need to test this!

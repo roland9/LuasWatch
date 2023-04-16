@@ -10,6 +10,7 @@ struct MockAPIWorker: APIWorker {
     enum Scenario {
         case ranelaghTrains, noTrainsButMessage, noTrainsNoMessage // etc.
         case serverError
+        case parserError
     }
 
     // in the unit test, we can define the scenario we want to test
@@ -68,13 +69,13 @@ struct MockAPIWorker: APIWorker {
                 """
 
             case .serverError:
-                throw LuasError.someServerError
+                throw NSError(domain: NSURLErrorDomain, code: NSURLErrorTimedOut)
+
+            case .parserError:
+                xml = "some invalid xml"
+                throw APIError.invalidXML(xml)
         }
 
         return (xml as NSString).data(using: String.Encoding.utf8.rawValue)!
-    }
-
-    enum LuasError: Error {
-        case someServerError
     }
 }

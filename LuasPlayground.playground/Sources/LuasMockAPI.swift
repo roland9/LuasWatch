@@ -5,17 +5,18 @@
 
 import Foundation
 
-public struct MockAPIWorker: APIWorker {
+struct MockAPIWorker: APIWorker {
 
-    public enum Scenario {
+    enum Scenario {
         case ranelaghTrains, noTrainsButMessage, noTrainsNoMessage // etc.
         case serverError
+        case parserError
     }
 
     // in the unit test, we can define the scenario we want to test
     var scenario: Scenario = .ranelaghTrains
 
-    public func getTrains(shortCode: String) async throws -> Data {
+    func getTrains(shortCode: String) async throws -> Data {
 
         var xml: String
 
@@ -68,17 +69,13 @@ public struct MockAPIWorker: APIWorker {
                 """
 
             case .serverError:
-                throw LuasError.someServerError
+                throw NSError(domain: NSURLErrorDomain, code: NSURLErrorTimedOut)
+
+            case .parserError:
+                xml = "some invalid xml"
+                throw APIError.invalidXML(xml)
         }
 
         return (xml as NSString).data(using: String.Encoding.utf8.rawValue)!
-    }
-
-    enum LuasError: Error {
-        case someServerError
-    }
-
-    public init(scenario: Scenario) {
-        self.scenario = scenario
     }
 }

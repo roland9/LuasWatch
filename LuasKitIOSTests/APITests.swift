@@ -9,120 +9,112 @@ import XCTest
 
 class APITests: XCTestCase {
 
-    func testRealAPI() async {
-
+    func testRealAPI() async throws {
         let api = LuasAPI(apiWorker: RealAPIWorker())
-        let result = await api.dueTimes(for: stationHarcourt)
 
-        switch result {
+        let trains = try await api.dueTimes(for: stationHarcourt)
 
-            case .failure(let apiError):
-
-                switch apiError {
-                    case .noTrains(let message):
-                        print("noTrains: " + message)
-                    case .serverFailure(let message):
-                        print("serverFailure: " + message)
-                    case .parserError(let parserError):
-                        print("parserError: " + parserError.localizedDescription)
-                }
-                XCTFail("did not expect error: \(apiError.localizedDescription)")
-
-            case .success(let trains):
-                XCTAssertEqual(trains.trainStation.name, "Bluebell")
-        }
+        XCTAssertEqual(trains.trainStation.name, "Harcourt")
 	}
 
-	func testMockAPI_RanelaghTrains() async {
-
+	func testMockAPI_RanelaghTrains() async throws {
         let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .ranelaghTrains))
-        let result = await api.dueTimes(for: stationHarcourt)
 
-        switch result {
+        let trains = try await api.dueTimes(for: stationHarcourt)
 
-            case .failure(let apiError):
-                XCTFail("did not expect error: \(apiError.localizedDescription)")
+        XCTAssertEqual(trains.inbound.count, 2)
+        XCTAssertEqual(trains.inbound[0], Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"))
+        XCTAssertEqual(trains.inbound[1], Train(destination: "Broombridge", direction: "Inbound", dueTime: "5"))
 
-            case .success(let trains):
-                XCTAssertEqual(trains.inbound.count, 2)
-                XCTAssertEqual(trains.inbound[0], Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due"))
-                XCTAssertEqual(trains.inbound[1], Train(destination: "Broombridge", direction: "Inbound", dueTime: "5"))
+        XCTAssertEqual(trains.outbound.count, 3)
+        XCTAssertEqual(trains.outbound[0], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"))
+        XCTAssertEqual(trains.outbound[1], Train(destination: "Sandyford", direction: "Outbound", dueTime: "9"))
+        XCTAssertEqual(trains.outbound[2], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "15"))
 
-                XCTAssertEqual(trains.outbound.count, 3)
-                XCTAssertEqual(trains.outbound[0], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "7"))
-                XCTAssertEqual(trains.outbound[1], Train(destination: "Sandyford", direction: "Outbound", dueTime: "9"))
-                XCTAssertEqual(trains.outbound[2], Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "15"))
-
-                XCTAssertEqual(trains.message, "Green Line services operating normally")
-		}
+        XCTAssertEqual(trains.message, "Green Line services operating normally")
 	}
 
     func testMockAPI_NoTrains() async {
-
         let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .noTrainsButMessage))
-        let result = await api.dueTimes(for: stationBluebell)
 
-        switch result {
+        do {
+            _ = try await api.dueTimes(for: stationHarcourt)
+            XCTFail("did expect an exception")
 
-            case .failure(let apiError):
+        } catch {
+
+            if let apiError = error as? APIError {
+
                 switch apiError {
                     case .noTrains(let message):
                         XCTAssertEqual(message, "Green Line services operating normally")
-                    case .serverFailure:
-                        XCTFail("did not expect this case")
-                    case .parserError:
-                        XCTFail("did not expect this case")
-                }
+                    default:
+                        XCTFail("unexpected case")
 
-            case .success(let trains):
-                XCTFail("did not expect trains \(trains)")
+                }
+            } else {
+                XCTFail("unexpected case")
+            }
         }
     }
 
     func testMockAPI_NoTrainsNoMessage() async {
-
         let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .noTrainsNoMessage))
-        let result = await api.dueTimes(for: stationBluebell)
 
-        switch result {
+        do {
+            _ = try await api.dueTimes(for: stationHarcourt)
+            XCTFail("did expect an exception")
 
-            case .failure(let apiError):
+        } catch {
+
+            if let apiError = error as? APIError {
+
                 switch apiError {
                     case .noTrains(let message):
-                        // no message from API: should have fallback message
                         XCTAssertEqual(message, "Couldn’t get any trains.\n\n" +
                                        "Either Luas is not operating, or there is a problem with the Luas website.")
-                    case .serverFailure:
-                        XCTFail("did not expect this case")
-                    case .parserError:
-                        XCTFail("did not expect this case")
+                    default:
+                        XCTFail("unexpected case")
                 }
-
-            case .success(let trains):
-                XCTFail("did not expect trains \(trains)")
+            } else {
+                XCTFail("unexpected error type")
+            }
         }
     }
 
     func testMockAPI_ServerError() async {
-
         let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .serverError))
-        let result = await api.dueTimes(for: stationBluebell)
 
-        switch result {
+        do {
+            _ = try await api.dueTimes(for: stationBluebell)
+            XCTFail("did expect an exception")
 
-            case .failure(let apiError):
+        } catch {
+
+            XCTAssertEqual((error as NSError), NSError(domain: NSURLErrorDomain, code: NSURLErrorTimedOut))
+        }
+    }
+
+    func testMockAPI_ParserErrorInvalidXML() async {
+        let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .parserError))
+
+        do {
+            _ = try await api.dueTimes(for: stationHarcourt)
+            XCTFail("did expect an exception")
+
+        } catch {
+
+            if let apiError = error as? APIError {
+
                 switch apiError {
-                    case .noTrains:
-                        XCTFail("did not expect this case")
-                    case .serverFailure(let message):
-                        XCTAssertEqual(message, "Couldn’t get any trains.\n\n" +
-                                       "Either Luas is not operating, or there is a problem with the Luas website.")
-                    case .parserError:
-                        XCTFail("did not expect this case")
+                    case .invalidXML(let message):
+                        XCTAssertEqual(message, "some invalid xml")
+                    default:
+                        XCTFail("unexpected case")
                 }
-
-            case .success(let trains):
-                XCTFail("did not expect trains \(trains)")
+            } else {
+                XCTFail("unexpected error type")
+            }
         }
     }
 }

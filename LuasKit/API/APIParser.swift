@@ -124,16 +124,17 @@ struct APIParser {
 		}
 	}
 
-	public static func parse(xml: Data, for trainStation: TrainStation) -> Result<TrainsByDirection, ParserError> {
+	public static func parse(xml: Data, for trainStation: TrainStation) throws -> TrainsByDirection {
 		let xmlParser = XMLParser(data: xml)
 		let delegateStack = ParserDelegateStack(xmlParser: xmlParser)
 		let stopInfoParser = StopInfoParser(trainStation: trainStation)
 		delegateStack.push(stopInfoParser)
 
 		if xmlParser.parse() {
-			return .success(stopInfoParser.result!)
+			return stopInfoParser.result!
 		} else {
-            return .failure(.invalidXML("Invalid XML: \(xmlParser.parserError?.localizedDescription ?? "")"))
+            throw APIError.invalidXML("Error parsing XML: " +
+                                      (xmlParser.parserError?.localizedDescription ?? ""))
 		}
 	}
 }

@@ -169,35 +169,40 @@ extension Coordinator: LocationDelegate {
         //////////////////////////////////
         // step 3: get due times from API
         Task {
-            let result = await api.dueTimes(for: closestStation)
 
-            DispatchQueue.main.async { [weak self] in
+            do {
+                let trains = try await api.dueTimes(for: closestStation)
 
-                switch result {
+                DispatchQueue.main.async { [weak self] in
 
-                    case .failure(let apiError):
-                        print("\(#function): \(apiError)")
-                        self?.trains = nil
+                    print("\(#function): got trains \(trains)")
+                    self?.trains = trains
+                    self?.appState.state = .foundDueTimes(trains, location)
+                }
+
+            } catch {
+
+                trains = nil
+                print("\(#function):  caught error \(error.localizedDescription)")
+
+                DispatchQueue.main.async { [weak self] in
+
+                    if let apiError = error as? APIError {
 
                         switch apiError {
                             case .noTrains(let message):
                                 self?.appState.state =
                                     .errorGettingDueTimes(closestStation,
                                                           message.count > 0 ? message : LuasStrings.errorGettingDueTimes)
-                            case .serverFailure(let message):
-                                self?.appState.state =
-                                    .errorGettingDueTimes(closestStation,
-                                                          message.count > 0 ? message : LuasStrings.errorGettingDueTimes)
-                            case .parserError(let parserError):
-                                self?.appState.state =
-                                    .errorGettingDueTimes(closestStation,
-                                                          parserError.localizedDescription)
-                        }
 
-                    case .success(let trains):
-                        print("\(#function): \(trains)")
-                        self?.trains = trains
-                        self?.appState.state = .foundDueTimes(trains, location)
+                            case .invalidXML:
+                                self?.appState.state =
+                                    .errorGettingDueTimes(closestStation, "Error reading server response")
+                        }
+                    } else {
+                        self?.appState.state =
+                            .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes)
+                    }
                 }
             }
         }
