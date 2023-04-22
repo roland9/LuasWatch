@@ -23,6 +23,6 @@
 	<key>NSLocationUsageDescription</key>
 	<string>Location access allows the app to find the closest LUAS stop</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>100</string>
 </dict>
 </plist>
