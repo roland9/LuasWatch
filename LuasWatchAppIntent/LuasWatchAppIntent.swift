@@ -8,6 +8,14 @@ import CoreLocation
 
 import LuasKitIOS
 
+struct LuasWatchShortCuts: AppShortcutsProvider {
+
+    @AppShortcutsBuilder
+    static var appShortcuts: [AppShortcut] {
+
+    }
+}
+
 enum DirectionEnum: String, CaseIterable, AppEnum {
 
     case both, inbound, outbound
@@ -70,18 +78,27 @@ extension TrainStation {
 
     internal func loadTrainTimesFromAPI(direction: DirectionEnum) async -> String {
 
-        let api = LuasAPI(apiWorker: RealAPIWorker())
-        let result = await api.dueTimes(for: self)
+        do {
+            let api = LuasAPI(apiWorker: RealAPIWorker())
 
-        switch result {
-                // TODO need to test this!
-            case .failure(let apiError):
-                print("\(#function): \(apiError.localizedDescription)")
-                return apiError.localizedDescription.count > 0 ? apiError.localizedDescription : LuasStrings.errorGettingDueTimes
+            let trains = try await api.dueTimes(for: self)
 
-            case .success(let trains):
-                print("\(#function): \(trains)")
-                return trains.shortcutOutput(direction)
+            return trains.shortcutOutput(direction)
+
+        } catch {
+
+            if let apiError = error as? APIError {
+
+                switch apiError {
+                    case .noTrains(let message):
+                        return message
+
+                    case .invalidXML:
+                        return "Error reading server response"
+                }
+            } else {
+                return "Error reading server response"
+            }
         }
     }
 }
