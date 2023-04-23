@@ -6,7 +6,15 @@
 import XCTest
 import CoreLocation
 
+#if os(iOS)
 @testable import LuasKitIOS
+#endif
+
+#if os(watchOS)
+@testable import LuasKit
+#endif
+
+// this test class is shared between LuasKitIOSTests and the WatchKitExtensionTests
 
 class ModelsTests: XCTestCase {
 
@@ -51,7 +59,7 @@ class ModelsTests: XCTestCase {
     }
 
     func testGreenLineStations() {
-        XCTAssertEqual(TrainStations.sharedFromFileForTests.greenLineStations.count, 35)
+         XCTAssertEqual(TrainStations.sharedFromFileForTests.greenLineStations.count, 35)
     }
 
     func testRedLineStations() {
@@ -106,16 +114,16 @@ class ModelsTests: XCTestCase {
                        Train(destination: "Bride's Glen", direction: "Outbound", dueTime: "14")],
             message: "Phibsborough lift works until 28/04/23. See news.")
 
-//        let output = trains.shortcutOutput()
-//        let expected =
-//            """
-//            Luas to Broombridge is Due.
-//            Luas to Broombridge in 12.
-//            Luas to Bride's Glen in 7.
-//            Luas to Bride's Glen in 14.
-//
-//            """
-//
-//        XCTAssertEqual(expected, output)
+        let output = trains.shortcutOutput(direction: .both)
+        let expected =
+                """
+                Luas to Broombridge is Due.
+                Luas to Broombridge in 12.
+                Luas to Bride's Glen in 7.
+                Luas to Bride's Glen in 14.
+
+                """
+
+        XCTAssertEqual(expected, output)
     }
 }

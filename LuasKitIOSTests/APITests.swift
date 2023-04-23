@@ -5,7 +5,29 @@
 
 import XCTest
 
+#if os(iOS)
 @testable import LuasKitIOS
+#endif
+
+#if os(watchOS)
+@testable import LuasKit
+#endif
+
+public struct WrongAPIWorker: APIWorker {
+
+    public func getTrains(shortCode: String) async throws -> Data {
+
+        let url = URL(string: "https://WRONGluasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=\(shortCode)&encrypt=false")!
+
+        let (data, _) = try await URLSession.shared.data(from: url)
+
+        return data
+    }
+
+    public init() {}
+}
+
+// this test class is shared between LuasKitIOSTests and the WatchKitExtensionTests
 
 class APITests: XCTestCase {
 
@@ -16,6 +38,17 @@ class APITests: XCTestCase {
 
         XCTAssertEqual(trains.trainStation.name, "Harcourt")
 	}
+
+    func testWrongAPI() async {
+        let api = LuasAPI(apiWorker: WrongAPIWorker())
+
+        do {
+            _ = try await api.dueTimes(for: stationHarcourt)
+            XCTFail("unexpected")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, "A server with the specified hostname could not be found.")
+        }
+    }
 
 	func testMockAPI_RanelaghTrains() async throws {
         let api = LuasAPI(apiWorker: MockAPIWorker(scenario: .ranelaghTrains))

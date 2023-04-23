@@ -6,7 +6,13 @@
 import Foundation
 import CoreLocation
 
+#if os(iOS)
 import LuasKitIOS
+#endif
+
+#if os(watchOS)
+import LuasKit
+#endif
 
 internal extension TrainStations {
     func station(named: String) -> TrainStation {

@@ -8,29 +8,16 @@ import CoreLocation
 
 import LuasKitIOS
 
-struct LuasWatchShortCuts: AppShortcutsProvider {
-
-    @AppShortcutsBuilder
-    static var appShortcuts: [AppShortcut] {
-
-        AppShortcut(intent: LuasWatchAppIntent(), phrases: ["\(.applicationName) Times",
-                                                            "LuasWatch Times",
-                                                            "Luas Times"])
-    }
-}
-
-enum DirectionEnum: String, CaseIterable, AppEnum {
-
-    case both, inbound, outbound
-
-    static var typeDisplayName: LocalizedStringResource = "Direction"
-
-    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Direction of the train (for stations that have both)")
-
-    public static var caseDisplayRepresentations: [DirectionEnum: DisplayRepresentation] {
-        [.inbound: "inbound trains", .outbound: "outbound trains", .both: "both directions"]
-    }
-}
+//struct LuasWatchShortCuts: AppShortcutsProvider {
+//
+//    @AppShortcutsBuilder
+//    static var appShortcuts: [AppShortcut] {
+//
+//        AppShortcut(intent: LuasWatchAppIntent(), phrases: ["\(.applicationName) Times",
+//                                                            "LuasWatch Times",
+//                                                            "Luas Times"])
+//    }
+//}
 
 struct LuasWatchAppIntent: AppIntent {
 
@@ -43,7 +30,7 @@ struct LuasWatchAppIntent: AppIntent {
     var luasStop: String
 
     @Parameter(title: "Train Direction (if Station has both)")
-    var direction: DirectionEnum
+    var direction: Direction
 
     private struct LuasStopOptionsProvider: DynamicOptionsProvider {
 
@@ -79,14 +66,14 @@ struct LuasWatchAppIntent: AppIntent {
 
 extension TrainStation {
 
-    internal func loadTrainTimesFromAPI(direction: DirectionEnum) async -> String {
+    internal func loadTrainTimesFromAPI(direction: Direction) async -> String {
 
         do {
             let api = LuasAPI(apiWorker: RealAPIWorker())
 
             let trains = try await api.dueTimes(for: self)
 
-            return trains.shortcutOutput(direction)
+            return trains.shortcutOutput(direction: direction)
 
         } catch {
 
@@ -104,26 +91,5 @@ extension TrainStation {
                 return "Error reading server response"
             }
         }
-    }
-}
-
-extension TrainsByDirection {
-
-    func shortcutOutput(_ direction: DirectionEnum) -> String {
-        var output = ""
-
-        if direction == .inbound || direction == .both {
-            output += inbound
-                .compactMap { $0.destinationDueTimeDescription + ".\n" }
-                .joined()
-        }
-
-        if direction == .outbound || direction == .both {
-            output += outbound
-                .compactMap { $0.destinationDueTimeDescription + ".\n" }
-                .joined()
-        }
-
-        return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
     }
 }

@@ -7,6 +7,7 @@ import CoreLocation
 import Combine
 
 public enum MyState {
+    
 	case gettingLocation
 	case errorGettingLocation(String)
 

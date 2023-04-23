@@ -41,12 +41,12 @@
 		AB57F0E1230B3C1900BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F0E4230B3C1900BA8B53 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB57F0E5230B3C1900BA8B53 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* Models.swift */; };
+		AB57F0EA230B3C3F00BA8B53 /* TrainsByDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* TrainsByDirection.swift */; };
 		AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D392308281100C73EF6 /* Location.swift */; };
 		AB57F0ED230B3C8600BA8B53 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D382308281100C73EF6 /* AppState.swift */; };
 		AB57F11D230B432E00BA8B53 /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB57F0DF230B3C1900BA8B53 /* LuasKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB57F11F230B432E00BA8B53 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D392308281100C73EF6 /* Location.swift */; };
-		AB57F121230B432E00BA8B53 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* Models.swift */; };
+		AB57F121230B432E00BA8B53 /* TrainsByDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D342308281000C73EF6 /* TrainsByDirection.swift */; };
 		AB57F122230B432E00BA8B53 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D382308281100C73EF6 /* AppState.swift */; };
 		AB57F133230B43AA00BA8B53 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
 		AB5C8B7F26FFB8770097A7C4 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C8B7E26FFB8770097A7C4 /* LoadingAnimationView.swift */; };
@@ -68,14 +68,24 @@
 		AB5EE5D629E45DCF00896798 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */; };
 		AB5EE5D829E45E5B00896798 /* TestDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */; };
 		AB6BF95029F5C75500CB4DAD /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
+		AB6BF95229F5D0F500CB4DAD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95129F5D0F500CB4DAD /* Route.swift */; };
+		AB6BF95429F5D10C00CB4DAD /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95329F5D10C00CB4DAD /* Train.swift */; };
+		AB6BF95629F5D13300CB4DAD /* TrainStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95529F5D13300CB4DAD /* TrainStation.swift */; };
+		AB6BF95729F5D13B00CB4DAD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95129F5D0F500CB4DAD /* Route.swift */; };
+		AB6BF95829F5D14000CB4DAD /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95329F5D10C00CB4DAD /* Train.swift */; };
+		AB6BF95929F5D14400CB4DAD /* TrainStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95529F5D13300CB4DAD /* TrainStation.swift */; };
+		AB6BF95B29F5D15E00CB4DAD /* TrainStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95A29F5D15E00CB4DAD /* TrainStations.swift */; };
+		AB6BF95C29F5D1DC00CB4DAD /* TrainStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6BF95A29F5D15E00CB4DAD /* TrainStations.swift */; };
+		AB6BF95E29F5D27000CB4DAD /* TestDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */; };
+		AB6BF95F29F5D33400CB4DAD /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D329E45A5300896798 /* ModelsTests.swift */; };
+		AB6BF96029F5D40800CB4DAD /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
+		AB6BF96129F5D47A00CB4DAD /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* APITests.swift */; };
 		AB6EF01429E4C199008CDAD2 /* AppIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EF01329E4C199008CDAD2 /* AppIntents.framework */; };
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */; };
 		AB99CE8C24BA717600025521 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB99CE8B24BA717600025521 /* SnapshotTesting */; };
 		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
-		ABC02D3729EB1966008E175C /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */; };
-		ABC02D3829EB1971008E175C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API.swift */; };
 		ABC02D3A29EB60D7008E175C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC02D3929EB60D7008E175C /* ParserTests.swift */; };
 		ABC25BF324DF676A00F51EB4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* APITests.swift */; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
@@ -201,7 +211,7 @@
 		AB364D222308277100C73EF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB364D242308277100C73EF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB364D332308281000C73EF6 /* JSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSON; sourceTree = "<group>"; };
-		AB364D342308281000C73EF6 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		AB364D342308281000C73EF6 /* TrainsByDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsByDirection.swift; sourceTree = "<group>"; };
 		AB364D352308281100C73EF6 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB364D382308281100C73EF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB364D392308281100C73EF6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -235,6 +245,10 @@
 		AB5EE5D329E45A5300896798 /* ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
 		AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
 		AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDefinitions.swift; sourceTree = "<group>"; };
+		AB6BF95129F5D0F500CB4DAD /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		AB6BF95329F5D10C00CB4DAD /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
+		AB6BF95529F5D13300CB4DAD /* TrainStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStation.swift; sourceTree = "<group>"; };
+		AB6BF95A29F5D15E00CB4DAD /* TrainStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStations.swift; sourceTree = "<group>"; };
 		AB6EF00929E4BC58008CDAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AB6EF00A29E4C060008CDAD2 /* AppIntents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppIntents.framework; path = System/Library/Frameworks/AppIntents.framework; sourceTree = SDKROOT; };
 		AB6EF01329E4C199008CDAD2 /* AppIntents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppIntents.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AppIntents.framework; sourceTree = DEVELOPER_DIR; };
@@ -341,10 +355,10 @@
 			children = (
 				ABBD74822657CCFD00D003EE /* LuasKitIOSTests.xctestplan */,
 				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
-				AB364D072308276D00C73EF6 /* LuasWatch WatchKit App */,
-				AB364D162308277000C73EF6 /* LuasWatch WatchKit Extension */,
 				AB57F0DE230B3C1900BA8B53 /* LuasKit */,
 				AB57F12F230B43AA00BA8B53 /* LuasKitIOSTests */,
+				AB364D072308276D00C73EF6 /* LuasWatch WatchKit App */,
+				AB364D162308277000C73EF6 /* LuasWatch WatchKit Extension */,
 				AB15B86E26868022005BF013 /* LuasWatchWatchKitExtensionTests */,
 				AB3E8BDB29E3078800F1AC7B /* LuasWatchiOS */,
 				AB05D26F29E453D400F9EDDE /* LuasWatchAppIntent */,
@@ -428,9 +442,8 @@
 			isa = PBXGroup;
 			children = (
 				AB57F0DF230B3C1900BA8B53 /* LuasKit.h */,
+				AB6BF95D29F5D21400CB4DAD /* Models */,
 				AB364D382308281100C73EF6 /* AppState.swift */,
-				AB364D342308281000C73EF6 /* Models.swift */,
-				ABE5585924E944C1008F3789 /* Direction.swift */,
 				AB364D392308281100C73EF6 /* Location.swift */,
 				ABC02D3629EB0DBA008E175C /* API */,
 				AB832B24232058BF005E1BB7 /* LuasStrings.swift */,
@@ -478,6 +491,19 @@
 				AB5C8B8026FFB9530097A7C4 /* TapOverlayView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		AB6BF95D29F5D21400CB4DAD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB6BF95129F5D0F500CB4DAD /* Route.swift */,
+				AB6BF95329F5D10C00CB4DAD /* Train.swift */,
+				AB6BF95529F5D13300CB4DAD /* TrainStation.swift */,
+				AB6BF95A29F5D15E00CB4DAD /* TrainStations.swift */,
+				ABE5585924E944C1008F3789 /* Direction.swift */,
+				AB364D342308281000C73EF6 /* TrainsByDirection.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		ABC02D3629EB0DBA008E175C /* API */ = {
@@ -741,6 +767,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6BF96029F5D40800CB4DAD /* JSON in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,9 +859,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6BF95E29F5D27000CB4DAD /* TestDefinitions.swift in Sources */,
+				AB6BF95F29F5D33400CB4DAD /* ModelsTests.swift in Sources */,
+				AB6BF96129F5D47A00CB4DAD /* APITests.swift in Sources */,
 				AB8B6D90268685E1002DC152 /* LuasWatchWatchKitExtensionTests.swift in Sources */,
-				ABC02D3829EB1971008E175C /* API.swift in Sources */,
-				ABC02D3729EB1966008E175C /* LuasMockAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,15 +902,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABFB67BF2359122800906CD6 /* LuasExtensions.swift in Sources */,
+				AB6BF95B29F5D15E00CB4DAD /* TrainStations.swift in Sources */,
 				AB50E3CE250D394800BFA30F /* Parser.swift in Sources */,
+				AB6BF95429F5D10C00CB4DAD /* Train.swift in Sources */,
 				AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F0EB230B3C3F00BA8B53 /* Location.swift in Sources */,
+				AB6BF95229F5D0F500CB4DAD /* Route.swift in Sources */,
 				AB50E3CF250D394800BFA30F /* APIParser.swift in Sources */,
 				ABF215EB29EA1CBA00B1A77F /* LuasMockAPI.swift in Sources */,
 				AB50E3CD250D394800BFA30F /* API.swift in Sources */,
 				AB55742823770C48007778DC /* Logging.swift in Sources */,
 				AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */,
-				AB57F0EA230B3C3F00BA8B53 /* Models.swift in Sources */,
+				AB6BF95629F5D13300CB4DAD /* TrainStation.swift in Sources */,
+				AB57F0EA230B3C3F00BA8B53 /* TrainsByDirection.swift in Sources */,
 				AB57F0ED230B3C8600BA8B53 /* AppState.swift in Sources */,
 				ABE5585A24E944C1008F3789 /* Direction.swift in Sources */,
 			);
@@ -893,15 +925,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABF215EC29EA1D0E00B1A77F /* LuasMockAPI.swift in Sources */,
+				AB6BF95C29F5D1DC00CB4DAD /* TrainStations.swift in Sources */,
 				ABFB67C02359122800906CD6 /* LuasExtensions.swift in Sources */,
+				AB6BF95829F5D14000CB4DAD /* Train.swift in Sources */,
 				AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */,
 				AB57F11F230B432E00BA8B53 /* Location.swift in Sources */,
+				AB6BF95729F5D13B00CB4DAD /* Route.swift in Sources */,
 				AB2E18BD253C61580006F615 /* API.swift in Sources */,
 				ABAED72824DF61AF006FE91C /* Logging.swift in Sources */,
 				AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */,
 				AB2E18C3253C61600006F615 /* APIParser.swift in Sources */,
 				AB2E18C9253C61690006F615 /* Parser.swift in Sources */,
-				AB57F121230B432E00BA8B53 /* Models.swift in Sources */,
+				AB6BF95929F5D14400CB4DAD /* TrainStation.swift in Sources */,
+				AB57F121230B432E00BA8B53 /* TrainsByDirection.swift in Sources */,
 				AB57F122230B432E00BA8B53 /* AppState.swift in Sources */,
 				ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */,
 			);
