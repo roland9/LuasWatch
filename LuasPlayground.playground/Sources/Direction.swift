@@ -10,8 +10,9 @@ public enum Direction: Int, CaseIterable {
     case both, inbound, outbound
 }
 
-extension Direction: CustomDebugStringConvertible {
-	public var debugDescription: String {
+extension Direction: CustomStringConvertible {
+
+    public var description: String {
 		return text()
 	}
 

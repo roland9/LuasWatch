@@ -19,7 +19,7 @@ extension LuasView {
 	internal func loadingAnimationView() -> some View {
 
 		VStack {
-			Text(self.appState.state.debugDescription)
+			Text(self.appState.state.description)
 				.multilineTextAlignment(.center)
 				.padding()
 

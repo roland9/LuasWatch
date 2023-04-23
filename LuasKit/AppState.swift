@@ -20,8 +20,9 @@ public enum MyState {
 	case updatingDueTimes(TrainsByDirection, CLLocation)
 }
 
-extension MyState: CustomDebugStringConvertible {
-	public var debugDescription: String {
+extension MyState: CustomStringConvertible {
+
+	public var description: String {
 		switch self {
 
 		case .gettingLocation:

@@ -33,7 +33,7 @@ extension Route {
 	}
 }
 
-public struct Train: CustomDebugStringConvertible, Hashable, Codable {
+public struct Train: CustomStringConvertible, Hashable, Codable {
 
 	public var id: String {
 		direction + dueTime
@@ -43,7 +43,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	public let direction: String
 	public let dueTime: String
 
-	public var debugDescription: String {
+	public var description: String {
 		"\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
 	}
 
@@ -63,7 +63,7 @@ public struct Train: CustomDebugStringConvertible, Hashable, Codable {
 	}
 }
 
-public struct TrainStation: CustomDebugStringConvertible {
+public struct TrainStation: CustomStringConvertible {
 
 	public enum StationType: String {
 		case twoway, oneway, terminal
@@ -77,7 +77,7 @@ public struct TrainStation: CustomDebugStringConvertible {
 	public let location: CLLocation
 	public let stationType: StationType
 
-	public var debugDescription: String {
+	public var description: String {
 		return "\n<\(stationIdShort)> \(name)  (\(location.coordinate.latitude)/\(location.coordinate.longitude))  type \(stationType)"
 	}
 
@@ -94,15 +94,15 @@ public struct TrainStation: CustomDebugStringConvertible {
 	}
 
 	public var isFinalStop: Bool {
-		.terminal == stationType
+		stationType == .terminal
 	}
 
 	public var isOneWayStop: Bool {
-		.oneway == stationType
+        stationType == .oneway
 	}
 
 	public var allowsSwitchingDirection: Bool {
-		.twoway == stationType
+        stationType == .twoway 
 	}
 
 	// will return nil if the distance is quite small, i.e. if the user is quite close to the station

@@ -35,7 +35,7 @@ struct LuasView: View {
 				loadingAnimationView()
 
 			case .errorGettingLocation:
-				Text(self.appState.state.debugDescription)
+				Text(self.appState.state.description)
 					.multilineTextAlignment(.center)
 					.frame(idealHeight: .greatestFiniteMagnitude)
 
@@ -46,11 +46,11 @@ struct LuasView: View {
 
 					// we do get location here in this enum as well, but we ignore it in the UI
 			case .gettingDueTimes:
-				Text(self.appState.state.debugDescription)
+				Text(self.appState.state.description)
 					.multilineTextAlignment(.center)
 
 				// bit confusing: this enum has second parameter 'errorString', but it's not shown here
-				// because it's surfaced via the appState's `debugDescription`
+				// because it's surfaced via the appState's `description`
 			case .errorGettingDueTimes(let trainStation, _):
 
 				ScrollView {
@@ -60,7 +60,7 @@ struct LuasView: View {
 
 						Spacer(minLength: 20)
 
-						Text(self.appState.state.debugDescription)
+						Text(self.appState.state.description)
 							.multilineTextAlignment(.center)
 
 						ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
