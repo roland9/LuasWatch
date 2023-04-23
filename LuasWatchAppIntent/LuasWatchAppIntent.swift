@@ -13,6 +13,9 @@ struct LuasWatchShortCuts: AppShortcutsProvider {
     @AppShortcutsBuilder
     static var appShortcuts: [AppShortcut] {
 
+        AppShortcut(intent: LuasWatchAppIntent(), phrases: ["\(.applicationName) Times",
+                                                            "LuasWatch Times",
+                                                            "Luas Times"])
     }
 }
 
@@ -89,6 +92,7 @@ extension TrainStation {
 
             if let apiError = error as? APIError {
 
+                //  TODO need to test this - does it say cryptic error message!
                 switch apiError {
                     case .noTrains(let message):
                         return message
