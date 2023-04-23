@@ -8,7 +8,7 @@ import CoreLocation
 
 import LuasKitIOS
 
-fileprivate extension TrainStations {
+internal extension TrainStations {
     func station(named: String) -> TrainStation {
         stations.filter({ $0.name == named }).first!
     }

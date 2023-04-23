@@ -132,41 +132,45 @@ public struct TrainStations {
 
 	public let stations: [TrainStation]
 
-	public static let sharedFromFile = TrainStations.fromFile()
+	public static let sharedFromFile = Self.fromFile()
 
 	private static func fromFile() -> TrainStations {
 		TrainStations(fromFile: "luasStops")
 	}
 
-	private init(fromFile fileName: String) {
-		guard
-			let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
-			let data = try? Data(contentsOf: luasStopsFile),
-			let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
-			let stationsArray = json["stations"] as? [JSONDictionary]
-			else { fatalError("could not parse JSON file") }
+    fileprivate static func trainStations(from stationsArray: [JSONDictionary]) -> [TrainStation] {
+        // swiftlint:disable force_cast
+        stationsArray.compactMap { (station) in
 
-		// swiftlint:disable force_cast
-		stations = stationsArray.compactMap { (station) in
+            var stationTypeValue: TrainStation.StationType = .twoway
 
-			var stationTypeValue: TrainStation.StationType = .twoway
+            if let stationTypeString = station["type"] as? String,
+               let stationType = TrainStation.StationType(rawValue: stationTypeString) {
+                stationTypeValue = stationType
+            }
 
-			if let stationTypeString = station["type"] as? String,
-				let stationType = TrainStation.StationType(rawValue: stationTypeString) {
-				stationTypeValue = stationType
-			}
+            return TrainStation(stationId: station["stationId"] as! String,
+                                stationIdShort: station["stationIdShort"] as! String,
+                                shortCode: station["shortCode"] as! String,
+                                route: Route(station["route"] as! String)!,
+                                name: station["name"] as! String,
+                                location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
+                                                     longitude: CLLocationDegrees(station["long"] as! Double)),
+                                stationType: stationTypeValue)
+        }
+        // swiftlint:enable force_cast
+    }
 
-			return TrainStation(stationId: station["stationId"] as! String,
-								stationIdShort: station["stationIdShort"] as! String,
-								shortCode: station["shortCode"] as! String,
-								route: Route(station["route"] as! String)!,
-								name: station["name"] as! String,
-								location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
-													 longitude: CLLocationDegrees(station["long"] as! Double)),
-								stationType: stationTypeValue)
-		}
-		// swiftlint:enable force_cast
-	}
+    private init(fromFile fileName: String) {
+        guard
+            let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
+            let data = try? Data(contentsOf: luasStopsFile),
+            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
+            let stationsArray = json["stations"] as? [JSONDictionary]
+        else { fatalError("could not parse JSON file") }
+
+        self.stations = Self.trainStations(from: stationsArray)
+    }
 
 	public init(stations: [TrainStation]) {
 		self.stations = stations
@@ -216,6 +220,23 @@ public struct TrainStations {
 				return closestStation(from: location, stations: greenLineStations)
 		}
 	}
+
+#if DEBUG
+    // for Unit Tests only
+    public static let sharedFromFileForTests = Self.fromFileForTests()
+
+    private static func fromFileForTests() -> TrainStations {
+        guard
+            let luasStopsFile = Bundle(identifier: "ie.mapps.LuasKitIOSTests")!
+                .url(forResource: "JSON/luasStops", withExtension: "json"),
+            let data = try? Data(contentsOf: luasStopsFile),
+            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
+            let stationsArray = json["stations"] as? [JSONDictionary]
+        else { fatalError("could not parse JSON file") }
+
+        return TrainStations(stations: trainStations(from: stationsArray))
+    }
+#endif
 }
 
 public struct TrainsByDirection {

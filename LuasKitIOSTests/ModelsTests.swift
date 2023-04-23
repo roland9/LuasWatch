@@ -28,6 +28,36 @@ class ModelsTests: XCTestCase {
         XCTAssertEqual(trains.outbound[1].dueTimeDescription, "Broombridge: 9 mins")
     }
 
+    func testDestinationDueTimeDescription() {
+        let train1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "DUE")
+        let train2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
+        let train3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
+
+        let trains = TrainsByDirection(trainStation: stationBluebell,
+                                       inbound: [train3],
+                                       outbound: [train1, train2])
+
+        XCTAssertEqual(trains.inbound.count, 1)
+        XCTAssertEqual(trains.inbound[0].destinationDueTimeDescription, "Luas to LUAS Sandyford in 12")
+
+        XCTAssertEqual(trains.outbound.count, 2)
+        XCTAssertEqual(trains.outbound[0].destinationDueTimeDescription, "Luas to LUAS Broombridge is Due")
+        XCTAssertEqual(trains.outbound[1].destinationDueTimeDescription, "Luas to LUAS Broombridge in 9")
+    }
+
+    func testIsFinalStop() {
+        XCTAssertFalse(TrainStations.sharedFromFileForTests.station(named: "Harcourt").isFinalStop)
+        XCTAssertTrue(TrainStations.sharedFromFileForTests.station(named: "Broombridge").isFinalStop)
+    }
+
+    func testGreenLineStations() {
+        XCTAssertEqual(TrainStations.sharedFromFileForTests.greenLineStations.count, 35)
+    }
+
+    func testRedLineStations() {
+        XCTAssertEqual(TrainStations.sharedFromFileForTests.redLineStations.count, 32)
+    }
+
     func testClosestStation() {
         let allStations = TrainStations(stations: [stationBluebell, stationHarcourt])
 
@@ -39,6 +69,10 @@ class ModelsTests: XCTestCase {
 
         location = CLLocation(latitude: CLLocationDegrees(53.1), longitude: CLLocationDegrees(-6.333))
         XCTAssertNil(allStations.closestStation(from: location))
+
+        location = CLLocation(latitude: CLLocationDegrees(53.329), longitude: CLLocationDegrees(-6.333))
+        XCTAssertEqual(allStations.closestStation(from: location, route: .red)!.name, "Bluebell")
+        XCTAssertEqual(allStations.closestStation(from: location, route: .green)!.name, "Harcourt")
     }
 
     func testDistanceFromUserLocation() {

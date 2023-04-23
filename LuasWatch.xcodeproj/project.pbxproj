@@ -67,6 +67,7 @@
 		AB5EE5D429E45A5300896798 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D329E45A5300896798 /* ModelsTests.swift */; };
 		AB5EE5D629E45DCF00896798 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D529E45DCF00896798 /* SnapshotTests.swift */; };
 		AB5EE5D829E45E5B00896798 /* TestDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EE5D729E45E5B00896798 /* TestDefinitions.swift */; };
+		AB6BF95029F5C75500CB4DAD /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
 		AB6EF01429E4C199008CDAD2 /* AppIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EF01329E4C199008CDAD2 /* AppIntents.framework */; };
 		AB832B25232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
 		AB832B26232058BF005E1BB7 /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB832B24232058BF005E1BB7 /* LuasStrings.swift */; };
@@ -789,6 +790,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6BF95029F5C75500CB4DAD /* JSON in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
