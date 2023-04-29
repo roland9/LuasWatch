@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB04B77829FD700700FB5B3C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04B77729FD700700FB5B3C /* ParserTests.swift */; };
 		AB22502624DF63E500ADA854 /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D172308277000C73EF6 /* LuasView.swift */; };
 		AB22502A24DF650700ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
 		AB22502B24DF650D00ADA854 /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22502924DF650700ADA854 /* MyUserDefaults.swift */; };
@@ -144,6 +145,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB04B77729FD700700FB5B3C /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		AB15B86D26868022005BF013 /* LuasWatchWatchKitExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasWatchWatchKitExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB15B86F26868022005BF013 /* LuasWatchWatchKitExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchWatchKitExtensionTests.swift; sourceTree = "<group>"; };
 		AB15B87126868022005BF013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC25BF224DF676A00F51EB4 /* LuasKitIOSTests.swift */,
+				AB04B77729FD700700FB5B3C /* ParserTests.swift */,
 				AB57F132230B43AA00BA8B53 /* Info.plist */,
 			);
 			path = LuasKitIOSTests;
@@ -742,6 +745,7 @@
 				AB5D908127A71039006C621F /* LoadingAnimationView.swift in Sources */,
 				AB22502624DF63E500ADA854 /* LuasView.swift in Sources */,
 				AB5D908627A7107A006C621F /* TapOverlayView.swift in Sources */,
+				AB04B77829FD700700FB5B3C /* ParserTests.swift in Sources */,
 				ABC25BF324DF676A00F51EB4 /* LuasKitIOSTests.swift in Sources */,
 				AB5D908327A71062006C621F /* TrainsListView.swift in Sources */,
 				AB5D908227A7105C006C621F /* HeaderView.swift in Sources */,
