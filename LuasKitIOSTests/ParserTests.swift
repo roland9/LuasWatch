@@ -11,6 +11,9 @@ class ParserTests: XCTestCase {
 
     func testMessageParsing() {
 
+        // Apr 2023: looks like they fixed the XML now, escaping the apostrophe, so this fix is not that urgent anymore:
+        // <message>No service Stephen\'s Green - Beechwood. See news</message>
+
         let apiResponse = """
         <stopInfo created=\"2023-04-15T23:27:12\" stop=\"Beechwood\" stopAbv=\"BEE\">
             <message>No service Stephen’s Green – Beechwood. See news</message>
@@ -29,7 +32,7 @@ class ParserTests: XCTestCase {
         switch result {
 
             case .error:
-                XCTFail()
+                XCTFail("unexpected error")
 
             case .success(let trains):
                 XCTAssertEqual(trains.inbound.count, 0)
