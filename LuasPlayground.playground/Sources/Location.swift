@@ -6,125 +6,126 @@
 import CoreLocation
 
 public protocol LocationDelegate: AnyObject {
-	func didFail(_ error: LocationDelegateError)
-	func didGetLocation(_ location: CLLocation)
+    func didFail(_ error: LocationDelegateError)
+    func didGetLocation(_ location: CLLocation)
 }
 
 public enum LocationDelegateError {
-	case locationServicesNotEnabled
-	case locationAccessDenied
-	case locationManagerError(Error)
-	case authStatus(CLAuthorizationStatus)
+    case locationServicesNotEnabled
+    case locationAccessDenied
+    case locationManagerError(Error)
+    case authStatus(CLAuthorizationStatus)
 }
 
 enum LocationState {
-	case initializing, gettingLocation, stoppedUpdatingLocation, error
+    case initializing, gettingLocation, stoppedUpdatingLocation, error
 }
 
 public class Location: NSObject {
 
-	public weak var delegate: LocationDelegate?
+    public weak var delegate: LocationDelegate?
 
-	var state: LocationState = .initializing
+    var state: LocationState = .initializing
 
-	let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
 
-	public override init() {}
+    public override init() {}
 
-	public func start() {
+    public func start() {
 
-		// start getting location
-		locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        // start getting location
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 
-		if CLLocationManager.locationServicesEnabled() {
-			print("\(#function): services enabled")
+        if CLLocationManager.locationServicesEnabled() {
+            print("\(#function): services enabled")
 
-			locationManager.requestWhenInUseAuthorization()
-			locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.delegate = self
 
-			state = .gettingLocation
-			locationManager.startUpdatingLocation()
+            state = .gettingLocation
+            locationManager.startUpdatingLocation()
 
-		} else {
-			print("\(#function): services NOT enabled")
+        } else {
+            print("\(#function): services NOT enabled")
 
-			state = .error
-			delegate?.didFail(.locationServicesNotEnabled)
-		}
-	}
+            state = .error
+            delegate?.didFail(.locationServicesNotEnabled)
+        }
+    }
 
-	public func update() {
-		if (state == .stoppedUpdatingLocation || state == .error) &&
-			CLLocationManager.locationServicesEnabled() {
+    public func update() {
+        if (state == .stoppedUpdatingLocation || state == .error) &&
+            CLLocationManager.locationServicesEnabled() {
 
-			locationManager.requestWhenInUseAuthorization()
-			locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.delegate = self
 
-			state = .gettingLocation
-			locationManager.startUpdatingLocation()
-		}
-	}
+            state = .gettingLocation
+            locationManager.startUpdatingLocation()
+        }
+    }
 }
 
 extension Location: CLLocationManagerDelegate {
 
-	public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-		print("\(#function): \(error)")
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("\(#function): \(error)")
 
-		state = .error
-		let nsError = error as NSError
+        state = .error
+        let nsError = error as NSError
 
-		if nsError.domain == kCLErrorDomain &&
-			nsError.code == CLError.Code.denied.rawValue {
-			delegate?.didFail(.locationAccessDenied)
-		} else if nsError.domain == kCLErrorDomain &&
-			nsError.code == CLError.Code.locationUnknown.rawValue {
-		} else {
-			delegate?.didFail(.locationManagerError(error))
-		}
-	}
+        if nsError.domain == kCLErrorDomain &&
+            nsError.code == CLError.Code.denied.rawValue {
+            delegate?.didFail(.locationAccessDenied)
+        } else if nsError.domain == kCLErrorDomain &&
+            nsError.code == CLError.Code.locationUnknown.rawValue {
+        } else {
+            delegate?.didFail(.locationManagerError(error))
+        }
+    }
 
-	public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		let authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        let authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
 
-		print("\(#function): \(authorizationStatus)")
+        print("\(#function): \(authorizationStatus)")
 
-		switch authorizationStatus {
-			case .denied, .notDetermined, .restricted:
-				delegate?.didFail(.authStatus(authorizationStatus))
-			case .authorizedAlways:
-				print("authorizedAlways")
-			case .authorizedWhenInUse:
-				print("authorizedWhenInUse")
-			@unknown default:
-				print("default")
-		}
-	}
+        switch authorizationStatus {
+            case .denied, .notDetermined, .restricted:
+                delegate?.didFail(.authStatus(authorizationStatus))
+            case .authorizedAlways:
+                print("authorizedAlways")
+            case .authorizedWhenInUse:
+                print("authorizedWhenInUse")
+            @unknown default:
+                print("default")
+        }
+    }
 
-	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		print("\(#function): \(locations)")
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("\(#function): \(locations)")
 
-		let lastLocation = locations.last!
+        let lastLocation = locations.last!
 
-		// TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later
+        // TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later
 
-		let howRecent = lastLocation.timestamp.timeIntervalSinceNow
+        let howRecent = lastLocation.timestamp.timeIntervalSinceNow
 
-		if abs(howRecent) < 15.0 {
-			// TODO we should kill previous API requests if there is a newer location
-			delegate?.didGetLocation(lastLocation)
+        if abs(howRecent) < 15.0 {
 
-			if lastLocation.horizontalAccuracy < 100 &&
-				lastLocation.verticalAccuracy < 100 {
-				print("\(#function): last location quite precise -> stopping location updates for now")
+            // we should kill previous API requests if there is a newer location
+            delegate?.didGetLocation(lastLocation)
 
-				state = .stoppedUpdatingLocation
-				locationManager.stopUpdatingLocation()
-			}
+            if lastLocation.horizontalAccuracy < 100 &&
+                lastLocation.verticalAccuracy < 100 {
+                print("\(#function): last location quite precise -> stopping location updates for now")
 
-		} else {
-			print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
-		}
-	}
+                state = .stoppedUpdatingLocation
+                locationManager.stopUpdatingLocation()
+            }
+
+        } else {
+            print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
+        }
+    }
 
 }

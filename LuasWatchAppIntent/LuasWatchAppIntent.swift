@@ -8,7 +8,8 @@ import CoreLocation
 
 import LuasKitIOS
 
-//struct LuasWatchShortCuts: AppShortcutsProvider {
+#warning("do we need that?")
+// struct LuasWatchShortCuts: AppShortcutsProvider {
 //
 //    @AppShortcutsBuilder
 //    static var appShortcuts: [AppShortcut] {
@@ -17,7 +18,7 @@ import LuasKitIOS
 //                                                            "LuasWatch Times",
 //                                                            "Luas Times"])
 //    }
-//}
+// }
 
 struct LuasWatchAppIntent: AppIntent {
 

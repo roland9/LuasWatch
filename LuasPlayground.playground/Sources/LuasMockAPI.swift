@@ -16,6 +16,7 @@ struct MockAPIWorker: APIWorker {
     // in the unit test, we can define the scenario we want to test
     var scenario: Scenario = .ranelaghTrains
 
+    // swiftlint:disable:next function_body_length
     func getTrains(shortCode: String) async throws -> Data {
 
         var xml: String

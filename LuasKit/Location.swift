@@ -111,7 +111,8 @@ extension Location: CLLocationManagerDelegate {
 		let howRecent = lastLocation.timestamp.timeIntervalSinceNow
 
 		if abs(howRecent) < 15.0 {
-			// TODO we should kill previous API requests if there is a newer location
+
+            // we should kill previous API requests if there is a newer location
 			delegate?.didGetLocation(lastLocation)
 
 			if lastLocation.horizontalAccuracy < 100 &&

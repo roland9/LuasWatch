@@ -57,7 +57,8 @@ struct APIParser {
                 if // let destination = attributeDict["destination"],
                     let dueMins = attributeDict["dueMins"] {
                     if description != "No trams forecast" && dueMins != "" {
-                        let train = Train(destination: attributeDict["destination"]!, direction: direction, dueTime: attributeDict["dueMins"]!)
+                        let train = Train(destination: attributeDict["destination"]!,
+                                          direction: direction, dueTime: attributeDict["dueMins"]!)
                         result?.append(train)
                     }
                 }
