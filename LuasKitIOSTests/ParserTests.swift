@@ -1,5 +1,5 @@
 //
-//  Created by Roland Gropmair on 15/04/2023.
+//  Created by Roland Gropmair on 29/04/2023.
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
@@ -10,6 +10,9 @@ import XCTest
 class ParserTests: XCTestCase {
 
     func testMessageParsing() throws {
+
+        // Apr 2023: looks like they fixed the XML now, escaping the apostrophe, so this fix is not that urgent anymore:
+        // <message>No service Stephen\'s Green - Beechwood. See news</message>
 
         let apiResponse = """
         <stopInfo created=\"2023-04-15T23:27:12\" stop=\"Beechwood\" stopAbv=\"BEE\">
