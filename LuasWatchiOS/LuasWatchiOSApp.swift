@@ -10,8 +10,8 @@ import LuasKitIOS
 struct LuasWatchiOSApp: App {
     @Environment(\.scenePhase) var scenePhase
 
+    static let appState = AppState()
     let coordinator: Coordinator = {
-        let appState = AppState()
         let location = Location()
 
         let coord = Coordinator(appState: appState, location: location)
@@ -22,7 +22,8 @@ struct LuasWatchiOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LuasView()
+                .environmentObject(Self.appState)
         }
         .onChange(of: scenePhase) { phase in
 

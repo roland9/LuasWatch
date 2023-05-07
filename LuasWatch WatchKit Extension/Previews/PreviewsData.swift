@@ -4,7 +4,15 @@
 //
 
 import SwiftUI
+import CoreLocation
+
+#if os(iOS)
+import LuasKitIOS
+#endif
+
+#if os(watchOS)
 import LuasKit
+#endif
 
 #if DEBUG
 
@@ -19,7 +27,7 @@ let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",
 							  shortCode: "BLU",
 							  route: .red,
-							  name: "Trinity Luas Stop",
+							  name: "Bluebell Luas Stop",
 							  location: location)
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
