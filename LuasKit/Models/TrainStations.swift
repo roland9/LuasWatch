@@ -40,8 +40,11 @@ public struct TrainStations {
     }
 
     private init(fromFile fileName: String) {
+        let identifier = "ie.mapps.LuasKit"
+
         guard
-            let luasStopsFile = Bundle.main.url(forResource: "JSON/" + fileName, withExtension: "json"),
+            let luasStopsFile = Bundle(identifier: identifier)?
+                .url(forResource: fileName, withExtension: "json"),
             let data = try? Data(contentsOf: luasStopsFile),
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
             let stationsArray = json["stations"] as? [JSONDictionary]
@@ -98,30 +101,4 @@ public struct TrainStations {
                 return closestStation(from: location, stations: greenLineStations)
         }
     }
-
-#if DEBUG
-    // for Unit Tests only
-    public static let sharedFromFileForTests = Self.fromFileForTests()
-
-    private static func fromFileForTests() -> TrainStations {
-
-#if os(iOS)
-        let identifier = "ie.mapps.LuasKitIOSTests"
-#endif
-
-#if os(watchOS)
-        let identifier = "ie.mapps.LuasWatchWatchKitExtensionTests"
-#endif
-
-        guard
-            let luasStopsFile = Bundle(identifier: identifier)!
-                .url(forResource: "JSON/luasStops", withExtension: "json"),
-            let data = try? Data(contentsOf: luasStopsFile),
-            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
-            let stationsArray = json["stations"] as? [JSONDictionary]
-        else { fatalError("could not parse JSON file") }
-
-        return TrainStations(stations: trainStations(from: stationsArray))
-    }
-#endif
 }

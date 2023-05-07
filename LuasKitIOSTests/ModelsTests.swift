@@ -54,16 +54,16 @@ class ModelsTests: XCTestCase {
     }
 
     func testIsFinalStop() {
-        XCTAssertFalse(TrainStations.sharedFromFileForTests.station(named: "Harcourt").isFinalStop)
-        XCTAssertTrue(TrainStations.sharedFromFileForTests.station(named: "Broombridge").isFinalStop)
+        XCTAssertFalse(TrainStations.sharedFromFile.station(named: "Harcourt").isFinalStop)
+        XCTAssertTrue(TrainStations.sharedFromFile.station(named: "Broombridge").isFinalStop)
     }
 
     func testGreenLineStations() {
-         XCTAssertEqual(TrainStations.sharedFromFileForTests.greenLineStations.count, 35)
+         XCTAssertEqual(TrainStations.sharedFromFile.greenLineStations.count, 35)
     }
 
     func testRedLineStations() {
-        XCTAssertEqual(TrainStations.sharedFromFileForTests.redLineStations.count, 32)
+        XCTAssertEqual(TrainStations.sharedFromFile.redLineStations.count, 32)
     }
 
     func testClosestStation() {
