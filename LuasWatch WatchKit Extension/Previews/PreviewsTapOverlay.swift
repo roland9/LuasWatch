@@ -15,12 +15,11 @@ struct Preview_TapOverlay: PreviewProvider {
         ZStack {
             LuasView()
                 .environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, userLocation)))
-                .previewDisplayName("found due times - 1:1")
-            
+
             LuasView()
                 .overlayView("Showing outbound trains only")
-                .previewDisplayName("Tap overlay view")
         }
+        .previewDisplayName("Tap overlay view")
     }
 }
 #endif
