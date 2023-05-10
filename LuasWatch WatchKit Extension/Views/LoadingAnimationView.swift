@@ -28,18 +28,18 @@ extension LuasView {
 				Circle()
 					.stroke(Colors.luasPurple, lineWidth: 6)
 					.scaleEffect(isAnimating ? 2.8 : 1)
-					.animation(slowAnimation)
+					.animation(slowAnimation, value: isAnimating)
 					.blur(radius: 8)
 
 				Circle()
 					.fill(Colors.luasGreen)
 					.scaleEffect(isAnimating ? 1.5 : 1)
-					.animation(standardAnimation)
+					.animation(standardAnimation, value: isAnimating)
 
 				Circle()
 					.stroke(Colors.luasRed, lineWidth: 3)
 					.scaleEffect(isAnimating ? 2.0 : 1)
-					.animation(slowAnimation)
+					.animation(slowAnimation, value: isAnimating)
 
 			}.frame(width: CGFloat(20), height: CGFloat(20))
 				.onAppear { self.isAnimating = true }

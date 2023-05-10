@@ -69,10 +69,12 @@ struct LuasView: View {
 
 			case .foundDueTimes(let trains, let location):
 					foundDueTimesView(for: trains, location: location)
+                        .transition(.opacity)
 
-			case .updatingDueTimes(let trains, let location):
-					updatingDueTimesView(for: trains, location: location)
-			}
+            case .updatingDueTimes(let trains, let location):
+                    updatingDueTimesView(for: trains, location: location)
+                        .transition(.opacity)
+            }
 		}
 	}
 

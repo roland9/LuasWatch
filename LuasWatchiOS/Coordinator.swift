@@ -18,6 +18,8 @@ class Coordinator: NSObject {
 
     private var trains: TrainsByDirection?
 
+    static let refreshInterval = 12.0
+
     init(appState: AppState,
          location: Location) {
         self.appState = appState
@@ -42,7 +44,7 @@ class Coordinator: NSObject {
         timerDidFire()
 
         // ... but also schedule for later
-        timer = Timer.scheduledTimer(timeInterval: 12.0,
+        timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
                                      target: self, selector: #selector(timerDidFire),
                                      userInfo: nil, repeats: true)
     }
@@ -54,7 +56,7 @@ class Coordinator: NSObject {
         timerDidFire()
 
         // ... and then schedule again for regular interval
-        timer = Timer.scheduledTimer(timeInterval: 12.0,
+        timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
                                      target: self, selector: #selector(timerDidFire),
                                      userInfo: nil, repeats: true)
     }

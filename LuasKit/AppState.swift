@@ -5,6 +5,7 @@
 
 import CoreLocation
 import Combine
+import SwiftUI
 
 public enum MyState {
 
@@ -59,4 +60,10 @@ public class AppState: ObservableObject {
 	public init(state: MyState) {
 		self.state = state
 	}
+
+    public func updateWithAnimation(to state: MyState) {
+        withAnimation {
+            self.state = state
+        }
+    }
 }

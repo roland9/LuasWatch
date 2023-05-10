@@ -18,6 +18,8 @@ class Coordinator: NSObject {
 
 	private var trains: TrainsByDirection?
 
+    static let refreshInterval = 12.0
+
 	init(appState: AppState,
 		 location: Location) {
 		self.appState = appState
@@ -42,7 +44,7 @@ class Coordinator: NSObject {
 		timerDidFire()
 
 		// ... but also schedule for later
-		timer = Timer.scheduledTimer(timeInterval: 12.0,
+        timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
 									 target: self, selector: #selector(timerDidFire),
 									 userInfo: nil, repeats: true)
 	}
@@ -54,7 +56,7 @@ class Coordinator: NSObject {
 		timerDidFire()
 
 		// ... and then schedule again for regular interval
-		timer = Timer.scheduledTimer(timeInterval: 12.0,
+		timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
 									 target: self, selector: #selector(timerDidFire),
 									 userInfo: nil, repeats: true)
 	}
@@ -107,19 +109,19 @@ extension Coordinator: LocationDelegate {
 		switch delegateError {
 
 			case .locationServicesNotEnabled:
-				appState.state = .errorGettingLocation(LuasStrings.locationServicesDisabled)
+                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
 			case .locationAccessDenied:
-				appState.state = .errorGettingLocation(LuasStrings.locationAccessDenied)
+                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
 			case .locationManagerError(let error):
-				appState.state = .errorGettingLocation(error.localizedDescription)
+                appState.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
 
 			case .authStatus(let authStatusError):
 				if let errorMessage = authStatusError.localizedErrorMessage() {
-					appState.state = .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage))
+                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
 				} else {
-					appState.state = .errorGettingLocation(LuasStrings.gettingLocationOtherError)
+                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
 			}
 		}
 	}
@@ -146,7 +148,7 @@ extension Coordinator: LocationDelegate {
 
 				// no station found -> user too far away!
 				trains = nil
-				appState.state = .errorGettingStation(LuasStrings.tooFarAway)
+                appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
 			}
 		}
 
@@ -158,13 +160,13 @@ extension Coordinator: LocationDelegate {
 
 		// sometimes crash on watchOS 9
 		// [SwiftUI] Publishing changes from within view updates is not allowed, this will cause undefined behavior
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        //		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 
-        if let trains = self.trains {
-            self.appState.state = .updatingDueTimes(trains, location)
-        } else {
-            self.appState.state = .gettingDueTimes(closestStation, location)
-        }
+            if let trains = self.trains {
+                appState.updateWithAnimation(to: .updatingDueTimes(trains, location))
+            } else {
+                appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
+            }
 
         //////////////////////////////////
         // step 3: get due times from API
@@ -177,7 +179,7 @@ extension Coordinator: LocationDelegate {
 
                     print("\(#function): got trains \(trains)")
                     self?.trains = trains
-                    self?.appState.state = .foundDueTimes(trains, location)
+                    self?.appState.updateWithAnimation(to: .foundDueTimes(trains, location))
                 }
 
             } catch {
@@ -191,17 +193,17 @@ extension Coordinator: LocationDelegate {
 
                         switch apiError {
                             case .noTrains(let message):
-                                self?.appState.state =
-                                    .errorGettingDueTimes(closestStation,
-                                                          message.count > 0 ? message : LuasStrings.errorGettingDueTimes)
+                                self?.appState.updateWithAnimation(to:
+                                        .errorGettingDueTimes(closestStation,
+                                                              message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
 
                             case .invalidXML:
-                                self?.appState.state =
-                                    .errorGettingDueTimes(closestStation, "Error reading server response")
+                                self?.appState.updateWithAnimation(
+                                    to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                         }
                     } else {
-                        self?.appState.state =
-                            .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes)
+                        self?.appState.updateWithAnimation(to:
+                                .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
                     }
                 }
             }

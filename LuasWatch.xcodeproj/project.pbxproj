@@ -95,6 +95,7 @@
 		ABC4BE982A085D0C005DFFAF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE972A085D0C005DFFAF /* HeaderView.swift */; };
 		ABC4BE9A2A085D11005DFFAF /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE992A085D11005DFFAF /* TrainsListView.swift */; };
 		ABC4BE9C2A085E39005DFFAF /* PreviewsAppRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE9B2A085E39005DFFAF /* PreviewsAppRunning.swift */; };
+		ABCC5CE42A0C070F0049B71A /* PreviewsTapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCC5CE32A0C070F0049B71A /* PreviewsTapOverlay.swift */; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABF215EB29EA1CBA00B1A77F /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */; };
@@ -271,6 +272,7 @@
 		ABC4BE972A085D0C005DFFAF /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		ABC4BE992A085D11005DFFAF /* TrainsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsListView.swift; sourceTree = "<group>"; };
 		ABC4BE9B2A085E39005DFFAF /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
+		ABCC5CE32A0C070F0049B71A /* PreviewsTapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsTapOverlay.swift; sourceTree = "<group>"; };
 		ABE5585924E944C1008F3789 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMockAPI.swift; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				AB5C8B8C26FFBD9F0097A7C4 /* PreviewsAppRunning.swift */,
 				AB5C8B8E26FFBDE70097A7C4 /* PreviewsAppResult.swift */,
 				AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */,
+				ABCC5CE32A0C070F0049B71A /* PreviewsTapOverlay.swift */,
 				AB5C8B8826FFBB640097A7C4 /* PreviewsData.swift */,
 			);
 			path = Previews;
@@ -921,6 +924,7 @@
 				AB5C8B9126FFBE130097A7C4 /* PreviewsStationsModal.swift in Sources */,
 				AB364D1C2308277000C73EF6 /* ExtensionDelegate.swift in Sources */,
 				AB5C8B8326FFB9CE0097A7C4 /* HeaderView.swift in Sources */,
+				ABCC5CE42A0C070F0049B71A /* PreviewsTapOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

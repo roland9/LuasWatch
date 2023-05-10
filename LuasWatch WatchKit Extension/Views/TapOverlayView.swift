@@ -7,33 +7,37 @@ import SwiftUI
 
 extension LuasView {
 
-	@ViewBuilder
-	internal func tapOverlayView() -> some View {
+    @ViewBuilder
+    internal func tapOverlayView() -> some View {
 
-		if let text = overlayTextAfterTap {
+        if let text = overlayTextAfterTap {
+            overlayView(text)
+        }
+    }
 
-			ZStack {
-				Rectangle()
-					.foregroundColor(.black).opacity(0.59)
-				VStack {
-					Text(text)
-						.font(.body)
-						.multilineTextAlignment(.center)
-				}
-			}
-			.frame(maxHeight: 70)
-			.opacity(overlayTextViewOpacity)
-			.onAppear {
-				withAnimation(Animation.easeOut.delay(1.5)) {
-					overlayTextViewOpacity = 0.0
-				}
+    @ViewBuilder
+    internal func overlayView(_ text: String) -> some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(.black).opacity(0.59)
+            VStack {
+                Text(text)
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxHeight: 70)
+        .opacity(overlayTextViewOpacity)
+        .onAppear {
+            withAnimation(Animation.easeOut.delay(1.5)) {
+                overlayTextViewOpacity = 0.0
+            }
 
-				// a bit ugly: reset so we're ready to show if user taps again
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-					overlayTextAfterTap = nil
-					overlayTextViewOpacity = 1.0
-				}
-			}
-		}
-	}
+            // a bit ugly: reset so we're ready to show if user taps again
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                overlayTextAfterTap = nil
+                overlayTextViewOpacity = 1.0
+            }
+        }
+    }
 }
