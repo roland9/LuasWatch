@@ -16,6 +16,8 @@ class Coordinator: NSObject {
 
 	private var trains: TrainsByDirection?
 
+    static let refreshInterval = 12.0
+
 	init(appState: AppState,
 		 location: Location) {
 		self.appState = appState
@@ -40,7 +42,7 @@ class Coordinator: NSObject {
 		timerDidFire()
 
 		// ... but also schedule for later
-		timer = Timer.scheduledTimer(timeInterval: 12.0,
+        timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
 									 target: self, selector: #selector(timerDidFire),
 									 userInfo: nil, repeats: true)
 	}
@@ -52,7 +54,7 @@ class Coordinator: NSObject {
 		timerDidFire()
 
 		// ... and then schedule again for regular interval
-		timer = Timer.scheduledTimer(timeInterval: 12.0,
+		timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
 									 target: self, selector: #selector(timerDidFire),
 									 userInfo: nil, repeats: true)
 	}
@@ -105,19 +107,19 @@ extension Coordinator: LocationDelegate {
 		switch delegateError {
 
 			case .locationServicesNotEnabled:
-				appState.state = .errorGettingLocation(LuasStrings.locationServicesDisabled)
+                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
 			case .locationAccessDenied:
-				appState.state = .errorGettingLocation(LuasStrings.locationAccessDenied)
+				appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
 			case .locationManagerError(let error):
-				appState.state = .errorGettingLocation(error.localizedDescription)
+                appState.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
 
 			case .authStatus(let authStatusError):
 				if let errorMessage = authStatusError.localizedErrorMessage() {
-					appState.state = .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage))
+                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
 				} else {
-					appState.state = .errorGettingLocation(LuasStrings.gettingLocationOtherError)
+                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
 			}
 		}
 	}
@@ -144,7 +146,7 @@ extension Coordinator: LocationDelegate {
 
 				// no station found -> user too far away!
 				trains = nil
-				appState.state = .errorGettingStation(LuasStrings.tooFarAway)
+				appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
 			}
 		}
 
@@ -161,9 +163,9 @@ extension Coordinator: LocationDelegate {
 			guard let self = self else { return }
 
 			if let trains = self.trains {
-				self.appState.state = .updatingDueTimes(trains, location)
+				self.appState.updateWithAnimation(to: .updatingDueTimes(trains, location))
 			} else {
-				self.appState.state = .gettingDueTimes(closestStation, location)
+				self.appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
 			}
 
 			//////////////////////////////////
@@ -175,13 +177,13 @@ extension Coordinator: LocationDelegate {
 						case .error(let error):
 							print("\(#function): \(error)")
 							self?.trains = nil
-							self?.appState.state = .errorGettingDueTimes(closestStation,
-																		 error.count > 0 ? error : LuasStrings.errorGettingDueTimes)
+                            self?.appState.updateWithAnimation(to: .errorGettingDueTimes(closestStation,
+                                                                                         error.count > 0 ? error : LuasStrings.errorGettingDueTimes))
 
 						case .success(let trains):
 							print("\(#function): \(trains)")
 							self?.trains = trains
-							self?.appState.state = .foundDueTimes(trains, location)
+							self?.appState.updateWithAnimation(to: .foundDueTimes(trains, location))
 					}
 				}
 			}

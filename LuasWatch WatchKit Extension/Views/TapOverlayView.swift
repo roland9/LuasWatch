@@ -14,22 +14,24 @@ extension LuasView {
 
 			ZStack {
 				Rectangle()
-					.foregroundColor(.black).opacity(0.59)
+					.foregroundColor(.black).opacity(0.82)
 				VStack {
 					Text(text)
 						.font(.body)
+                        .padding()
 						.multilineTextAlignment(.center)
 				}
 			}
-			.frame(maxHeight: 70)
-			.opacity(overlayTextViewOpacity)
+            .offset(y: 40)
+            .frame(minHeight: 20, maxHeight: 240)
+            .opacity(overlayTextViewOpacity)
 			.onAppear {
 				withAnimation(Animation.easeOut.delay(1.5)) {
 					overlayTextViewOpacity = 0.0
 				}
 
 				// a bit ugly: reset so we're ready to show if user taps again
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
 					overlayTextAfterTap = nil
 					overlayTextViewOpacity = 1.0
 				}

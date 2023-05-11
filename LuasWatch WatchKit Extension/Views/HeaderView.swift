@@ -46,7 +46,9 @@ struct HeaderView: View {
 
 			}
 		}.onTapGesture {
-			handleTap(station)
+            withAnimation {
+                handleTap(station)
+            }
 		}
 	}
 
