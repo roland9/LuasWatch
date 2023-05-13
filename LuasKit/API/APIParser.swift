@@ -26,13 +26,13 @@ struct APIParser {
             // the second time has '’s Green – Beechwood. See news'
             // -> so we need to concatenate what we receive
             message = (message ?? "") + string
-		}
+        }
 
 		func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
             if shouldLog {
                 print("📄 \(self.classForCoder) message: \(String( describing: message))")
             }
-			result = message
+            result = message
 			delegateStack?.pop()
 		}
 	}

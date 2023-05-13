@@ -112,7 +112,7 @@ extension Coordinator: LocationDelegate {
                 appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
 			case .locationAccessDenied:
-                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
+				appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
 			case .locationManagerError(let error):
                 appState.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
@@ -148,7 +148,7 @@ extension Coordinator: LocationDelegate {
 
 				// no station found -> user too far away!
 				trains = nil
-                appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
+				appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
 			}
 		}
 
