@@ -8,17 +8,35 @@ import CoreLocation
 
 import LuasKitIOS
 
-#warning("do we need that?")
-// struct LuasWatchShortCuts: AppShortcutsProvider {
-//
-//    @AppShortcutsBuilder
-//    static var appShortcuts: [AppShortcut] {
-//
-//        AppShortcut(intent: LuasWatchAppIntent(), phrases: ["\(.applicationName) Times",
-//                                                            "LuasWatch Times",
-//                                                            "Luas Times"])
-//    }
-// }
+struct LuasWatchShortCuts: AppShortcutsProvider {
+
+    @AppShortcutsBuilder
+    static var appShortcuts: [AppShortcut] {
+
+        AppShortcut(intent: LuasWatchAppIntent(), phrases: ["\(.applicationName) Times",
+                                                            "LuasWatch Times",
+                                                            "Luas Times"])
+    }
+}
+
+// using LuasKit's `Direction` and extracting this code into the LuasKit framework doesn't work:
+// it will start extracting metadata: `Starting appintentsmetadataprocessor export`
+// but then will run into an error in the AppIntents target, and then will disable AppIntents for this target:
+//    warning: At least one halting error produced during export. No AppIntents metadata have been exported and this target is not usable with AppIntents until errors are resolved.
+//    warning: Unable to map action parameter of AppIntents.IntentParameter<LuasKitIOS.Direction> to a valueType
+
+enum DirectionEnum: String, CaseIterable, AppEnum {
+
+    case both, inbound, outbound
+
+    static var typeDisplayName: LocalizedStringResource = "Direction"
+
+    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Direction of the train (for stations that have both)")
+
+    public static var caseDisplayRepresentations: [DirectionEnum: DisplayRepresentation] {
+        [.inbound: "inbound trains", .outbound: "outbound trains", .both: "both directions"]
+    }
+}
 
 struct LuasWatchAppIntent: AppIntent {
 
@@ -31,7 +49,7 @@ struct LuasWatchAppIntent: AppIntent {
     var luasStop: String
 
     @Parameter(title: "Train Direction (if Station has both)")
-    var direction: Direction
+    var direction: DirectionEnum
 
     private struct LuasStopOptionsProvider: DynamicOptionsProvider {
 
@@ -67,14 +85,14 @@ struct LuasWatchAppIntent: AppIntent {
 
 extension TrainStation {
 
-    internal func loadTrainTimesFromAPI(direction: Direction) async -> String {
+    internal func loadTrainTimesFromAPI(direction: DirectionEnum) async -> String {
 
         do {
             let api = LuasAPI(apiWorker: RealAPIWorker())
 
             let trains = try await api.dueTimes(for: self)
 
-            return trains.shortcutOutput(direction: direction)
+            return trains.shortcutOutput(direction)
 
         } catch {
 
@@ -92,5 +110,26 @@ extension TrainStation {
                 return "Error reading server response"
             }
         }
+    }
+}
+
+extension TrainsByDirection {
+
+    func shortcutOutput(_ direction: DirectionEnum) -> String {
+        var output = ""
+
+        if direction == .inbound || direction == .both {
+            output += inbound
+                .compactMap { $0.destinationDueTimeDescription + ".\n" }
+                .joined()
+        }
+
+        if direction == .outbound || direction == .both {
+            output += outbound
+                .compactMap { $0.destinationDueTimeDescription + ".\n" }
+                .joined()
+        }
+
+        return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
     }
 }

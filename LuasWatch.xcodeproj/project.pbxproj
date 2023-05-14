@@ -75,7 +75,6 @@
 		AB8B513E2A10FCFC003B586B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB8B513D2A10FCFC003B586B /* Assets.xcassets */; };
 		AB8B51432A10FCFC003B586B /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB8B51352A10FCFC003B586B /* LuasWatchComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB8B51472A110BC7003B586B /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
-		AB8B51482A110BC7003B586B /* LuasKitIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ABAED72824DF61AF006FE91C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB55742723770C48007778DC /* Logging.swift */; };
 		ABC02D3A29EB60D7008E175C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC02D3929EB60D7008E175C /* ParserTests.swift */; };
 		ABC25BF324DF676A00F51EB4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC25BF224DF676A00F51EB4 /* APITests.swift */; };
@@ -199,17 +198,6 @@
 				AB8B51432A10FCFC003B586B /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB8B51492A110BC7003B586B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				AB8B51482A110BC7003B586B /* LuasKitIOS.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -625,7 +613,6 @@
 				AB05D26A29E453D400F9EDDE /* Sources */,
 				AB05D26B29E453D400F9EDDE /* Frameworks */,
 				AB05D26C29E453D400F9EDDE /* Resources */,
-				AB8B51492A110BC7003B586B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
