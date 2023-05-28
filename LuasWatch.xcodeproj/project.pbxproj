@@ -88,6 +88,8 @@
 		ABC4BE982A085D0C005DFFAF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE972A085D0C005DFFAF /* HeaderView.swift */; };
 		ABC4BE9A2A085D11005DFFAF /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE992A085D11005DFFAF /* TrainsListView.swift */; };
 		ABC4BE9C2A085E39005DFFAF /* PreviewsAppRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE9B2A085E39005DFFAF /* PreviewsAppRunning.swift */; };
+		ABDACEBF2A19645300A9FB63 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
+		ABDACEC02A19645300A9FB63 /* LuasKitIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABE70E3624E95C0700CF0653 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
 		ABF215EB29EA1CBA00B1A77F /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */; };
@@ -153,6 +155,13 @@
 			remoteGlobalIDString = AB8B51342A10FCFC003B586B;
 			remoteInfo = LuasWatchComplicationsExtension;
 		};
+		ABDACEC12A19645300A9FB63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB364CF92308276C00C73EF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB57F11B230B432E00BA8B53;
+			remoteInfo = LuasKitIOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -198,6 +207,17 @@
 				AB8B51432A10FCFC003B586B /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABDACEC32A19645300A9FB63 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ABDACEC02A19645300A9FB63 /* LuasKitIOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -318,6 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDACEBF2A19645300A9FB63 /* LuasKitIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,12 +711,14 @@
 				AB3E8BD829E3078800F1AC7B /* Resources */,
 				AB05D27829E453D400F9EDDE /* Embed ExtensionKit Extensions */,
 				AB2FE67B2A101DA600814E5F /* Embed Watch Content */,
+				ABDACEC32A19645300A9FB63 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				AB05D27629E453D400F9EDDE /* PBXTargetDependency */,
 				AB2FE6792A101DA600814E5F /* PBXTargetDependency */,
+				ABDACEC22A19645300A9FB63 /* PBXTargetDependency */,
 			);
 			name = LuasWatchiOS;
 			productName = LuasWatchiOS;
@@ -1090,6 +1113,11 @@
 			target = AB8B51342A10FCFC003B586B /* LuasWatchComplicationsExtension */;
 			targetProxy = AB8B51402A10FCFC003B586B /* PBXContainerItemProxy */;
 		};
+		ABDACEC22A19645300A9FB63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB57F11B230B432E00BA8B53 /* LuasKitIOS */;
+			targetProxy = ABDACEC12A19645300A9FB63 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1331,7 +1359,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1396,7 +1424,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
