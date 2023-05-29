@@ -23,8 +23,8 @@ struct HeaderView: View {
 		ZStack {
 
 			Image(station.route == .green ? "HeaderGreen" : "HeaderRed")
-				.resizable()
-				.frame(maxWidth: .infinity, minHeight: 36, maxHeight: 36, alignment: .trailing)
+                .resizable(capInsets: EdgeInsets(top: 12, leading: 54, bottom: 6, trailing: 54), resizingMode: .stretch)
+				.frame(maxWidth: .infinity, minHeight: 54, maxHeight: 54, alignment: .trailing)
 
 			HStack {
 
@@ -33,7 +33,7 @@ struct HeaderView: View {
 					.resizable()
 					.foregroundColor(.gray)
 					.frame(width: 25, height: 25)
-					.offset(x: 12)
+					.offset(x: 30)
 
 				Spacer(minLength: 16)
 
@@ -42,11 +42,13 @@ struct HeaderView: View {
 					.font(.system(.headline))
 					.foregroundColor(.black)
 					.frame(maxWidth: .infinity, alignment: .leading)
-					.padding(.trailing, 24)
+                    .padding(.horizontal, 24)
 
 			}
-		}.onTapGesture {
-			handleTap(station)
+		}
+        .padding(.horizontal)
+        .onTapGesture {
+            handleTap(station)
 		}
 	}
 

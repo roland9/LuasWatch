@@ -56,7 +56,7 @@ struct LuasView: View {
                             Text(self.appState.state.description)
                                 .multilineTextAlignment(.center)
 
-//                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
+                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
                         }
                     }
 
@@ -79,7 +79,7 @@ struct LuasView: View {
                                location: location)
 
             }.onAppear {
-//                forceUpdateDirection(trainStationName: trains.trainStation.name)
+                forceUpdateDirection(trainStationName: trains.trainStation.name)
             }
 
 //            tapOverlayView()
@@ -104,7 +104,15 @@ struct LuasView: View {
                            location: location)
 
         }.onAppear {
-//            forceUpdateDirection(trainStationName: trains.trainStation.name)
+            forceUpdateDirection(trainStationName: trains.trainStation.name)
+        }
+    }
+
+    // challenge: if station changed since last time, it doesn't pick persisted one -> need to force update direction here to fix
+    fileprivate func forceUpdateDirection(trainStationName: String) {
+        if self.direction != Direction.direction(for: trainStationName) {
+            self.direction = Direction.direction(for: trainStationName)
+            print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
         }
     }
 }

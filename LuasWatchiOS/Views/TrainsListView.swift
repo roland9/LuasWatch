@@ -50,7 +50,7 @@ struct TrainsListView: View {
 						Spacer(minLength: 10)
 					}
 
-//					ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
+					ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
 				}
 			}
 
@@ -104,7 +104,7 @@ struct TrainsListView: View {
 	@ViewBuilder
 	fileprivate func ChangeStationButtonWithDistance(distanceFooter: String?) -> some View {
 		VStack {
-//			ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
+			ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
 
 			if let distanceFooter {
 				Spacer(minLength: 12)

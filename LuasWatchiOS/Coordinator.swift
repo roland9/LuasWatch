@@ -33,6 +33,12 @@ class Coordinator: NSObject {
         location.delegate = self
 
         location.start()
+
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name("LuasWatch.RetriggerTimer"),
+            object: nil, queue: nil) { _ in
+                self.retriggerTimer()
+            }
     }
 
     func invalidateTimer() {

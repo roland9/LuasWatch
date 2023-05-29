@@ -39,6 +39,9 @@
 		AB2FE6A32A102E6A00814E5F /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB2FE6A42A102E6A00814E5F /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB2FE6A92A1031BB00814E5F /* PreviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FE6872A102BD700814E5F /* PreviewsData.swift */; };
+		AB33DB4C2A253E0E0059E134 /* ChangeStationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB33DB4B2A253E0E0059E134 /* ChangeStationButton.swift */; };
+		AB33DB4E2A2543430059E134 /* PreviewsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB33DB4D2A2543430059E134 /* PreviewsButtons.swift */; };
+		AB33DB502A2545790059E134 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB33DB4F2A2545790059E134 /* Buttons.swift */; };
 		AB3E8BDD29E3078800F1AC7B /* LuasWatchiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E8BDC29E3078800F1AC7B /* LuasWatchiOSApp.swift */; };
 		AB3E8BE129E3078900F1AC7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3E8BE029E3078900F1AC7B /* Assets.xcassets */; };
 		AB3E8BE429E3078900F1AC7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3E8BE329E3078900F1AC7B /* Preview Assets.xcassets */; };
@@ -251,6 +254,9 @@
 		AB2FE6912A102BD700814E5F /* TapOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapOverlayView.swift; sourceTree = "<group>"; };
 		AB2FE6922A102BD700814E5F /* LuasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		AB2FE6A02A102D1900814E5F /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		AB33DB4B2A253E0E0059E134 /* ChangeStationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStationButton.swift; sourceTree = "<group>"; };
+		AB33DB4D2A2543430059E134 /* PreviewsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsButtons.swift; sourceTree = "<group>"; };
+		AB33DB4F2A2545790059E134 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		AB364D342308281000C73EF6 /* TrainsByDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsByDirection.swift; sourceTree = "<group>"; };
 		AB364D382308281100C73EF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB364D392308281100C73EF6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -403,8 +409,8 @@
 			children = (
 				AB2FE6592A101DA500814E5F /* LuasWatchApp.swift */,
 				AB2FE6A02A102D1900814E5F /* Coordinator.swift */,
-				AB2FE6852A102BD700814E5F /* Previews */,
 				AB2FE68C2A102BD700814E5F /* Views */,
+				AB2FE6852A102BD700814E5F /* Previews */,
 				AB2FE65D2A101DA600814E5F /* Assets.xcassets */,
 				AB2FE65F2A101DA600814E5F /* Preview Content */,
 			);
@@ -590,6 +596,7 @@
 				ABC4BE9B2A085E39005DFFAF /* PreviewsAppRunning.swift */,
 				ABC4BE8D2A085A9F005DFFAF /* PreviewsAppResult.swift */,
 				ABC4BE952A085C61005DFFAF /* PreviewsAppStartup.swift */,
+				AB33DB4D2A2543430059E134 /* PreviewsButtons.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";
@@ -599,6 +606,8 @@
 			children = (
 				ABC4BE922A085C1B005DFFAF /* LuasView.swift */,
 				ABC4BE992A085D11005DFFAF /* TrainsListView.swift */,
+				AB33DB4B2A253E0E0059E134 /* ChangeStationButton.swift */,
+				AB33DB4F2A2545790059E134 /* Buttons.swift */,
 				ABC4BE972A085D0C005DFFAF /* HeaderView.swift */,
 				ABC4BE912A085C1B005DFFAF /* LoadingAnimationView.swift */,
 			);
@@ -991,10 +1000,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB33DB4E2A2543430059E134 /* PreviewsButtons.swift in Sources */,
 				ABC4BE932A085C1B005DFFAF /* LoadingAnimationView.swift in Sources */,
 				ABC4BE942A085C1B005DFFAF /* LuasView.swift in Sources */,
+				AB33DB502A2545790059E134 /* Buttons.swift in Sources */,
 				AB3E8BDD29E3078800F1AC7B /* LuasWatchiOSApp.swift in Sources */,
 				ABC4BE9C2A085E39005DFFAF /* PreviewsAppRunning.swift in Sources */,
+				AB33DB4C2A253E0E0059E134 /* ChangeStationButton.swift in Sources */,
 				ABC4BE882A08462A005DFFAF /* Coordinator.swift in Sources */,
 				ABC4BE8E2A085A9F005DFFAF /* PreviewsAppResult.swift in Sources */,
 				AB2FE6A92A1031BB00814E5F /* PreviewsData.swift in Sources */,
@@ -1463,6 +1475,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LuasWatchiOS/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location access allows the app to find the closest LUAS stop";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location access allows the app to find the closest LUAS stop";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location access allows the app to find the closest LUAS stop";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1498,6 +1513,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LuasWatchiOS/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location access allows the app to find the closest LUAS stop";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location access allows the app to find the closest LUAS stop";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location access allows the app to find the closest LUAS stop";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
