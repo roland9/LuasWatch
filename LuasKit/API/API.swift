@@ -5,16 +5,16 @@
 
 import Foundation
 
+public protocol APIWorker {
+    func getTrains(shortCode: String) async throws -> Data
+}
+
 public protocol API {
     var apiWorker: APIWorker { get set }
 
     func dueTimes(for trainStation: TrainStation) async throws -> TrainsByDirection
 
     init(apiWorker: APIWorker)
-}
-
-public protocol APIWorker {
-    func getTrains(shortCode: String) async throws -> Data
 }
 
 public enum APIError: Error {

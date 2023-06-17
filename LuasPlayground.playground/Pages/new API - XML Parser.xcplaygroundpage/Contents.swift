@@ -21,6 +21,7 @@ import CoreLocation
  	</direction>
  </stopInfo>
 */
+import LuasKitIOS
 
 /* another example input
  <stopInfo created="2020-09-10T20:35:43" stop="St. Stephen's Green" stopAbv="STS">
