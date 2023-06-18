@@ -10,7 +10,7 @@ public protocol LocationDelegate: AnyObject {
 	func didGetLocation(_ location: CLLocation)
 }
 
-public enum LocationDelegateError {
+public enum LocationDelegateError: Error {
 	case locationServicesNotEnabled
 	case locationAccessDenied
 	case locationManagerError(Error)
@@ -54,7 +54,7 @@ public class Location: NSObject {
 	}
 
 	public func update() {
-		if (state == .stoppedUpdatingLocation || state == .error) &&
+ 		if (state == .stoppedUpdatingLocation || state == .error) &&
 			CLLocationManager.locationServicesEnabled() {
 
 			locationManager.requestWhenInUseAuthorization()

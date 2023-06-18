@@ -4,5 +4,6 @@
         <page name='new API '/>
         <page name='new API - XML Parser'/>
         <page name='reading Luas JSON file'/>
+        <page name='Location'/>
     </pages>
 </playground>

@@ -18,7 +18,7 @@ import LuasKit
 
 // Bluebell station
 let location = CLLocation(latitude: CLLocationDegrees(53.3292817872831),
-                                  longitude: CLLocationDegrees(-6.33382500275916))
+                          longitude: CLLocationDegrees(-6.33382500275916))
 
 let userLocation = CLLocation(latitude: location.coordinate.latitude + 0.00425,
 							  longitude: location.coordinate.longitude + 0.005)

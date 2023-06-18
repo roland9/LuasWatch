@@ -11,11 +11,11 @@ struct LuasWatch_Watch_AppApp: App {
     @Environment (\.scenePhase) var scenePhase
 
     let appState = AppState()
-    let location = Location()
+    let locationHandler = LocationHandler()
     var mainCoordinator: Coordinator!
 
     init() {
-        mainCoordinator = Coordinator(appState: appState, location: location)
+        mainCoordinator = Coordinator(appState: appState, locationHandler: locationHandler)
         mainCoordinator.start()
     }
 

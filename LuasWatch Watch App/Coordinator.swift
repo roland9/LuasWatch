@@ -8,175 +8,98 @@ import LuasKit
 
 class Coordinator: NSObject {
 
+    internal let appState: AppState
+    internal var latestLocation: CLLocation?
+    internal var timer: Timer?
+
+    private var locationHandler: LocationHandler
     private let api = LuasAPI(apiWorker: RealAPIWorker())
+    private var trains: TrainsByDirection?
 
-	private let appState: AppState
-	private var location: Location
-	private var timer: Timer?
+    private static let allStations = TrainStations.sharedFromFile
 
-	private var latestLocation: CLLocation?
-
-	private var trains: TrainsByDirection?
-
-    static let refreshInterval = 12.0
-
-	init(appState: AppState,
-		 location: Location) {
-		self.appState = appState
-		self.location = location
+    init(appState: AppState, locationHandler: LocationHandler) {
+        self.appState = appState
+        self.locationHandler = locationHandler
     }
 
     func start() {
 
-        //////////////////////////////////
-        // step 1: determine location
-        location.delegate = self
-
-        location.start()
-
-        NotificationCenter.default.addObserver(
-            forName: Notification.Name("LuasWatch.RetriggerTimer"),
-            object: nil, queue: nil) { _ in
+        // WIP find a nicer way to handle timers - Combine?
+        NotificationCenter.default
+            .addObserver(forName: Notification.Name("LuasWatch.RetriggerTimer"),
+                         object: nil, queue: nil) { _ in
                 self.retriggerTimer()
             }
-	}
 
-	func invalidateTimer() {
-		timer?.invalidate()
-	}
+        Task {
+            do {
+                let location = try await locationHandler.requestLocation()
+                latestLocation = location
 
-	func scheduleTimer() {
-		// fire right now...
-		timerDidFire()
+                if let station = MyUserDefaults.userSelectedSpecificStation() {
+                    print("user selected a specific station")
+                    handle(station, location)
 
-		// ... but also schedule for later
-        timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
-									 target: self, selector: #selector(timerDidFire),
-									 userInfo: nil, repeats: true)
-	}
+                } else {
+                    print("find closest station for this location (red or green line)")
+                    if let closestStation = Self.allStations.closestStation(from: location) {
+                        print("\(#function): found closest station <\(closestStation.name)>")
 
-	func retriggerTimer() {
-		timer?.invalidate()
+                        handle(closestStation, location)
+                    } else {
 
-		// fire right now...
-		timerDidFire()
+                        // no station found -> user too far away!
+                        trains = nil
+                        appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
+                    }
+                }
 
-		// ... and then schedule again for regular interval
-		timer = Timer.scheduledTimer(timeInterval: Self.refreshInterval,
-									 target: self, selector: #selector(timerDidFire),
-									 userInfo: nil, repeats: true)
-	}
+            } catch let error as LocationDelegateError {
 
-	@objc func timerDidFire() {
+                latestLocation = nil
 
-		guard appState.isStationsModalPresented == false else {
-			print("💔 StationsModal is up (isStationsModalPresented == true) -> ignore location update timer")
-			return
-		}
+                switch error {
 
-		// if user has selected a specific station & the location we have is not too old -> don't wait  for another location update
-		if let station = MyUserDefaults.userSelectedSpecificStation(),
-		   let latestLocation = latestLocation,
-		   latestLocation.timestamp.timeIntervalSinceNow < -25.0 {
-			print("🥳 we have user selected station & recent location -> skip location update")
-			handle(station, latestLocation)
-		} else {
-			// user has NOT selected a specific station;  or the location we have it quite outdated -> wait for new location update
-			print("😇 only outdated location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
-			location.update()
-		}
-	}
-}
+                        // we do Dispatch to main queue in updateWithAnimation()
+                    case .locationServicesNotEnabled:
+                        appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
-extension CLAuthorizationStatus {
+                    case .locationAccessDenied:
+                        appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
-	func localizedErrorMessage() -> String? {
-		switch self {
-			case .notDetermined:
-				return NSLocalizedString("auth status not determined (yet)", comment: "")
+                    case .locationManagerError(let error):
+                        appState.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
 
-			case .restricted:
-				return NSLocalizedString("auth status restricted", comment: "")
+                    case .authStatus(let authStatusError):
+                        if let errorMessage = authStatusError.localizedErrorMessage() {
+                            appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
+                        } else {
+                            appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
+                        }
+                }
 
-			case .denied:
-				return NSLocalizedString("auth status denied", comment: "")
-
-			default:
-				return nil
-		}
-	}
-}
-
-extension Coordinator: LocationDelegate {
-
-	func didFail(_ delegateError: LocationDelegateError) {
-
-		latestLocation = nil
-
-		switch delegateError {
-
-			case .locationServicesNotEnabled:
-                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
-
-			case .locationAccessDenied:
-				appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
-
-			case .locationManagerError(let error):
-                appState.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
-
-			case .authStatus(let authStatusError):
-				if let errorMessage = authStatusError.localizedErrorMessage() {
-                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
-				} else {
-                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
-			}
-		}
-	}
-
-	func didGetLocation(_ location: CLLocation) {
-
-		latestLocation = location
-
-		//////////////////////////////////
-		// step 2: we have location -> now find station
-		let allStations = TrainStations.sharedFromFile
-
-		if let station = MyUserDefaults.userSelectedSpecificStation() {
-			print("step 2a: closest station, but specific one user selected before")
-			handle(station, location)
-
-		} else {
-			print("step 2b: closest station, doesn't matter which line")
-			if let closestStation = allStations.closestStation(from: location) {
-				print("\(#function): found closest station <\(closestStation.name)>")
-
-				handle(closestStation, location)
-			} else {
-
-				// no station found -> user too far away!
-				trains = nil
-				appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
-			}
-		}
-
-	}
-
-	fileprivate func handle(_ closestStation: TrainStation,
-							_ location: CLLocation) {
-		// use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
-
-		// sometimes crash on watchOS 9
-		// [SwiftUI] Publishing changes from within view updates is not allowed, this will cause undefined behavior
-        //		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-
-            if let trains = self.trains {
-                appState.updateWithAnimation(to: .updatingDueTimes(trains, location))
-            } else {
-                appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
+            } catch {
+                // generic error
+                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
             }
+        }
+    }
 
-        //////////////////////////////////
-        // step 3: get due times from API
+}
+
+extension Coordinator {
+
+    internal func handle(_ closestStation: TrainStation,
+                         _ location: CLLocation) {
+        // use different states with self.trains: if we have previously loaded a list of trains, let's preserve it in the UI while loading
+
+        if let trains = self.trains {
+            appState.updateWithAnimation(to: .updatingDueTimes(trains, location))
+        } else {
+            appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
+        }
+
         Task {
 
             do {
@@ -215,5 +138,5 @@ extension Coordinator: LocationDelegate {
                 }
             }
         }
-	}
+    }
 }
