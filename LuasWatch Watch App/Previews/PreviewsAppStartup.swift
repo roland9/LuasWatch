@@ -18,7 +18,11 @@ struct Preview_AppStartup: PreviewProvider {
 	static var previews: some View {
 
 		Group {
-			LuasView()
+            LuasView()
+                .environmentObject(AppState(state: .locationAuthorizationUnknown))
+                .previewDisplayName("locationAuth unknown")
+
+            LuasView()
 				.environmentObject(AppState(state: .gettingLocation))
 				.previewDisplayName("getting location")
 

@@ -91,6 +91,7 @@
 		ABC4BE982A085D0C005DFFAF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE972A085D0C005DFFAF /* HeaderView.swift */; };
 		ABC4BE9A2A085D11005DFFAF /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE992A085D11005DFFAF /* TrainsListView.swift */; };
 		ABC4BE9C2A085E39005DFFAF /* PreviewsAppRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4BE9B2A085E39005DFFAF /* PreviewsAppRunning.swift */; };
+		ABC94AAF2A50BB7E006D3E30 /* GrantLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC94AAE2A50BB7E006D3E30 /* GrantLocationAuthView.swift */; };
 		ABDACEBF2A19645300A9FB63 /* LuasKitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; };
 		ABDACEC02A19645300A9FB63 /* LuasKitIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F128230B432E00BA8B53 /* LuasKitIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ABE5585A24E944C1008F3789 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE5585924E944C1008F3789 /* Direction.swift */; };
@@ -304,6 +305,7 @@
 		ABC4BE972A085D0C005DFFAF /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		ABC4BE992A085D11005DFFAF /* TrainsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsListView.swift; sourceTree = "<group>"; };
 		ABC4BE9B2A085E39005DFFAF /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
+		ABC94AAE2A50BB7E006D3E30 /* GrantLocationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantLocationAuthView.swift; sourceTree = "<group>"; };
 		ABE5585924E944C1008F3789 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		ABF215EA29EA1CBA00B1A77F /* LuasMockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMockAPI.swift; sourceTree = "<group>"; };
 		ABFB67BE2359122800906CD6 /* LuasExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				AB2FE6902A102BD700814E5F /* ChangeStationButton.swift */,
 				AB2FE68F2A102BD700814E5F /* HeaderView.swift */,
 				AB2FE68D2A102BD700814E5F /* LoadingAnimationView.swift */,
+				ABC94AAE2A50BB7E006D3E30 /* GrantLocationAuthView.swift */,
 				AB2FE6912A102BD700814E5F /* TapOverlayView.swift */,
 			);
 			path = Views;
@@ -963,6 +966,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2FE6A22A102D1900814E5F /* Coordinator.swift in Sources */,
+				ABC94AAF2A50BB7E006D3E30 /* GrantLocationAuthView.swift in Sources */,
 				AB2FE69C2A102BD700814E5F /* ChangeStationButton.swift in Sources */,
 				AB2FE69E2A102BD700814E5F /* LuasView.swift in Sources */,
 				AB2FE6952A102BD700814E5F /* PreviewsTapOverlay.swift in Sources */,

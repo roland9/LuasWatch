@@ -16,60 +16,65 @@ struct LuasView: View {
 
 	@State internal var isAnimating = false
 
-	@State internal var overlayTextAfterTap: String?
-	@State internal var overlayTextViewOpacity: Double = 1.0
+    @State internal var overlayTextAfterTap: String?
+    @State internal var overlayTextViewOpacity: Double = 1.0
 
-	var body: some View {
+    var body: some View {
 
-		Group {
-			switch appState.state {
+        Group {
+            switch appState.state {
 
-			case .gettingLocation:
-				loadingAnimationView()
+                case .locationAuthorizationUnknown:
+                    GrantLocationAuthView(didTapButton: {
+                        appState.state = .gettingLocation
+                    })
 
-			case .errorGettingLocation:
-				Text(self.appState.state.description)
-					.multilineTextAlignment(.center)
-					.frame(idealHeight: .greatestFiniteMagnitude)
+                case .gettingLocation:
+                    loadingAnimationView()
 
-			case .errorGettingStation(let errorMessage):
-				Text(errorMessage)
-					.multilineTextAlignment(.center)
-					.frame(idealHeight: .greatestFiniteMagnitude)
+                case .errorGettingLocation:
+                    Text(self.appState.state.description)
+                        .multilineTextAlignment(.center)
+                        .frame(idealHeight: .greatestFiniteMagnitude)
 
-					// we do get location here in this enum as well, but we ignore it in the UI
-			case .gettingDueTimes:
-				Text(self.appState.state.description)
-					.multilineTextAlignment(.center)
+                case .errorGettingStation(let errorMessage):
+                    Text(errorMessage)
+                        .multilineTextAlignment(.center)
+                        .frame(idealHeight: .greatestFiniteMagnitude)
 
-				// bit confusing: this enum has second parameter 'errorString', but it's not shown here
-				// because it's surfaced via the appState's `description`
-			case .errorGettingDueTimes(let trainStation, _):
+                    // we do get location here in this enum as well, but we ignore it in the UI
+                case .gettingDueTimes:
+                    Text(self.appState.state.description)
+                        .multilineTextAlignment(.center)
 
-				ScrollView {
-					VStack {
-						HeaderView(station: trainStation, direction: $direction,
-								   overlayTextAfterTap: $overlayTextAfterTap)
+                    // bit confusing: this enum has second parameter 'errorString', but it's not shown here
+                    // because it's surfaced via the appState's `description`
+                case .errorGettingDueTimes(let trainStation, _):
 
-						Spacer(minLength: 20)
+                    ScrollView {
+                        VStack {
+                            HeaderView(station: trainStation, direction: $direction,
+                                       overlayTextAfterTap: $overlayTextAfterTap)
 
-						Text(self.appState.state.description)
-							.multilineTextAlignment(.center)
+                            Spacer(minLength: 20)
 
-						ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
-					}
-				}
+                            Text(self.appState.state.description)
+                                .multilineTextAlignment(.center)
 
-			case .foundDueTimes(let trains, let location):
-					foundDueTimesView(for: trains, location: location)
+                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
+                        }
+                    }
+
+                case .foundDueTimes(let trains, let location):
+                    foundDueTimesView(for: trains, location: location)
                         .transition(.opacity)
 
-            case .updatingDueTimes(let trains, let location):
+                case .updatingDueTimes(let trains, let location):
                     updatingDueTimesView(for: trains, location: location)
                         .transition(.opacity)
             }
-		}
-	}
+        }
+    }
 
 	fileprivate func foundDueTimesView(for trains: TrainsByDirection, location: CLLocation) -> some View {
 		ZStack {

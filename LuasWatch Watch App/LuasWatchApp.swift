@@ -16,6 +16,7 @@ struct LuasWatch_Watch_AppApp: App {
 
     init() {
         mainCoordinator = Coordinator(appState: appState, location: location)
+        appState.changeable = mainCoordinator
         mainCoordinator.start()
     }
 

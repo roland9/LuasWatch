@@ -32,7 +32,8 @@ class Coordinator: NSObject {
         // step 1: determine location
         location.delegate = self
 
-        location.start()
+        // dont call start() here anymore - we call it once user has authorized location access
+        //        location.start()
 
         NotificationCenter.default.addObserver(
             forName: Notification.Name("LuasWatch.RetriggerTimer"),
@@ -133,6 +134,10 @@ extension Coordinator: LocationDelegate {
 		}
 	}
 
+    func didEnableLocation() {
+        location.start()
+    }
+
 	func didGetLocation(_ location: CLLocation) {
 
 		latestLocation = location
@@ -174,31 +179,31 @@ extension Coordinator: LocationDelegate {
             } else {
                 appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
             }
-        
+
         //////////////////////////////////
         // step 3: get due times from API
         Task {
-            
+
             do {
                 let trains = try await self.api.dueTimes(for: closestStation)
-                
+
                 print("\(#function): got trains \(trains)")
                 self.trains = trains
                 appState.updateWithAnimation(to: .foundDueTimes(trains, location))
-                
+
             } catch {
-                
+
                 trains = nil
                 print("\(#function):  caught error \(error.localizedDescription)")
-                
+
                 if let apiError = error as? APIError {
-                    
+
                     switch apiError {
                         case .noTrains(let message):
                             appState.updateWithAnimation(to:
                                     .errorGettingDueTimes(closestStation,
                                                           message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
-                            
+
                         case .invalidXML:
                             appState.updateWithAnimation(
                                 to: .errorGettingDueTimes(closestStation, "Error reading server response"))
@@ -208,6 +213,15 @@ extension Coordinator: LocationDelegate {
                             .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
                 }
             }
+        }
+    }
+}
+
+extension Coordinator: AppStateChangeable {
+
+    func didChange(to state: MyState) {
+        if case .gettingLocation = state {
+            location.promptLocationAuth()
         }
     }
 }

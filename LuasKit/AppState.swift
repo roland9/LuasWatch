@@ -9,6 +9,8 @@ import SwiftUI
 
 public enum MyState {
 
+    case locationAuthorizationUnknown
+
 	case gettingLocation
 	case errorGettingLocation(String)
 
@@ -24,36 +26,49 @@ public enum MyState {
 
 extension MyState: CustomStringConvertible {
 
-	public var description: String {
-		switch self {
+    public var description: String {
+        switch self {
 
-		case .gettingLocation:
-			return LuasStrings.gettingLocation
+            case .locationAuthorizationUnknown:
+                return LuasStrings.locationAuthorizationUnknown
 
-		case .errorGettingLocation(let errorMessage):
-			return errorMessage
+            case .gettingLocation:
+                return LuasStrings.gettingLocation
 
-		case .errorGettingStation:
-			return LuasStrings.errorGettingStation
+            case .errorGettingLocation(let errorMessage):
+                return errorMessage
 
-		case .gettingDueTimes(let trainStation, _):
-			return LuasStrings.gettingDueTimes(trainStation)
+            case .errorGettingStation:
+                return LuasStrings.errorGettingStation
 
-		case .errorGettingDueTimes(_, let errorMessage):
-			return errorMessage
+            case .gettingDueTimes(let trainStation, _):
+                return LuasStrings.gettingDueTimes(trainStation)
 
-		case .foundDueTimes(let trains, _):
-			return LuasStrings.foundDueTimes(trains)
+            case .errorGettingDueTimes(_, let errorMessage):
+                return errorMessage
 
-		case .updatingDueTimes(let trains, _):
-			return LuasStrings.updatingDueTimes(trains)
-		}
-	}
+            case .foundDueTimes(let trains, _):
+                return LuasStrings.foundDueTimes(trains)
+
+            case .updatingDueTimes(let trains, _):
+                return LuasStrings.updatingDueTimes(trains)
+        }
+    }
+}
+
+public protocol AppStateChangeable {
+    func didChange(to: MyState)
 }
 
 public class AppState: ObservableObject {
-	@Published public var state: MyState = .gettingLocation
+    @Published public var state: MyState = .locationAuthorizationUnknown {
+        didSet {
+            changeable?.didChange(to: state)
+        }
+    }
 	@Published public var isStationsModalPresented: Bool = false
+
+    public var changeable: AppStateChangeable?
 
 	public init() {}
 
