@@ -78,15 +78,32 @@ class Coordinator: NSObject {
 		// if user has selected a specific station & the location we have is not too old -> don't wait  for another location update
 		if let station = MyUserDefaults.userSelectedSpecificStation(),
 		   let latestLocation = latestLocation,
-		   latestLocation.timestamp.timeIntervalSinceNow < -25.0 {
+		   latestLocation.isQuiteRecent() {
 			print("🥳 we have user selected station & recent location -> skip location update")
 			handle(station, latestLocation)
-		} else {
-			// user has NOT selected a specific station;  or the location we have it quite outdated -> wait for new location update
-			print("😇 only outdated location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
-			location.update()
+
+		} else if MyUserDefaults.userSelectedSpecificStation() == nil {
+			// user has NOT selected a specific station
+
+            if let latestLocation = latestLocation,
+               latestLocation.isQuiteRecent() {
+                // we have a location that's not too old
+                print("🥳 user has NOT selected specific location & we have a recent location -> skip location update")
+                didGetLocation(latestLocation)
+            } else {
+
+                print("😇 only outdated location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
+                location.update()
+            }
 		}
 	}
+}
+
+extension CLLocation {
+
+    func isQuiteRecent() -> Bool {
+        timestamp.timeIntervalSinceNow > -20.0
+    }
 }
 
 extension CLAuthorizationStatus {
