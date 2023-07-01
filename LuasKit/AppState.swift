@@ -63,7 +63,9 @@ public class AppState: ObservableObject {
 
     public func updateWithAnimation(to state: MyState) {
         withAnimation {
-            self.state = state
+            DispatchQueue.main.async { [weak self] in
+                self?.state = state
+            }
         }
     }
 }

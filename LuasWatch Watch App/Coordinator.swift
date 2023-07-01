@@ -174,46 +174,40 @@ extension Coordinator: LocationDelegate {
             } else {
                 appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
             }
-
+        
         //////////////////////////////////
         // step 3: get due times from API
         Task {
-
+            
             do {
-                let trains = try await api.dueTimes(for: closestStation)
-
-                DispatchQueue.main.async { [weak self] in
-
-                    print("\(#function): got trains \(trains)")
-                    self?.trains = trains
-                    self?.appState.updateWithAnimation(to: .foundDueTimes(trains, location))
-                }
-
+                let trains = try await self.api.dueTimes(for: closestStation)
+                
+                print("\(#function): got trains \(trains)")
+                self.trains = trains
+                appState.updateWithAnimation(to: .foundDueTimes(trains, location))
+                
             } catch {
-
+                
                 trains = nil
                 print("\(#function):  caught error \(error.localizedDescription)")
-
-                DispatchQueue.main.async { [weak self] in
-
-                    if let apiError = error as? APIError {
-
-                        switch apiError {
-                            case .noTrains(let message):
-                                self?.appState.updateWithAnimation(to:
-                                        .errorGettingDueTimes(closestStation,
-                                                              message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
-
-                            case .invalidXML:
-                                self?.appState.updateWithAnimation(
-                                    to: .errorGettingDueTimes(closestStation, "Error reading server response"))
-                        }
-                    } else {
-                        self?.appState.updateWithAnimation(to:
-                                .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
+                
+                if let apiError = error as? APIError {
+                    
+                    switch apiError {
+                        case .noTrains(let message):
+                            appState.updateWithAnimation(to:
+                                    .errorGettingDueTimes(closestStation,
+                                                          message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
+                            
+                        case .invalidXML:
+                            appState.updateWithAnimation(
+                                to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                     }
+                } else {
+                    appState.updateWithAnimation(to:
+                            .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
                 }
             }
         }
-	}
+    }
 }

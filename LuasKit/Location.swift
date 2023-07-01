@@ -10,7 +10,7 @@ public protocol LocationDelegate: AnyObject {
 	func didGetLocation(_ location: CLLocation)
 }
 
-public enum LocationDelegateError {
+public enum LocationDelegateError: Error {
 	case locationServicesNotEnabled
 	case locationAccessDenied
 	case locationManagerError(Error)
@@ -32,28 +32,27 @@ public class Location: NSObject {
 	public override init() {}
 
 	public func start() {
+// consider waiting for the `-locationManagerDidChangeAuthorization:` callback and checking `authorizationStatus` first
+        guard CLLocationManager.locationServicesEnabled() else {
+            print("\(#function): services NOT enabled")
 
-		// start getting location
-		locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            state = .error
+            delegate?.didFail(.locationServicesNotEnabled)
+            return
+        }
 
-		if CLLocationManager.locationServicesEnabled() {
-			print("\(#function): services enabled")
+        // start getting location
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 
-			locationManager.requestWhenInUseAuthorization()
-			locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
 
-			state = .gettingLocation
-			locationManager.startUpdatingLocation()
-
-		} else {
-			print("\(#function): services NOT enabled")
-
-			state = .error
-			delegate?.didFail(.locationServicesNotEnabled)
-		}
+        state = .gettingLocation
+        locationManager.startUpdatingLocation()
 	}
 
 	public func update() {
+        // consider waiting for the `-locationManagerDidChangeAuthorization:` callback and checking `authorizationStatus
 		if (state == .stoppedUpdatingLocation || state == .error) &&
 			CLLocationManager.locationServicesEnabled() {
 
@@ -84,14 +83,12 @@ extension Location: CLLocationManagerDelegate {
 		}
 	}
 
-	public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		let authorizationStatus: CLAuthorizationStatus = manager.authorizationStatus
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+		print("\(#function): \(manager.authorizationStatus)")
 
-		print("\(#function): \(authorizationStatus)")
-
-		switch authorizationStatus {
+		switch manager.authorizationStatus {
 			case .denied, .notDetermined, .restricted:
-				delegate?.didFail(.authStatus(authorizationStatus))
+				delegate?.didFail(.authStatus(manager.authorizationStatus))
 			case .authorizedAlways:
 				print("authorizedAlways")
 			case .authorizedWhenInUse:
