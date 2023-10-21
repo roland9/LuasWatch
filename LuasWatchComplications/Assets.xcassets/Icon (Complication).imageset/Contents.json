@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "IconFlat (Complication).pdf",
+      "idiom" : "watch"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

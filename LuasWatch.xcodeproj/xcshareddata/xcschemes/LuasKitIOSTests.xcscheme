@@ -14,7 +14,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB57F12D230B43AA00BA8B53"
+               BlueprintIdentifier = "AB3CC0412AE41413002AA60A"
                BuildableName = "LuasKitIOSTests.xctest"
                BlueprintName = "LuasKitIOSTests"
                ReferencedContainer = "container:LuasWatch.xcodeproj">
@@ -39,7 +39,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB57F12D230B43AA00BA8B53"
+               BlueprintIdentifier = "AB3CC0412AE41413002AA60A"
                BuildableName = "LuasKitIOSTests.xctest"
                BlueprintName = "LuasKitIOSTests"
                ReferencedContainer = "container:LuasWatch.xcodeproj">

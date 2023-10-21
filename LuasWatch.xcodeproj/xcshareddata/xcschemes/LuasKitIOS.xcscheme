@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB57F11B230B432E00BA8B53"
+               BlueprintIdentifier = "AB3CC03A2AE41413002AA60A"
                BuildableName = "LuasKitIOS.framework"
                BlueprintName = "LuasKitIOS"
                ReferencedContainer = "container:LuasWatch.xcodeproj">
@@ -50,7 +50,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AB57F11B230B432E00BA8B53"
+            BlueprintIdentifier = "AB3CC03A2AE41413002AA60A"
             BuildableName = "LuasKitIOS.framework"
             BlueprintName = "LuasKitIOS"
             ReferencedContainer = "container:LuasWatch.xcodeproj">
