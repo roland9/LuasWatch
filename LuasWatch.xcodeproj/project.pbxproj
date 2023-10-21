@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		AB364D232308277100C73EF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB364D222308277100C73EF6 /* Preview Assets.xcassets */; };
 		AB364D3A2308281100C73EF6 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = AB364D332308281000C73EF6 /* JSON */; };
 		AB364D3C2308281100C73EF6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB364D352308281100C73EF6 /* Coordinator.swift */; };
+		AB3CC0062AE4050C002AA60A /* PreviewsAppResult2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0052AE4050C002AA60A /* PreviewsAppResult2.swift */; };
 		AB50E3CD250D394800BFA30F /* API2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CA250D394800BFA30F /* API2.swift */; };
 		AB50E3CE250D394800BFA30F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CB250D394800BFA30F /* Parser.swift */; };
 		AB50E3CF250D394800BFA30F /* API2Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB50E3CC250D394800BFA30F /* API2Parser.swift */; };
@@ -169,6 +170,7 @@
 		AB364D362308281100C73EF6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB364D382308281100C73EF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB364D392308281100C73EF6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		AB3CC0052AE4050C002AA60A /* PreviewsAppResult2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppResult2.swift; sourceTree = "<group>"; };
 		AB50E3CA250D394800BFA30F /* API2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API2.swift; sourceTree = "<group>"; };
 		AB50E3CB250D394800BFA30F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		AB50E3CC250D394800BFA30F /* API2Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API2Parser.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				AB5C8B8A26FFBD4F0097A7C4 /* PreviewsAppStartup.swift */,
 				AB5C8B8C26FFBD9F0097A7C4 /* PreviewsAppRunning.swift */,
 				AB5C8B8E26FFBDE70097A7C4 /* PreviewsAppResult.swift */,
+				AB3CC0052AE4050C002AA60A /* PreviewsAppResult2.swift */,
 				AB5C8B9026FFBE130097A7C4 /* PreviewsStationsModal.swift */,
 				AB5C8B8826FFBB640097A7C4 /* PreviewsData.swift */,
 			);
@@ -691,6 +694,7 @@
 				AB364D182308277000C73EF6 /* LuasView.swift in Sources */,
 				AB5C8B8726FFBA570097A7C4 /* ChangeStationButton.swift in Sources */,
 				AB5C8B8F26FFBDE70097A7C4 /* PreviewsAppResult.swift in Sources */,
+				AB3CC0062AE4050C002AA60A /* PreviewsAppResult2.swift in Sources */,
 				AB5C8B8526FFB9F90097A7C4 /* TrainsListView.swift in Sources */,
 				AB5C8B8D26FFBD9F0097A7C4 /* PreviewsAppRunning.swift in Sources */,
 				AB5C8B9126FFBE130097A7C4 /* PreviewsStationsModal.swift in Sources */,

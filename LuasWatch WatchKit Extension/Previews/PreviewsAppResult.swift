@@ -14,61 +14,42 @@ struct Preview_AppResult: PreviewProvider {
 		Group {
 			LuasView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, userLocation)))
-				.previewDisplayName("found due times - 1:1")
+				.previewDisplayName("found - 1:1")
 
 			LuasView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, location)))
-				.previewDisplayName("found due times - user very close")
+				.previewDisplayName("found - close")
 
 			LuasView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_2_1, userLocation)))
-				.previewDisplayName("found due times - 2:1")
+				.previewDisplayName("found - 2:1")
 
 			LuasView()
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_3_2, userLocation)))
-				.previewDisplayName("found due times - 3:2")
+				.previewDisplayName("found - 3:2")
 
 			LuasView().previewDevice("Apple Watch Series 3 - 38mm")
 				.environmentObject(AppState(state: .foundDueTimes(trainsRed_4_4, userLocation)))
-				.previewDisplayName("Small watch - found due times - 4:4")
+				.previewDisplayName("found - small 4:4")
 
 			LuasView()
 				.environmentObject(AppState(state: .updatingDueTimes(trainsGreen, userLocation)))
-				.previewDisplayName("updating due times")
+				.previewDisplayName("updating")
 
 			LuasView()
 				.environmentObject(
 					AppState(
 						state: .errorGettingDueTimes(stationGreen,
 													 "No service Broombridge-Parnell. See news.")))
-				.previewDisplayName("error getting due times - with real message from API")
+				.previewDisplayName("error - API")  // message coming from API
 			LuasView()
 				.environmentObject(
 					AppState(
 						state: .errorGettingDueTimes(stationGreen,
 													 LuasStrings.noTrainsErrorMessage + "\n\n" +
 													 LuasStrings.noTrainsFallbackExplanation)))
-				.previewDisplayName("error getting due times - with fallback text")
+				.previewDisplayName("error - fallback") // showing fallback message
 
-		}
-
-		// there is a limit of 10  views we can pack into a group!
-		Group {
-			LuasView()
-				.environmentObject(
-					AppState(state: .errorGettingDueTimes(stationGreen,
-														  LuasStrings.noTrainsErrorMessage + "\n\n" +
-														  LuasStrings.noTrainsFallbackExplanation)))
-				.environment(\.sizeCategory, .extraExtraLarge)
-				.previewDisplayName("error getting due times (larger) - not working??")
-
-			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsOneWayStation, userLocation)))
-				.previewDisplayName("found due times - one way stop")
-
-			LuasView()
-				.environmentObject(AppState(state: .foundDueTimes(trainsFinalStop, userLocation)))
-				.previewDisplayName("found due times - final stop")
 		}
 	}
 }

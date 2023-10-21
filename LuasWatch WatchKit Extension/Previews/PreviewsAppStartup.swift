@@ -20,35 +20,35 @@ struct Preview_AppStartup: PreviewProvider {
 		Group {
 			LuasView()
 				.environmentObject(AppState(state: .gettingLocation))
-				.previewDisplayName("getting location")
+				.previewDisplayName("getting")
 
 			LuasView()
 				.previewDevice("Apple Watch Series 3 - 38mm")
 				.environmentObject(AppState(state: .gettingLocation))
 				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.previewDisplayName("getting location (38mm) extra large")
+				.previewDisplayName("getting XXL")
 
 			LuasView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationServicesDisabled)))
-				.previewDisplayName("error getting location - location services disabled")
+				.previewDisplayName("disabled")
 
 			LuasView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.locationAccessDenied)))
-				.previewDisplayName("error getting location - location access denied")
+				.previewDisplayName("denied")
 
 			LuasView().environmentObject(AppState(state: .errorGettingLocation(longGenericError)))
-				.previewDisplayName("error getting location - location manager error")
+				.previewDisplayName("locman error")
 
 			LuasView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationAuthError(genericAuthError))))
-				.previewDisplayName("error getting location - auth error")
+				.previewDisplayName("auth")
 
 			LuasView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationOtherError)))
-				.previewDisplayName("error getting location - other error")
+				.previewDisplayName("other")
 
 			LuasView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
-				.previewDisplayName("error getting station - too far away")
+				.previewDisplayName("error - too far away")
 
 			LuasView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
 				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-				.previewDisplayName("error getting station - too far away (larger)")
+				.previewDisplayName("error - too far away 2")
 		}
 	}
 }
