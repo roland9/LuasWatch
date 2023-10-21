@@ -121,7 +121,7 @@ struct ChangeStationButton: View {
 				ForEach(self.stations, id: \.stationId) { (station) in
 					// need a button here because just text only supports tap on the text but not full width
 					Button(action: {
-						print("☣️ tap \(station) -> save")
+						myPrint("☣️ tap \(station) -> save")
 
 						MyUserDefaults.saveSelectedStation(station)
 

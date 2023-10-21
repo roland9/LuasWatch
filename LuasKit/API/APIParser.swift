@@ -19,7 +19,7 @@ struct APIParser {
 
 		func parser(_ parser: XMLParser, foundCharacters string: String) {
             if shouldLog {
-                print("📄 \(self.classForCoder) \(#function): \(String( describing: string))")
+                myPrint("📄 \(String( describing: string))")
             }
             // fix: in some cases the parser calls this delegate back twice,
             // e.g. with input 'No service Stephen’s Green – Beechwood. See news',
@@ -30,7 +30,7 @@ struct APIParser {
 
 		func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
             if shouldLog {
-                print("📄 \(self.classForCoder) message: \(String( describing: message))")
+                myPrint("📄 \(self.classForCoder) message: \(String( describing: message))")
             }
             result = message
 			delegateStack?.pop()
@@ -50,7 +50,7 @@ struct APIParser {
 		func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?,
 					attributes attributeDict: [String: String] = [:]) {
             if shouldLog {
-                print("🔛 \(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
+                myPrint("🔛 \(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
             }
 
 			if elementName == "tram" {
@@ -90,13 +90,13 @@ struct APIParser {
 		func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
 					qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
             if shouldLog {
-                print("\(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
+                myPrint("\(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
             }
 
 			switch elementName {
 				case "stopInfo":
 					// we don't need to parse that info; we hand that in based on the API call we're making for the station
-                    if shouldLog { print("skip stopInfo") }
+                    if shouldLog { myPrint("skip stopInfo") }
 
 				case "message":
 					delegateStack?.push(messageParser)

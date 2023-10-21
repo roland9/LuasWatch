@@ -15,4 +15,4 @@ let station = TrainStation(stationId: "stationId",
 
 let realAPI = LuasAPI(apiWorker: RealAPIWorker())
 
-print(try await realAPI.dueTimes(for: station))
+myPrint(try await realAPI.dueTimes(for: station))

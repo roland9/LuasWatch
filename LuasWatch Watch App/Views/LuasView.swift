@@ -119,7 +119,7 @@ struct LuasView: View {
 	fileprivate func forceUpdateDirection(trainStationName: String) {
 		if self.direction != Direction.direction(for: trainStationName) {
 			self.direction = Direction.direction(for: trainStationName)
-			print("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
+			myPrint("🟢 foundDueTimes -> updated direction \(String(describing: self.direction))")
 		}
 	}
 }

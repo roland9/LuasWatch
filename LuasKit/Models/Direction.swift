@@ -74,12 +74,12 @@ extension Direction {
 		if var directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int] {
 			directions[station] = direction.rawValue
 			userDefaults.set(directions, forKey: userDefaultsKey)
-			print("updating directions \(directions)")
+			myPrint("updating directions \(directions)")
 		} else {
 			// first time we set anything: start from scratch with dictionary with only one entry
 			let direction: [String: Int] = [station: direction.rawValue]
 			userDefaults.set(direction, forKey: userDefaultsKey)
-			print("setting direction \(direction)")
+			myPrint("setting direction \(direction)")
 		}
 	}
 }

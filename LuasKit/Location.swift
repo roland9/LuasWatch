@@ -47,17 +47,17 @@ public class Location: NSObject {
 
     // start getting location
     public func start() {
-        print("\(#function): startUpdatingLocation")
+        myPrint("startUpdatingLocation")
         internalState = .gettingLocation
         locationManager.startUpdatingLocation()
 	}
 
-    // WIP that will be called very shortly after start because timer fires & calls update
-
+    #warning("that will be called very shortly after start because timer fires & calls update")
+    
 	public func update() {
         if locationAuthState == .granted &&
             (internalState == .stoppedUpdatingLocation || internalState == .error) {
-            print("\(#function): startUpdatingLocation")
+            myPrint("startUpdatingLocation")
 
             internalState = .gettingLocation
             locationManager.startUpdatingLocation()
@@ -68,7 +68,7 @@ public class Location: NSObject {
 extension Location: CLLocationManagerDelegate {
 
 	public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-		print("\(#function): \(error)")
+		myPrint("\(error)")
 
 		internalState = .error
 		let nsError = error as NSError
@@ -84,7 +84,7 @@ extension Location: CLLocationManagerDelegate {
 	}
 
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print("\(#function): \(manager.authorizationStatus.description)")
+        myPrint("\(manager.authorizationStatus.description)")
 
 		switch manager.authorizationStatus {
             case .notDetermined:
@@ -96,12 +96,12 @@ extension Location: CLLocationManagerDelegate {
                 locationAuthState = .granted
                 delegate?.didEnableLocation()
 			@unknown default:
-				print("default")
+				myPrint("default")
 		}
 	}
 
 	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		print("\(#function): \(locations)")
+		myPrint("\(locations)")
 
 		let lastLocation = locations.last!
 
@@ -116,14 +116,14 @@ extension Location: CLLocationManagerDelegate {
 
 			if lastLocation.horizontalAccuracy < 100 &&
 				lastLocation.verticalAccuracy < 100 {
-				print("\(#function): last location quite precise -> stopping location updates for now")
+				myPrint("last location quite precise -> stopping location updates for now")
 
 				internalState = .stoppedUpdatingLocation
 				locationManager.stopUpdatingLocation()
 			}
 
 		} else {
-			print("\(#function): ignoring lastLocation because too old (\(howRecent) seconds ago")
+			myPrint("ignoring lastLocation because too old (\(howRecent) seconds ago")
 		}
 	}
 

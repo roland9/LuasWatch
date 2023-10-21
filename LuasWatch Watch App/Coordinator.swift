@@ -71,16 +71,22 @@ class Coordinator: NSObject {
 	@objc func timerDidFire() {
 
 		guard appState.isStationsModalPresented == false else {
-			print("💔 StationsModal is up (isStationsModalPresented == true) -> ignore location update timer")
+			myPrint("💔 StationsModal is up (isStationsModalPresented == true) -> ignore location update timer")
 			return
 		}
 
-		// if user has selected a specific station & the location we have is not too old -> don't wait  for another location update
-		if let station = MyUserDefaults.userSelectedSpecificStation(),
-		   let latestLocation = latestLocation,
-		   latestLocation.isQuiteRecent() {
-			print("🥳 we have user selected station & recent location -> skip location update")
-			handle(station, latestLocation)
+		// if user has selected a specific station
+        if let station = MyUserDefaults.userSelectedSpecificStation() {
+
+            // the location we have is not too old -> don't wait for another location update
+            if let latestLocation,
+               latestLocation.isQuiteRecent() {
+                myPrint("🥳 we have user selected station & recent location -> skip location update")
+                handle(station, latestLocation)
+            } else {
+                myPrint("😇 user has selected specific station & only outdated or no location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
+                location.update()
+            }
 
 		} else if MyUserDefaults.userSelectedSpecificStation() == nil {
 			// user has NOT selected a specific station
@@ -88,11 +94,10 @@ class Coordinator: NSObject {
             if let latestLocation = latestLocation,
                latestLocation.isQuiteRecent() {
                 // we have a location that's not too old
-                print("🥳 user has NOT selected specific location & we have a recent location -> skip location update")
+                myPrint("🥳 user has NOT selected specific station & we have a recent location -> skip location update")
                 didGetLocation(latestLocation)
             } else {
-
-                print("😇 only outdated location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
+                myPrint("😇 user has NOT selected specific station & only outdated location \(latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update")
                 location.update()
             }
 		}
@@ -164,14 +169,13 @@ extension Coordinator: LocationDelegate {
 		let allStations = TrainStations.sharedFromFile
 
 		if let station = MyUserDefaults.userSelectedSpecificStation() {
-			print("step 2a: closest station, but specific one user selected before")
+			myPrint("step 2a: closest station, but specific one user selected before")
 			handle(station, location)
 
 		} else {
-			print("step 2b: closest station, doesn't matter which line")
+			myPrint("step 2b: closest station, doesn't matter which line")
 			if let closestStation = allStations.closestStation(from: location) {
-				print("\(#function): found closest station <\(closestStation.name)>")
-
+				myPrint("found closest station <\(closestStation.name)>")
 				handle(closestStation, location)
 			} else {
 
@@ -204,14 +208,14 @@ extension Coordinator: LocationDelegate {
             do {
                 let trains = try await self.api.dueTimes(for: closestStation)
 
-                print("\(#function): got trains \(trains)")
+                myPrint("got trains \(trains)")
                 self.trains = trains
                 appState.updateWithAnimation(to: .foundDueTimes(trains, location))
 
             } catch {
 
                 trains = nil
-                print("\(#function):  caught error \(error.localizedDescription)")
+                myPrint("caught error \(error.localizedDescription)")
 
                 if let apiError = error as? APIError {
 
