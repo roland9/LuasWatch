@@ -1,6 +1,11 @@
+//
+//  Created by Roland Gropmair on 19/08/2019.
+//  Copyright © 2019 mApps.ie. All rights reserved.
+//
+
 import Foundation
 
-struct API2Parser {
+struct APIParser {
 
     static let shouldLog = false
 
@@ -52,7 +57,8 @@ struct API2Parser {
 				if // let destination = attributeDict["destination"],
 					let dueMins = attributeDict["dueMins"] {
 					if description != "No trams forecast" && dueMins != "" {
-						let train = Train(destination: attributeDict["destination"]!, direction: direction, dueTime: attributeDict["dueMins"]!)
+						let train = Train(destination: attributeDict["destination"]!,
+                                          direction: direction, dueTime: attributeDict["dueMins"]!)
 						result?.append(train)
 					}
 				}
@@ -91,7 +97,6 @@ struct API2Parser {
 				case "stopInfo":
 					// we don't need to parse that info; we hand that in based on the API call we're making for the station
                     if shouldLog { print("skip stopInfo") }
-					break
 
 				case "message":
 					delegateStack?.push(messageParser)
@@ -120,16 +125,17 @@ struct API2Parser {
 		}
 	}
 
-	public static func parse(xml: Data, for trainStation: TrainStation) -> Result<TrainsByDirection> {
+	public static func parse(xml: Data, for trainStation: TrainStation) throws -> TrainsByDirection {
 		let xmlParser = XMLParser(data: xml)
 		let delegateStack = ParserDelegateStack(xmlParser: xmlParser)
 		let stopInfoParser = StopInfoParser(trainStation: trainStation)
 		delegateStack.push(stopInfoParser)
 
 		if xmlParser.parse() {
-			return .success(stopInfoParser.result!)
+			return stopInfoParser.result!
 		} else {
-			return .error("Invalid xml: \(xmlParser.parserError?.localizedDescription ?? "")")
+            throw APIError.invalidXML("Error parsing XML: " +
+                                      (xmlParser.parserError?.localizedDescription ?? ""))
 		}
 	}
 }

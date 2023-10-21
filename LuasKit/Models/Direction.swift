@@ -4,13 +4,28 @@
 //
 
 import Foundation
+import AppIntents
 
-public enum Direction: Int {
-	case both, inbound, outbound
+public enum Direction: Int, CaseIterable {
+
+    case both, inbound, outbound
 }
 
-extension Direction: CustomDebugStringConvertible {
-	public var debugDescription: String {
+@available(iOSApplicationExtension 16.0, *)
+extension Direction: AppEnum {
+
+    static var typeDisplayName: LocalizedStringResource = "Direction"
+
+    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Direction of the train (for stations that have both)")
+
+    public static var caseDisplayRepresentations: [Direction: DisplayRepresentation] {
+        [.inbound: "inbound trains", .outbound: "outbound trains", .both: "both directions"]
+    }
+}
+
+extension Direction: CustomStringConvertible {
+
+    public var description: String {
 		return text()
 	}
 

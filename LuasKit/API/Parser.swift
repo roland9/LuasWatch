@@ -1,3 +1,8 @@
+//
+//  Created by Roland Gropmair on 19/08/2019.
+//  Copyright © 2019 mApps.ie. All rights reserved.
+//
+
 import Foundation
 
 // credit to BenS https://github.com/nsscreencast/425-parsing-xml-in-swift/blob/master/SwiftParsingXML/SwiftParsingXML/main.swift

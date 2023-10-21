@@ -9,7 +9,7 @@ import XCTest
 
 class ParserTests: XCTestCase {
 
-    func testMessageParsing() {
+    func testMessageParsing() throws {
 
         // Apr 2023: looks like they fixed the XML now, escaping the apostrophe, so this fix is not that urgent anymore:
         // <message>No service Stephen\'s Green - Beechwood. See news</message>
@@ -26,18 +26,10 @@ class ParserTests: XCTestCase {
         </stopInfo>
         """.data(using: .utf8)!
 
-        let result = API2Parser.parse(xml: apiResponse, for: stationBlueBell)
-        print(result)
+        let trainsByDirection = try APIParser.parse(xml: apiResponse, for: stationBluebell)
 
-        switch result {
-
-            case .error:
-                XCTFail("unexpected error")
-
-            case .success(let trains):
-                XCTAssertEqual(trains.inbound.count, 0)
-                XCTAssertEqual(trains.outbound.count, 0)
-                XCTAssertEqual(trains.message, "No service Stephen’s Green – Beechwood. See news")
-        }
+        XCTAssertEqual(trainsByDirection.inbound.count, 0)
+        XCTAssertEqual(trainsByDirection.outbound.count, 0)
+        XCTAssertEqual(trainsByDirection.message, "No service Stephen’s Green – Beechwood. See news")
     }
 }

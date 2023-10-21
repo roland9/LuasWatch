@@ -39,6 +39,9 @@ public struct LuasStrings {
 		NSLocalizedString("Error getting your location:\n\n\(errorMessage)", comment: "")
 	}
 
+    public static let locationAuthorizationUnknown =
+        NSLocalizedString("Please grant location access so LuasWatch can find the closest LUAS stop.", comment: "")
+
 	public static let gettingLocation =
 		NSLocalizedString("Getting location...", comment: "")
 
@@ -68,3 +71,4 @@ public struct LuasStrings {
 		NSLocalizedString("\(station.name) stop is \(distance) away", comment: "String indicating distance of this Luas station (in meters) - input1: station name; input2: distance string")
 	}
 }
+// swiftlint:enable line_length
