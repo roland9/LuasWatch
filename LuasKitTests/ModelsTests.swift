@@ -6,9 +6,7 @@
 import XCTest
 import CoreLocation
 
-#if os(watchOS)
 @testable import LuasKit
-#endif
 
 // this test class is shared between LuasKitTests and the WatchKitExtensionTests
 

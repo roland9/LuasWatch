@@ -5,9 +5,7 @@
 
 import XCTest
 
-#if os(watchOS)
 @testable import LuasKit
-#endif
 
 public struct WrongAPIWorker: APIWorker {
 
