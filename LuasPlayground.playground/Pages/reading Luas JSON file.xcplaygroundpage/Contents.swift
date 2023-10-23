@@ -1,5 +1,5 @@
 import CoreLocation
-import LuasKitIOS
+import LuasKit
 
 let allStations = TrainStations.sharedFromFile
 let redStations = TrainStations.sharedFromFile.redLineStations.map { $0.name }

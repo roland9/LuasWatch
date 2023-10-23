@@ -5,7 +5,7 @@
 
 import XCTest
 
-@testable import LuasKitIOS
+@testable import LuasKit
 
 class ParserTests: XCTestCase {
 

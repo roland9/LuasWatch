@@ -5,10 +5,6 @@
 
 import XCTest
 
-#if os(iOS)
-@testable import LuasKitIOS
-#endif
-
 #if os(watchOS)
 @testable import LuasKit
 #endif

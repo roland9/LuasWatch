@@ -1,6 +1,6 @@
 import CoreLocation
 import PlaygroundSupport
-import LuasKitIOS
+import LuasKit
 
 let userLocation = CLLocation(latitude: CLLocationDegrees(53.3163934083453), longitude: CLLocationDegrees(-6.25344151996991))
 

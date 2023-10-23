@@ -6,15 +6,11 @@
 import XCTest
 import CoreLocation
 
-#if os(iOS)
-@testable import LuasKitIOS
-#endif
-
 #if os(watchOS)
 @testable import LuasKit
 #endif
 
-// this test class is shared between LuasKitIOSTests and the WatchKitExtensionTests
+// this test class is shared between LuasKitTests and the WatchKitExtensionTests
 
 class ModelsTests: XCTestCase {
 

@@ -6,10 +6,6 @@
 import Foundation
 import CoreLocation
 
-#if os(iOS)
-import LuasKitIOS
-#endif
-
 #if os(watchOS)
 import LuasKit
 #endif

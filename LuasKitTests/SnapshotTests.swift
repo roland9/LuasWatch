@@ -6,7 +6,7 @@
 import XCTest
 //import SnapshotTesting
 
-@testable import LuasKitIOS
+@testable import LuasKit
 
 class SnapshotTests: XCTestCase {
 

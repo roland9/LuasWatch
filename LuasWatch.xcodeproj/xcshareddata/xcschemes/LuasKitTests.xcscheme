@@ -5,22 +5,6 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB3CC0412AE41413002AA60A"
-               BuildableName = "LuasKitIOSTests.xctest"
-               BlueprintName = "LuasKitIOSTests"
-               ReferencedContainer = "container:LuasWatch.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -29,19 +13,18 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:LuasWatch.xcodeproj/LuasKitIOSTests.xctestplan"
+            reference = "container:LuasKitTests/LuasKitTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB3CC0412AE41413002AA60A"
-               BuildableName = "LuasKitIOSTests.xctest"
-               BlueprintName = "LuasKitIOSTests"
+               BlueprintIdentifier = "AB0BD3462AE6F61700EB51AF"
+               BuildableName = "LuasKitTests.xctest"
+               BlueprintName = "LuasKitTests"
                ReferencedContainer = "container:LuasWatch.xcodeproj">
             </BuildableReference>
          </TestableReference>
