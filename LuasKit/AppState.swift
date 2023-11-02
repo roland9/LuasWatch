@@ -8,6 +8,9 @@ import Combine
 import SwiftUI
 
 public enum MyState {
+
+    case locationAuthorizationUnknown
+
 	case gettingLocation
 	case errorGettingLocation(String)
 
@@ -21,37 +24,51 @@ public enum MyState {
 	case updatingDueTimes(TrainsByDirection, CLLocation)
 }
 
-extension MyState: CustomDebugStringConvertible {
-	public var debugDescription: String {
-		switch self {
+extension MyState: CustomStringConvertible {
 
-		case .gettingLocation:
-			return LuasStrings.gettingLocation
+    public var description: String {
+        switch self {
 
-		case .errorGettingLocation(let errorMessage):
-			return errorMessage
+            case .locationAuthorizationUnknown:
+                return LuasStrings.locationAuthorizationUnknown
 
-		case .errorGettingStation:
-			return LuasStrings.errorGettingStation
+            case .gettingLocation:
+                return LuasStrings.gettingLocation
 
-		case .gettingDueTimes(let trainStation, _):
-			return LuasStrings.gettingDueTimes(trainStation)
+            case .errorGettingLocation(let errorMessage):
+                return errorMessage
 
-		case .errorGettingDueTimes(_, let errorMessage):
-			return errorMessage
+            case .errorGettingStation:
+                return LuasStrings.errorGettingStation
 
-		case .foundDueTimes(let trains, _):
-			return LuasStrings.foundDueTimes(trains)
+            case .gettingDueTimes(let trainStation, _):
+                return LuasStrings.gettingDueTimes(trainStation)
 
-		case .updatingDueTimes(let trains, _):
-			return LuasStrings.updatingDueTimes(trains)
-		}
-	}
+            case .errorGettingDueTimes(_, let errorMessage):
+                return errorMessage
+
+            case .foundDueTimes(let trains, _):
+                return LuasStrings.foundDueTimes(trains)
+
+            case .updatingDueTimes(let trains, _):
+                return LuasStrings.updatingDueTimes(trains)
+        }
+    }
+}
+
+public protocol AppStateChangeable {
+    func didChange(to: MyState)
 }
 
 public class AppState: ObservableObject {
-	@Published public var state: MyState = .gettingLocation
+    @Published public var state: MyState = .locationAuthorizationUnknown {
+        didSet {
+            changeable?.didChange(to: state)
+        }
+    }
 	@Published public var isStationsModalPresented: Bool = false
+
+    public var changeable: AppStateChangeable?
 
 	public init() {}
 
@@ -61,7 +78,9 @@ public class AppState: ObservableObject {
 
     public func updateWithAnimation(to state: MyState) {
         withAnimation {
-            self.state = state
+            DispatchQueue.main.async { [weak self] in
+                self?.state = state
+            }
         }
     }
 }

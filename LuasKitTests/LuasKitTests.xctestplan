@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "16648599-5577-435C-8B84-994ADF4BDEDA",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:LuasWatch.xcodeproj",
+        "identifier" : "AB0BD3462AE6F61700EB51AF",
+        "name" : "LuasKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
