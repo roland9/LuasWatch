@@ -101,4 +101,20 @@ public struct TrainStations {
                 return closestStation(from: location, stations: greenLineStations)
         }
     }
+
+    public func station(shortCode: String) -> TrainStation? {
+        stations
+            .filter { $0.shortCode == shortCode }
+            .first
+    }
+
+    public static var unknown: TrainStation {
+        TrainStation(stationId: "id", 
+                     stationIdShort: "unknown",
+                     shortCode: "unknown",
+                     route: .green,
+                     name: "Unknown",
+                     location: CLLocation(latitude: CLLocationDegrees(53.3163934083453),
+                                          longitude: CLLocationDegrees(-6.25344151996991)))
+    }
 }

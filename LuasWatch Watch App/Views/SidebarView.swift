@@ -8,23 +8,35 @@ import LuasKit
 
 struct SidebarView: View {
 
-    @State var selectedStation: TrainStation?
-
-    let stations = TrainStations.sharedFromFile.greenLineStations
-
     var body: some View {
-      List(selection: $selectedStation) {
-            ForEach(stations, id: \.self) { station in
-                NavigationLink(station.name,
-                               value: station.name)
-            }
+
+        VStack {
+            FavouritesSidebarView()
+
+            NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
+                               Array(TrainStations.sharedFromFile.redLineStations.prefix(3)))
+
+            LinesView()
+
+//            RecentsView()
+
+            Text("Version 1.0.0")
         }
-        .containerBackground(.green.gradient,
-                             for: .navigation)
-        .listStyle(.carousel)
+
+
+//      List(selection: $selectedStation) {
+//            ForEach(stations, id: \.self) { station in
+//                NavigationLink(station.name,
+//                               value: station.name)
+//            }
+//        }
+//        .containerBackground(.green.gradient,
+//                             for: .navigation)
+//        .listStyle(.carousel)
     }
 }
 
 #Preview("Sidebar") {
     SidebarView()
+        .modelContainer(Previews().container)
 }

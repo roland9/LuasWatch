@@ -37,6 +37,11 @@
 		AB0BD3AC2AE70AFD00EB51AF /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCE82B42E5430060AAD5 /* StationView.swift */; };
 		AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */; };
+		AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */; };
+		AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */; };
+		AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */; };
+		AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */; };
+		AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF52B4315440060AAD5 /* LinesView.swift */; };
 		AB2453F32AE424B40007FA7C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F22AE424B40007FA7C /* WidgetKit.framework */; };
 		AB2453F52AE424B40007FA7C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F42AE424B40007FA7C /* SwiftUI.framework */; };
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
@@ -225,6 +230,11 @@
 		AB0BD3A82AE7086700EB51AF /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB0BFCE82B42E5430060AAD5 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesSidebarView.swift; sourceTree = "<group>"; };
+		AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previews.swift; sourceTree = "<group>"; };
+		AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStation.swift; sourceTree = "<group>"; };
+		AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsView.swift; sourceTree = "<group>"; };
+		AB0BFCF52B4315440060AAD5 /* LinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesView.swift; sourceTree = "<group>"; };
 		AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LuasWatchComplicationsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2453F22AE424B40007FA7C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB2453F42AE424B40007FA7C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -430,6 +440,14 @@
 			path = Previews;
 			sourceTree = "<group>";
 		};
+		AB0BFCF22B4312370060AAD5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		AB15B8772686815E005BF013 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +550,7 @@
 			children = (
 				AB695E322AE41C1D00B6DB99 /* LuasWatchApp.swift */,
 				AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */,
+				AB0BFCF22B4312370060AAD5 /* Models */,
 				AB695E652AE41CAC00B6DB99 /* Views */,
 				AB695E5E2AE41CAC00B6DB99 /* Previews */,
 				AB695E362AE41C1E00B6DB99 /* Assets.xcassets */,
@@ -566,6 +585,7 @@
 				AB695E5F2AE41CAC00B6DB99 /* PreviewsStationsModal.swift */,
 				AB695E612AE41CAC00B6DB99 /* PreviewsTapOverlay.swift */,
 				AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */,
+				AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";
@@ -582,6 +602,9 @@
 				AB695E6B2AE41CAC00B6DB99 /* TapOverlayView.swift */,
 				ABA68B232AF43977002A9F0D /* MainResultView.swift */,
 				AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */,
+				AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */,
+				AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */,
+				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
 				AB0BFCE82B42E5430060AAD5 /* StationView.swift */,
 			);
 			path = Views;
@@ -1036,8 +1059,10 @@
 				AB695E7A2AE41CAC00B6DB99 /* ChangeStationButton.swift in Sources */,
 				AB695E7C2AE41CAC00B6DB99 /* LuasView.swift in Sources */,
 				AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */,
+				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
 				AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */,
+				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
 				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
 				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
 				AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */,
@@ -1047,9 +1072,12 @@
 				AB695E722AE41CAC00B6DB99 /* PreviewsTapOverlay.swift in Sources */,
 				AB695E792AE41CAC00B6DB99 /* HeaderView.swift in Sources */,
 				AB695E7B2AE41CAC00B6DB99 /* TapOverlayView.swift in Sources */,
+				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				AB695E772AE41CAC00B6DB99 /* LoadingAnimationView.swift in Sources */,
 				AB695E732AE41CAC00B6DB99 /* PreviewsAppStartup.swift in Sources */,
 				ABA68B242AF43977002A9F0D /* MainResultView.swift in Sources */,
+				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
+				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
 				AB695E752AE41CAC00B6DB99 /* PreviewsAppRunning.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

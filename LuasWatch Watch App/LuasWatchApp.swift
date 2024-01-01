@@ -5,10 +5,26 @@
 
 import SwiftUI
 import LuasKit
+import SwiftData
 
 @main
 struct LuasWatch_Watch_AppApp: App {
     @Environment (\.scenePhase) var scenePhase
+
+    private var sharedModelContainer: ModelContainer = {
+        let schema = Schema([ FavouriteStation.self ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+            // WIP create sample data
+
+            return container
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
 
     let appState = AppState()
     let location = Location()
@@ -26,6 +42,8 @@ struct LuasWatch_Watch_AppApp: App {
             LuasView()
                 .environmentObject(appState)
         }
+        .modelContainer(sharedModelContainer)
+
         .onChange(of: scenePhase) {
             switch $0 {
                 case .background, .inactive:
