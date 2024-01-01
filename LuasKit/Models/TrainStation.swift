@@ -6,7 +6,7 @@
 import Foundation
 import CoreLocation
 
-public struct TrainStation: CustomStringConvertible {
+public struct TrainStation: CustomStringConvertible, Hashable {
 
     public enum StationType: String {
         case twoway, oneway, terminal
