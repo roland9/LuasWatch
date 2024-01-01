@@ -8,20 +8,46 @@ import LuasKit
 
 struct SidebarView: View {
 
+    @Binding var selectedStation: TrainStation?
+
     var body: some View {
 
-        VStack {
-            FavouritesSidebarView()
+        List(selection: $selectedStation) {
 
-            NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
-                               Array(TrainStations.sharedFromFile.redLineStations.prefix(3)))
+            Section {
+                FavouritesSidebarView(selectedStation: $selectedStation)
+            } header: {
+                FavouritesHeaderView()
+            }
 
-            LinesView()
+            Section {
+                NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
+                                   Array(TrainStations.sharedFromFile.redLineStations.prefix(3)),
+                selectedStation: $selectedStation)
+            } header: {
+                Text("Nearby")
+                    .font(.subheadline)
+                    .frame(minHeight: 40)
+            }
+
+            Section {
+                LinesView()
+            } header: {
+                Text("Lines")
+                    .font(.subheadline)
+                    .frame(minHeight: 40)
+            } footer: {
+
+                Text("App Version 1.0.0")
+            }
+
 
 //            RecentsView()
 
-            Text("Version 1.0.0")
         }
+        .containerBackground(.green.gradient,
+                             for: .navigation)
+        .listStyle(.carousel)
 
 
 //      List(selection: $selectedStation) {
@@ -30,13 +56,12 @@ struct SidebarView: View {
 //                               value: station.name)
 //            }
 //        }
-//        .containerBackground(.green.gradient,
-//                             for: .navigation)
-//        .listStyle(.carousel)
     }
 }
 
 #Preview("Sidebar") {
-    SidebarView()
+    @State var selectedStation: TrainStation?
+
+    return SidebarView(selectedStation: $selectedStation)
         .modelContainer(Previews().container)
 }

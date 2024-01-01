@@ -14,12 +14,13 @@ struct MainResultView {
 extension MainResultView: View {
 
     var body: some View {
+
         NavigationSplitView {
-            SidebarView()
+            SidebarView(selectedStation: $selectedStation)
 
         } detail: {
             TabView(selection: $selectedStation) {
-                    StationView(station: selectedStation)
+                    StationView(station: $selectedStation)
                         .tag(Optional(selectedStation))
                         .containerBackground(.blue.gradient,
                                              for: .tabView)
@@ -37,4 +38,5 @@ extension MainResultView: View {
                                     location: location)
 
     return MainResultView(selectedStation: stationGreen)
+        .modelContainer(Previews().container)
 }

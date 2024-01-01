@@ -42,6 +42,7 @@
 		AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */; };
 		AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */; };
 		AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF52B4315440060AAD5 /* LinesView.swift */; };
+		AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */; };
 		AB2453F32AE424B40007FA7C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F22AE424B40007FA7C /* WidgetKit.framework */; };
 		AB2453F52AE424B40007FA7C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F42AE424B40007FA7C /* SwiftUI.framework */; };
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
@@ -235,6 +236,7 @@
 		AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStation.swift; sourceTree = "<group>"; };
 		AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsView.swift; sourceTree = "<group>"; };
 		AB0BFCF52B4315440060AAD5 /* LinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesView.swift; sourceTree = "<group>"; };
+		AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesHeaderView.swift; sourceTree = "<group>"; };
 		AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LuasWatchComplicationsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2453F22AE424B40007FA7C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB2453F42AE424B40007FA7C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -603,6 +605,7 @@
 				ABA68B232AF43977002A9F0D /* MainResultView.swift */,
 				AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */,
 				AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */,
+				AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */,
 				AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */,
 				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
 				AB0BFCE82B42E5430060AAD5 /* StationView.swift */,
@@ -1065,6 +1068,7 @@
 				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
 				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
 				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
+				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
 				AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */,
 				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,
 				AB695E702AE41CAC00B6DB99 /* PreviewsStationsModal.swift in Sources */,

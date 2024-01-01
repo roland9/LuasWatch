@@ -10,40 +10,36 @@ struct LinesView: View {
 
     var body: some View {
 
-        List {
-
-            Section {
-
-                HStack {
-                    Text("Green Line")
-                    Spacer()
-                    Rectangle()
-                        .cornerRadius(3)
-                        .frame(width: 30, height: 20)
-                        .foregroundColor(Color("luasGreen"))
-                }
-
-                HStack {
-                    Text("Red Line")
-                    Spacer()
-                    Rectangle()
-                        .cornerRadius(3)
-                        .frame(width: 30, height: 20)
-                        .foregroundColor(Color("luasRed"))
-                }
-
-            } header: {
-                Text("Lines")
-                    .font(.subheadline)
-                    .frame(minHeight: 40)
-
-            }
-
+        HStack {
+            Text("Green Line")
+            Spacer()
+            Rectangle()
+                .cornerRadius(3)
+                .frame(width: 30, height: 20)
+                .foregroundColor(Color("luasGreen"))
         }
 
+        HStack {
+            Text("Red Line")
+            Spacer()
+            Rectangle()
+                .cornerRadius(3)
+                .frame(width: 30, height: 20)
+                .foregroundColor(Color("luasRed"))
+        }
     }
 }
 
 #Preview("Lines") {
-    LinesView()
+    List {
+        Section {
+            LinesView()
+        } header: {
+            Text("Lines")
+                .font(.subheadline)
+                .frame(minHeight: 40)
+
+        }
+
+    }
 }

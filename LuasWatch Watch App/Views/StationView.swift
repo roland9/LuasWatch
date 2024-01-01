@@ -8,9 +8,25 @@ import LuasKit
 
 struct StationView: View {
 
-    @State var station: TrainStation?
+    @Binding var station: TrainStation?
 
     var body: some View {
-        Text("Here!")
+        guard let station else {
+            return Text("Unknown")
+        }
+
+        return Text("\(station.name)")
     }
+}
+
+#Preview("Station View") {
+    @State var station: TrainStation? =
+    TrainStation(stationId: "stationId",
+                 stationIdShort: "LUAS69",
+                 shortCode: "PHI",
+                 route: .green,
+                 name: "Phibsboro",
+                 location: location)
+
+    return StationView(station: $station)
 }

@@ -42,24 +42,29 @@ struct LuasWatchComplicationsEntryView : View {
     var body: some View {
         switch family {
             case .accessoryInline:
-                Image("IconRound (Complication)")
+                Image("Icon (Complication)")
                     .resizable()
+                    .containerBackground(.black, for: .widget)
 
             case .accessoryCorner:
                 Image("IconComplication91.2")
                     .resizable()
+                    .containerBackground(.black, for: .widget)
 
             case .accessoryCircular:
                 Image("IconComplication120")
                     .resizable()
+                    .containerBackground(.black, for: .widget)
 
             case .accessoryRectangular:
-                Image("IconRound (Complication)")
+                Image("Icon (Complication)")
                     .resizable()
+                    .containerBackground(.black, for: .widget)
 
             @unknown default:
                 // unknown widgetFamily
                 Text("LuasWatch")
+                    .containerBackground(.black, for: .widget)
         }
     }
 }

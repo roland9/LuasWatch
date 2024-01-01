@@ -9,6 +9,8 @@ import LuasKit
 
 struct FavouritesSidebarView: View {
 
+    @Binding var selectedStation: TrainStation?
+
     @Environment(\.modelContext) private var modelContext
 
     @Query(sort: \FavouriteStation.dateAdded)
@@ -17,43 +19,27 @@ struct FavouritesSidebarView: View {
     var body: some View {
 
         if !favouriteStations.isEmpty {
-            List {
 
-                Section {
+            ForEach(favouriteStations) { station in
+                
+                let station = TrainStations.sharedFromFile.station(shortCode: station.shortCode) ?? TrainStations.unknown
 
-                    ForEach(favouriteStations) { station in
-                        HStack {
-                            let station = TrainStations.sharedFromFile.station(shortCode: station.shortCode) ?? TrainStations.unknown
+                HStack {
 
-                            Text("\(station.name)")
-                            Spacer()
-                            Rectangle()
-                                .cornerRadius(3)
-                                .frame(width: 30, height: 20)
-                                .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
-                        }
-                    }.onDelete(perform: { indexSet in
-                        #warning("WIP - delete from favorites")
-                    })
-
-                } header: {
-                    HStack {
-                        Text("Favourites")
-                            .font(.subheadline)
-                            .frame(minHeight: 40)
-                        Spacer()
-                        Button(action: {
-                            #warning("WIP - add from list")
-                        }, label: {
-                            Image(systemName: "plus.circle")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 30)
-                        })
-                        .buttonStyle(.borderless)
-                    }
+                    Text("\(station.name)")
+                    Spacer()
+                    Rectangle()
+                        .cornerRadius(3)
+                        .frame(width: 30, height: 20)
+                        .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
+                }.onTapGesture {
+                    selectedStation = station
                 }
-            }
+
+            }.onDelete(perform: { indexSet in
+#warning("WIP - delete from favorites")
+            })
+
         } else {
 
             VStack {
@@ -71,13 +57,33 @@ struct FavouritesSidebarView: View {
     }
 }
 
+#warning("improvie visuals - nested header??")
+
 #Preview("Favourites") {
-    FavouritesSidebarView()
-        .modelContainer(Previews().container)
+
+    @State var selectedStation: TrainStation?
+
+    return List {
+        Section {
+            FavouritesSidebarView(selectedStation: $selectedStation)
+                .modelContainer(Previews().container)
+        } header: {
+            FavouritesHeaderView()
+        }
+    }
 }
 
 
 #Preview("Favourites (empty)") {
-    FavouritesSidebarView()
-        .modelContainer(Previews(addSample: false).container)
+
+    @State var selectedStation: TrainStation?
+
+    return List {
+        Section {
+            FavouritesSidebarView(selectedStation: $selectedStation)
+                .modelContainer(Previews(addSample: false).container)
+        } header: {
+            FavouritesHeaderView()
+        }
+    }
 }

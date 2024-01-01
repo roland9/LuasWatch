@@ -9,33 +9,33 @@ import LuasKit
 struct NearbyStationsView {
 
     let nearbyStations: [TrainStation]
+
+    @Binding var selectedStation: TrainStation?
+
 }
 
 extension NearbyStationsView: View {
 
     var body: some View {
         if !nearbyStations.isEmpty {
-            List {
 
-                Section {
-
-                    ForEach(nearbyStations) { station in
-                        HStack {
-                            Text("\(station.name)")
-                            Spacer()
-                            Rectangle()
-                                .cornerRadius(3)
-                                .frame(width: 30, height: 20)
-                                .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
-                        }
-                    }
-
-                } header: {
-                    Text("Nearby")
-                        .font(.subheadline)
-                        .frame(minHeight: 40)
+            ForEach(nearbyStations) { station in
+                HStack {
+                    Text("\(station.name)")
+                    Spacer()
+                    Rectangle()
+                        .cornerRadius(3)
+                        .frame(width: 30, height: 20)
+                        .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
+                }.onTapGesture {
+                    selectedStation = station
                 }
             }
+
+            Text("Closest station")
+
+            Text("Closest other line station")
+
         } else {
 
             VStack {
@@ -51,12 +51,25 @@ extension NearbyStationsView: View {
 }
 
 #Preview("Nearby") {
-    NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
-                       Array(TrainStations.sharedFromFile.redLineStations.prefix(3))
-    )
+    @State var selectedStation: TrainStation?
+
+    return List {
+        Section {
+            NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
+                               Array(TrainStations.sharedFromFile.redLineStations.prefix(3)),
+                               selectedStation: $selectedStation)
+        } header: {
+            Text("Nearby")
+                .font(.subheadline)
+                .frame(minHeight: 40)
+        }
+    }
 }
 
 
 #Preview("Favourites (empty)") {
-    NearbyStationsView(nearbyStations: [])
+    @State var selectedStation: TrainStation?
+
+    return NearbyStationsView(nearbyStations: [],
+                       selectedStation: $selectedStation)
 }
