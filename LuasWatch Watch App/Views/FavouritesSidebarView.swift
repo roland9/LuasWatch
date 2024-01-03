@@ -37,7 +37,11 @@ struct FavouritesSidebarView: View {
                 }
 
             }.onDelete(perform: { indexSet in
-#warning("WIP - delete from favorites")
+
+                if let index = indexSet.first,
+                   let item = favouriteStations[safe: index] {
+                    modelContext.delete(item)
+                }
             })
 
         } else {
@@ -66,13 +70,12 @@ struct FavouritesSidebarView: View {
     return List {
         Section {
             FavouritesSidebarView(selectedStation: $selectedStation)
-                .modelContainer(Previews().container)
         } header: {
             FavouritesHeaderView()
         }
+        .modelContainer(Previews().container)
     }
 }
-
 
 #Preview("Favourites (empty)") {
 
@@ -81,9 +84,9 @@ struct FavouritesSidebarView: View {
     return List {
         Section {
             FavouritesSidebarView(selectedStation: $selectedStation)
-                .modelContainer(Previews(addSample: false).container)
         } header: {
             FavouritesHeaderView()
         }
+        .modelContainer(Previews(addSample: false).container)
     }
 }

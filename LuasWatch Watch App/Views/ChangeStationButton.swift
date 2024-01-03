@@ -118,7 +118,7 @@ struct ChangeStationButton: View {
 		var body: some View {
 			// swiftlint:disable multiple_closures_with_trailing_closure
 			List {
-				ForEach(self.stations, id: \.stationId) { (station) in
+				ForEach(stations, id: \.stationId) { (station) in
 					// need a button here because just text only supports tap on the text but not full width
 					Button(action: {
 						myPrint("☣️ tap \(station) -> save")

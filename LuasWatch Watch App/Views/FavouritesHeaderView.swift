@@ -4,8 +4,13 @@
 //
 
 import SwiftUI
+import LuasKit
 
 struct FavouritesHeaderView: View {
+
+    @Environment(\.modelContext) private var modelContext
+
+    @State var isStationsModalPresented = false
 
     var body: some View {
         HStack {
@@ -14,7 +19,7 @@ struct FavouritesHeaderView: View {
                 .frame(minHeight: 40)
             Spacer()
             Button(action: {
-                #warning("WIP - add from list")
+                isStationsModalPresented = true
             }, label: {
                 Image(systemName: "plus.circle")
                     .resizable()
@@ -22,6 +27,14 @@ struct FavouritesHeaderView: View {
                     .frame(maxWidth: 30)
             })
             .buttonStyle(.borderless)
+            .sheet(isPresented: $isStationsModalPresented, content: {
+                AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+            })
         }
     }
+}
+
+#Preview("HeaderView") {
+    FavouritesHeaderView()
+        .modelContainer(Previews().container)
 }

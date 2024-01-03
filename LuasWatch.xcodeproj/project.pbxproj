@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */; };
+		AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */; };
 		AB0BD34B2AE6F61700EB51AF /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB0BD3562AE6F64C00EB51AF /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */; };
 		AB0BD3572AE6F64C00EB51AF /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */; };
@@ -199,6 +201,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsListView.swift; sourceTree = "<group>"; };
+		AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		AB0BD3472AE6F61700EB51AF /* LuasKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
 		AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -608,7 +612,9 @@
 				AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */,
 				AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */,
 				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
+				AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */,
 				AB0BFCE82B42E5430060AAD5 /* StationView.swift */,
+				AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1066,6 +1072,7 @@
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
 				AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */,
 				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
+				AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */,
 				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
 				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
 				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */,
 				AB695E722AE41CAC00B6DB99 /* PreviewsTapOverlay.swift in Sources */,
 				AB695E792AE41CAC00B6DB99 /* HeaderView.swift in Sources */,
+				AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */,
 				AB695E7B2AE41CAC00B6DB99 /* TapOverlayView.swift in Sources */,
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				AB695E772AE41CAC00B6DB99 /* LoadingAnimationView.swift in Sources */,
