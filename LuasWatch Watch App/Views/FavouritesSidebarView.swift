@@ -24,17 +24,8 @@ struct FavouritesSidebarView: View {
                 
                 let station = TrainStations.sharedFromFile.station(shortCode: station.shortCode) ?? TrainStations.unknown
 
-                HStack {
-
-                    Text("\(station.name)")
-                    Spacer()
-                    Rectangle()
-                        .cornerRadius(3)
-                        .frame(width: 30, height: 20)
-                        .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
-                }.onTapGesture {
-                    selectedStation = station
-                }
+                StationRowView(station: station,
+                               action: { selectedStation = station })
 
             }.onDelete(perform: { indexSet in
 

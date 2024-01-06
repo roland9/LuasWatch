@@ -22,7 +22,7 @@ extension MainResultView: View {
             TabView(selection: $selectedStation) {
                     StationView(station: $selectedStation)
                         .tag(Optional(selectedStation))
-                        .containerBackground(.blue.gradient,
+                        .containerBackground(selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
                                              for: .tabView)
             }
         }

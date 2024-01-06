@@ -14,12 +14,14 @@ struct SidebarView: View {
 
         List(selection: $selectedStation) {
 
+            /// Favourite Stations
             Section {
                 FavouritesSidebarView(selectedStation: $selectedStation)
             } header: {
                 FavouritesHeaderView()
             }
 
+            /// Nearby Stations
             Section {
                 NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
                                    Array(TrainStations.sharedFromFile.redLineStations.prefix(3)),
@@ -30,8 +32,14 @@ struct SidebarView: View {
                     .frame(minHeight: 40)
             }
 
+            /// Lines Green / Red
             Section {
-                LinesView()
+                LinesView(actionRed: {
+
+                },
+                          actionGreen: {
+
+                })
             } header: {
                 Text("Lines")
                     .font(.subheadline)
@@ -41,21 +49,13 @@ struct SidebarView: View {
                 Text("App Version 1.0.0")
             }
 
-
+            /// Recents
 //            RecentsView()
 
         }
-        .containerBackground(.green.gradient,
+        .containerBackground(Color("luasTheme").gradient,
                              for: .navigation)
         .listStyle(.carousel)
-
-
-//      List(selection: $selectedStation) {
-//            ForEach(stations, id: \.self) { station in
-//                NavigationLink(station.name,
-//                               value: station.name)
-//            }
-//        }
     }
 }
 

@@ -7,33 +7,32 @@ import SwiftUI
 import LuasKit
 
 struct LinesView: View {
+    var actionRed: () -> Void
+    var actionGreen: () -> Void
 
     var body: some View {
+        Button(
+            action: { actionGreen() },
+            label: {
+                LineRowView(route: .green)
+            }
+        )
+        .padding(4)
 
-        HStack {
-            Text("Green Line")
-            Spacer()
-            Rectangle()
-                .cornerRadius(3)
-                .frame(width: 30, height: 20)
-                .foregroundColor(Color("luasGreen"))
-        }
-
-        HStack {
-            Text("Red Line")
-            Spacer()
-            Rectangle()
-                .cornerRadius(3)
-                .frame(width: 30, height: 20)
-                .foregroundColor(Color("luasRed"))
-        }
+        Button(
+            action: { actionRed() },
+            label: {
+                LineRowView(route: .red)
+            }
+        )
+        .padding(4)
     }
 }
 
 #Preview("Lines") {
     List {
         Section {
-            LinesView()
+            LinesView(actionRed: {}, actionGreen: {})
         } header: {
             Text("Lines")
                 .font(.subheadline)

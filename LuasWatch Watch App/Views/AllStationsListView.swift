@@ -17,23 +17,11 @@ struct AllStationsListView: View {
 
             ScrollView {
                 NavigationLink(destination: greenStationsView()) {
-                    VStack {
-                        Image(systemName: "arrow.up.arrow.down")
-                            .padding(5)
-                            .background(Color("luasGreen"))
-                            .cornerRadius(6)
-                        Text("Green Line Stations")
-                    }
+                    LineRowView(route: .green)
                 }
 
                 NavigationLink(destination: redStationsView()) {
-                    VStack {
-                        Image(systemName: "arrow.right.arrow.left")
-                            .padding(5)
-                            .background(Color("luasRed"))
-                            .cornerRadius(6)
-                        Text("Red Line Stations")
-                    }
+                    LineRowView(route: .red)
                 }
             }
         })

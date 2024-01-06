@@ -20,21 +20,15 @@ extension NearbyStationsView: View {
         if !nearbyStations.isEmpty {
 
             ForEach(nearbyStations) { station in
-                HStack {
-                    Text("\(station.name)")
-                    Spacer()
-                    Rectangle()
-                        .cornerRadius(3)
-                        .frame(width: 30, height: 20)
-                        .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
-                }.onTapGesture {
-                    selectedStation = station
-                }
+                StationRowView(station: station,
+                               action: { selectedStation = station })
             }
 
-            Text("Closest station")
+            Button(action: { print("WIP closest") },
+                   label: { Text("Closest station") })
 
-            Text("Closest other line station")
+            Button(action: { print("WIP closest other") },
+                   label: { Text("Closest other line station") })
 
         } else {
 
