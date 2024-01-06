@@ -27,11 +27,14 @@ struct LuasWatch_Watch_AppApp: App {
     }()
 
     let appState = AppState()
+    let appModel = AppModel()
     let location = Location()
     var mainCoordinator: Coordinator!
 
     init() {
-        mainCoordinator = Coordinator(appState: appState, location: location)
+        mainCoordinator = Coordinator(appState: appState,
+                                      appModel: appModel,
+                                      location: location)
         appState.changeable = mainCoordinator
         mainCoordinator.start()
     }
@@ -41,6 +44,7 @@ struct LuasWatch_Watch_AppApp: App {
         WindowGroup {
             LuasView()
                 .environmentObject(appState)
+                .environmentObject(appModel)
         }
         .modelContainer(sharedModelContainer)
 

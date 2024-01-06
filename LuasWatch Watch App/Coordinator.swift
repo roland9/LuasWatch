@@ -14,6 +14,8 @@ class Coordinator: NSObject {
 	private var location: Location
 	private var timer: Timer?
 
+    private let appModel: AppModel
+
 	private var latestLocation: CLLocation?
 
 	private var trains: TrainsByDirection?
@@ -21,19 +23,31 @@ class Coordinator: NSObject {
     static let refreshInterval = 12.0
 
 	init(appState: AppState,
+         appModel: AppModel,
 		 location: Location) {
 		self.appState = appState
+        self.appModel = appModel
 		self.location = location
     }
 
     func start() {
 
         //////////////////////////////////
-        // step 1: determine location
+        // step 1: if required, determine location
         location.delegate = self
 
-        // dont call start() here anymore - we call it once user has authorized location access
-        //        location.start()
+        if appModel.appMode == .closest ||
+            appModel.appMode == .closestOtherLine {
+
+            myPrint("need location for the current appMode \(appModel.appMode) -> prompt for location auth")
+            /// we need location updates in these cases
+            location.promptLocationAuth()
+
+        } else {
+            myPrint("no location needed for the current appMode \(appModel.appMode)")
+        }
+
+        /// we will call location.start() once user has authorized location access
 
         NotificationCenter.default.addObserver(
             forName: Notification.Name("LuasWatch.RetriggerTimer"),
@@ -76,7 +90,8 @@ class Coordinator: NSObject {
 		}
 
 		// if user has selected a specific station
-        if let station = MyUserDefaults.userSelectedSpecificStation() {
+//        if let station = MyUserDefaults.userSelectedSpecificStation() {
+        if let station = appModel.appMode.isSpecificStation {
 
             // the location we have is not too old -> don't wait for another location update
             if let latestLocation,
@@ -88,7 +103,7 @@ class Coordinator: NSObject {
                 location.update()
             }
 
-		} else if MyUserDefaults.userSelectedSpecificStation() == nil {
+        } else {
 			// user has NOT selected a specific station
 
             if let latestLocation = latestLocation,
@@ -139,19 +154,19 @@ extension Coordinator: LocationDelegate {
 		switch delegateError {
 
 			case .locationServicesNotEnabled:
-                appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
+                appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
 			case .locationAccessDenied:
-				appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
+                appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
 			case .locationManagerError(let error):
-                appState.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
+                appModel.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
 
 			case .authStatus(let authStatusError):
 				if let errorMessage = authStatusError.localizedErrorMessage() {
-                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
+                    appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
 				} else {
-                    appState.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
+                    appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
 			}
 		}
 	}
@@ -168,7 +183,9 @@ extension Coordinator: LocationDelegate {
 		// step 2: we have location -> now find station
 		let allStations = TrainStations.sharedFromFile
 
-		if let station = MyUserDefaults.userSelectedSpecificStation() {
+
+//		if let station = MyUserDefaults.userSelectedSpecificStation() {
+        if let station = appModel.appMode.isSpecificStation {
 			myPrint("step 2a: closest station, but specific one user selected before")
 			handle(station, location)
 
@@ -177,11 +194,12 @@ extension Coordinator: LocationDelegate {
 			if let closestStation = allStations.closestStation(from: location) {
 				myPrint("found closest station <\(closestStation.name)>")
 				handle(closestStation, location)
+
 			} else {
 
 				// no station found -> user too far away!
 				trains = nil
-				appState.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
+				appModel.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
 			}
 		}
 
@@ -196,9 +214,9 @@ extension Coordinator: LocationDelegate {
         //		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 
             if let trains = self.trains {
-                appState.updateWithAnimation(to: .updatingDueTimes(trains, location))
+                appModel.updateWithAnimation(to: .updatingDueTimes(trains, location))
             } else {
-                appState.updateWithAnimation(to: .gettingDueTimes(closestStation, location))
+                appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, location))
             }
 
         //////////////////////////////////
@@ -210,7 +228,7 @@ extension Coordinator: LocationDelegate {
 
                 myPrint("got trains \(trains)")
                 self.trains = trains
-                appState.updateWithAnimation(to: .foundDueTimes(trains, location))
+                appModel.updateWithAnimation(to: .foundDueTimes(trains, location))
 
             } catch {
 
@@ -221,16 +239,16 @@ extension Coordinator: LocationDelegate {
 
                     switch apiError {
                         case .noTrains(let message):
-                            appState.updateWithAnimation(to:
+                            appModel.updateWithAnimation(to:
                                     .errorGettingDueTimes(closestStation,
                                                           message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
 
                         case .invalidXML:
-                            appState.updateWithAnimation(
+                            appModel.updateWithAnimation(
                                 to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                     }
                 } else {
-                    appState.updateWithAnimation(to:
+                    appModel.updateWithAnimation(to:
                             .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
                 }
             }

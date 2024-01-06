@@ -91,6 +91,7 @@
 		AB695E7F2AE41D5800B6DB99 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB695E802AE41D5800B6DB99 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB695E842AE41EAE00B6DB99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */; };
+		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
 		AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRowView.swift */; };
 		AB89FB8B2B49B7B50020A943 /* LineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRowView.swift */; };
 		ABA68B242AF43977002A9F0D /* MainResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* MainResultView.swift */; };
@@ -294,6 +295,7 @@
 		AB695E6C2AE41CAC00B6DB99 /* LuasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRowView.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRowView.swift; sourceTree = "<group>"; };
 		ABA68B232AF43977002A9F0D /* MainResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultView.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 				AB3CC0112AE4094F002AA60A /* Models */,
 				AB3CC0072AE4094F002AA60A /* API */,
 				AB3CC00C2AE4094F002AA60A /* AppState.swift */,
+				AB8220782B49F79200022CA0 /* AppModel.swift */,
 				AB3CC00E2AE4094F002AA60A /* Location.swift */,
 				AB3CC00D2AE4094F002AA60A /* luasStops.json */,
 				AB3CC0102AE4094F002AA60A /* LuasStrings.swift */,
@@ -1058,6 +1061,7 @@
 				AB3CC02A2AE4094F002AA60A /* MyUserDefaults.swift in Sources */,
 				AB3CC0242AE4094F002AA60A /* TrainsByDirection.swift in Sources */,
 				AB3CC0292AE4094F002AA60A /* Direction.swift in Sources */,
+				AB8220792B49F79200022CA0 /* AppModel.swift in Sources */,
 				AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */,
 				AB3CC0232AE4094F002AA60A /* LuasStrings.swift in Sources */,
 				AB3CC0222AE4094F002AA60A /* Logging.swift in Sources */,

@@ -15,6 +15,7 @@ struct Preview_TapOverlay: PreviewProvider {
         ZStack {
             LuasView()
                 .environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, userLocation)))
+                .environmentObject(AppModel(.foundDueTimes(trainsRed_1_1, userLocation)))
 
             LuasView()
                 .overlayView("Showing outbound trains only")
