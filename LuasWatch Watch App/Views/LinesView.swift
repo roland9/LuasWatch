@@ -11,20 +11,18 @@ struct LinesView: View {
     var actionGreen: () -> Void
 
     var body: some View {
-        Button(
-            action: { actionGreen() },
-            label: {
-                LineRowView(route: .green)
-            }
-        )
+        Button {
+            actionGreen()
+        } label: {
+            LineRowView(route: .green)
+        }
         .padding(4)
 
-        Button(
-            action: { actionRed() },
-            label: {
-                LineRowView(route: .red)
-            }
-        )
+        Button {
+            actionRed()
+        } label: {
+            LineRowView(route: .red)
+        }
         .padding(4)
     }
 }
