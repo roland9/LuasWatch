@@ -8,59 +8,111 @@ import LuasKit
 
 struct StationView: View {
 
+    @EnvironmentObject var appModel: AppModel
+
     @Binding var station: TrainStation?
+    @State private var direction: Direction?
 
     var body: some View {
-        guard let station else {
-            return AnyView(Text("Unknown Station"))
-        }
 
-        return AnyView(
-            NavigationStack {
+        Group {
+            switch appModel.appState {
 
-                VStack {
-                    Text("\(station.name)")
-                        .font(.title3)
-                        .padding(.bottom)
+                case .idle:
+                    Text("idle...")
 
-                    Spacer()
+                case .gettingLocation:
+                    Text("getting location...")
 
-                    VStack {
-                        DueView(destination: "Broombridge", due: "5min")
-                        DueView(destination: "Broombridge", due: "12min")
-                        Divider()
-                        DueView(destination: "Sandyford", due: "12min")
-                    }
-                    .padding(6)
-                    .background(.black)
-                    .border(.secondary).cornerRadius(2)
-                    .padding(4)
-                }
+                case .locationAuthorizationUnknown:
+                    // WIP we need new approach to trigger location prompt via appModel?
+                    GrantLocationAuthView(didTapButton: {
+                        appModel.appState = .gettingLocation
+                    })
 
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            // Perform an action here.
-                        } label: {
-                            Image(systemName:"map")
+                case .errorGettingLocation:
+                    // we do get error description as well, but we ignore it in UI
+                    Text(appModel.appState.description)
+                        .multilineTextAlignment(.center)
+                        .frame(idealHeight: .greatestFiniteMagnitude)
+
+                case .errorGettingStation(let errorMessage):
+                    Text(errorMessage)
+                        .multilineTextAlignment(.center)
+                        .frame(idealHeight: .greatestFiniteMagnitude)
+
+                case .loadingDueTimes(_, _):
+                    // we do get location here in this enum as well, but we ignore it in the UI
+                    Text(appModel.appState.description)
+                        .multilineTextAlignment(.center)
+
+                case .errorGettingDueTimes(_, _):
+                    // this enum has second parameter 'errorString', but it's not shown here
+                    // because it's surfaced via the appState's `description`
+                    ScrollView {
+                        VStack {
+                            //                            HeaderView(station: station, direction: $direction)
+
+                            Spacer(minLength: 20)
+
+                            Text(appModel.appState.description)
+                                .multilineTextAlignment(.center)
+
+                            //                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
                         }
                     }
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button {
-                            // Perform an action here.
-                        } label: {
-                            Image(systemName:"arrow.left.arrow.right")
+
+                case .foundDueTimes(let trains, let location),
+                        .updatingDueTimes(let trains, let location):
+                    NavigationStack {
+
+                        VStack {
+                            Text("\(station?.name ?? "Unknown Station")")
+                                .font(.title3)
+                                .padding(.bottom)
+
+                            Spacer()
+
+                            VStack {
+                                ForEach(trains.inbound, id: \.id) {
+                                    DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                                }
+                                Divider()
+                                ForEach(trains.outbound, id: \.id) {
+                                    DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                                }
+                            }
+                            .padding(6)
+                            .background(.black)
+                            .border(.secondary).cornerRadius(2)
+                            .padding(4)
                         }
 
-                        Button {
-                            // Perform an action here.
-                        } label: {
-                            Image(systemName:"heart")
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button {
+                                    // Perform an action here.
+                                } label: {
+                                    Image(systemName:"map")
+                                }
+                            }
+                            ToolbarItemGroup(placement: .bottomBar) {
+                                Button {
+                                    // Perform an action here.
+                                } label: {
+                                    Image(systemName:"arrow.left.arrow.right")
+                                }
+
+                                Button {
+                                    // Perform an action here.
+                                } label: {
+                                    Image(systemName:"heart")
+                                }
+                            }
                         }
                     }
-                }
             }
-        )
+        }
     }
 }
 
@@ -87,28 +139,31 @@ struct DueView: View {
     @State var station: TrainStation? =
     TrainStations.sharedFromFile.station(shortCode: "CAB")
 
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsFinalStop, userLocation)))
+
     return TabView { StationView(station: $station)
-            .containerBackground(station!.route.color.gradient,
+            .environmentObject(appModel)
+            .containerBackground(trainsFinalStop.trainStation.route.color.gradient,
                                  for: .tabView)
     }
 }
 
-#Preview("Station - Leopardstown Valley") {
-    @State var station: TrainStation? =
-    TrainStations.sharedFromFile.station(shortCode: "LEO")
-
-    return TabView { StationView(station: $station)
-            .containerBackground(station!.route.color.gradient,
-                                 for: .tabView)
-    }
-}
-
-#Preview("Station - Connolly") {
-    @State var station: TrainStation? =
-    TrainStations.sharedFromFile.station(shortCode: "CON")
-
-    return TabView { StationView(station: $station)
-            .containerBackground(station!.route.color.gradient,
-                                 for: .tabView)
-    }
-}
+//#Preview("Station - Leopardstown Valley") {
+//    @State var station: TrainStation? =
+//    TrainStations.sharedFromFile.station(shortCode: "LEO")
+//
+//    return TabView { StationView(station: $station)
+//            .containerBackground(station!.route.color.gradient,
+//                                 for: .tabView)
+//    }
+//}
+//
+//#Preview("Station - Connolly") {
+//    @State var station: TrainStation? =
+//    TrainStations.sharedFromFile.station(shortCode: "CON")
+//
+//    return TabView { StationView(station: $station)
+//            .containerBackground(station!.route.color.gradient,
+//                                 for: .tabView)
+//    }
+//}

@@ -32,14 +32,14 @@ class Coordinator: NSObject {
 
     func start() {
 
-        //////////////////////////////////
+        // ///////////////////////////////
         // step 1: if required, determine location
         location.delegate = self
 
         if appModel.appMode == .closest ||
             appModel.appMode == .closestOtherLine {
 
-            myPrint("need location for the current appMode \(appModel.appMode) -> prompt for location auth")
+            myPrint("need location for current appMode \(appModel.appMode) -> prompt for location auth")
             /// we need location updates in these cases
             location.promptLocationAuth()
 
@@ -179,25 +179,25 @@ extension Coordinator: LocationDelegate {
 
 		latestLocation = location
 
-		//////////////////////////////////
+		// ///////////////////////////////
 		// step 2: we have location -> now find station
 		let allStations = TrainStations.sharedFromFile
 
 
 //		if let station = MyUserDefaults.userSelectedSpecificStation() {
         if let station = appModel.appMode.isSpecificStation {
-			myPrint("step 2a: closest station, but specific one user selected before")
+			myPrint("step 2a: got location now, but user selected specific station before -> use this station now")
 			handle(station, location)
 
 		} else {
-			myPrint("step 2b: closest station, doesn't matter which line")
+			myPrint("step 2b: got location; find closest station (no matter which line)")
+
 			if let closestStation = allStations.closestStation(from: location) {
 				myPrint("found closest station <\(closestStation.name)>")
 				handle(closestStation, location)
 
 			} else {
-
-				// no station found -> user too far away!
+                myPrint("step 2c: no station found -> user too far away")
 				trains = nil
 				appModel.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
 			}
@@ -219,7 +219,7 @@ extension Coordinator: LocationDelegate {
                 appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, location))
             }
 
-        //////////////////////////////////
+        // ///////////////////////////////
         // step 3: get due times from API
         Task {
 

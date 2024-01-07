@@ -37,7 +37,6 @@ extension MainResultView: View {
                                     route: .green,
                                     name: "Phibsboro",
                                     location: location)
-    let appState = AppModel.AppState(.foundDueTimes(trainsFinalStop, userLocation))
 
     return MainResultView(selectedStation: stationGreen)
         .modelContainer(Previews().container)

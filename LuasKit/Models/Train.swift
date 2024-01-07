@@ -24,6 +24,14 @@ public struct Train: CustomStringConvertible, Hashable, Codable {
         ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
     }
 
+    public var destinationDescription: String {
+        destination.replacingOccurrences(of: "LUAS ", with: "")
+    }
+
+    public var dueTimeDescription2: String {
+        (dueTime.lowercased() == "due") ? "Due" : dueTime
+    }
+
     public var destinationDueTimeDescription: String {
         "Luas to \(destination) \(dueTime.lowercased() == "due" ? "is Due" : "in \(dueTime)")"
     }
