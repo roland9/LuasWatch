@@ -42,8 +42,7 @@ struct LuasWatch_Watch_AppApp: App {
     var body: some Scene {
 
         WindowGroup {
-            LuasView()
-                .environmentObject(appState)
+            LuasView2()
                 .environmentObject(appModel)
         }
         .modelContainer(sharedModelContainer)

@@ -16,7 +16,7 @@ public class AppModel: ObservableObject {
 
     // for previews
     public init(_ state: AppState) {
-        self.appState = appState
+        self.appState = state
     }
 
     /// state machine, drives UI
@@ -43,6 +43,14 @@ public class AppModel: ObservableObject {
     }
 
     @Published public var appState: AppState = .idle
+
+    @Published public var selectedStation: TrainStation? {
+        didSet {
+            // save?
+
+            NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
+        }
+    }
 
     public var changeable: AppStateChangeable?
 

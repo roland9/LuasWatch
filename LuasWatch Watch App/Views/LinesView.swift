@@ -14,16 +14,25 @@ struct LinesView: View {
         Button {
             actionGreen()
         } label: {
-            LineRowView(route: .green)
+            // so we center the lineRowView
+            HStack {
+                Spacer()
+                LineRowView(route: .green)
+                Spacer()
+            }
         }
-        .padding(4)
+        .padding(.vertical, 8)
 
         Button {
             actionRed()
         } label: {
-            LineRowView(route: .red)
+            HStack {
+                Spacer()
+                LineRowView(route: .red)
+                Spacer()
+            }
         }
-        .padding(4)
+        .padding(.vertical, 8)
     }
 }
 
@@ -35,7 +44,6 @@ struct LinesView: View {
             Text("Lines")
                 .font(.subheadline)
                 .frame(minHeight: 40)
-
         }
 
     }

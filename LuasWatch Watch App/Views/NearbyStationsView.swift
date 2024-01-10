@@ -8,10 +8,8 @@ import LuasKit
 
 struct NearbyStationsView {
 
+    @EnvironmentObject var appModel: AppModel
     let nearbyStations: [TrainStation]
-
-    @Binding var selectedStation: TrainStation?
-
 }
 
 extension NearbyStationsView: View {
@@ -21,13 +19,13 @@ extension NearbyStationsView: View {
 
             ForEach(nearbyStations) { station in
                 StationRowView(station: station,
-                               action: { selectedStation = station })
+                               action: { appModel.appMode = .nearby(station) })
             }
 
-            Button(action: { print("WIP closest") },
+            Button(action: { appModel.appMode = .closest },
                    label: { Text("Closest station") })
 
-            Button(action: { print("WIP closest other") },
+            Button(action: { appModel.appMode = .closestOtherLine },
                    label: { Text("Closest other line station") })
 
         } else {
@@ -38,20 +36,20 @@ extension NearbyStationsView: View {
                     .padding()
                     .foregroundColor(.primary)
             }
-
         }
-
     }
 }
 
 #Preview("Nearby") {
     @State var selectedStation: TrainStation?
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
+    appModel.selectedStation = stationGreen
 
     return List {
         Section {
             NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
-                               Array(TrainStations.sharedFromFile.redLineStations.prefix(3)),
-                               selectedStation: $selectedStation)
+                               Array(TrainStations.sharedFromFile.redLineStations.prefix(3)))
+            .environmentObject(appModel)
         } header: {
             Text("Nearby")
                 .font(.subheadline)
@@ -60,10 +58,8 @@ extension NearbyStationsView: View {
     }
 }
 
-
 #Preview("Favourites (empty)") {
     @State var selectedStation: TrainStation?
 
-    return NearbyStationsView(nearbyStations: [],
-                       selectedStation: $selectedStation)
+    return NearbyStationsView(nearbyStations: [])
 }

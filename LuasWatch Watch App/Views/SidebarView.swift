@@ -24,8 +24,7 @@ struct SidebarView: View {
             /// Nearby Stations
             Section {
                 NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
-                                   Array(TrainStations.sharedFromFile.redLineStations.prefix(3)),
-                selectedStation: $selectedStation)
+                                   Array(TrainStations.sharedFromFile.redLineStations.prefix(3)))
             } header: {
                 Text("Nearby")
                     .font(.subheadline)

@@ -94,7 +94,7 @@
 		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
 		AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRowView.swift */; };
 		AB89FB8B2B49B7B50020A943 /* LineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRowView.swift */; };
-		ABA68B242AF43977002A9F0D /* MainResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* MainResultView.swift */; };
+		ABA68B242AF43977002A9F0D /* LuasView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasView2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,7 +298,7 @@
 		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRowView.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRowView.swift; sourceTree = "<group>"; };
-		ABA68B232AF43977002A9F0D /* MainResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultView.swift; sourceTree = "<group>"; };
+		ABA68B232AF43977002A9F0D /* LuasView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasView2.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -613,7 +613,7 @@
 				AB695E672AE41CAC00B6DB99 /* LoadingAnimationView.swift */,
 				AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */,
 				AB695E6B2AE41CAC00B6DB99 /* TapOverlayView.swift */,
-				ABA68B232AF43977002A9F0D /* MainResultView.swift */,
+				ABA68B232AF43977002A9F0D /* LuasView2.swift */,
 				AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */,
 				AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */,
 				AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */,
@@ -1098,7 +1098,7 @@
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				AB695E772AE41CAC00B6DB99 /* LoadingAnimationView.swift in Sources */,
 				AB695E732AE41CAC00B6DB99 /* PreviewsAppStartup.swift in Sources */,
-				ABA68B242AF43977002A9F0D /* MainResultView.swift in Sources */,
+				ABA68B242AF43977002A9F0D /* LuasView2.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
 				AB695E752AE41CAC00B6DB99 /* PreviewsAppRunning.swift in Sources */,

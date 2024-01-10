@@ -135,35 +135,47 @@ struct DueView: View {
     }
 }
 
-#Preview("Station - Cabra") {
+#Preview("Cabra") {
     @State var station: TrainStation? =
     TrainStations.sharedFromFile.station(shortCode: "CAB")
 
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsFinalStop, userLocation)))
+    let trains = trainsGreen
+
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
     return TabView { StationView(station: $station)
             .environmentObject(appModel)
-            .containerBackground(trainsFinalStop.trainStation.route.color.gradient,
+            .containerBackground(trains.trainStation.route.color.gradient,
                                  for: .tabView)
     }
 }
 
-//#Preview("Station - Leopardstown Valley") {
-//    @State var station: TrainStation? =
-//    TrainStations.sharedFromFile.station(shortCode: "LEO")
-//
-//    return TabView { StationView(station: $station)
-//            .containerBackground(station!.route.color.gradient,
-//                                 for: .tabView)
-//    }
-//}
-//
-//#Preview("Station - Connolly") {
-//    @State var station: TrainStation? =
-//    TrainStations.sharedFromFile.station(shortCode: "CON")
-//
-//    return TabView { StationView(station: $station)
-//            .containerBackground(station!.route.color.gradient,
-//                                 for: .tabView)
-//    }
-//}
+#Preview("Leopardstown Valley") {
+    @State var station: TrainStation? =
+    TrainStations.sharedFromFile.station(shortCode: "LEO")
+
+    let trains = trainsGreen
+
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
+
+    return TabView { StationView(station: $station)
+            .environmentObject(appModel)
+            .containerBackground(trains.trainStation.route.color.gradient,
+                                 for: .tabView)
+    }
+}
+
+#Preview("Connolly") {
+    @State var station: TrainStation? =
+    TrainStations.sharedFromFile.station(shortCode: "CON")
+
+    let trains = trainsFinalStop
+
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
+
+    return TabView { StationView(station: $station)
+            .environmentObject(appModel)
+            .containerBackground(trains.trainStation.route.color.gradient,
+                                 for: .tabView)
+    }
+}

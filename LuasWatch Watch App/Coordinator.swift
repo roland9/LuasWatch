@@ -71,6 +71,8 @@ class Coordinator: NSObject {
 	}
 
 	func retriggerTimer() {
+        myPrint(#function)
+        
 		timer?.invalidate()
 
 		// fire right now...

@@ -22,61 +22,59 @@ struct LuasView: View {
 
     var body: some View {
 
-        MainResultView()
+        Group {
+            switch appState.state {
 
-//        Group {
-//            switch appState.state {
-//
-//                case .locationAuthorizationUnknown:
-//                    GrantLocationAuthView(didTapButton: {
-//                        appState.state = .gettingLocation
-//                    })
-//
-//                case .gettingLocation:
-//                    loadingAnimationView()
-//
-//                case .errorGettingLocation:
-//                    Text(self.appState.state.description)
-//                        .multilineTextAlignment(.center)
-//                        .frame(idealHeight: .greatestFiniteMagnitude)
-//
-//                case .errorGettingStation(let errorMessage):
-//                    Text(errorMessage)
-//                        .multilineTextAlignment(.center)
-//                        .frame(idealHeight: .greatestFiniteMagnitude)
-//
-//                    // we do get location here in this enum as well, but we ignore it in the UI
-//                case .gettingDueTimes:
-//                    Text(self.appState.state.description)
-//                        .multilineTextAlignment(.center)
-//
-//                    // bit confusing: this enum has second parameter 'errorString', but it's not shown here
-//                    // because it's surfaced via the appState's `description`
-//                case .errorGettingDueTimes(let trainStation, _):
-//
-//                    ScrollView {
-//                        VStack {
-//                            HeaderView(station: trainStation, direction: $direction,
-//                                       overlayTextAfterTap: $overlayTextAfterTap)
-//
-//                            Spacer(minLength: 20)
-//
-//                            Text(self.appState.state.description)
-//                                .multilineTextAlignment(.center)
-//
-//                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
-//                        }
-//                    }
-//
-//                case .foundDueTimes(let trains, let location):
-//                    foundDueTimesView(for: trains, location: location)
-//                        .transition(.opacity)
-//
-//                case .updatingDueTimes(let trains, let location):
-//                    updatingDueTimesView(for: trains, location: location)
-//                        .transition(.opacity)
-//            }
-//        }
+                case .locationAuthorizationUnknown:
+                    GrantLocationAuthView(didTapButton: {
+                        appState.state = .gettingLocation
+                    })
+
+                case .gettingLocation:
+                    loadingAnimationView()
+
+                case .errorGettingLocation:
+                    Text(self.appState.state.description)
+                        .multilineTextAlignment(.center)
+                        .frame(idealHeight: .greatestFiniteMagnitude)
+
+                case .errorGettingStation(let errorMessage):
+                    Text(errorMessage)
+                        .multilineTextAlignment(.center)
+                        .frame(idealHeight: .greatestFiniteMagnitude)
+
+                    // we do get location here in this enum as well, but we ignore it in the UI
+                case .gettingDueTimes:
+                    Text(self.appState.state.description)
+                        .multilineTextAlignment(.center)
+
+                    // bit confusing: this enum has second parameter 'errorString', but it's not shown here
+                    // because it's surfaced via the appState's `description`
+                case .errorGettingDueTimes(let trainStation, _):
+
+                    ScrollView {
+                        VStack {
+                            HeaderView(station: trainStation, direction: $direction,
+                                       overlayTextAfterTap: $overlayTextAfterTap)
+
+                            Spacer(minLength: 20)
+
+                            Text(self.appState.state.description)
+                                .multilineTextAlignment(.center)
+
+                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
+                        }
+                    }
+
+                case .foundDueTimes(let trains, let location):
+                    foundDueTimesView(for: trains, location: location)
+                        .transition(.opacity)
+
+                case .updatingDueTimes(let trains, let location):
+                    updatingDueTimesView(for: trains, location: location)
+                        .transition(.opacity)
+            }
+        }
     }
 
 	fileprivate func foundDueTimesView(for trains: TrainsByDirection, location: CLLocation) -> some View {
