@@ -7,6 +7,7 @@ import CoreLocation
 import Combine
 import SwiftUI
 
+// WIP remove
 public enum MyState {
 
     case locationAuthorizationUnknown
@@ -60,6 +61,7 @@ public protocol AppStateChangeable {
     func didChange(to: MyState)
 }
 
+// WIP remove
 public class AppState: ObservableObject {
     @Published public var state: MyState = .locationAuthorizationUnknown {
         didSet {

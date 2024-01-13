@@ -41,6 +41,7 @@ public class Location: NSObject {
     }
 
     public func promptLocationAuth() {
+        myPrint(#function)
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
     }

@@ -9,6 +9,7 @@ import SwiftData
 
 @main
 struct LuasWatch_Watch_AppApp: App {
+    
     @Environment (\.scenePhase) var scenePhase
 
     private var sharedModelContainer: ModelContainer = {
@@ -26,16 +27,13 @@ struct LuasWatch_Watch_AppApp: App {
         }
     }()
 
-    let appState = AppState()
     let appModel = AppModel()
     let location = Location()
     var mainCoordinator: Coordinator!
 
     init() {
-        mainCoordinator = Coordinator(appState: appState,
-                                      appModel: appModel,
+        mainCoordinator = Coordinator(appModel: appModel,
                                       location: location)
-        appState.changeable = mainCoordinator
         mainCoordinator.start()
     }
 
@@ -43,8 +41,8 @@ struct LuasWatch_Watch_AppApp: App {
 
         WindowGroup {
             LuasView2()
-                .environmentObject(appModel)
         }
+        .environmentObject(appModel)
         .modelContainer(sharedModelContainer)
 
         .onChange(of: scenePhase) {
@@ -53,7 +51,7 @@ struct LuasWatch_Watch_AppApp: App {
                     mainCoordinator.invalidateTimer()
 
                 case .active:
-                    mainCoordinator.scheduleTimer()
+                    mainCoordinator.fireAndScheduleTimer()
 
                 @unknown default:
                     break

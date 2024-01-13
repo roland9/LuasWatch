@@ -50,6 +50,8 @@
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
 		AB2453FA2AE424B50007FA7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2453F92AE424B50007FA7C /* Assets.xcassets */; };
 		AB2453FE2AE424B50007FA7C /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */; };
+		AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */; };
 		AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0082AE4094F002AA60A /* APIParser.swift */; };
 		AB3CC01C2AE4094F002AA60A /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */; };
 		AB3CC01D2AE4094F002AA60A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00A2AE4094F002AA60A /* API.swift */; };
@@ -250,6 +252,8 @@
 		AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchComplications.swift; sourceTree = "<group>"; };
 		AB2453F92AE424B50007FA7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2453FB2AE424B50007FA7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
+		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		AB3CC0082AE4094F002AA60A /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasMockAPI.swift; sourceTree = "<group>"; };
 		AB3CC00A2AE4094F002AA60A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -515,6 +519,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AB38CED12B52FB0C0074D901 /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				AB3CC00C2AE4094F002AA60A /* AppState.swift */,
+			);
+			path = OLD;
+			sourceTree = "<group>";
+		};
 		AB3CC0072AE4094F002AA60A /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,7 +557,7 @@
 				AB3CC01A2AE4094F002AA60A /* LuasKit.h */,
 				AB3CC0112AE4094F002AA60A /* Models */,
 				AB3CC0072AE4094F002AA60A /* API */,
-				AB3CC00C2AE4094F002AA60A /* AppState.swift */,
+				AB38CED12B52FB0C0074D901 /* OLD */,
 				AB8220782B49F79200022CA0 /* AppModel.swift */,
 				AB3CC00E2AE4094F002AA60A /* Location.swift */,
 				AB3CC00D2AE4094F002AA60A /* luasStops.json */,
@@ -563,6 +575,8 @@
 			children = (
 				AB695E322AE41C1D00B6DB99 /* LuasWatchApp.swift */,
 				AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */,
+				AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */,
+				AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */,
 				AB0BFCF22B4312370060AAD5 /* Models */,
 				AB695E652AE41CAC00B6DB99 /* Views */,
 				AB695E5E2AE41CAC00B6DB99 /* Previews */,
@@ -1076,6 +1090,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB695E7A2AE41CAC00B6DB99 /* ChangeStationButton.swift in Sources */,
+				AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */,
 				AB695E7C2AE41CAC00B6DB99 /* LuasView.swift in Sources */,
 				AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */,
 				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
@@ -1084,6 +1099,7 @@
 				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
 				AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */,
 				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
+				AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */,
 				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
 				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
 				AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */,
@@ -1400,7 +1416,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
@@ -1431,7 +1446,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;
@@ -1593,7 +1607,6 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,4";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1628,7 +1641,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,4";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1667,7 +1679,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
@@ -1703,7 +1714,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;

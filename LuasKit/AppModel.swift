@@ -12,14 +12,8 @@ import SwiftUI
 // @Observable does not work -  circular reference?
 public class AppModel: ObservableObject {
 
-    public init() {}
-
-    // for previews
-    public init(_ state: AppState) {
-        self.appState = state
-    }
-
     /// state machine, drives UI
+    #warning("Codeable does not work here, but it should be supported since Swift 5.5??")
     public enum AppState {
 
         case idle
@@ -42,19 +36,6 @@ public class AppModel: ObservableObject {
         }
     }
 
-    @Published public var appState: AppState = .idle
-
-    // WIP do we need both - appMode & selectedStation??
-    @Published public var selectedStation: TrainStation? {
-        didSet {
-            // save?
-
-            NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
-        }
-    }
-
-    public var changeable: AppStateChangeable?
-
     /// how user decided how current station should be determined
     public enum AppMode {
 
@@ -68,7 +49,7 @@ public class AppModel: ObservableObject {
         case specific(TrainStation)
         case recents(TrainStation)
 
-        public var isSpecificStation: TrainStation? {
+        public var specificStation: TrainStation? {
             switch self {
 
                 case .closest, .closestOtherLine:
@@ -77,11 +58,47 @@ public class AppModel: ObservableObject {
                     return station
             }
         }
+
+        public var needsLocation: Bool {
+            self == .closest || self == .closestOtherLine
+        }
     }
 
-//    @AppStorage("appMode") var appMode: AppMode = .closest
-    @Published public var appMode: AppMode = .closest
+    @Published public var appState: AppState = .idle
 
+//    @AppStorage("simpleAppMode")
+//    var simpleAppMode: Int?
+
+
+    @Published public var appMode: AppMode = .closest {
+        didSet {
+//            simpleAppMode = appMode.simple
+        }
+    }
+
+    // WIP do we need both - appMode & selectedStation??
+    @Published public var selectedStation: TrainStation? {
+        didSet {
+            // save?
+
+            NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
+        }
+    }
+
+    @Published public var latestLocation: CLLocation?
+
+    public init() {
+        self.appMode = .closest //  AppMode.from(simpleAppMode)
+    }
+
+    // for previews
+    public init(_ state: AppState) {
+        self.appState = state
+    }
+
+    //public var changeable: AppStateChangeable?
+
+    // that should be somewhere else
     public func updateWithAnimation(to state: AppState) {
         withAnimation {
             DispatchQueue.main.async { [weak self] in
