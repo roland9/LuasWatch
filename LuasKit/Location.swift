@@ -111,7 +111,7 @@ extension Location: CLLocationManagerDelegate {
 
 		if abs(howRecent) < 15.0 {
 
-            // we should kill previous API requests if there is a newer location
+            #warning("we should kill previous API requests if there is a newer location")
 			delegate?.didGetLocation(lastLocation)
 
 			if lastLocation.horizontalAccuracy < 100 &&

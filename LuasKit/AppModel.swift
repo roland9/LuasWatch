@@ -44,6 +44,7 @@ public class AppModel: ObservableObject {
 
     @Published public var appState: AppState = .idle
 
+    // WIP do we need both - appMode & selectedStation??
     @Published public var selectedStation: TrainStation? {
         didSet {
             // save?

@@ -8,7 +8,7 @@ import Foundation
 public struct Train: CustomStringConvertible, Hashable, Codable {
 
     public var id: String {
-        direction + dueTime
+        UUID().uuidString
     }
 
     public let destination: String

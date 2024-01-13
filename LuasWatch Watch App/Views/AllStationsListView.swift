@@ -58,6 +58,7 @@ struct AllStationsListView: View {
                     // need a button here because just text only supports tap on the text but not full width
                     Button(action: {
 
+                        #warning("avoid duplicates?")
                         modelContext.insert(FavouriteStation(shortCode: station.shortCode))
 
                         DispatchQueue.main.async {
