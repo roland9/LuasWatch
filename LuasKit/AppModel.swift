@@ -70,6 +70,15 @@ public class AppModel: ObservableObject {
             do {
                 let encoded = try JSONEncoder().encode(appMode)
                 UserDefaults.standard.set(encoded, forKey: "AppMode")
+
+                switch appMode {
+
+                    case .closest, .closestOtherLine:
+                        self.selectedStation = nil
+                    case .favourite(let station), .nearby(let station), .specific(let station), .recents(let station):
+                        self.selectedStation = station
+                }
+
             } catch {
                 myPrint("error encoding appMode \(error)")
             }
@@ -79,7 +88,8 @@ public class AppModel: ObservableObject {
     // WIP do we need both - appMode & selectedStation??
     @Published public var selectedStation: TrainStation? {
         didSet {
-            // save?
+            // don't need to save here, because we also set the appMode above - which gets saved
+            // in fact, ideally we could get rid of the selectedStation - because it's part of the appMode??!!
 
             NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
         }
@@ -91,11 +101,19 @@ public class AppModel: ObservableObject {
         if let storedAppModeData = UserDefaults.standard.object(forKey: "AppMode") as? Data,
            let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData) {
             self.appMode = storedAppMode
+
+            switch storedAppMode {
+
+                case .closest, .closestOtherLine:
+                    self.selectedStation = nil
+                case .favourite(let station), .nearby(let station), .specific(let station), .recents(let station):
+                    self.selectedStation = station
+            }
+
         } else {
             self.appMode = .closest
+            self.selectedStation = nil
         }
-
-        self.selectedStation = TrainStations.sharedFromFile.station(shortCode: "HAR")
     }
 
     // for previews
@@ -222,45 +240,3 @@ extension AppModel.AppState: CustomStringConvertible {
         }
     }
 }
-
-/// WIP so we can support @AppStorage
-//extension AppModel.AppMode: RawRepresentable {
-//
-//    public typealias RawValue = String
-//
-//    /// Failable Initalizer
-//    public init?(rawValue: RawValue) {
-//        switch rawValue {
-//            case "closest":
-//                self = .closest
-//            case "closestOtherLine":
-//                self = .closesOtherLine
-//            case _ where rawValue.starts(with: "favourite "):
-//                let shortCode = String(rawValue.dropFirst("favourite ".count))
-//                let station = TrainStations.sharedFromFile.station(shortCode: shortCode)
-////self =
-//                break
-//            default:
-//                return nil
-//        }
-//    }
-//
-//    /// Backing raw value
-//    public var rawValue: RawValue {
-//        switch self {
-//
-//            case .closest:
-//                return "closest"
-//            case .closesOtherLine:
-//                return "closestOtherLine"
-//            case .favourite(let station):
-//                return "favourite \(station.shortCode)"
-//            case .nearby(let station):
-//                return "nearby \(station.shortCode)"
-//            case .specific(let station):
-//                return "specific \(station.shortCode)"
-//            case .recents(let station):
-//                return "recents \(station.shortCode)"
-//        }
-//    }
-//}

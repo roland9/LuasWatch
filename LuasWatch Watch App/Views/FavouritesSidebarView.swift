@@ -9,7 +9,7 @@ import LuasKit
 
 struct FavouritesSidebarView: View {
 
-    @Binding var selectedStation: TrainStation?
+    @EnvironmentObject var appModel: AppModel
 
     @Environment(\.modelContext) private var modelContext
 
@@ -25,7 +25,9 @@ struct FavouritesSidebarView: View {
                 let station = TrainStations.sharedFromFile.station(shortCode: station.shortCode) ?? TrainStations.unknown
 
                 StationRowView(station: station,
-                               action: { selectedStation = station })
+                               action: {
+                    appModel.appMode = .favourite(station)
+                })
 
             }.onDelete(perform: { indexSet in
 
@@ -55,26 +57,25 @@ struct FavouritesSidebarView: View {
 #warning("improvie visuals - nested header??")
 
 #Preview("Favourites") {
-
-    @State var selectedStation: TrainStation?
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
+    appModel.appMode = .favourite(stationGreen)
 
     return List {
         Section {
-            FavouritesSidebarView(selectedStation: $selectedStation)
+            FavouritesSidebarView()
         } header: {
             FavouritesHeaderView()
         }
+        .environmentObject(appModel)
         .modelContainer(Previews().container)
     }
 }
 
 #Preview("Favourites (empty)") {
 
-    @State var selectedStation: TrainStation?
-
     return List {
         Section {
-            FavouritesSidebarView(selectedStation: $selectedStation)
+            FavouritesSidebarView()
         } header: {
             FavouritesHeaderView()
         }

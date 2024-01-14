@@ -19,7 +19,9 @@ extension NearbyStationsView: View {
 
             ForEach(nearbyStations) { station in
                 StationRowView(station: station,
-                               action: { appModel.appMode = .nearby(station) })
+                               action: {
+                    appModel.appMode = .nearby(station)
+                })
             }
 
             Button(action: { appModel.appMode = .closest },
@@ -41,9 +43,8 @@ extension NearbyStationsView: View {
 }
 
 #Preview("Nearby") {
-    @State var selectedStation: TrainStation?
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
-    appModel.selectedStation = stationGreen
+    appModel.appMode = .favourite(stationGreen)
 
     return List {
         Section {

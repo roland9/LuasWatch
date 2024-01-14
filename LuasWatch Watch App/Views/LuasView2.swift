@@ -20,7 +20,7 @@ extension LuasView2: View {
 
         } detail: {
             TabView(selection: $appModel.selectedStation) {
-                    StationView(station: $appModel.selectedStation)
+                    StationView()
                         .tag(Optional(appModel.selectedStation))
                         .containerBackground(appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
                                              for: .tabView)
@@ -31,8 +31,9 @@ extension LuasView2: View {
 
 #Preview("Phibs") {
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
-    appModel.selectedStation = stationGreen
-    
+    appModel.appMode = .favourite(stationGreen)
+
     return LuasView2()
         .environmentObject(appModel)
+        .modelContainer(Previews().container)
 }

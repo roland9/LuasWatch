@@ -16,7 +16,7 @@ struct SidebarView: View {
 
             /// Favourite Stations
             Section {
-                FavouritesSidebarView(selectedStation: $selectedStation)
+                FavouritesSidebarView()
             } header: {
                 FavouritesHeaderView()
             }

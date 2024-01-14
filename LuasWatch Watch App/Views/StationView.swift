@@ -10,7 +10,6 @@ struct StationView: View {
 
     @EnvironmentObject var appModel: AppModel
 
-    @Binding var station: TrainStation?
     @State private var direction: Direction?
 
     var body: some View {
@@ -57,8 +56,6 @@ struct StationView: View {
 
                             Text(appModel.appState.description)
                                 .multilineTextAlignment(.center)
-
-                            //                            ChangeStationButton(isStationsModalPresented: $appState.isStationsModalPresented)
                         }
                     }
 
@@ -67,7 +64,7 @@ struct StationView: View {
                     NavigationStack {
 
                         VStack {
-                            Text("\(station?.name ?? "Unknown Station")")
+                            Text(trains.trainStation.name)
                                 .font(.title3)
                                 .padding(.bottom)
 
@@ -136,14 +133,11 @@ struct DueView: View {
 }
 
 #Preview("Cabra") {
-    @State var station: TrainStation? =
-    TrainStations.sharedFromFile.station(shortCode: "CAB")
-
     let trains = trainsGreen
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
-    return TabView { StationView(station: $station)
+    return TabView { StationView()
             .environmentObject(appModel)
             .containerBackground(trains.trainStation.route.color.gradient,
                                  for: .tabView)
@@ -151,14 +145,11 @@ struct DueView: View {
 }
 
 #Preview("Leopardstown Valley") {
-    @State var station: TrainStation? =
-    TrainStations.sharedFromFile.station(shortCode: "LEO")
-
     let trains = trainsGreen
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
-    return TabView { StationView(station: $station)
+    return TabView { StationView()
             .environmentObject(appModel)
             .containerBackground(trains.trainStation.route.color.gradient,
                                  for: .tabView)
@@ -166,14 +157,11 @@ struct DueView: View {
 }
 
 #Preview("Connolly") {
-    @State var station: TrainStation? =
-    TrainStations.sharedFromFile.station(shortCode: "CON")
-
     let trains = trainsFinalStop
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
-    return TabView { StationView(station: $station)
+    return TabView { StationView()
             .environmentObject(appModel)
             .containerBackground(trains.trainStation.route.color.gradient,
                                  for: .tabView)
