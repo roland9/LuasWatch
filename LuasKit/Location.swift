@@ -100,7 +100,7 @@ extension Location: CLLocationManagerDelegate {
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         myPrint("\(locations)")
-
+        // don't do force unwrap...
         let lastLocation = locations.last!
 
         // TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later

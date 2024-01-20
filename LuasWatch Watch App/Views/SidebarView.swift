@@ -8,7 +8,12 @@ import LuasKit
 
 struct SidebarView: View {
 
+    @EnvironmentObject var appModel: AppModel
+
     @Binding var selectedStation: TrainStation?
+
+    @State var isGreenStationsViewPresented = false
+    @State var isRedStationsViewPresented = false
 
     var body: some View {
 
@@ -23,8 +28,8 @@ struct SidebarView: View {
 
             /// Nearby Stations
             Section {
-                NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
-                                   Array(TrainStations.sharedFromFile.redLineStations.prefix(3)))
+                NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(2)) +
+                                   Array(TrainStations.sharedFromFile.redLineStations.prefix(2)))
             } header: {
                 Text("Nearby")
                     .font(.subheadline)
@@ -33,12 +38,13 @@ struct SidebarView: View {
 
             /// Lines Green / Red
             Section {
-                LinesView(actionRed: {
-
-                },
-                          actionGreen: {
-
-                })
+                LinesView(
+                    actionGreen: {
+                        isGreenStationsViewPresented = true
+                    },
+                    actionRed: {
+                        isRedStationsViewPresented = true
+                    })
             } header: {
                 Text("Lines")
                     .font(.subheadline)
@@ -49,18 +55,34 @@ struct SidebarView: View {
             }
 
             /// Recents
-//            RecentsView()
+            //            RecentsView()
 
         }
-        .containerBackground(Color("luasTheme").gradient,
-                             for: .navigation)
+        .sheet(isPresented: $isGreenStationsViewPresented, content: {
+            StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
+                          action: {
+                appModel.appMode = .specific($0)
+                isGreenStationsViewPresented = false
+            })
+        })
+        .sheet(isPresented: $isRedStationsViewPresented, content: {
+            StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
+                          action: {
+                appModel.appMode = .specific($0)
+                isRedStationsViewPresented = false
+            })
+        }).containerBackground(Color("luasTheme").gradient,
+                               for: .navigation)
         .listStyle(.carousel)
     }
 }
 
 #Preview("Sidebar") {
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
+    appModel.appMode = .favourite(stationGreen)
     @State var selectedStation: TrainStation?
 
     return SidebarView(selectedStation: $selectedStation)
+        .environmentObject(appModel)
         .modelContainer(Previews().container)
 }

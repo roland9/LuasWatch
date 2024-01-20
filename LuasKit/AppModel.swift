@@ -77,6 +77,7 @@ public class AppModel: ObservableObject {
                     case .favourite(let station), .nearby(let station), .specific(let station), .recents(let station):
                         self.selectedStation = station
                 }
+                NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
 
             } catch {
                 myPrint("error encoding appMode \(error)")
@@ -85,14 +86,9 @@ public class AppModel: ObservableObject {
     }
 
     // WIP do we need both - appMode & selectedStation??
-    @Published public var selectedStation: TrainStation? {
-        didSet {
-            // don't need to save here, because we also set the appMode above - which gets saved
-            // in fact, ideally we could get rid of the selectedStation - because it's part of the appMode??!!
-
-            NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
-        }
-    }
+    // don't need to save here, because we also set the appMode above - which gets saved
+    // in fact, ideally we could get rid of the selectedStation - because it's part of the appMode??!!
+    @Published public var selectedStation: TrainStation?
 
     @Published public var latestLocation: CLLocation?
 
@@ -108,6 +104,8 @@ public class AppModel: ObservableObject {
                     self.selectedStation = nil
                 case .favourite(let station), .nearby(let station), .specific(let station), .recents(let station):
                     self.selectedStation = station
+            // we don't need to trigger here do we?
+            //                    NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
             }
 
         } else {

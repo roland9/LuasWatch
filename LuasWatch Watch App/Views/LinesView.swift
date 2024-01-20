@@ -7,8 +7,8 @@ import SwiftUI
 import LuasKit
 
 struct LinesView: View {
-    var actionRed: () -> Void
     var actionGreen: () -> Void
+    var actionRed: () -> Void
 
     var body: some View {
         Button {
@@ -39,7 +39,7 @@ struct LinesView: View {
 #Preview("Lines") {
     List {
         Section {
-            LinesView(actionRed: {}, actionGreen: {})
+            LinesView(actionGreen: {}, actionRed: {})
         } header: {
             Text("Lines")
                 .font(.subheadline)

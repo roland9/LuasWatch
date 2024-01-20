@@ -7,8 +7,9 @@ import SwiftUI
 import LuasKit
 
 struct AllStationsListView: View {
-
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+
     @State var stations: [TrainStation]
 
     var body: some View {
@@ -16,11 +17,11 @@ struct AllStationsListView: View {
         NavigationView(content: {
 
             ScrollView {
-                NavigationLink(destination: greenStationsView()) {
+                NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.greenLineStations)) {
                     LineRowView(route: .green)
                 }
 
-                NavigationLink(destination: redStationsView()) {
+                NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.redLineStations)) {
                     LineRowView(route: .red)
                 }
             }
@@ -29,47 +30,37 @@ struct AllStationsListView: View {
     }
 
     @ViewBuilder
-    private func greenStationsView() -> some View {
-        StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
-                      dismissAllModal: { dismiss() })
+    private func stationsListView(stations: [TrainStation]) -> some View {
+        StationsModal(stations: stations,
+                      action: {
+#warning("how to avoid duplicates?")
+            modelContext.insert(FavouriteStation(shortCode: $0.shortCode))
+
+            DispatchQueue.main.async {
+                dismiss()
+            }
+        })
         .navigationTitle("Add to favourites")
     }
+}
 
-    @ViewBuilder
-    private func redStationsView() -> some View {
-        StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
-                      dismissAllModal: { dismiss() })
-        .navigationTitle("Add to favourites")
-    }
+struct StationsModal: View {
 
-    struct StationsModal: View {
-        @Environment(\.modelContext) private var modelContext
+    @State var stations: [TrainStation]
 
-        @State var stations: [TrainStation]
+    var action: (TrainStation) -> Void
 
-        /// challenge here: we could use Environment(\.dismiss); but that only dismisses this Stations nav view,
-        /// so it's then back to StationsSelection modal.  instead, we want to dismiss the *entire* flow
-        var dismissAllModal: () -> Void
+    var body: some View {
+        List {
+            ForEach(stations, id: \.stationId) { (station) in
 
-        var body: some View {
-            List {
-                ForEach(stations, id: \.stationId) { (station) in
-
-                    // need a button here because just text only supports tap on the text but not full width
-                    Button(action: {
-
-                        #warning("avoid duplicates?")
-                        modelContext.insert(FavouriteStation(shortCode: station.shortCode))
-
-                        DispatchQueue.main.async {
-                            dismissAllModal()
-                        }
-
-                    }, label: {
-                        Text(station.name)
-                            .font(.system(.headline))
-                    })
-                }
+                // need a button here because just text only supports tap on the text but not full width
+                Button(action: {
+                    action(station)
+                }, label: {
+                    Text(station.name)
+                        .font(.system(.headline))
+                })
             }
         }
     }

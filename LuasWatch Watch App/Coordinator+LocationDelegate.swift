@@ -54,8 +54,19 @@ extension Coordinator: LocationDelegate {
             myPrint("step 2b: got location; find closest station (no matter which line)")
 
             if let closestStation = allStations.closestStation(from: location) {
-                myPrint("found closest station <\(closestStation.name)>")
-                handle(closestStation, location)
+
+                if appModel.appMode == .closest {
+                    myPrint("found closest station <\(closestStation.name)>")
+                    handle(closestStation, location)
+                } else if appModel.appMode == .closestOtherLine,
+                            let closestOtherLine = allStations.closestStation(from: location, route: closestStation.route.other) {
+                    myPrint("found closest other line station <\(closestOtherLine.name)>")
+                    handle(closestOtherLine, location)
+                } else {
+                    #warning("not sure we need that else here?")
+                    myPrint("found closest station <\(closestStation.name)>")
+                    handle(closestStation, location)
+                }
 
             } else {
                 myPrint("step 2c: no station found -> user too far away")
@@ -63,22 +74,19 @@ extension Coordinator: LocationDelegate {
                 appModel.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
             }
         }
-
     }
 
     internal func handle(_ closestStation: TrainStation,
                          _ location: CLLocation) {
         // use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 
-        // sometimes crash on watchOS 9
-        // [SwiftUI] Publishing changes from within view updates is not allowed, this will cause undefined behavior
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        appModel.selectedStation = closestStation
 
-            if let trains = self.trains {
-                appModel.updateWithAnimation(to: .updatingDueTimes(trains, location))
-            } else {
-                appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, location))
-            }
+        if let trains = self.trains {
+            appModel.updateWithAnimation(to: .updatingDueTimes(trains, location))
+        } else {
+            appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, location))
+        }
 
         // //////////////////////////////////////////////
         // step 3: get due times from API

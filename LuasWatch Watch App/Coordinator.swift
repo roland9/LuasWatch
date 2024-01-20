@@ -83,7 +83,8 @@ class Coordinator: NSObject {
     }
 
 	@objc func timerDidFire() {
-
+        #warning("check whether modal is up")
+        
 		// if user has selected a specific station
         if let station = appModel.appMode.specificStation {
 
