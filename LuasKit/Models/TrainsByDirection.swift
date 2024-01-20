@@ -6,33 +6,37 @@
 import Foundation
 
 public struct TrainsByDirection {
-	public let trainStation: TrainStation
+    public let trainStation: TrainStation
 
-	public let inbound: [Train]
-	public let outbound: [Train]
-	public let message: String?	// XML api gives message
+    public let inbound: [Train]
+    public let outbound: [Train]
+    public let message: String?  // XML api gives message
 
-	public init(trainStation: TrainStation,
-				inbound: [Train],
-				outbound: [Train],
-				message: String? = nil) {
-		self.trainStation = trainStation
-		self.inbound = inbound
-		self.outbound = outbound
-		self.message = message
-	}
+    public init(
+        trainStation: TrainStation,
+        inbound: [Train],
+        outbound: [Train],
+        message: String? = nil
+    ) {
+        self.trainStation = trainStation
+        self.inbound = inbound
+        self.outbound = outbound
+        self.message = message
+    }
 
     public func shortcutOutput(direction: Direction) -> String {
         var output = ""
 
         if direction == .inbound || direction == .both {
-            output += inbound
+            output +=
+                inbound
                 .compactMap { $0.destinationDueTimeDescription + ".\n" }
                 .joined()
         }
 
         if direction == .outbound || direction == .both {
-            output += outbound
+            output +=
+                outbound
                 .compactMap { $0.destinationDueTimeDescription + ".\n" }
                 .joined()
         }

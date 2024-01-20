@@ -3,8 +3,8 @@
 //  Copyright © 2019 mApps.ie. All rights reserved.
 //
 
-import CoreLocation
 import Combine
+import CoreLocation
 import SwiftUI
 
 // WIP remove
@@ -12,17 +12,17 @@ public enum MyState {
 
     case locationAuthorizationUnknown
 
-	case gettingLocation
-	case errorGettingLocation(String)
+    case gettingLocation
+    case errorGettingLocation(String)
 
-	case errorGettingStation(String)		// in case the user is too far away
+    case errorGettingStation(String)  // in case the user is too far away
 
-	case gettingDueTimes(TrainStation, CLLocation)
-	case errorGettingDueTimes(TrainStation, String)
+    case gettingDueTimes(TrainStation, CLLocation)
+    case errorGettingDueTimes(TrainStation, String)
 
-	case foundDueTimes(TrainsByDirection, CLLocation)
+    case foundDueTimes(TrainsByDirection, CLLocation)
 
-	case updatingDueTimes(TrainsByDirection, CLLocation)
+    case updatingDueTimes(TrainsByDirection, CLLocation)
 }
 
 extension MyState: CustomStringConvertible {
@@ -68,15 +68,15 @@ public class AppState: ObservableObject {
             changeable?.didChange(to: state)
         }
     }
-	@Published public var isStationsModalPresented: Bool = false
+    @Published public var isStationsModalPresented: Bool = false
 
     public var changeable: AppStateChangeable?
 
-	public init() {}
+    public init() {}
 
-	public init(state: MyState) {
-		self.state = state
-	}
+    public init(state: MyState) {
+        self.state = state
+    }
 
     public func updateWithAnimation(to state: MyState) {
         withAnimation {

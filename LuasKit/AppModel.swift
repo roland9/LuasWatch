@@ -3,11 +3,9 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import SwiftUI
-
-#warning("use swiftlint")
 
 // @Observable does not work -  circular reference?
 public class AppModel: ObservableObject {
@@ -21,7 +19,8 @@ public class AppModel: ObservableObject {
         case locationAuthorizationUnknown
         case errorGettingLocation(String)
 
-        case errorGettingStation(String)  /// in case the user is too far away from Dublin area
+        case errorGettingStation(String)
+        /// in case the user is too far away from Dublin area
 
         case loadingDueTimes(TrainStation, CLLocation)
         case errorGettingDueTimes(TrainStation, String)
@@ -99,7 +98,8 @@ public class AppModel: ObservableObject {
 
     public init() {
         if let storedAppModeData = UserDefaults.standard.object(forKey: "AppMode") as? Data,
-           let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData) {
+            let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData)
+        {
             self.appMode = storedAppMode
 
             switch storedAppMode {
@@ -138,10 +138,10 @@ extension AppModel.AppMode: Codable {
     private enum CodingBase: String, Codable {
         case closest
         case closestOtherLine
-        case favourite // (TrainStation)
-        case nearby // (TrainStation)
-        case specific // (TrainStation)
-        case recents // (TrainStation)
+        case favourite  // (TrainStation)
+        case nearby  // (TrainStation)
+        case specific  // (TrainStation)
+        case recents  // (TrainStation)
     }
 
     private enum CodingKeys: String, CodingKey {
