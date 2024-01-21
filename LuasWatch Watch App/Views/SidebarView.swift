@@ -6,7 +6,7 @@
 import LuasKit
 import SwiftUI
 
-struct SidebarView: View {
+struct SidebarView {
 
     @EnvironmentObject var appModel: AppModel
 
@@ -14,6 +14,9 @@ struct SidebarView: View {
 
     @State var isGreenStationsViewPresented = false
     @State var isRedStationsViewPresented = false
+}
+
+extension SidebarView: View {
 
     var body: some View {
 
@@ -24,17 +27,6 @@ struct SidebarView: View {
                 FavouritesSidebarView()
             } header: {
                 FavouritesHeaderView()
-            }
-
-            /// Nearby Stations
-            Section {
-                NearbyStationsView(
-                    nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(2))
-                        + Array(TrainStations.sharedFromFile.redLineStations.prefix(2)))
-            } header: {
-                Text("Nearby")
-                    .font(.subheadline)
-                    .frame(minHeight: 40)
             }
 
             /// Lines Green / Red
@@ -89,9 +81,10 @@ struct SidebarView: View {
 }
 
 #Preview("Sidebar") {
+    @State var selectedStation: TrainStation?
+
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
     appModel.appMode = .favourite(stationGreen)
-    @State var selectedStation: TrainStation?
 
     return SidebarView(selectedStation: $selectedStation)
         .environmentObject(appModel)

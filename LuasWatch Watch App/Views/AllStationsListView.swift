@@ -6,11 +6,14 @@
 import LuasKit
 import SwiftUI
 
-struct AllStationsListView: View {
+struct AllStationsListView {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State var stations: [TrainStation]
+}
+
+extension AllStationsListView: View {
 
     var body: some View {
 

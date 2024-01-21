@@ -7,14 +7,18 @@ import LuasKit
 import SwiftData
 import SwiftUI
 
-struct FavouritesSidebarView: View {
+struct FavouritesSidebarView {
 
     @EnvironmentObject var appModel: AppModel
 
     @Environment(\.modelContext) private var modelContext
 
     @Query(sort: \FavouriteStation.dateAdded)
+
     private var favouriteStations: [FavouriteStation]
+}
+
+extension FavouritesSidebarView: View {
 
     var body: some View {
 

@@ -6,11 +6,14 @@
 import LuasKit
 import SwiftUI
 
-struct StationView: View {
+struct StationView {
 
     @EnvironmentObject var appModel: AppModel
 
     @State private var direction: Direction?
+}
+
+extension StationView: View {
 
     var body: some View {
 
@@ -129,47 +132,5 @@ struct DueView: View {
                 .monospaced()
         }
         .foregroundColor(.yellow)
-    }
-}
-
-#Preview("Cabra") {
-    let trains = trainsGreen
-
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
-
-    return TabView {
-        StationView()
-            .environmentObject(appModel)
-            .containerBackground(
-                trains.trainStation.route.color.gradient,
-                for: .tabView)
-    }
-}
-
-#Preview("Leopardstown Valley") {
-    let trains = trainsGreen
-
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
-
-    return TabView {
-        StationView()
-            .environmentObject(appModel)
-            .containerBackground(
-                trains.trainStation.route.color.gradient,
-                for: .tabView)
-    }
-}
-
-#Preview("Connolly") {
-    let trains = trainsFinalStop
-
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
-
-    return TabView {
-        StationView()
-            .environmentObject(appModel)
-            .containerBackground(
-                trains.trainStation.route.color.gradient,
-                for: .tabView)
     }
 }

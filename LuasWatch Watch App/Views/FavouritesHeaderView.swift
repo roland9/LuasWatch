@@ -6,11 +6,14 @@
 import LuasKit
 import SwiftUI
 
-struct FavouritesHeaderView: View {
+struct FavouritesHeaderView {
 
     @Environment(\.modelContext) private var modelContext
 
     @State var isStationsModalPresented = false
+}
+
+extension FavouritesHeaderView: View {
 
     var body: some View {
         HStack {

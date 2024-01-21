@@ -6,9 +6,12 @@
 import LuasKit
 import SwiftUI
 
-struct LinesView: View {
+struct LinesView {
     var actionGreen: () -> Void
     var actionRed: () -> Void
+}
+
+extension LinesView: View {
 
     var body: some View {
         Button {
