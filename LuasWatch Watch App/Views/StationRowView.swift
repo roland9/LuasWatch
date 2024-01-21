@@ -3,9 +3,9 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-import SwiftData
 import LuasKit
+import SwiftData
+import SwiftUI
 
 struct StationRowView: View {
     var station: TrainStation
@@ -22,7 +22,7 @@ struct StationRowView: View {
                     Rectangle()
                         .cornerRadius(3)
                         .frame(width: 30, height: 20)
-                        .foregroundColor(station.route == .red ?  Color("luasRed"): Color("luasGreen"))
+                        .foregroundColor(station.route == .red ? Color("luasRed") : Color("luasGreen"))
                 }
             }
         )

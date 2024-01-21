@@ -20,8 +20,10 @@ struct Previews {
         }
     }
 
-    private init(_ types: [any PersistentModel.Type],
-                 isStoredInMemoryOnly: Bool = true) {
+    private init(
+        _ types: [any PersistentModel.Type],
+        isStoredInMemoryOnly: Bool = true
+    ) {
 
         let schema = Schema(types)
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isStoredInMemoryOnly)
@@ -43,12 +45,12 @@ extension FavouriteStation {
             "BEE",
             "CCK",
             "GAL",
-            "Invalid"
+            "Invalid",
         ]
-            .map {
-                let station = FavouriteStation(shortCode: $0)
-                context.insert(station)
-                return station
-            }
+        .map {
+            let station = FavouriteStation(shortCode: $0)
+            context.insert(station)
+            return station
+        }
     }
 }

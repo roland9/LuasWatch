@@ -3,17 +3,17 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
 import SwiftData
+import SwiftUI
 
 @main
 struct LuasWatch_Watch_AppApp: App {
-    
-    @Environment (\.scenePhase) var scenePhase
+
+    @Environment(\.scenePhase) var scenePhase
 
     private var sharedModelContainer: ModelContainer = {
-        let schema = Schema([ FavouriteStation.self ])
+        let schema = Schema([FavouriteStation.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
@@ -32,15 +32,16 @@ struct LuasWatch_Watch_AppApp: App {
     var mainCoordinator: Coordinator!
 
     init() {
-        mainCoordinator = Coordinator(appModel: appModel,
-                                      location: location)
+        mainCoordinator = Coordinator(
+            appModel: appModel,
+            location: location)
         mainCoordinator.start()
     }
 
     var body: some Scene {
 
         WindowGroup {
-            LuasView2()
+            LuasView()
         }
         .environmentObject(appModel)
         .modelContainer(sharedModelContainer)

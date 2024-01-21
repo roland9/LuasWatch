@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct SidebarView: View {
 
@@ -28,8 +28,9 @@ struct SidebarView: View {
 
             /// Nearby Stations
             Section {
-                NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(2)) +
-                                   Array(TrainStations.sharedFromFile.redLineStations.prefix(2)))
+                NearbyStationsView(
+                    nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(2))
+                        + Array(TrainStations.sharedFromFile.redLineStations.prefix(2)))
             } header: {
                 Text("Nearby")
                     .font(.subheadline)
@@ -58,21 +59,31 @@ struct SidebarView: View {
             //            RecentsView()
 
         }
-        .sheet(isPresented: $isGreenStationsViewPresented, content: {
-            StationsModal(stations: TrainStations.sharedFromFile.greenLineStations,
-                          action: {
-                appModel.appMode = .specific($0)
-                isGreenStationsViewPresented = false
-            })
-        })
-        .sheet(isPresented: $isRedStationsViewPresented, content: {
-            StationsModal(stations: TrainStations.sharedFromFile.redLineStations,
-                          action: {
-                appModel.appMode = .specific($0)
-                isRedStationsViewPresented = false
-            })
-        }).containerBackground(Color("luasTheme").gradient,
-                               for: .navigation)
+        .sheet(
+            isPresented: $isGreenStationsViewPresented,
+            content: {
+                StationsModal(
+                    stations: TrainStations.sharedFromFile.greenLineStations,
+                    action: {
+                        appModel.appMode = .specific($0)
+                        isGreenStationsViewPresented = false
+                    })
+            }
+        )
+        .sheet(
+            isPresented: $isRedStationsViewPresented,
+            content: {
+                StationsModal(
+                    stations: TrainStations.sharedFromFile.redLineStations,
+                    action: {
+                        appModel.appMode = .specific($0)
+                        isRedStationsViewPresented = false
+                    })
+            }
+        ).containerBackground(
+            Color("luasTheme").gradient,
+            for: .navigation
+        )
         .listStyle(.carousel)
     }
 }

@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct FavouritesHeaderView: View {
 
@@ -18,18 +18,23 @@ struct FavouritesHeaderView: View {
                 .font(.subheadline)
                 .frame(minHeight: 40)
             Spacer()
-            Button(action: {
-                isStationsModalPresented = true
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 30)
-            })
+            Button(
+                action: {
+                    isStationsModalPresented = true
+                },
+                label: {
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 30)
+                }
+            )
             .buttonStyle(.borderless)
-            .sheet(isPresented: $isStationsModalPresented, content: {
-                AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
-            })
+            .sheet(
+                isPresented: $isStationsModalPresented,
+                content: {
+                    AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+                })
         }
     }
 }

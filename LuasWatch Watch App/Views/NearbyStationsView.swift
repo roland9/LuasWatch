@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct NearbyStationsView {
 
@@ -18,17 +18,20 @@ extension NearbyStationsView: View {
         if !nearbyStations.isEmpty {
 
             ForEach(nearbyStations) { station in
-                StationRowView(station: station,
-                               action: {
-                    appModel.appMode = .nearby(station)
-                })
+                StationRowView(
+                    station: station,
+                    action: {
+                        appModel.appMode = .nearby(station)
+                    })
             }
 
-            Button(action: { appModel.appMode = .closest },
-                   label: { Text("Closest station") })
+            Button(
+                action: { appModel.appMode = .closest },
+                label: { Text("Closest station") })
 
-            Button(action: { appModel.appMode = .closestOtherLine },
-                   label: { Text("Closest other line station") })
+            Button(
+                action: { appModel.appMode = .closestOtherLine },
+                label: { Text("Closest other line station") })
 
         } else {
 
@@ -48,8 +51,10 @@ extension NearbyStationsView: View {
 
     return List {
         Section {
-            NearbyStationsView(nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3)) +
-                               Array(TrainStations.sharedFromFile.redLineStations.prefix(3)))
+            NearbyStationsView(
+                nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3))
+                    + Array(TrainStations.sharedFromFile.redLineStations.prefix(3))
+            )
             .environmentObject(appModel)
         } header: {
             Text("Nearby")

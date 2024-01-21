@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct StationView: View {
 
@@ -60,7 +60,7 @@ struct StationView: View {
                     }
 
                 case .foundDueTimes(let trains, let location),
-                        .updatingDueTimes(let trains, let location):
+                    .updatingDueTimes(let trains, let location):
                     NavigationStack {
 
                         VStack {
@@ -90,20 +90,20 @@ struct StationView: View {
                                 Button {
                                     // Perform an action here.
                                 } label: {
-                                    Image(systemName:"map")
+                                    Image(systemName: "map")
                                 }
                             }
                             ToolbarItemGroup(placement: .bottomBar) {
                                 Button {
                                     // Perform an action here.
                                 } label: {
-                                    Image(systemName:"arrow.left.arrow.right")
+                                    Image(systemName: "arrow.left.arrow.right")
                                 }
 
                                 Button {
                                     // Perform an action here.
                                 } label: {
-                                    Image(systemName:"heart")
+                                    Image(systemName: "heart")
                                 }
                             }
                         }
@@ -137,10 +137,12 @@ struct DueView: View {
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
-    return TabView { StationView()
+    return TabView {
+        StationView()
             .environmentObject(appModel)
-            .containerBackground(trains.trainStation.route.color.gradient,
-                                 for: .tabView)
+            .containerBackground(
+                trains.trainStation.route.color.gradient,
+                for: .tabView)
     }
 }
 
@@ -149,10 +151,12 @@ struct DueView: View {
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
-    return TabView { StationView()
+    return TabView {
+        StationView()
             .environmentObject(appModel)
-            .containerBackground(trains.trainStation.route.color.gradient,
-                                 for: .tabView)
+            .containerBackground(
+                trains.trainStation.route.color.gradient,
+                for: .tabView)
     }
 }
 
@@ -161,9 +165,11 @@ struct DueView: View {
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trains, userLocation)))
 
-    return TabView { StationView()
+    return TabView {
+        StationView()
             .environmentObject(appModel)
-            .containerBackground(trains.trainStation.route.color.gradient,
-                                 for: .tabView)
+            .containerBackground(
+                trains.trainStation.route.color.gradient,
+                for: .tabView)
     }
 }

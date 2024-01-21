@@ -10,7 +10,7 @@ typealias StationShortCode = String
 
 @Model
 final class FavouriteStation: CustomDebugStringConvertible {
-    
+
     let shortCode: StationShortCode
     let dateAdded: Date
 

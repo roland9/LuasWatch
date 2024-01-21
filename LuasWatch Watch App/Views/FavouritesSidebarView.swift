@@ -3,9 +3,9 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-import SwiftData
 import LuasKit
+import SwiftData
+import SwiftUI
 
 struct FavouritesSidebarView: View {
 
@@ -21,18 +21,20 @@ struct FavouritesSidebarView: View {
         if !favouriteStations.isEmpty {
 
             ForEach(favouriteStations) { station in
-                
+
                 let station = TrainStations.sharedFromFile.station(shortCode: station.shortCode) ?? TrainStations.unknown
 
-                StationRowView(station: station,
-                               action: {
-                    appModel.appMode = .favourite(station)
-                })
+                StationRowView(
+                    station: station,
+                    action: {
+                        appModel.appMode = .favourite(station)
+                    })
 
             }.onDelete(perform: { indexSet in
 
                 if let index = indexSet.first,
-                   let item = favouriteStations[safe: index] {
+                    let item = favouriteStations[safe: index]
+                {
                     modelContext.delete(item)
                 }
             })

@@ -3,8 +3,8 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct GrantLocationAuthView: View {
 
@@ -18,11 +18,13 @@ struct GrantLocationAuthView: View {
                 .frame(idealHeight: .greatestFiniteMagnitude)
                 .padding(.bottom)
 
-            Button(action: {
-                didTapButton()
-            }, label: {
-                Text("OK")
-            })
+            Button(
+                action: {
+                    didTapButton()
+                },
+                label: {
+                    Text("OK")
+                })
         }
     }
 }

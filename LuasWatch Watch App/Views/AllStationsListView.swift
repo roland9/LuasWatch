@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct AllStationsListView: View {
     @Environment(\.modelContext) private var modelContext
@@ -31,15 +31,17 @@ struct AllStationsListView: View {
 
     @ViewBuilder
     private func stationsListView(stations: [TrainStation]) -> some View {
-        StationsModal(stations: stations,
-                      action: {
-#warning("how to avoid duplicates?")
-            modelContext.insert(FavouriteStation(shortCode: $0.shortCode))
+        StationsModal(
+            stations: stations,
+            action: {
+                #warning("how to avoid duplicates?")
+                modelContext.insert(FavouriteStation(shortCode: $0.shortCode))
 
-            DispatchQueue.main.async {
-                dismiss()
+                DispatchQueue.main.async {
+                    dismiss()
+                }
             }
-        })
+        )
         .navigationTitle("Add to favourites")
     }
 }
@@ -55,12 +57,14 @@ struct StationsModal: View {
             ForEach(stations, id: \.stationId) { (station) in
 
                 // need a button here because just text only supports tap on the text but not full width
-                Button(action: {
-                    action(station)
-                }, label: {
-                    Text(station.name)
-                        .font(.system(.headline))
-                })
+                Button(
+                    action: {
+                        action(station)
+                    },
+                    label: {
+                        Text(station.name)
+                            .font(.system(.headline))
+                    })
             }
         }
     }

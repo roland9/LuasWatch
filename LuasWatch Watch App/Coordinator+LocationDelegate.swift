@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import LuasKit
 
 extension Coordinator: LocationDelegate {
@@ -29,7 +29,7 @@ extension Coordinator: LocationDelegate {
                     appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
                 } else {
                     appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
-            }
+                }
         }
     }
 
@@ -45,7 +45,6 @@ extension Coordinator: LocationDelegate {
         // step 2: we have location -> now find station
         let allStations = TrainStations.sharedFromFile
 
-
         if let station = appModel.appMode.specificStation {
             myPrint("step 2a: got location now, but user selected specific station before -> use this station now")
             handle(station, location)
@@ -59,7 +58,8 @@ extension Coordinator: LocationDelegate {
                     myPrint("found closest station <\(closestStation.name)>")
                     handle(closestStation, location)
                 } else if appModel.appMode == .closestOtherLine,
-                            let closestOtherLine = allStations.closestStation(from: location, route: closestStation.route.other) {
+                    let closestOtherLine = allStations.closestStation(from: location, route: closestStation.route.other)
+                {
                     myPrint("found closest other line station <\(closestOtherLine.name)>")
                     handle(closestOtherLine, location)
                 } else {
@@ -76,8 +76,10 @@ extension Coordinator: LocationDelegate {
         }
     }
 
-    internal func handle(_ closestStation: TrainStation,
-                         _ location: CLLocation) {
+    internal func handle(
+        _ closestStation: TrainStation,
+        _ location: CLLocation
+    ) {
         // use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 
         appModel.selectedStation = closestStation
@@ -108,16 +110,19 @@ extension Coordinator: LocationDelegate {
 
                     switch apiError {
                         case .noTrains(let message):
-                            appModel.updateWithAnimation(to:
-                                    .errorGettingDueTimes(closestStation,
-                                                          message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
+                            appModel.updateWithAnimation(
+                                to:
+                                    .errorGettingDueTimes(
+                                        closestStation,
+                                        message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
 
                         case .invalidXML:
                             appModel.updateWithAnimation(
                                 to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                     }
                 } else {
-                    appModel.updateWithAnimation(to:
+                    appModel.updateWithAnimation(
+                        to:
                             .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
                 }
             }

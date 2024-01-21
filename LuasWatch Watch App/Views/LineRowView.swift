@@ -3,9 +3,9 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-import SwiftData
 import LuasKit
+import SwiftData
+import SwiftUI
 
 struct LineRowView: View {
 
