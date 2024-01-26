@@ -29,6 +29,15 @@ extension SidebarView: View {
                 FavouritesHeaderView()
             }
 
+            /// Nearby
+            Section {
+                NearbyStationsView()
+            } header: {
+                Text("Nearby")
+                    .font(.subheadline)
+                    .frame(minHeight: 40)
+            }
+
             /// Lines Green / Red
             Section {
                 LinesView(
@@ -43,7 +52,6 @@ extension SidebarView: View {
                     .font(.subheadline)
                     .frame(minHeight: 40)
             } footer: {
-
                 Text("App Version 1.0.0")
             }
 

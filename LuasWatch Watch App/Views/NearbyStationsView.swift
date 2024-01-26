@@ -9,39 +9,38 @@ import SwiftUI
 struct NearbyStationsView {
 
     @EnvironmentObject var appModel: AppModel
-    let nearbyStations: [TrainStation]
 }
 
 extension NearbyStationsView: View {
 
     var body: some View {
-        if !nearbyStations.isEmpty {
 
-            ForEach(nearbyStations) { station in
-                StationRowView(
-                    station: station,
-                    action: {
-                        appModel.appMode = .nearby(station)
-                    })
-            }
+        Button(
+            action: { appModel.appMode = .closest },
+            label: {
+                HStack {
+                    Text("Closest station")
+                    Spacer()
+                    Image(systemName: "location.fill.viewfinder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 24)
+                }
+            })
 
-            Button(
-                action: { appModel.appMode = .closest },
-                label: { Text("Closest station") })
+        Button(
+            action: { appModel.appMode = .closestOtherLine },
+            label: {
+                HStack {
+                    Text("Closest other line station")
+                    Spacer()
+                    Image(systemName: "location.viewfinder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 24)
+                }
 
-            Button(
-                action: { appModel.appMode = .closestOtherLine },
-                label: { Text("Closest other line station") })
-
-        } else {
-
-            VStack {
-                Text("No nearby stations found")
-                    .font(.title3)
-                    .padding()
-                    .foregroundColor(.primary)
-            }
-        }
+            })
     }
 }
 
@@ -51,21 +50,12 @@ extension NearbyStationsView: View {
 
     return List {
         Section {
-            NearbyStationsView(
-                nearbyStations: Array(TrainStations.sharedFromFile.greenLineStations.prefix(3))
-                    + Array(TrainStations.sharedFromFile.redLineStations.prefix(3))
-            )
-            .environmentObject(appModel)
+            NearbyStationsView()
+                .environmentObject(appModel)
         } header: {
             Text("Nearby")
                 .font(.subheadline)
                 .frame(minHeight: 40)
         }
     }
-}
-
-#Preview("Favourites (empty)") {
-    @State var selectedStation: TrainStation?
-
-    return NearbyStationsView(nearbyStations: [])
 }
