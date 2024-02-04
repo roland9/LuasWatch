@@ -304,6 +304,7 @@
 		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRowView.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRowView.swift; sourceTree = "<group>"; };
+		AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch Watch App.xctestplan"; sourceTree = "<group>"; };
 		ABA68B232AF43977002A9F0D /* LuasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAllStates.swift; sourceTree = "<group>"; };
@@ -490,6 +491,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */,
 				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
 				AB57F0DE230B3C1900BA8B53 /* LuasKit */,
 				AB695E312AE41C1D00B6DB99 /* LuasWatch Watch App */,
@@ -690,6 +692,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB0BD3502AE6F61700EB51AF /* Build configuration list for PBXNativeTarget "LuasKitTests" */;
 			buildPhases = (
+				AB925F432B6FAD7800F23497 /* Run swift-format */,
 				AB0BD3432AE6F61700EB51AF /* Sources */,
 				AB0BD3442AE6F61700EB51AF /* Frameworks */,
 				AB0BD3452AE6F61700EB51AF /* Resources */,
@@ -779,7 +782,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB57F0E9230B3C1900BA8B53 /* Build configuration list for PBXNativeTarget "LuasKit" */;
 			buildPhases = (
-				AB5828452B5C788400E9F772 /* Run swift-format */,
 				AB57F0D8230B3C1900BA8B53 /* Headers */,
 				AB57F0D9230B3C1900BA8B53 /* Sources */,
 				AB57F0DA230B3C1900BA8B53 /* Frameworks */,
@@ -820,7 +822,6 @@
 				AB695E2B2AE41C1C00B6DB99 /* Resources */,
 				AB695E832AE41D5800B6DB99 /* Embed Frameworks */,
 				AB2453FF2AE424B50007FA7C /* Embed Foundation Extensions */,
-				ABCDB4C02B5DA94D0068EFAA /* Run swift-format */,
 			);
 			buildRules = (
 			);
@@ -837,6 +838,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB695E582AE41C1F00B6DB99 /* Build configuration list for PBXNativeTarget "LuasWatch Watch AppTests" */;
 			buildPhases = (
+				AB925F452B6FAEB200F23497 /* Run swift-format */,
 				AB695E3B2AE41C1E00B6DB99 /* Sources */,
 				AB695E3C2AE41C1E00B6DB99 /* Frameworks */,
 				AB695E3D2AE41C1E00B6DB99 /* Resources */,
@@ -1026,7 +1028,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AB5828452B5C788400E9F772 /* Run swift-format */ = {
+		AB925F432B6FAD7800F23497 /* Run swift-format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1045,7 +1047,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=$PATH:/opt/homebrew/bin/\n\nif which swift-format >/dev/null; then\n    swift-format -i --configuration myConfiguration.json --ignore-unparsable-files -p -r LuasKit\nelse\n    echo \"warning: swift-format not installed\"\nfi\n";
 		};
-		ABCDB4C02B5DA94D0068EFAA /* Run swift-format */ = {
+		AB925F452B6FAEB200F23497 /* Run swift-format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1260,6 +1262,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1282,6 +1285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1659,7 +1663,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = LuasKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1695,7 +1698,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = LuasKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1835,6 +1837,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1858,6 +1861,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;

@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "D27B91B5-EBA0-4464-83BA-CCC0D704AA09",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:LuasWatch.xcodeproj",
+      "identifier" : "AB695E2C2AE41C1C00B6DB99",
+      "name" : "LuasWatch Watch App"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:LuasWatch.xcodeproj",
+        "identifier" : "AB695E3E2AE41C1E00B6DB99",
+        "name" : "LuasWatch Watch AppTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:LuasWatch.xcodeproj",
+        "identifier" : "AB695E482AE41C1F00B6DB99",
+        "name" : "LuasWatch Watch AppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

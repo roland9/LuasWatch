@@ -97,12 +97,15 @@ extension StationView: View {
                                 }
                             }
                             ToolbarItemGroup(placement: .bottomBar) {
+
+                                /// Change direction
                                 Button {
                                     // Perform an action here.
                                 } label: {
                                     Image(systemName: "arrow.left.arrow.right")
                                 }
 
+                                /// Favourite
                                 Button {
                                     // Perform an action here.
                                 } label: {
