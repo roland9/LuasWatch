@@ -97,6 +97,7 @@
 		AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRowView.swift */; };
 		AB89FB8B2B49B7B50020A943 /* LineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRowView.swift */; };
 		AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */; };
+		AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F482B6FCD0800F23497 /* StationDirection.swift */; };
 		ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasView.swift */; };
 		ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */; };
 		ABD285812B5DB3F00000011C /* PreViewsStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD285802B5DB3F00000011C /* PreViewsStationView.swift */; };
@@ -307,6 +308,7 @@
 		AB89FB8A2B49B7B50020A943 /* LineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRowView.swift; sourceTree = "<group>"; };
 		AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch Watch App.xctestplan"; sourceTree = "<group>"; };
 		AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extensions.swift"; sourceTree = "<group>"; };
+		AB925F482B6FCD0800F23497 /* StationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDirection.swift; sourceTree = "<group>"; };
 		ABA68B232AF43977002A9F0D /* LuasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAllStates.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */,
+				AB925F482B6FCD0800F23497 /* StationDirection.swift */,
 				AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */,
 			);
 			path = Models;
@@ -1189,6 +1192,7 @@
 				ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
+				AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */,
 				AB695E752AE41CAC00B6DB99 /* PreviewsAppRunningOLD.swift in Sources */,
 				AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */,
 				AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */,

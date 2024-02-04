@@ -6,7 +6,7 @@
 import AppIntents
 import Foundation
 
-public enum Direction: Int, CaseIterable {
+public enum Direction: Int, CaseIterable, Codable {
 
     case both, inbound, outbound
 }

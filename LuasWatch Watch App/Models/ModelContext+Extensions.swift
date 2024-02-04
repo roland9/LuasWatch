@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import LuasKit
 import SwiftData
 
 extension ModelContext {
@@ -29,5 +30,44 @@ extension ModelContext {
         } else {
             insert(FavouriteStation(shortCode: shortCode))
         }
+    }
+
+    internal func direction(for shortCode: String) throws -> [StationDirection] {
+
+        let descriptor = FetchDescriptor<StationDirection>(
+            predicate: #Predicate {
+                $0.shortCode == shortCode
+            })
+
+        return try fetch(descriptor)
+    }
+
+    func directionConsideringStationType(for shortCode: String) -> Direction {
+
+        guard let station = TrainStations.sharedFromFile.station(shortCode: shortCode) else {
+            return .both
+        }
+
+        if station.isFinalStop || station.isOneWayStop {
+            return .both  // because we're not sure whether API returns the trains in inbound or outbound array
+        } else {
+
+            // only now that we checked the stationType, we check the DB
+            if let obj = try? direction(for: shortCode).first {
+                return obj.direction
+            } else {
+                return .both
+            }
+        }
+    }
+
+    func createOrUpdate(shortCode: String, to direction: Direction) {
+
+        if let station = try? self.direction(for: shortCode).first {
+            station.direction = direction
+            return
+        }
+
+        insert(StationDirection(shortCode: shortCode, direction: direction))
     }
 }

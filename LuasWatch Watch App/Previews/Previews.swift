@@ -13,7 +13,10 @@ struct Previews {
     }()
 
     init(addSample: Bool = true) {
-        self.init([FavouriteStation.self])
+        self.init([
+            FavouriteStation.self,
+            StationDirection.self,
+        ])
 
         if addSample {
             addSampleData()

@@ -13,7 +13,10 @@ struct LuasWatch_Watch_AppApp: App {
     @Environment(\.scenePhase) var scenePhase
 
     private var sharedModelContainer: ModelContainer = {
-        let schema = Schema([FavouriteStation.self])
+        let schema = Schema([
+            FavouriteStation.self,
+            StationDirection.self,
+        ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {

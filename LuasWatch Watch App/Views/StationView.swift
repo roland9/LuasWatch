@@ -4,6 +4,7 @@
 //
 
 import LuasKit
+import SwiftData
 import SwiftUI
 
 struct StationView {
@@ -11,8 +12,12 @@ struct StationView {
     @EnvironmentObject var appModel: AppModel
     @Environment(\.modelContext) private var modelContext
 
-//    @State private var direction: Direction?
+    @State private var direction: Direction?
+
+    // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
     @State private var isFavourite: Bool = false
+
+    @State private var isSwitchingDirectionEnabled: Bool = true
 }
 
 extension StationView: View {
@@ -66,7 +71,7 @@ extension StationView: View {
 
                 case .foundDueTimes(let trains, let location),
                     .updatingDueTimes(let trains, let location):
-                    
+
                     NavigationStack {
 
                         VStack {
@@ -76,19 +81,51 @@ extension StationView: View {
 
                             Spacer()
 
-                            VStack {
-                                ForEach(trains.inbound, id: \.id) {
-                                    DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
-                                }
-                                Divider()
-                                ForEach(trains.outbound, id: \.id) {
-                                    DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
-                                }
+                            switch direction {
+                                case .inbound:
+                                    Spacer()
+                                    VStack {
+                                        ForEach(trains.inbound, id: \.id) {
+                                            DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                                        }
+                                    }
+                                    .padding(6)
+                                    .background(.black)
+                                    .border(.secondary).cornerRadius(2)
+                                    .padding(4)
+                                    Spacer()
+
+                                case .outbound:
+                                    Spacer()
+                                    VStack {
+                                        ForEach(trains.outbound, id: \.id) {
+                                            DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                                        }
+                                    }
+                                    .padding(6)
+                                    .background(.black)
+                                    .border(.secondary).cornerRadius(2)
+                                    .padding(4)
+                                    Spacer()
+
+                                case .both:
+                                    VStack {
+                                        ForEach(trains.inbound, id: \.id) {
+                                            DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                                        }
+                                        Divider()
+                                        ForEach(trains.outbound, id: \.id) {
+                                            DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                                        }
+                                    }
+                                    .padding(6)
+                                    .background(.black)
+                                    .border(.secondary).cornerRadius(2)
+                                    .padding(4)
+
+                                case .none:
+                                    Text("None")
                             }
-                            .padding(6)
-                            .background(.black)
-                            .border(.secondary).cornerRadius(2)
-                            .padding(4)
                         }
 
                         .toolbar {
@@ -99,24 +136,44 @@ extension StationView: View {
                                     Image(systemName: "map")
                                 }
                             }
+
                             ToolbarItemGroup(placement: .bottomBar) {
 
                                 /// Change direction
                                 Button {
-                                    // Perform an action here.
+                                    withAnimation {
+                                        direction = direction?.next()
+                                    }
+                                    if let direction {
+                                        modelContext.createOrUpdate(shortCode: trains.trainStation.shortCode, to: direction)
+                                    }
                                 } label: {
-                                    Image(systemName: "arrow.left.arrow.right")
+                                    switch direction {
+
+                                        case .inbound:
+                                            Image(systemName: "arrow.left")
+                                        case .outbound:
+                                            Image(systemName: "arrow.right")
+                                        case .both:
+                                            Image(systemName: "arrow.left.arrow.right")
+                                        case .none:  // because it's optional
+                                            Image(systemName: "arrow.left.arrow.right")
+                                    }
+                                }
+                                .disabled(!isSwitchingDirectionEnabled)
+                                .onAppear {
+                                    isSwitchingDirectionEnabled = trains.trainStation.allowsSwitchingDirection
+                                    direction = modelContext.directionConsideringStationType(for: trains.trainStation.shortCode)
                                 }
 
                                 /// Favourite
                                 Button {
                                     modelContext.toggleFavouriteStation(shortCode: trains.trainStation.shortCode)
-                                    // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
                                     isFavourite.toggle()
                                 } label: {
-                                    isFavourite ?
-                                    Image(systemName: "heart.fill") : Image(systemName: "heart")
-                                }.onAppear {
+                                    isFavourite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
+                                }
+                                .onAppear {
                                     isFavourite = modelContext.doesFavouriteStationExist(shortCode: trains.trainStation.shortCode)
                                 }
                             }
