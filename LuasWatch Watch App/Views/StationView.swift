@@ -9,8 +9,10 @@ import SwiftUI
 struct StationView {
 
     @EnvironmentObject var appModel: AppModel
+    @Environment(\.modelContext) private var modelContext
 
-    @State private var direction: Direction?
+//    @State private var direction: Direction?
+    @State private var isFavourite: Bool = false
 }
 
 extension StationView: View {
@@ -64,6 +66,7 @@ extension StationView: View {
 
                 case .foundDueTimes(let trains, let location),
                     .updatingDueTimes(let trains, let location):
+                    
                     NavigationStack {
 
                         VStack {
@@ -107,9 +110,14 @@ extension StationView: View {
 
                                 /// Favourite
                                 Button {
-                                    // Perform an action here.
+                                    modelContext.toggleFavouriteStation(shortCode: trains.trainStation.shortCode)
+                                    // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
+                                    isFavourite.toggle()
                                 } label: {
-                                    Image(systemName: "heart")
+                                    isFavourite ?
+                                    Image(systemName: "heart.fill") : Image(systemName: "heart")
+                                }.onAppear {
+                                    isFavourite = modelContext.doesFavouriteStationExist(shortCode: trains.trainStation.shortCode)
                                 }
                             }
                         }

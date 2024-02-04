@@ -9,11 +9,21 @@
     }
   ],
   "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:LuasWatch.xcodeproj",
+          "identifier" : "AB695E2C2AE41C1C00B6DB99",
+          "name" : "LuasWatch Watch App"
+        }
+      ]
+    },
     "targetForVariableExpansion" : {
       "containerPath" : "container:LuasWatch.xcodeproj",
       "identifier" : "AB695E2C2AE41C1C00B6DB99",
       "name" : "LuasWatch Watch App"
-    }
+    },
+    "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {

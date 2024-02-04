@@ -3,20 +3,33 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
+import SwiftData
 import XCTest
+
 @testable import LuasWatch_Watch_App
 
 final class LuasWatch_Watch_AppTests: XCTestCase {
 
+    var context: ModelContext!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let schema = Schema([FavouriteStation.self])
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: schema, configurations: [config])
+        context = ModelContext(container)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testFavouriteStation() throws {
-        XCTAssertTrue(FavouriteStation.doesExist(shortCode: "RAN"))
+    func testFavouriteStationDoesNotExist() throws {
+        XCTAssertFalse(context.doesFavouriteStationExist(shortCode: "HAR"))
+    }
+
+    func testFavouriteStationDoesExist() throws {
+        let station = FavouriteStation(shortCode: "HAR")
+        context.insert(station)
+        XCTAssertTrue(context.doesFavouriteStationExist(shortCode: "HAR"))
     }
 }

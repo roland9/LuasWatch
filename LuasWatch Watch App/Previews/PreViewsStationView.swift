@@ -6,7 +6,7 @@
 import LuasKit
 import SwiftUI
 
-#Preview("Cabra") {
+#Preview("Phibs (not fav)") {
     let trains = trainsGreen
 
     let appModel = AppModel(.foundDueTimes(trains, userLocation))
@@ -14,27 +14,14 @@ import SwiftUI
     return TabView {
         StationView()
             .environmentObject(appModel)
+            .modelContainer(Previews().container)
             .containerBackground(
                 trains.trainStation.route.color.gradient,
                 for: .tabView)
     }
 }
 
-#Preview("Leopardstown Valley") {
-    let trains = trainsGreen
-
-    let appModel = AppModel(.foundDueTimes(trains, userLocation))
-
-    return TabView {
-        StationView()
-            .environmentObject(appModel)
-            .containerBackground(
-                trains.trainStation.route.color.gradient,
-                for: .tabView)
-    }
-}
-
-#Preview("Connolly") {
+#Preview("Tallaght (fav)") {
     let trains = trainsFinalStop
 
     let appModel = AppModel(.foundDueTimes(trains, userLocation))
@@ -42,6 +29,7 @@ import SwiftUI
     return TabView {
         StationView()
             .environmentObject(appModel)
+            .modelContainer(Previews().container)
             .containerBackground(
                 trains.trainStation.route.color.gradient,
                 for: .tabView)

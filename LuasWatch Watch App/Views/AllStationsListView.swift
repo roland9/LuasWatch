@@ -4,6 +4,7 @@
 //
 
 import LuasKit
+import SwiftData
 import SwiftUI
 
 struct AllStationsListView {
@@ -36,9 +37,13 @@ extension AllStationsListView: View {
     private func stationsListView(stations: [TrainStation]) -> some View {
         StationsModal(
             stations: stations,
-            action: {
-                #warning("how to avoid duplicates?")
-                modelContext.insert(FavouriteStation(shortCode: $0.shortCode))
+            action: { station in
+
+                if modelContext.doesFavouriteStationExist(shortCode: station.shortCode) == false {
+                    modelContext.insert(FavouriteStation(shortCode: station.shortCode))
+                } else {
+                    myPrint("Favourite station already exists -> ignore")
+                }
 
                 DispatchQueue.main.async {
                     dismiss()

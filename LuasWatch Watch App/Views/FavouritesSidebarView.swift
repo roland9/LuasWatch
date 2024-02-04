@@ -10,11 +10,9 @@ import SwiftUI
 struct FavouritesSidebarView {
 
     @EnvironmentObject var appModel: AppModel
-
     @Environment(\.modelContext) private var modelContext
 
-    @Query(sort: \FavouriteStation.dateAdded)
-
+    @Query(sort: \FavouriteStation.dateAdded, order: .reverse)
     private var favouriteStations: [FavouriteStation]
 }
 

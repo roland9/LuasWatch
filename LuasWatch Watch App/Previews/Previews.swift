@@ -31,7 +31,7 @@ struct Previews {
     }
 
     mutating func addSampleData() {
-        let friends = FavouriteStation.addPreviews(into: context)
+        _ = FavouriteStation.addPreviews(into: context)
     }
 }
 
