@@ -38,7 +38,7 @@ import SwiftUI
 }
 
 #Preview("loading") {
-    luasView(state: .loadingDueTimes(stationGreen, location))
+    luasView(state: .loadingDueTimes(stationGreen))
 }
 
 #Preview("errLoading") {
@@ -46,7 +46,7 @@ import SwiftUI
 }
 
 #Preview("OK") {
-    luasView(state: .foundDueTimes(trainsGreen, location))
+    luasView(state: .foundDueTimes(trainsGreen))
 }
 
 #Preview("locErr") {

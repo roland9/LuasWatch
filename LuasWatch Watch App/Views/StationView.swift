@@ -20,6 +20,17 @@ struct StationView {
     @State private var isSwitchingDirectionEnabled: Bool = true
 }
 
+extension View {
+
+    fileprivate func timeTableStyle() -> some View {
+        self
+            .padding(6)
+            .background(.black)
+            .border(.secondary).cornerRadius(2)
+            .padding(4)
+    }
+}
+
 extension StationView: View {
 
     var body: some View {
@@ -50,7 +61,7 @@ extension StationView: View {
                         .multilineTextAlignment(.center)
                         .frame(idealHeight: .greatestFiniteMagnitude)
 
-                case .loadingDueTimes(_, _):
+                case .loadingDueTimes(_):
                     // we do get location here in this enum as well, but we ignore it in the UI
                     Text(appModel.appState.description)
                         .multilineTextAlignment(.center)
@@ -69,8 +80,8 @@ extension StationView: View {
                         }
                     }
 
-                case .foundDueTimes(let trains, let location),
-                    .updatingDueTimes(let trains, let location):
+                case .foundDueTimes(let trains),
+                    .updatingDueTimes(let trains):
 
                     NavigationStack {
 
@@ -89,10 +100,7 @@ extension StationView: View {
                                             DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
                                         }
                                     }
-                                    .padding(6)
-                                    .background(.black)
-                                    .border(.secondary).cornerRadius(2)
-                                    .padding(4)
+                                    .timeTableStyle()
                                     Spacer()
 
                                 case .outbound:
@@ -102,10 +110,7 @@ extension StationView: View {
                                             DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
                                         }
                                     }
-                                    .padding(6)
-                                    .background(.black)
-                                    .border(.secondary).cornerRadius(2)
-                                    .padding(4)
+                                    .timeTableStyle()
                                     Spacer()
 
                                 case .both:
@@ -118,10 +123,7 @@ extension StationView: View {
                                             DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
                                         }
                                     }
-                                    .padding(6)
-                                    .background(.black)
-                                    .border(.secondary).cornerRadius(2)
-                                    .padding(4)
+                                    .timeTableStyle()
 
                                 case .none:
                                     Text("None")
@@ -160,11 +162,18 @@ extension StationView: View {
                                             Image(systemName: "arrow.left.arrow.right")
                                     }
                                 }
-                                .disabled(!isSwitchingDirectionEnabled)
                                 .onAppear {
                                     isSwitchingDirectionEnabled = trains.trainStation.allowsSwitchingDirection
                                     direction = modelContext.directionConsideringStationType(for: trains.trainStation.shortCode)
+                                    print("😍 on appear \(trains.trainStation.shortCode)  isSwitchingDirectionEnabled \(isSwitchingDirectionEnabled)")
                                 }
+                                .onChange(
+                                    of: appModel.selectedStation,
+                                    { oldValue, newValue in
+                                        print("😇 onChange old \(oldValue) \(newValue)")
+                                    }
+                                )
+                                .disabled(!isSwitchingDirectionEnabled)
 
                                 /// Favourite
                                 Button {

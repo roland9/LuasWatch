@@ -48,7 +48,7 @@ public class Location: NSObject {
 
     // start getting location
     public func start() {
-        myPrint("startUpdatingLocation")
+        myPrint("calling locationManager.startUpdatingLocation")
         internalState = .gettingLocation
         locationManager.startUpdatingLocation()
     }
@@ -57,7 +57,7 @@ public class Location: NSObject {
 
     public func update() {
         if locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error) {
-            myPrint("startUpdatingLocation")
+            myPrint("calling locationManager.startUpdatingLocation")
 
             internalState = .gettingLocation
             locationManager.startUpdatingLocation()

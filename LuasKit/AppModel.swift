@@ -22,12 +22,12 @@ public class AppModel: ObservableObject {
         case errorGettingStation(String)
         /// in case the user is too far away from Dublin area
 
-        case loadingDueTimes(TrainStation, CLLocation)
+        case loadingDueTimes(TrainStation)
         case errorGettingDueTimes(TrainStation, String)
 
-        case foundDueTimes(TrainsByDirection, CLLocation)
+        case foundDueTimes(TrainsByDirection)
 
-        case updatingDueTimes(TrainsByDirection, CLLocation)
+        case updatingDueTimes(TrainsByDirection)
 
         public init(_ state: AppState) {
             self = state

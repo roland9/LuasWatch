@@ -61,7 +61,7 @@ extension FavouritesSidebarView: View {
 #warning("improvie visuals - nested header??")
 
 #Preview("Favourites") {
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
     appModel.appMode = .favourite(stationGreen)
 
     return List {

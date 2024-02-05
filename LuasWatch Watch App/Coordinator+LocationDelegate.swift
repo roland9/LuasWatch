@@ -34,7 +34,11 @@ extension Coordinator: LocationDelegate {
     }
 
     func didEnableLocation() {
-        location.start()
+        if appModel.appMode.needsLocation {
+            location.start()
+        } else {
+            myPrint("no location auth needed for the current appMode \(appModel.appMode)")
+        }
     }
 
     func didGetLocation(_ location: CLLocation) {
@@ -47,7 +51,7 @@ extension Coordinator: LocationDelegate {
 
         if let station = appModel.appMode.specificStation {
             myPrint("step 2a: got location now, but user selected specific station before -> use this station now")
-            handle(station, location)
+            handle(station)
 
         } else {
             myPrint("step 2b: got location; find closest station (no matter which line)")
@@ -56,16 +60,16 @@ extension Coordinator: LocationDelegate {
 
                 if appModel.appMode == .closest {
                     myPrint("found closest station <\(closestStation.name)>")
-                    handle(closestStation, location)
+                    handle(closestStation)
                 } else if appModel.appMode == .closestOtherLine,
                     let closestOtherLine = allStations.closestStation(from: location, route: closestStation.route.other)
                 {
                     myPrint("found closest other line station <\(closestOtherLine.name)>")
-                    handle(closestOtherLine, location)
+                    handle(closestOtherLine)
                 } else {
                     #warning("not sure we need that else here?")
                     myPrint("found closest station <\(closestStation.name)>")
-                    handle(closestStation, location)
+                    handle(closestStation)
                 }
 
             } else {
@@ -77,17 +81,16 @@ extension Coordinator: LocationDelegate {
     }
 
     internal func handle(
-        _ closestStation: TrainStation,
-        _ location: CLLocation
+        _ closestStation: TrainStation
     ) {
         // use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 
         appModel.selectedStation = closestStation
 
         if let trains = self.trains {
-            appModel.updateWithAnimation(to: .updatingDueTimes(trains, location))
+            appModel.updateWithAnimation(to: .updatingDueTimes(trains))
         } else {
-            appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, location))
+            appModel.updateWithAnimation(to: .loadingDueTimes(closestStation))
         }
 
         // //////////////////////////////////////////////
@@ -99,7 +102,7 @@ extension Coordinator: LocationDelegate {
 
                 myPrint("got trains \(trains)")
                 self.trains = trains
-                appModel.updateWithAnimation(to: .foundDueTimes(trains, location))
+                appModel.updateWithAnimation(to: .foundDueTimes(trains))
 
             } catch {
 

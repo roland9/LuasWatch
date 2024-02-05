@@ -9,25 +9,24 @@ import SwiftUI
 
 #if DEBUG
 
-    // Bluebell station
-    let location = CLLocation(
+    let locationBluebell = CLLocation(
         latitude: CLLocationDegrees(53.3292817872831),
         longitude: CLLocationDegrees(-6.33382500275916))
 
     let userLocation = CLLocation(
-        latitude: location.coordinate.latitude + 0.00425,
-        longitude: location.coordinate.longitude + 0.005)
+        latitude: locationBluebell.coordinate.latitude + 0.00425,
+        longitude: locationBluebell.coordinate.longitude + 0.005)
 
-    let stationRed = TrainStation(
+    private let stationRed = TrainStation(
         stationId: "stationId",
         stationIdShort: "LUAS8",
         shortCode: "BLU",
         route: .red,
         name: "Bluebell Luas Stop",
-        location: location)
-    let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
-    let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
-    let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
+        location: locationBluebell)
+    private let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
+    private let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
+    private let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
 
     let trainsRed_1_1 = TrainsByDirection(
         trainStation: stationRed,
@@ -52,42 +51,40 @@ import SwiftUI
         shortCode: "PHI",
         route: .green,
         name: "Phibsboro",
-        location: location)
+        location: locationBluebell)
 
-    let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
-    let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
-    let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
-
+    private let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
+    private let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
+    private let trainGreen3 = Train(destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
     let trainsGreen = TrainsByDirection(
         trainStation: stationGreen,
         inbound: [trainGreen3],
         outbound: [trainGreen1, trainGreen2])
 
-    let stationOneWay = TrainStation(
+    private let stationOneWay = TrainStation(
         stationId: "stationId",
         stationIdShort: "LUAS69",
         shortCode: "MAR",
         route: .green,
         name: "Marlborough",
-        location: location,
+        location: locationBluebell,
         stationType: .oneway)
     let trainsOneWayStation = TrainsByDirection(
         trainStation: stationOneWay,
         inbound: [trainGreen2, trainGreen3],
         outbound: [])
 
-    let stationFinalStop = TrainStation(
+    private let stationFinalStop = TrainStation(
         stationId: "stationId",
         stationIdShort: "stationIdShort",
         shortCode: "TAL",
         route: .red,
         name: "Tallaght",
-        location: location,
+        location: locationBluebell,
         stationType: .terminal)
     let trainsFinalStop = TrainsByDirection(
         trainStation: stationFinalStop,
         inbound: [trainRed1, trainRed3],
         outbound: [])
-    let directionBoth: Direction = .both
 
 #endif

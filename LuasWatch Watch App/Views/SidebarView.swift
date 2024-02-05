@@ -91,7 +91,7 @@ extension SidebarView: View {
 #Preview("Sidebar") {
     @State var selectedStation: TrainStation?
 
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation, userLocation)))
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
     appModel.appMode = .favourite(stationGreen)
 
     return SidebarView(selectedStation: $selectedStation)

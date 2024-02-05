@@ -14,8 +14,8 @@ import SwiftUI
 
             ZStack {
                 LuasViewOLD()
-                    .environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, userLocation)))
-                    .environmentObject(AppModel(.foundDueTimes(trainsRed_1_1, userLocation)))
+                //                    .environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1)))
+                //                    .environmentObject(AppModel(.foundDueTimes(trainsRed_1_1)))
 
                 LuasViewOLD()
                     .overlayView("Showing outbound trains only")

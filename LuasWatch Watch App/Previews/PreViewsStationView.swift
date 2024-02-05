@@ -6,32 +6,41 @@
 import LuasKit
 import SwiftUI
 
-#Preview("Phibs (not fav)") {
-    let trains = trainsGreen
-
-    let appModel = AppModel(.foundDueTimes(trains, userLocation))
-
-    return TabView {
+private func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
+    TabView {
         StationView()
             .environmentObject(appModel)
             .modelContainer(Previews().container)
             .containerBackground(
-                trains.trainStation.route.color.gradient,
+                route.color.gradient,
                 for: .tabView)
     }
 }
 
-#Preview("Tallaght (fav)") {
-    let trains = trainsFinalStop
+#Preview("Phibs (not fav)") {
+    makeTabView(AppModel(.foundDueTimes(trainsGreen)), .green)
+}
 
-    let appModel = AppModel(.foundDueTimes(trains, userLocation))
+#Preview("1/1") {
+    makeTabView(AppModel(.foundDueTimes(trainsRed_1_1)), .red)
+}
 
-    return TabView {
-        StationView()
-            .environmentObject(appModel)
-            .modelContainer(Previews().container)
-            .containerBackground(
-                trains.trainStation.route.color.gradient,
-                for: .tabView)
-    }
+#Preview("2/1") {
+    makeTabView(AppModel(.foundDueTimes(trainsRed_2_1)), .red)
+}
+
+#Preview("3/2") {
+    makeTabView(AppModel(.foundDueTimes(trainsRed_3_2)), .red)
+}
+
+#Preview("4/4") {
+    makeTabView(AppModel(.foundDueTimes(trainsRed_4_4)), .red)
+}
+
+#Preview("OneWay") {
+    makeTabView(AppModel(.foundDueTimes(trainsOneWayStation)), .green)
+}
+
+#Preview("Final") {
+    makeTabView(AppModel(.foundDueTimes(trainsFinalStop)), .red)
 }

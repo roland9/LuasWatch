@@ -45,11 +45,11 @@ class Coordinator: NSObject {
 
         if appModel.appMode.needsLocation {
 
-            myPrint("need location for current appMode \(appModel.appMode) -> prompt for location auth")
+            myPrint("need location auth for current appMode \(appModel.appMode) -> prompt for location auth")
             location.promptLocationAuth()
 
         } else {
-            myPrint("no location needed for the current appMode \(appModel.appMode)")
+            myPrint("no location auth needed for the current appMode \(appModel.appMode)")
         }
 
         /// we will call location.start() once user has authorized location access
@@ -71,6 +71,9 @@ class Coordinator: NSObject {
         myPrint(#function)
 
         timer?.invalidate()
+
+        // when we tap a station in sidebarView and force a retrigger, it's still up & we would ignore it -> let's override this check
+        appModel.allowStationTabviewUpdates = true
 
         fireAndScheduleTimer()
     }
@@ -94,21 +97,11 @@ class Coordinator: NSObject {
             return
         }
 
-        // if user has selected a specific station
         if let station = appModel.appMode.specificStation {
 
-            // the location we have is not too old -> don't wait for another location update
-            if let latestLocation = appModel.latestLocation,
-                latestLocation.isQuiteRecent()
-            {
-                myPrint("🥳 we have user selected station & recent location -> skip location update")
-                handle(station, latestLocation)
-            } else {
-                myPrint(
-                    "😇 user has selected specific station & only outdated or no location \(appModel.latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update"
-                )
-                location.update()
-            }
+            // if user has selected a specific station
+            myPrint("🥳 user selected station -> skip location update")
+            handle(station)
 
         } else {
             // user has NOT selected a specific station

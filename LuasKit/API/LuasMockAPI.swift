@@ -17,7 +17,7 @@ struct MockAPIWorker: APIWorker {
     var scenario: Scenario = .ranelaghTrains
 
     // swiftlint:disable:next function_body_length
-    func getTrains(shortCode: String) async throws -> Data {
+    func getTrains(shortCode: String) throws -> Data {
 
         var xml: String
 

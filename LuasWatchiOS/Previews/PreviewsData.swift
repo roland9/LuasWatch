@@ -11,18 +11,18 @@ import LuasKit
 #if DEBUG
 
 // Bluebell station
-let location = CLLocation(latitude: CLLocationDegrees(53.3292817872831),
+let locationBluebell = CLLocation(latitude: CLLocationDegrees(53.3292817872831),
                                   longitude: CLLocationDegrees(-6.33382500275916))
 
-let userLocation = CLLocation(latitude: location.coordinate.latitude + 0.00425,
-							  longitude: location.coordinate.longitude + 0.005)
+let userLocation = CLLocation(latitude: locationBluebell.coordinate.latitude + 0.00425,
+							  longitude: locationBluebell.coordinate.longitude + 0.005)
 
 let stationRed = TrainStation(stationId: "stationId",
 							  stationIdShort: "LUAS8",
 							  shortCode: "BLU",
 							  route: .red,
 							  name: "Bluebell Luas Stop",
-							  location: location)
+							  locationBluebell: locationBluebell)
 let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
 let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")
 let trainRed3 = Train(destination: "LUAS Connolly", direction: "Inbound", dueTime: "12")
@@ -45,7 +45,7 @@ let stationGreen = TrainStation(stationId: "stationId",
 								shortCode: "PHI",
 								route: .green,
 								name: "Phibsboro",
-								location: location)
+								locationBluebell: locationBluebell)
 
 let trainGreen1 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "Due")
 let trainGreen2 = Train(destination: "LUAS Broombridge", direction: "Outbound", dueTime: "9")
@@ -60,7 +60,7 @@ let stationOneWay = TrainStation(stationId: "stationId",
 								 shortCode: "MAR",
 								 route: .green,
 								 name: "Marlborough",
-								 location: location,
+								 locationBluebell: locationBluebell,
 								 stationType: .oneway)
 let trainsOneWayStation = TrainsByDirection(trainStation: stationOneWay,
 											inbound: [trainGreen2, trainGreen3],
@@ -71,7 +71,7 @@ let stationFinalStop = TrainStation(stationId: "stationId",
 									shortCode: "TAL",
 									route: .red,
 									name: "Tallaght",
-									location: location,
+									locationBluebell: locationBluebell,
 									stationType: .terminal)
 let trainsFinalStop = TrainsByDirection(trainStation: stationFinalStop,
 										inbound: [trainRed1, trainRed3],
