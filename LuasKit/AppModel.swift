@@ -93,7 +93,7 @@ public class AppModel: ObservableObject {
     @Published public var latestLocation: CLLocation?
 
     @Published public var allowStationTabviewUpdates: Bool = true
-    
+
     public init() {
         if let storedAppModeData = UserDefaults.standard.object(forKey: "AppMode") as? Data,
             let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData)
@@ -127,116 +127,6 @@ public class AppModel: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 self?.appState = state
             }
-        }
-    }
-}
-
-extension AppModel.AppMode: Codable {
-
-    // https://stackoverflow.com/questions/69979095/codable-enum-with-arguments-and-fails-at-compile-time
-
-    private enum CodingBase: String, Codable {
-        case closest
-        case closestOtherLine
-        case favourite  // (TrainStation)
-        case nearby  // (TrainStation)
-        case specific  // (TrainStation)
-        case recents  // (TrainStation)
-    }
-
-    private enum CodingKeys: String, CodingKey {
-        case base
-        case stationValue
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let base = try container.decode(CodingBase.self, forKey: .base)
-
-        switch base {
-
-            case .closest:
-                self = .closest
-            case .closestOtherLine:
-                self = .closestOtherLine
-            case .favourite:
-                let shortCode = try container.decode(String.self, forKey: .stationValue)
-                if let station = TrainStations.sharedFromFile.station(shortCode: shortCode) {
-                    self = .favourite(station)
-                } else {
-                    self = .closest
-                }
-            case .nearby:
-                let shortCode = try container.decode(String.self, forKey: .stationValue)
-                if let station = TrainStations.sharedFromFile.station(shortCode: shortCode) {
-                    self = .nearby(station)
-                } else {
-                    self = .closest
-                }
-            case .specific:
-                let shortCode = try container.decode(String.self, forKey: .stationValue)
-                if let station = TrainStations.sharedFromFile.station(shortCode: shortCode) {
-                    self = .specific(station)
-                } else {
-                    self = .closest
-                }
-            case .recents:
-                let shortCode = try container.decode(String.self, forKey: .stationValue)
-                if let station = TrainStations.sharedFromFile.station(shortCode: shortCode) {
-                    self = .recents(station)
-                } else {
-                    self = .closest
-                }
-
-        }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        switch self {
-            case .closest:
-                try container.encode(CodingBase.closest, forKey: .base)
-            case .closestOtherLine:
-                try container.encode(CodingBase.closestOtherLine, forKey: .base)
-            case .favourite(let station):
-                try container.encode(CodingBase.favourite, forKey: .base)
-                try container.encode(station.shortCode, forKey: .stationValue)
-            case .nearby(let station):
-                try container.encode(CodingBase.nearby, forKey: .base)
-                try container.encode(station.shortCode, forKey: .stationValue)
-            case .specific(let station):
-                try container.encode(CodingBase.specific, forKey: .base)
-                try container.encode(station.shortCode, forKey: .stationValue)
-            case .recents(let station):
-                try container.encode(CodingBase.recents, forKey: .base)
-                try container.encode(station.shortCode, forKey: .stationValue)
-        }
-    }
-}
-
-extension AppModel.AppState: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-
-            case .idle:
-                return "Idle"
-            case .gettingLocation:
-                return LuasStrings.gettingLocation
-            case .locationAuthorizationUnknown:
-                return LuasStrings.locationAuthorizationUnknown
-            case .errorGettingLocation(let errorMessage):
-                return errorMessage
-            case .errorGettingStation:
-                return LuasStrings.errorGettingStation
-            case .loadingDueTimes(let trainStation, _):
-                return LuasStrings.gettingDueTimes(trainStation)
-            case .errorGettingDueTimes(_, let errorMessage):
-                return errorMessage
-            case .foundDueTimes(let trains, _):
-                return LuasStrings.foundDueTimes(trains)
-            case .updatingDueTimes(let trains, _):
-                return LuasStrings.updatingDueTimes(trains)
         }
     }
 }
