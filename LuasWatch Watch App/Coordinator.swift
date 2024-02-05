@@ -87,7 +87,12 @@ class Coordinator: NSObject {
     }
 
     @objc func timerDidFire() {
-        #warning("check whether modal is up")
+        myPrint("😇 \(#function)")
+
+        guard appModel.allowStationTabviewUpdates == true else {
+            myPrint("😇 SidebarView is up -> ignore timer firing so we don't interfere UI")
+            return
+        }
 
         // if user has selected a specific station
         if let station = appModel.appMode.specificStation {

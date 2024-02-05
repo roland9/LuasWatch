@@ -16,7 +16,11 @@ extension LuasView: View {
     var body: some View {
 
         NavigationSplitView {
+
             SidebarView(selectedStation: $appModel.selectedStation)
+                .onAppear(perform: {
+                    appModel.allowStationTabviewUpdates = false
+                })
 
         } detail: {
             TabView(selection: $appModel.selectedStation) {
@@ -26,6 +30,13 @@ extension LuasView: View {
                         appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
                         for: .tabView)
             }
+            .onAppear(perform: {
+                appModel.allowStationTabviewUpdates = true
+            })
+            .onDisappear(perform: {
+                appModel.allowStationTabviewUpdates = false
+            })
+
         }
     }
 }
