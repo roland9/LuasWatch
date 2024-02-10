@@ -11,7 +11,6 @@ class Coordinator: NSObject {
 
     internal let appModel: AppModel
     internal var location: Location
-    internal var trains: TrainsByDirection?
     internal let api = LuasAPI(apiWorker: RealAPIWorker())
 
     private var timer: Timer?

@@ -8,10 +8,11 @@ import SwiftData
 import SwiftUI
 
 struct StationTimesView: View {
-    
-    @EnvironmentObject private var appModel: AppModel
 
-    @State private var direction: Direction?
+    @EnvironmentObject private var appModel: AppModel
+    @Environment(\.modelContext) private var modelContext
+
+    @State private var direction: Direction = .both
 
     var trains: TrainsByDirection
 }
@@ -19,6 +20,7 @@ struct StationTimesView: View {
 extension StationTimesView {
 
     var body: some View {
+
         NavigationStack {
 
             VStack {
@@ -38,11 +40,13 @@ extension StationTimesView {
 
                     case .both:
                         DoubleTimetableView(trainsByDirection: trains)
-
-                    case .none:
-                        Text("None")
                 }
             }
+
+            .onAppear {
+                direction = modelContext.directionConsideringStationType(for: trains.trainStation.shortCode)
+            }
+
             .toolbar {
                 StationToolbar(
                     direction: $direction,

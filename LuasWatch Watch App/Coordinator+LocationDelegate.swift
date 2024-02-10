@@ -75,7 +75,6 @@ extension Coordinator: LocationDelegate {
 
             } else {
                 myPrint("step 2c: no station found -> user too far away")
-                trains = nil
                 appModel.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
             }
         }
@@ -87,12 +86,7 @@ extension Coordinator: LocationDelegate {
         // use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
 
         appModel.selectedStation = closestStation
-
-        if let trains = self.trains {
-            appModel.updateWithAnimation(to: .updatingDueTimes(trains))
-        } else {
-            appModel.updateWithAnimation(to: .loadingDueTimes(closestStation))
-        }
+        appModel.updateWithAnimation(to: .loadingDueTimes(closestStation))
 
         // //////////////////////////////////////////////
         // step 3: get due times from API
@@ -104,12 +98,10 @@ extension Coordinator: LocationDelegate {
                 let trains = try await self.api.dueTimes(for: closestStation)
                 myPrint("... got trains \(trains)")
 
-                self.trains = trains
                 appModel.updateWithAnimation(to: .foundDueTimes(trains))
 
             } catch {
 
-                trains = nil
                 myPrint("caught error \(error.localizedDescription)")
 
                 if let apiError = error as? APIError {

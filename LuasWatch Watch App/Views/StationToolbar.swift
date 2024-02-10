@@ -8,7 +8,6 @@ import SwiftUI
 
 struct StationToolbar {
 
-    @EnvironmentObject private var appModel: AppModel
     @Environment(\.modelContext) private var modelContext
 
     // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
@@ -16,7 +15,7 @@ struct StationToolbar {
 
     @State private var isSwitchingDirectionEnabled: Bool = true
 
-    @Binding var direction: Direction?
+    @Binding var direction: Direction
 
     let trains: TrainsByDirection
 }
@@ -38,13 +37,13 @@ extension StationToolbar: ToolbarContent {
             /// Change direction
             Button {
                 withAnimation {
-                    direction = direction?.next()
+                    direction = direction.next()
                 }
-                if let direction {
-                    let shortCode = trains.trainStation.shortCode
-                    myPrint("\(#function) createOrUpdate \(shortCode) to \(direction)")
-                    modelContext.createOrUpdate(shortCode: shortCode, to: direction)
-                }
+
+                let shortCode = trains.trainStation.shortCode
+                myPrint("\(#function) createOrUpdate \(shortCode) to \(direction)")
+                modelContext.createOrUpdate(shortCode: shortCode, to: direction)
+
             } label: {
                 switch direction {
 
@@ -54,22 +53,11 @@ extension StationToolbar: ToolbarContent {
                         Image(systemName: "arrow.right")
                     case .both:
                         Image(systemName: "arrow.left.arrow.right")
-                    case .none:  // because it's optional
-                        Image(systemName: "arrow.left.arrow.right")
                 }
             }
             .onAppear {
                 isSwitchingDirectionEnabled = trains.trainStation.allowsSwitchingDirection
-                direction = modelContext.directionConsideringStationType(for: trains.trainStation.shortCode)
-                print("😍 on appear \(trains.trainStation.shortCode)  isSwitchingDirectionEnabled \(isSwitchingDirectionEnabled)")
             }
-            // WIP
-            .onChange(
-                of: appModel.selectedStation,
-                { oldValue, newValue in
-                    print("😇 onChange old \(oldValue) \(newValue)")
-                }
-            )
             .disabled(!isSwitchingDirectionEnabled)
 
             /// Favourite
