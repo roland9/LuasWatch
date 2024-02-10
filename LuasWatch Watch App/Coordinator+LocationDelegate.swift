@@ -67,7 +67,8 @@ extension Coordinator: LocationDelegate {
                     myPrint("found closest other line station <\(closestOtherLine.name)>")
                     handle(closestOtherLine)
                 } else {
-                    #warning("not sure we need that else here?")
+                    assertionFailure("internal error")
+                    // this should not happen unless we missed an appMode case;  as fallback let's use the closestStation
                     myPrint("found closest station <\(closestStation.name)>")
                     handle(closestStation)
                 }
@@ -98,9 +99,11 @@ extension Coordinator: LocationDelegate {
         Task {
 
             do {
-                let trains = try await self.api.dueTimes(for: closestStation)
 
-                myPrint("got trains \(trains)")
+                myPrint("calling API for station \(closestStation.name) ...")
+                let trains = try await self.api.dueTimes(for: closestStation)
+                myPrint("... got trains \(trains)")
+
                 self.trains = trains
                 appModel.updateWithAnimation(to: .foundDueTimes(trains))
 

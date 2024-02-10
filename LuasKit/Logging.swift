@@ -15,7 +15,7 @@ public func myPrint(
 
         let formatter: DateFormatter = {
             let _formatter = DateFormatter()
-            _formatter.dateFormat = "H:m:ss.SSS"
+            _formatter.dateFormat = "HH:mm:ss.SSS"
             return _formatter
         }()
 

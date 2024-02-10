@@ -50,17 +50,23 @@ public class Location: NSObject {
     public func start() {
         myPrint("calling locationManager.startUpdatingLocation")
         internalState = .gettingLocation
+        locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
 
-    #warning("that will be called very shortly after start because timer fires & calls update")
-
     public func update() {
-        if locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error) {
+        if (locationAuthState == .granted &&
+            (internalState == .stoppedUpdatingLocation || internalState == .error)) ||
+        internalState == .initializing {
             myPrint("calling locationManager.startUpdatingLocation")
 
             internalState = .gettingLocation
+            locationManager.delegate = self
             locationManager.startUpdatingLocation()
+
+        } else {
+            assertionFailure("internal error")
+            myPrint("🚨 NOT calling locationManager.startUpdatingLocation")
         }
     }
 }
@@ -100,24 +106,28 @@ extension Location: CLLocationManagerDelegate {
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         myPrint("\(locations)")
-        // don't do force unwrap...
-        let lastLocation = locations.last!
 
-        // TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later
+        guard let lastLocation = locations.last else {
+            assertionFailure("internal error")
+            myPrint("🚨 internal error: expected a location in the locations array")
+            return
+        }
 
         let howRecent = lastLocation.timestamp.timeIntervalSinceNow
 
         if abs(howRecent) < 15.0 {
 
-            #warning("we should kill previous API requests if there is a newer location")
-            delegate?.didGetLocation(lastLocation)
-
             if lastLocation.horizontalAccuracy < 100 && lastLocation.verticalAccuracy < 100 {
                 myPrint("last location quite precise -> stopping location updates for now")
 
                 internalState = .stoppedUpdatingLocation
+                // it seems that calling stopUpdatingLocation() does still deliver sometimes 3 location updates, which causes superfluous API calls....
+                // setting the delegate to nil avoids that (but need to remember to set it to self again!)
+                locationManager.delegate = nil
                 locationManager.stopUpdatingLocation()
             }
+
+            delegate?.didGetLocation(lastLocation)
 
         } else {
             myPrint("ignoring lastLocation because too old (\(howRecent) seconds ago")

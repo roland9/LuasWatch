@@ -47,14 +47,19 @@ class Coordinator: NSObject {
 
             myPrint("need location auth for current appMode \(appModel.appMode) -> prompt for location auth")
             location.promptLocationAuth()
+            /// we will call location.start() once user has authorized location access
 
         } else {
             myPrint("no location auth needed for the current appMode \(appModel.appMode)")
+            guard let specificStation = appModel.appMode.specificStation else {
+                assertionFailure("internal error")
+                myPrint("🚨 internal error: expected specific station in appModel")
+                return
+            }
+            handle(specificStation)
         }
 
-        /// we will call location.start() once user has authorized location access
-
-        #warning("a bit ugly -  notification is sent by ChangeStationButton - is there a better way?")
+        #warning("notification is sent by appMode.didSet - is there a better way?")
         NotificationCenter.default.addObserver(
             forName: Notification.Name("LuasWatch.RetriggerTimer"),
             object: nil, queue: nil
@@ -75,14 +80,13 @@ class Coordinator: NSObject {
         // when we tap a station in sidebarView and force a retrigger, it's still up & we would ignore it -> let's override this check
         appModel.allowStationTabviewUpdates = true
 
-        fireAndScheduleTimer()
+        // fire and schedule
+        timerDidFire()
+        scheduleTimer()
     }
 
-    internal func fireAndScheduleTimer() {
-        // fire right now...
-        timerDidFire()
-
-        // ... and then schedule again for regular interval
+    internal func scheduleTimer() {
+        // schedule timer for regular interval
         timer = Timer.scheduledTimer(
             timeInterval: Self.refreshInterval,
             target: self, selector: #selector(timerDidFire),

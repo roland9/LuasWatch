@@ -50,12 +50,12 @@ struct LuasWatch_Watch_AppApp: App {
         .modelContainer(sharedModelContainer)
 
         .onChange(of: scenePhase) {
-            switch $0 {
+            switch scenePhase {
                 case .background, .inactive:
                     mainCoordinator.invalidateTimer()
 
                 case .active:
-                    mainCoordinator.fireAndScheduleTimer()
+                    mainCoordinator.scheduleTimer()
 
                 @unknown default:
                     break
