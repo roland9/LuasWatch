@@ -22,7 +22,7 @@ import SwiftUI
         stationIdShort: "LUAS8",
         shortCode: "BLU",
         route: .red,
-        name: "Bluebell Luas Stop",
+        name: "Bluebell Luas Stop long name",
         location: locationBluebell)
     private let trainRed1 = Train(destination: "LUAS The Point", direction: "Outbound", dueTime: "Due")
     private let trainRed2 = Train(destination: "LUAS Tallaght", direction: "Outbound", dueTime: "9")

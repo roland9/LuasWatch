@@ -102,6 +102,11 @@
 		AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */; };
 		ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasView.swift */; };
 		ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */; };
+		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
+		ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */; };
+		ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA512B78211D0015DB81 /* StationTimesView.swift */; };
+		ABD1CA542B7826610015DB81 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA532B7826610015DB81 /* TimetableView.swift */; };
+		ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA552B7828870015DB81 /* StationToolbar.swift */; };
 		ABD285812B5DB3F00000011C /* PreViewsStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD285802B5DB3F00000011C /* PreViewsStationView.swift */; };
 /* End PBXBuildFile section */
 
@@ -316,6 +321,11 @@
 		ABA68B232AF43977002A9F0D /* LuasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAllStates.swift; sourceTree = "<group>"; };
+		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
+		ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
+		ABD1CA512B78211D0015DB81 /* StationTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTimesView.swift; sourceTree = "<group>"; };
+		ABD1CA532B7826610015DB81 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
+		ABD1CA552B7828870015DB81 /* StationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationToolbar.swift; sourceTree = "<group>"; };
 		ABD285802B5DB3F00000011C /* PreViewsStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreViewsStationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -645,6 +655,11 @@
 				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
 				AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */,
 				AB0BFCE82B42E5430060AAD5 /* StationView.swift */,
+				ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */,
+				ABD1CA512B78211D0015DB81 /* StationTimesView.swift */,
+				ABD1CA552B7828870015DB81 /* StationToolbar.swift */,
+				ABD1CA532B7826610015DB81 /* TimetableView.swift */,
+				ABD1CA4D2B781DDD0015DB81 /* DueView.swift */,
 				AB89FB882B49B6BE0020A943 /* StationRowView.swift */,
 				AB89FB8A2B49B7B50020A943 /* LineRowView.swift */,
 				AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */,
@@ -1174,6 +1189,7 @@
 				AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */,
 				AB695E7C2AE41CAC00B6DB99 /* LuasViewOLD.swift in Sources */,
 				AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */,
+				ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */,
 				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
 				ABD285812B5DB3F00000011C /* PreViewsStationView.swift in Sources */,
@@ -1184,6 +1200,7 @@
 				AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */,
 				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
 				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
+				ABD1CA542B7826610015DB81 /* TimetableView.swift in Sources */,
 				AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */,
 				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,
 				AB695E702AE41CAC00B6DB99 /* PreviewsStationsModal.swift in Sources */,
@@ -1194,12 +1211,15 @@
 				AB695E792AE41CAC00B6DB99 /* HeaderView.swift in Sources */,
 				AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */,
 				AB695E7B2AE41CAC00B6DB99 /* TapOverlayView.swift in Sources */,
+				ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */,
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				AB695E772AE41CAC00B6DB99 /* LoadingAnimationView.swift in Sources */,
 				AB695E732AE41CAC00B6DB99 /* PreviewsAppStartup.swift in Sources */,
 				ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
+				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
+				ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */,
 				AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */,
 				AB695E752AE41CAC00B6DB99 /* PreviewsAppRunningOLD.swift in Sources */,
 				AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */,
