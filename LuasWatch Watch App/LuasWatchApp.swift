@@ -60,7 +60,7 @@ struct LuasWatch_Watch_AppApp: App {
                     mainCoordinator.invalidateTimer()
 
                 case .active:
-                    mainCoordinator.scheduleTimer()
+                    mainCoordinator.fireAndScheduleTimer()
 
                 @unknown default:
                     break

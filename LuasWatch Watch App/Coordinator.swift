@@ -32,7 +32,7 @@ class Coordinator: NSObject {
     }
 
     deinit {
-        // do we need to do that manually?
+        // WIP do we actually need to do that manually?
         cancellable?.cancel()
     }
 
@@ -55,7 +55,9 @@ class Coordinator: NSObject {
                 myPrint("🚨 internal error: expected specific station in appModel")
                 return
             }
-            handle(specificStation)
+
+            // don't call handle here -> because `fireAndScheduleTimer` will be called by changing of the scenePhase, when app goes to active
+            // handle(specificStation)
         }
 
         #warning("notification is sent by appMode.didSet - is there a better way?")
@@ -63,7 +65,7 @@ class Coordinator: NSObject {
             forName: Notification.Name("LuasWatch.RetriggerTimer"),
             object: nil, queue: nil
         ) { _ in
-            self.retriggerTimer()
+            self.fireAndScheduleTimer()
         }
     }
 
@@ -71,10 +73,10 @@ class Coordinator: NSObject {
         timer?.invalidate()
     }
 
-    func retriggerTimer() {
+    func fireAndScheduleTimer() {
         myPrint(#function)
 
-        timer?.invalidate()
+        invalidateTimer()
 
         // when we tap a station in sidebarView and force a retrigger, it's still up & we would ignore it -> let's override this check
         appModel.allowStationTabviewUpdates = true
@@ -84,8 +86,10 @@ class Coordinator: NSObject {
         scheduleTimer()
     }
 
+    // schedule timer for regular interval
     internal func scheduleTimer() {
-        // schedule timer for regular interval
+        myPrint("\(#function)")
+
         timer = Timer.scheduledTimer(
             timeInterval: Self.refreshInterval,
             target: self, selector: #selector(timerDidFire),
@@ -93,17 +97,17 @@ class Coordinator: NSObject {
     }
 
     @objc func timerDidFire() {
-        myPrint("😇 \(#function)")
+        myPrint("\(#function)")
 
         guard appModel.allowStationTabviewUpdates == true else {
-            myPrint("😇 SidebarView is up -> ignore timer firing so we don't interfere UI")
+            myPrint("SidebarView is up -> ignore timer firing so we don't interfere UI")
             return
         }
 
         if let station = appModel.appMode.specificStation {
 
             // if user has selected a specific station
-            myPrint("🥳 user selected station -> skip location update")
+            myPrint("User selected station -> skip location update")
             handle(station)
 
         } else {
@@ -113,11 +117,11 @@ class Coordinator: NSObject {
                 latestLocation.isQuiteRecent()
             {
                 // we have a location that's not too old
-                myPrint("🥳 user has NOT selected specific station & we have a recent location -> skip location update")
+                myPrint("User has NOT selected specific station & we have a recent location -> skip location update")
                 didGetLocation(latestLocation)
             } else {
                 myPrint(
-                    "😇 user has NOT selected specific station & only outdated location \(appModel.latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update"
+                    "User has NOT selected specific station & only outdated location \(appModel.latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update"
                 )
                 location.update()
             }
