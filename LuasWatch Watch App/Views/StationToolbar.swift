@@ -18,6 +18,7 @@ struct StationToolbar {
     @Binding var direction: Direction
 
     let trains: TrainsByDirection
+    let isLoading: Bool
 }
 
 extension StationToolbar: ToolbarContent {
@@ -59,6 +60,11 @@ extension StationToolbar: ToolbarContent {
                 isSwitchingDirectionEnabled = trains.trainStation.allowsSwitchingDirection
             }
             .disabled(!isSwitchingDirectionEnabled)
+
+            if isLoading {
+                Text("Loading...")
+                    .font(.subheadline)
+            }
 
             /// Favourite
             Button {

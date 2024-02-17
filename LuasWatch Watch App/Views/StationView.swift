@@ -29,20 +29,20 @@ extension StationView: View {
                     appModel.appState = .gettingLocation
                 })
 
-            case .errorGettingLocation(_):
-                // Note: we do get error description as well, but we ignore it in UI
+            case .errorGettingLocation:
                 LuasTextView(text: appModel.appState.description)
 
             case .errorGettingStation(let errorMessage):
                 LuasTextView(text: errorMessage)
 
-            case .loadingDueTimes(_):
-                // Note: we do get location here in this enum as well, but we ignore it in the UI
-                LuasTextView(text: appModel.appState.description)
+            case .loadingDueTimes(_, let trains):
+                if let trains {
+                    StationTimesView(trains: trains, isLoading: true)
+                } else {
+                    LuasTextView(text: appModel.appState.description)
+                }
 
-            case .errorGettingDueTimes(_, _):
-                // this enum has second parameter 'errorString', but it's not shown here
-                // because it's surfaced via the appState's `description`
+            case .errorGettingDueTimes:
                 LuasTextView(text: appModel.appState.description)
 
             case .foundDueTimes(let trains),

@@ -22,7 +22,7 @@ public class AppModel: ObservableObject {
         case errorGettingStation(String)
         /// in case the user is too far away from Dublin area
 
-        case loadingDueTimes(TrainStation)
+        case loadingDueTimes(TrainStation, TrainsByDirection?)
         case errorGettingDueTimes(TrainStation, String)
 
         case foundDueTimes(TrainsByDirection)
@@ -121,7 +121,7 @@ public class AppModel: ObservableObject {
         self.appState = state
     }
 
-    // that should be somewhere else
+    #warning("that should be somewhere else?")
     public func updateWithAnimation(to state: AppState) {
         withAnimation {
             DispatchQueue.main.async { [weak self] in

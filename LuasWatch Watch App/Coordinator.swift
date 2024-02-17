@@ -17,6 +17,8 @@ class Coordinator: NSObject {
     private static let refreshInterval = 12.0
     private var cancellable: AnyCancellable?
 
+    internal var previouslyLoadedTrains: (for: TrainStation, trains: TrainsByDirection)?
+
     init(
         appModel: AppModel,
         location: Location
@@ -56,7 +58,7 @@ class Coordinator: NSObject {
                 return
             }
 
-            // don't call handle here -> because `fireAndScheduleTimer` will be called by changing of the scenePhase, when app goes to active
+            /// don't call handle here -> because `fireAndScheduleTimer` will be called by changing of the scenePhase, when app goes to active
             // handle(specificStation)
         }
 
@@ -78,7 +80,7 @@ class Coordinator: NSObject {
 
         invalidateTimer()
 
-        // when we tap a station in sidebarView and force a retrigger, it's still up & we would ignore it -> let's override this check
+        /// when we tap a station in sidebarView and force a retrigger, it's still up & we would ignore it -> let's override this check
         appModel.allowStationTabviewUpdates = true
 
         // fire and schedule
@@ -106,17 +108,16 @@ class Coordinator: NSObject {
 
         if let station = appModel.appMode.specificStation {
 
-            // if user has selected a specific station
             myPrint("User selected station -> skip location update")
             handle(station)
 
         } else {
-            // user has NOT selected a specific station
+
+            // User has NOT selected a specific station
 
             if let latestLocation = appModel.latestLocation,
                 latestLocation.isQuiteRecent()
             {
-                // we have a location that's not too old
                 myPrint("User has NOT selected specific station & we have a recent location -> skip location update")
                 didGetLocation(latestLocation)
             } else {

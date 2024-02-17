@@ -41,7 +41,7 @@ public class Location: NSObject {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    // start getting location
+    /// start getting location
     public func start() {
         myPrint("calling locationManager.startUpdatingLocation")
 
@@ -124,8 +124,8 @@ extension Location: CLLocationManagerDelegate {
                 myPrint("last location quite precise -> stopping location updates for now")
 
                 internalState = .stoppedUpdatingLocation
-                // it seems that calling stopUpdatingLocation() does still deliver sometimes 3 location updates, which causes superfluous API calls....
-                // setting the delegate to nil avoids that (but need to remember to set it to self again!)
+                /// it seems that calling stopUpdatingLocation() does still deliver sometimes 3 location updates, which causes superfluous API calls....
+                /// setting the delegate to nil avoids that (but need to remember to set it to self again!)
                 locationManager.delegate = nil
                 locationManager.stopUpdatingLocation()
             }

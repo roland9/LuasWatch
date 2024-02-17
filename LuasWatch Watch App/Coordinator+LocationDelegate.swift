@@ -87,10 +87,22 @@ extension Coordinator: LocationDelegate {
     internal func handle(
         _ closestStation: TrainStation
     ) {
-        // use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading
+        #warning("WIP use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading")
 
         appModel.selectedStation = closestStation
-        appModel.updateWithAnimation(to: .loadingDueTimes(closestStation))
+
+        if let cachedTrains = previouslyLoadedTrains,
+            cachedTrains.for.name == closestStation.name
+        {
+            /// only use the cached trains list if they actually match the station we're about to load
+            /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
+            appModel.updateWithAnimation(
+                to: .loadingDueTimes(
+                    closestStation,
+                    cachedTrains.trains))
+        } else {
+            appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, nil))
+        }
 
         // //////////////////////////////////////////////
         // step 3: get due times from API
@@ -102,11 +114,15 @@ extension Coordinator: LocationDelegate {
                 let trains = try await self.api.dueTimes(for: closestStation)
                 myPrint("... got trains \(trains)")
 
+                previouslyLoadedTrains = (for: closestStation, trains: trains)
+
                 appModel.updateWithAnimation(to: .foundDueTimes(trains))
 
             } catch {
 
                 myPrint("caught error \(error.localizedDescription)")
+
+                previouslyLoadedTrains = nil
 
                 if let apiError = error as? APIError {
 

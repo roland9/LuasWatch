@@ -9,15 +9,20 @@ import SwiftUI
 struct SimpleTimetableView: View {
 
     let trains: [Train]
+    var isLoading: Bool
 
     var body: some View {
         Spacer()
+
         VStack {
             ForEach(trains, id: \.id) {
-                DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                DueView(
+                    destination: $0.destinationDescription, 
+                    due: $0.dueTimeDescription2)
             }
         }
         .timeTableStyle()
+        
         Spacer()
     }
 }
@@ -25,18 +30,25 @@ struct SimpleTimetableView: View {
 struct DoubleTimetableView: View {
 
     let trainsByDirection: TrainsByDirection
+    var isLoading: Bool
 
     var body: some View {
+
         VStack {
             ForEach(trainsByDirection.inbound, id: \.id) {
-                DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                DueView(
+                    destination: $0.destinationDescription,
+                    due: $0.dueTimeDescription2)
             }
             Divider()
             ForEach(trainsByDirection.outbound, id: \.id) {
-                DueView(destination: $0.destinationDescription, due: $0.dueTimeDescription2)
+                DueView(
+                    destination: $0.destinationDescription,
+                    due: $0.dueTimeDescription2)
             }
         }
         .timeTableStyle()
+        .opacity(isLoading ? 0.52 : 1.0)
     }
 }
 

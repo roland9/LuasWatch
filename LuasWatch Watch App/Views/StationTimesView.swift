@@ -15,6 +15,7 @@ struct StationTimesView: View {
     @State private var direction: Direction = .both
 
     var trains: TrainsByDirection
+    var isLoading: Bool = false
 }
 
 extension StationTimesView {
@@ -33,13 +34,19 @@ extension StationTimesView {
                 switch direction {
 
                     case .inbound:
-                        SimpleTimetableView(trains: trains.inbound)
+                        SimpleTimetableView(
+                            trains: trains.inbound,
+                            isLoading: isLoading)
 
                     case .outbound:
-                        SimpleTimetableView(trains: trains.outbound)
+                        SimpleTimetableView(
+                            trains: trains.outbound,
+                            isLoading: isLoading)
 
                     case .both:
-                        DoubleTimetableView(trainsByDirection: trains)
+                        DoubleTimetableView(
+                            trainsByDirection: trains,
+                            isLoading: isLoading)
                 }
             }
 
@@ -50,7 +57,8 @@ extension StationTimesView {
             .toolbar {
                 StationToolbar(
                     direction: $direction,
-                    trains: trains)
+                    trains: trains,
+                    isLoading: isLoading)
             }
         }
     }

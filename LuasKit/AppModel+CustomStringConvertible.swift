@@ -20,7 +20,7 @@ extension AppModel.AppState: CustomStringConvertible {
                 return errorMessage
             case .errorGettingStation:
                 return LuasStrings.errorGettingStation
-            case .loadingDueTimes(let trainStation):
+            case .loadingDueTimes(let trainStation, _):
                 return LuasStrings.gettingDueTimes(trainStation)
             case .errorGettingDueTimes(_, let errorMessage):
                 return errorMessage

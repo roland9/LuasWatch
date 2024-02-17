@@ -38,7 +38,11 @@ import SwiftUI
 }
 
 #Preview("loading") {
-    luasView(state: .loadingDueTimes(stationGreen))
+    luasView(state: .loadingDueTimes(stationGreen, nil))
+}
+
+#Preview("loading (cached)") {
+    luasView(state: .loadingDueTimes(stationGreen, trainsGreen))
 }
 
 #Preview("errLoading") {
