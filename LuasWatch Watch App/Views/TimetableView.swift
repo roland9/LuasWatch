@@ -17,12 +17,12 @@ struct SimpleTimetableView: View {
         VStack {
             ForEach(trains, id: \.id) {
                 DueView(
-                    destination: $0.destinationDescription, 
+                    destination: $0.destinationDescription,
                     due: $0.dueTimeDescription2)
             }
         }
         .timeTableStyle()
-        
+
         Spacer()
     }
 }

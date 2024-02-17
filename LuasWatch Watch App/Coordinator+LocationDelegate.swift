@@ -16,19 +16,19 @@ extension Coordinator: LocationDelegate {
         switch delegateError {
 
             case .locationServicesNotEnabled:
-                appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
+                updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
             case .locationAccessDenied:
-                appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
+                updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
             case .locationManagerError(let error):
-                appModel.updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
+                updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
 
             case .authStatus(let authStatusError):
                 if let errorMessage = authStatusError.localizedErrorMessage() {
-                    appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
+                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
                 } else {
-                    appModel.updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
+                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
                 }
         }
     }
@@ -79,7 +79,7 @@ extension Coordinator: LocationDelegate {
 
             } else {
                 myPrint("step 2c: no station found -> user too far away")
-                appModel.updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
+                updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
             }
         }
     }
@@ -96,12 +96,12 @@ extension Coordinator: LocationDelegate {
         {
             /// only use the cached trains list if they actually match the station we're about to load
             /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
-            appModel.updateWithAnimation(
+            updateWithAnimation(
                 to: .loadingDueTimes(
                     closestStation,
                     cachedTrains.trains))
         } else {
-            appModel.updateWithAnimation(to: .loadingDueTimes(closestStation, nil))
+            updateWithAnimation(to: .loadingDueTimes(closestStation, nil))
         }
 
         // //////////////////////////////////////////////
@@ -115,8 +115,7 @@ extension Coordinator: LocationDelegate {
                 myPrint("... got trains \(trains)")
 
                 previouslyLoadedTrains = (for: closestStation, trains: trains)
-
-                appModel.updateWithAnimation(to: .foundDueTimes(trains))
+                updateWithAnimation(to: .foundDueTimes(trains))
 
             } catch {
 
@@ -128,18 +127,18 @@ extension Coordinator: LocationDelegate {
 
                     switch apiError {
                         case .noTrains(let message):
-                            appModel.updateWithAnimation(
+                            updateWithAnimation(
                                 to:
                                     .errorGettingDueTimes(
                                         closestStation,
                                         message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
 
                         case .invalidXML:
-                            appModel.updateWithAnimation(
+                            updateWithAnimation(
                                 to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                     }
                 } else {
-                    appModel.updateWithAnimation(
+                    updateWithAnimation(
                         to:
                             .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
                 }

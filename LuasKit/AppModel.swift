@@ -120,13 +120,4 @@ public class AppModel: ObservableObject {
     public init(_ state: AppState) {
         self.appState = state
     }
-
-    #warning("that should be somewhere else?")
-    public func updateWithAnimation(to state: AppState) {
-        withAnimation {
-            DispatchQueue.main.async { [weak self] in
-                self?.appState = state
-            }
-        }
-    }
 }
