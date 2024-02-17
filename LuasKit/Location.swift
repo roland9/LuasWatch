@@ -35,11 +35,6 @@ public class Location: NSObject {
 
     let locationManager = CLLocationManager()
 
-    public override init() {
-        super.init()
-        locationManager.delegate = self
-    }
-
     public func promptLocationAuth() {
         myPrint(#function)
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters

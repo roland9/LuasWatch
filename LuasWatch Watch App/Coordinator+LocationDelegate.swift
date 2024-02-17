@@ -34,6 +34,10 @@ extension Coordinator: LocationDelegate {
     }
 
     func didEnableLocation() {
+        #if DEBUG
+            if isRunningUnitTests() { return }
+        #endif
+
         if appModel.appMode.needsLocation {
             location.start()
         } else {

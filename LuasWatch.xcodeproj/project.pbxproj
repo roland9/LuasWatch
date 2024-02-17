@@ -101,6 +101,7 @@
 		AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */; };
 		AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */; };
 		ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasView.swift */; };
+		ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AA2B78E34A00C1F8F7 /* Utils.swift */; };
 		ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */; };
 		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
 		ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */; };
@@ -320,6 +321,7 @@
 		AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
 		ABA68B232AF43977002A9F0D /* LuasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ABC207AA2B78E34A00C1F8F7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAllStates.swift; sourceTree = "<group>"; };
 		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
 		ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */,
 				AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */,
 				AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */,
+				ABC207AA2B78E34A00C1F8F7 /* Utils.swift */,
 				AB0BFCF22B4312370060AAD5 /* Models */,
 				AB695E652AE41CAC00B6DB99 /* Views */,
 				AB695E5E2AE41CAC00B6DB99 /* Previews */,
@@ -1200,6 +1203,7 @@
 				AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */,
 				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
 				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
+				ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */,
 				ABD1CA542B7826610015DB81 /* TimetableView.swift in Sources */,
 				AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */,
 				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,

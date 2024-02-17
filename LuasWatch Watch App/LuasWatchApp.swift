@@ -38,6 +38,11 @@ struct LuasWatch_Watch_AppApp: App {
         mainCoordinator = Coordinator(
             appModel: appModel,
             location: location)
+
+        #if DEBUG
+            if isRunningUnitTests() { return }
+        #endif
+
         mainCoordinator.start()
     }
 
