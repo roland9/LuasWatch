@@ -57,9 +57,11 @@ struct LuasWatch_Watch_AppApp: App {
         .onChange(of: scenePhase) {
             switch scenePhase {
                 case .background, .inactive:
+                    myPrint("App did enter background or because inactive -> invalidateTimer")
                     mainCoordinator.invalidateTimer()
 
                 case .active:
+                    myPrint("App became active -> fireAndScheduleTimer")
                     mainCoordinator.fireAndScheduleTimer()
 
                 @unknown default:

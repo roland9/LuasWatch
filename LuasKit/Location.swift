@@ -44,6 +44,7 @@ public class Location: NSObject {
     // start getting location
     public func start() {
         myPrint("calling locationManager.startUpdatingLocation")
+
         internalState = .gettingLocation
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
@@ -52,13 +53,20 @@ public class Location: NSObject {
     public func update() {
         if (locationAuthState == .granted &&
             (internalState == .stoppedUpdatingLocation || internalState == .error)) ||
-        internalState == .initializing {
-            myPrint("calling locationManager.startUpdatingLocation")
+            internalState == .initializing {
+        
+            myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
 
             internalState = .gettingLocation
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
 
+        } else if locationAuthState == .unknown {
+            myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
+
+            internalState = .gettingLocation
+            locationManager.delegate = self
+            locationManager.startUpdatingLocation()
         } else {
             assertionFailure("internal error")
             myPrint("🚨 NOT calling locationManager.startUpdatingLocation")
@@ -126,26 +134,6 @@ extension Location: CLLocationManagerDelegate {
 
         } else {
             myPrint("ignoring lastLocation because too old (\(howRecent) seconds ago")
-        }
-    }
-
-}
-
-extension CLAuthorizationStatus: CustomStringConvertible {
-    public var description: String {
-        switch self {
-            case .notDetermined:
-                return "Not Determined"
-            case .restricted:
-                return "Restricted"
-            case .denied:
-                return "Denied"
-            case .authorizedAlways:
-                return "Authorized Always"
-            case .authorizedWhenInUse:
-                return "Authorized When In Use"
-            @unknown default:
-                return "Unknown"
         }
     }
 }
