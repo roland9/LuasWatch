@@ -51,10 +51,9 @@ public class Location: NSObject {
     }
 
     public func update() {
-        if (locationAuthState == .granted &&
-            (internalState == .stoppedUpdatingLocation || internalState == .error)) ||
-            internalState == .initializing {
-        
+        if (locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error)) || internalState == .initializing
+        {
+
             myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
 
             internalState = .gettingLocation
