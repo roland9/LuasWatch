@@ -99,7 +99,11 @@
 		ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA512B78211D0015DB81 /* StationTimesView.swift */; };
 		ABD1CA542B7826610015DB81 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA532B7826610015DB81 /* TimetableView.swift */; };
 		ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA552B7828870015DB81 /* StationToolbar.swift */; };
-		ABD285812B5DB3F00000011C /* PreViewsStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD285802B5DB3F00000011C /* PreViewsStationView.swift */; };
+		ABD285812B5DB3F00000011C /* PreviewsStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD285802B5DB3F00000011C /* PreviewsStationView.swift */; };
+		ABE7F19C2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */; };
+		ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19D2B8A5C1C00AE0644 /* PreviewsHelpers.swift */; };
+		ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */; };
+		ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,7 +314,11 @@
 		ABD1CA512B78211D0015DB81 /* StationTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTimesView.swift; sourceTree = "<group>"; };
 		ABD1CA532B7826610015DB81 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		ABD1CA552B7828870015DB81 /* StationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationToolbar.swift; sourceTree = "<group>"; };
-		ABD285802B5DB3F00000011C /* PreViewsStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreViewsStationView.swift; sourceTree = "<group>"; };
+		ABD285802B5DB3F00000011C /* PreviewsStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationView.swift; sourceTree = "<group>"; };
+		ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationView_EdgeCases.swift; sourceTree = "<group>"; };
+		ABE7F19D2B8A5C1C00AE0644 /* PreviewsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsHelpers.swift; sourceTree = "<group>"; };
+		ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTrainsView.swift; sourceTree = "<group>"; };
+		ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LuasFormatting.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,9 +630,11 @@
 			isa = PBXGroup;
 			children = (
 				ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */,
-				ABD285802B5DB3F00000011C /* PreViewsStationView.swift */,
+				ABD285802B5DB3F00000011C /* PreviewsStationView.swift */,
+				ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */,
 				AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */,
 				AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */,
+				ABE7F19D2B8A5C1C00AE0644 /* PreviewsHelpers.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";
@@ -673,6 +683,8 @@
 				ABD1CA552B7828870015DB81 /* StationToolbar.swift */,
 				ABD1CA532B7826610015DB81 /* TimetableView.swift */,
 				ABD1CA4D2B781DDD0015DB81 /* DueView.swift */,
+				ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */,
+				ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -1167,9 +1179,10 @@
 				ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */,
 				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
-				ABD285812B5DB3F00000011C /* PreViewsStationView.swift in Sources */,
+				ABD285812B5DB3F00000011C /* PreviewsStationView.swift in Sources */,
 				AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */,
 				ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */,
+				ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */,
 				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
 				AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */,
 				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
@@ -1177,14 +1190,17 @@
 				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
 				ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */,
 				ABD1CA542B7826610015DB81 /* TimetableView.swift in Sources */,
+				ABE7F19C2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift in Sources */,
 				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,
 				AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */,
 				ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */,
 				AB89FB8B2B49B7B50020A943 /* LineRowView.swift in Sources */,
 				AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */,
+				ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */,
 				ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */,
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */,
+				ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,

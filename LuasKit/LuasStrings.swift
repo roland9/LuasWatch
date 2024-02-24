@@ -76,5 +76,7 @@ public struct LuasStrings {
             "\(station.name) stop is \(distance) away",
             comment: "String indicating distance of this Luas station (in meters) - input1: station name; input2: distance string")
     }
+
+    public static let noTrains = NSLocalizedString("No Trains", comment: "String shown when no trains in specified direction")
 }
 // swiftlint:enable line_length

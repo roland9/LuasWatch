@@ -34,14 +34,24 @@ extension StationTimesView {
                 switch direction {
 
                     case .inbound:
-                        SimpleTimetableView(
-                            trains: trains.inbound,
-                            isLoading: isLoading)
+                        if trains.inbound.count > 0 {
+                            SimpleTimetableView(
+                                trains: trains.inbound,
+                                isLoading: isLoading)
+                        } else {
+                            NoTrainsView()
+                                .timeTableStyle()
+                        }
 
                     case .outbound:
-                        SimpleTimetableView(
-                            trains: trains.outbound,
-                            isLoading: isLoading)
+                        if trains.outbound.count > 0 {
+                            SimpleTimetableView(
+                                trains: trains.outbound,
+                                isLoading: isLoading)
+                        } else {
+                            NoTrainsView()
+                                .timeTableStyle()
+                        }
 
                     case .both:
                         DoubleTimetableView(

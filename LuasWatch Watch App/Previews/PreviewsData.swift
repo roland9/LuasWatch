@@ -87,4 +87,27 @@ import SwiftUI
         inbound: [trainRed1, trainRed3],
         outbound: [])
 
+    let trainsNoTrains = TrainsByDirection(trainStation: stationGreen, inbound: [], outbound: [])
+
+    let trainsNoOutboundTrains = TrainsByDirection(trainStation: stationGreen, inbound: [trainGreen1], outbound: [])
+
+    let lotsOfTrains = TrainsByDirection(
+        trainStation: stationGreen,
+        inbound: [trainGreen1, trainGreen2, trainGreen3, trainGreen1, trainGreen2, trainGreen3],
+        outbound: [trainGreen1, trainGreen2, trainGreen3, trainGreen1, trainGreen2, trainGreen3])
+
+    let trainLongNameOne = TrainsByDirection(
+        trainStation: stationGreen,
+        inbound: [
+            Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "Due")
+        ], outbound: [])
+
+    let trainLongNameThree = TrainsByDirection(
+        trainStation: stationGreen,
+        inbound: [
+            Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "Due"),
+            Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "12"),
+            Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "100"),
+        ], outbound: [])
+
 #endif

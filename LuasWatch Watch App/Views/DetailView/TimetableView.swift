@@ -35,30 +35,29 @@ struct DoubleTimetableView: View {
     var body: some View {
 
         VStack {
-            ForEach(trainsByDirection.inbound, id: \.id) {
-                DueView(
-                    destination: $0.destinationDescription,
-                    due: $0.dueTimeDescription2)
+            if trainsByDirection.inbound.count > 0 {
+                ForEach(trainsByDirection.inbound, id: \.id) {
+                    DueView(
+                        destination: $0.destinationDescription,
+                        due: $0.dueTimeDescription2)
+                }
+            } else {
+                NoTrainsView()
             }
+
             Divider()
-            ForEach(trainsByDirection.outbound, id: \.id) {
-                DueView(
-                    destination: $0.destinationDescription,
-                    due: $0.dueTimeDescription2)
+
+            if trainsByDirection.outbound.count > 0 {
+                ForEach(trainsByDirection.outbound, id: \.id) {
+                    DueView(
+                        destination: $0.destinationDescription,
+                        due: $0.dueTimeDescription2)
+                }
+            } else {
+                NoTrainsView()
             }
         }
         .timeTableStyle()
         .opacity(isLoading ? 0.52 : 1.0)
-    }
-}
-
-extension View {
-
-    fileprivate func timeTableStyle() -> some View {
-        self
-            .padding(6)
-            .background(.black)
-            .border(.secondary).cornerRadius(2)
-            .padding(4)
     }
 }

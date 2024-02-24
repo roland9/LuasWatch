@@ -6,24 +6,6 @@
 import LuasKit
 import SwiftUI
 
-private func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
-
-    @State var selectedStation: TrainStation? = trainsGreen.trainStation
-
-    return NavigationSplitView {
-        SidebarView(selectedStation: $selectedStation)
-    } detail: {
-        TabView(selection: $selectedStation) {
-            StationView()
-                .environmentObject(appModel)
-                .modelContainer(Previews().container)
-                .containerBackground(
-                    route.color.gradient,
-                    for: .tabView)
-        }
-    }
-}
-
 #Preview("Phibs (not fav)") {
     makeTabView(AppModel(.foundDueTimes(trainsGreen)), .green)
 }
