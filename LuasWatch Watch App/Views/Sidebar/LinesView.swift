@@ -20,7 +20,7 @@ extension LinesView: View {
             // so we center the lineRowView
             HStack {
                 Spacer()
-                LineRowView(route: .green)
+                LineRow(route: .green)
                 Spacer()
             }
         }
@@ -31,7 +31,7 @@ extension LinesView: View {
         } label: {
             HStack {
                 Spacer()
-                LineRowView(route: .red)
+                LineRow(route: .red)
                 Spacer()
             }
         }

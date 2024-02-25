@@ -22,11 +22,11 @@ extension AllStationsListView: View {
 
             ScrollView {
                 NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.greenLineStations)) {
-                    LineRowView(route: .green)
+                    LineRow(route: .green)
                 }
 
                 NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.redLineStations)) {
-                    LineRowView(route: .red)
+                    LineRow(route: .red)
                 }
             }
         })

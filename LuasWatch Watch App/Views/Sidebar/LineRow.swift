@@ -7,7 +7,7 @@ import LuasKit
 import SwiftData
 import SwiftUI
 
-struct LineRowView: View {
+struct LineRow: View {
 
     let route: Route
 

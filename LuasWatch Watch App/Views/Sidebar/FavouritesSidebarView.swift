@@ -26,7 +26,7 @@ extension FavouritesSidebarView: View {
 
                 let station = TrainStations.sharedFromFile.station(shortCode: station.shortCode) ?? TrainStations.unknown
 
-                StationRowView(
+                StationRow(
                     station: station,
                     action: {
                         appModel.appMode = .favourite(station)

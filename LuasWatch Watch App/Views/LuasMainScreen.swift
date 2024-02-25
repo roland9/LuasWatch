@@ -6,12 +6,12 @@
 import LuasKit
 import SwiftUI
 
-struct LuasView {
+struct LuasMainScreen {
 
     @EnvironmentObject var appModel: AppModel
 }
 
-extension LuasView: View {
+extension LuasMainScreen: View {
 
     var body: some View {
 

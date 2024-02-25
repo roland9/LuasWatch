@@ -11,7 +11,7 @@ import SwiftUI
         let appModel = AppModel(state)
         appModel.appMode = .favourite(stationGreen)
 
-        return LuasView()
+        return LuasMainScreen()
             .environmentObject(appModel)
             .modelContainer(Previews().container)
     }

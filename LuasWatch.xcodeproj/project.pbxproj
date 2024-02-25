@@ -83,13 +83,13 @@
 		AB695E802AE41D5800B6DB99 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB695E842AE41EAE00B6DB99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */; };
 		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
-		AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRowView.swift */; };
-		AB89FB8B2B49B7B50020A943 /* LineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRowView.swift */; };
+		AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRow.swift */; };
+		AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRow.swift */; };
 		AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */; };
 		AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F482B6FCD0800F23497 /* StationDirection.swift */; };
 		AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */; };
 		AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */; };
-		ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasView.swift */; };
+		ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */; };
 		ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AA2B78E34A00C1F8F7 /* Utils.swift */; };
 		ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */; };
 		ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */; };
@@ -296,14 +296,14 @@
 		AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		AB89FB882B49B6BE0020A943 /* StationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRowView.swift; sourceTree = "<group>"; };
-		AB89FB8A2B49B7B50020A943 /* LineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRowView.swift; sourceTree = "<group>"; };
+		AB89FB882B49B6BE0020A943 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
+		AB89FB8A2B49B7B50020A943 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
 		AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch Watch App.xctestplan"; sourceTree = "<group>"; };
 		AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extensions.swift"; sourceTree = "<group>"; };
 		AB925F482B6FCD0800F23497 /* StationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDirection.swift; sourceTree = "<group>"; };
 		AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+Codable.swift"; sourceTree = "<group>"; };
 		AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
-		ABA68B232AF43977002A9F0D /* LuasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
+		ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMainScreen.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABC207AA2B78E34A00C1F8F7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+Extensions.swift"; sourceTree = "<group>"; };
@@ -642,7 +642,7 @@
 		AB695E652AE41CAC00B6DB99 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ABA68B232AF43977002A9F0D /* LuasView.swift */,
+				ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */,
 				ABE7F1992B895C5D00AE0644 /* Sidebar */,
 				ABE7F19A2B895E2500AE0644 /* DetailView */,
 				AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */,
@@ -667,8 +667,8 @@
 				AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */,
 				AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */,
 				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
-				AB89FB8A2B49B7B50020A943 /* LineRowView.swift */,
-				AB89FB882B49B6BE0020A943 /* StationRowView.swift */,
+				AB89FB8A2B49B7B50020A943 /* LineRow.swift */,
+				AB89FB882B49B6BE0020A943 /* StationRow.swift */,
 			);
 			path = Sidebar;
 			sourceTree = "<group>";
@@ -1194,19 +1194,19 @@
 				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,
 				AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */,
 				ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */,
-				AB89FB8B2B49B7B50020A943 /* LineRowView.swift in Sources */,
+				AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */,
 				AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */,
 				ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */,
 				ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */,
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
-				ABA68B242AF43977002A9F0D /* LuasView.swift in Sources */,
+				ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */,
 				ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
 				ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */,
 				AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */,
-				AB89FB892B49B6BE0020A943 /* StationRowView.swift in Sources */,
+				AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */,
 				AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

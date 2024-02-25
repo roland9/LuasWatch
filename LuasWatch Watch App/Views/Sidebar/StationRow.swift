@@ -7,7 +7,7 @@ import LuasKit
 import SwiftData
 import SwiftUI
 
-struct StationRowView: View {
+struct StationRow: View {
     var station: TrainStation
     var action: () -> Void
 
