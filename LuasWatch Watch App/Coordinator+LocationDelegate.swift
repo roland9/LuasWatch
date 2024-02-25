@@ -79,6 +79,12 @@ extension Coordinator: LocationDelegate {
 
             } else {
                 myPrint("step 2c: no station found -> user too far away")
+
+                guard appModel.allowStationTabviewUpdates == true else {
+                    myPrint("SidebarView is up -> ignore new location so we don't interfere UI")
+                    return
+                }
+
                 updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
             }
         }
@@ -87,21 +93,23 @@ extension Coordinator: LocationDelegate {
     internal func handle(
         _ closestStation: TrainStation
     ) {
-        #warning("WIP use different states: if we have previously loaded a list of trains, let's preserve it in the UI while loading")
-
         appModel.selectedStation = closestStation
 
-        if let cachedTrains = previouslyLoadedTrains,
-            cachedTrains.for.name == closestStation.name
-        {
-            /// only use the cached trains list if they actually match the station we're about to load
-            /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
-            updateWithAnimation(
-                to: .loadingDueTimes(
-                    closestStation,
-                    cachedTrains.trains))
+        if appModel.allowStationTabviewUpdates {
+            if let cachedTrains = previouslyLoadedTrains,
+               cachedTrains.for.name == closestStation.name
+            {
+                /// only use the cached trains list if they actually match the station we're about to load
+                /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
+                updateWithAnimation(
+                    to: .loadingDueTimes(
+                        closestStation,
+                        cachedTrains.trains))
+            } else {
+                updateWithAnimation(to: .loadingDueTimes(closestStation, nil))
+            }
         } else {
-            updateWithAnimation(to: .loadingDueTimes(closestStation, nil))
+            myPrint("SidebarView is up -> ignore so we don't interfere UI")
         }
 
         // //////////////////////////////////////////////
@@ -115,13 +123,22 @@ extension Coordinator: LocationDelegate {
                 myPrint("... got trains \(trains)")
 
                 previouslyLoadedTrains = (for: closestStation, trains: trains)
-                updateWithAnimation(to: .foundDueTimes(trains))
+                if appModel.allowStationTabviewUpdates {
+                    updateWithAnimation(to: .foundDueTimes(trains))
+                } else {
+                    myPrint("SidebarView is up -> ignore so we don't interfere UI")
+                }
 
             } catch {
 
                 myPrint("caught error \(error.localizedDescription)")
 
                 previouslyLoadedTrains = nil
+
+                guard appModel.allowStationTabviewUpdates else {
+                    myPrint("SidebarView is up -> ignore so we don't interfere UI")
+                    return
+                }
 
                 if let apiError = error as? APIError {
 
@@ -137,6 +154,7 @@ extension Coordinator: LocationDelegate {
                             updateWithAnimation(
                                 to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                     }
+
                 } else {
                     updateWithAnimation(
                         to:
