@@ -9,7 +9,6 @@ import SwiftUI
 
 struct StationTimesView: View {
 
-    @EnvironmentObject private var appModel: AppModel
     @Environment(\.modelContext) private var modelContext
 
     @State private var direction: Direction = .both

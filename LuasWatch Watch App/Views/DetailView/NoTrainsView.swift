@@ -9,16 +9,13 @@ import SwiftUI
 struct NoTrainsView: View {
 
     var body: some View {
-
         VStack {
             Spacer()
-
             Text(LuasStrings.noTrains)
                 .font(.caption2)
                 .monospaced()
                 .foregroundColor(.yellow)
                 .frame(maxWidth: .infinity)
-
             Spacer()
         }
     }

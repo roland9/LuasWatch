@@ -52,14 +52,15 @@ class Coordinator: NSObject {
 
         } else {
             myPrint("no location auth needed for the current appMode \(appModel.appMode)")
-            guard let specificStation = appModel.appMode.specificStation else {
-                assertionFailure("internal error")
-                myPrint("🚨 internal error: expected specific station in appModel")
-                return
-            }
 
-            /// don't call handle here -> because `fireAndScheduleTimer` will be called by changing of the scenePhase, when app goes to active
-            // handle(specificStation)
+            /// don't call handle here -> because  when app goes to active`fireAndScheduleTimer` will be called by changing of the scenePhase
+
+            //    guard let specificStation = appModel.appMode.specificStation else {
+            //        assertionFailure("internal error")
+            //        myPrint("🚨 internal error: expected specific station in appModel")
+            //        return
+            //    }
+            //    handle(specificStation)
         }
 
         #warning("notification is sent by appMode.didSet - is there a better way?")
