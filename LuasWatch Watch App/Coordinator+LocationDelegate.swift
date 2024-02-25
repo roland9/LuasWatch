@@ -97,7 +97,7 @@ extension Coordinator: LocationDelegate {
 
         if appModel.allowStationTabviewUpdates {
             if let cachedTrains = previouslyLoadedTrains,
-               cachedTrains.for.name == closestStation.name
+                cachedTrains.for.name == closestStation.name
             {
                 /// only use the cached trains list if they actually match the station we're about to load
                 /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
@@ -119,7 +119,9 @@ extension Coordinator: LocationDelegate {
             do {
 
                 myPrint("calling API for station \(closestStation.name) ...")
+
                 let trains = try await self.api.dueTimes(for: closestStation)
+
                 myPrint("... got trains \(trains)")
 
                 previouslyLoadedTrains = (for: closestStation, trains: trains)
@@ -131,7 +133,7 @@ extension Coordinator: LocationDelegate {
 
             } catch {
 
-                myPrint("caught error \(error.localizedDescription)")
+                myPrint("...caught error \(error.localizedDescription)")
 
                 previouslyLoadedTrains = nil
 
@@ -148,17 +150,23 @@ extension Coordinator: LocationDelegate {
                                 to:
                                     .errorGettingDueTimes(
                                         closestStation,
-                                        message.count > 0 ? message : LuasStrings.errorGettingDueTimes))
+                                        message.count > 0 ? message : LuasStrings.errorGettingDueTimes(station: closestStation.name)))
 
                         case .invalidXML:
                             updateWithAnimation(
                                 to: .errorGettingDueTimes(closestStation, "Error reading server response"))
                     }
 
+                } else if (error as NSError).code == NSURLErrorNotConnectedToInternet {
+                    updateWithAnimation(
+                        to: .errorGettingDueTimes(
+                            closestStation,
+                            LuasStrings.errorNoInternet))
                 } else {
                     updateWithAnimation(
-                        to:
-                            .errorGettingDueTimes(closestStation, LuasStrings.errorGettingDueTimes))
+                        to: .errorGettingDueTimes(
+                            closestStation,
+                            LuasStrings.errorGettingDueTimes(station: closestStation.name)))
                 }
             }
         }

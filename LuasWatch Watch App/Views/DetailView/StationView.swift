@@ -42,11 +42,10 @@ extension StationView: View {
                     LuasTextView(text: appModel.appState.description)
                 }
 
-            case .errorGettingDueTimes:
-                LuasTextView(text: appModel.appState.description)
+            case .errorGettingDueTimes(_, let message):
+                LuasTextView(text: message)
 
-            case .foundDueTimes(let trains),
-                .updatingDueTimes(let trains):
+            case .foundDueTimes(let trains):
                 StationTimesView(trains: trains)
         }
     }

@@ -23,19 +23,20 @@ extension LuasMainScreen: View {
                 })
 
         } detail: {
-            TabView(selection: $appModel.selectedStation) {
-                StationView()
-                    .tag(Optional(appModel.selectedStation))
-                    .containerBackground(
-                        appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
-                        for: .tabView)
-            }
-            .onAppear(perform: {
-                appModel.allowStationTabviewUpdates = true
-            })
-            .onDisappear(perform: {
-                appModel.allowStationTabviewUpdates = false
-            })
+
+            StationView()
+                .containerBackground(
+                    appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
+                    for: .navigation
+                )
+
+                .onAppear(perform: {
+                    appModel.allowStationTabviewUpdates = true
+                })
+
+                .onDisappear(perform: {
+                    appModel.allowStationTabviewUpdates = false
+                })
 
         }
     }

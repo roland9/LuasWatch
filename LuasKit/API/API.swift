@@ -54,7 +54,11 @@ public struct RealAPIWorker: APIWorker {
 
         let url = URL(string: "https://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=\(shortCode)&encrypt=false")!
 
-        let (data, _) = try await URLSession.shared.data(from: url)
+        let urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5)
+
+        let session = URLSession.shared
+
+        let (data, _) = try await session.data(for: urlRequest)
 
         return data
     }

@@ -9,11 +9,6 @@ import Foundation
 // swiftlint:disable line_length
 public struct LuasStrings {
 
-    public static let emptyDueTimesErrorMessage =
-        NSLocalizedString(
-            "Couldn’t get any trains for the %@ station. " + "Either Luas is not operating, or there is a problem with the RTPI Service.\n\n"
-                + "Please try again later.", comment: "")
-
     public static let noTrainsErrorMessage =
         NSLocalizedString("Couldn’t get any trains.", comment: "")
 
@@ -25,7 +20,9 @@ public struct LuasStrings {
             "Looks like the closest Luas station is quite far away.\n\n" + "Please try again later when you’re closer to the Dublin Area.",
             comment: "")
 
-    public static let errorGettingDueTimes = NSLocalizedString("Error getting due times", comment: "")
+    public static func errorGettingDueTimes(station: String) -> String {
+        NSLocalizedString("Error getting due times for station \(station)", comment: "Error shown when network loading failed; with placeholder for station")
+    }
 
     public static let errorNoInternet =
         NSLocalizedString(
@@ -63,9 +60,7 @@ public struct LuasStrings {
         NSLocalizedString("Found times: \(trains)", comment: "")
     }
 
-    public static func updatingDueTimes(_ trains: TrainsByDirection) -> String {
-        NSLocalizedString("Updating times (current trains: \(trains))", comment: "")
-    }
+    public static let loadingDueTimes = NSLocalizedString("Loading...", comment: "Shown while loading data from internet")
 
     public static let switchingDirectionsNotAllowedForFinalStop = NSLocalizedString("Cannot switch directions for final stops", comment: "")
 

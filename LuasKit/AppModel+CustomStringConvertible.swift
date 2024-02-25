@@ -26,8 +26,6 @@ extension AppModel.AppState: CustomStringConvertible {
                 return errorMessage
             case .foundDueTimes(let trains):
                 return LuasStrings.foundDueTimes(trains)
-            case .updatingDueTimes(let trains):
-                return LuasStrings.updatingDueTimes(trains)
         }
     }
 }

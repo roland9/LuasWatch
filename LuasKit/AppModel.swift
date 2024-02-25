@@ -27,8 +27,6 @@ public class AppModel: ObservableObject {
 
         case foundDueTimes(TrainsByDirection)
 
-        case updatingDueTimes(TrainsByDirection)
-
         public init(_ state: AppState) {
             self = state
         }

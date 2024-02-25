@@ -62,7 +62,7 @@ extension StationToolbar: ToolbarContent {
             .disabled(!isSwitchingDirectionEnabled)
 
             if isLoading {
-                Text("Loading...")
+                Text(LuasStrings.loadingDueTimes)
                     .font(.subheadline)
             }
 

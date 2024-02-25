@@ -32,7 +32,7 @@ struct DoubleTimetableView: View {
     var body: some View {
 
         #warning("WIP: cut off with prefix(2) and have a ... with more trains on 2nd screen")
-        
+
         VStack {
             if trainsByDirection.inbound.count > 0 {
                 ForEach(trainsByDirection.inbound, id: \.id) {

@@ -56,7 +56,6 @@
 		AB3CC01C2AE4094F002AA60A /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */; };
 		AB3CC01D2AE4094F002AA60A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00A2AE4094F002AA60A /* API.swift */; };
 		AB3CC01E2AE4094F002AA60A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00B2AE4094F002AA60A /* Parser.swift */; };
-		AB3CC01F2AE4094F002AA60A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00C2AE4094F002AA60A /* AppState.swift */; };
 		AB3CC0202AE4094F002AA60A /* luasStops.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3CC00D2AE4094F002AA60A /* luasStops.json */; };
 		AB3CC0212AE4094F002AA60A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00E2AE4094F002AA60A /* Location.swift */; };
 		AB3CC0222AE4094F002AA60A /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00F2AE4094F002AA60A /* Logging.swift */; };
@@ -265,7 +264,6 @@
 		AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasMockAPI.swift; sourceTree = "<group>"; };
 		AB3CC00A2AE4094F002AA60A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB3CC00B2AE4094F002AA60A /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		AB3CC00C2AE4094F002AA60A /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB3CC00D2AE4094F002AA60A /* luasStops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = luasStops.json; sourceTree = "<group>"; };
 		AB3CC00E2AE4094F002AA60A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		AB3CC00F2AE4094F002AA60A /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
@@ -537,14 +535,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AB38CED12B52FB0C0074D901 /* OLD */ = {
-			isa = PBXGroup;
-			children = (
-				AB3CC00C2AE4094F002AA60A /* AppState.swift */,
-			);
-			path = OLD;
-			sourceTree = "<group>";
-		};
 		AB3CC0072AE4094F002AA60A /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,7 +565,6 @@
 				AB3CC01A2AE4094F002AA60A /* LuasKit.h */,
 				AB3CC0112AE4094F002AA60A /* Models */,
 				AB3CC0072AE4094F002AA60A /* API */,
-				AB38CED12B52FB0C0074D901 /* OLD */,
 				AB8220782B49F79200022CA0 /* AppModel.swift */,
 				AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */,
 				AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */,
@@ -1154,7 +1143,6 @@
 				AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */,
 				AB3CC02B2AE4094F002AA60A /* LuasExtensions.swift in Sources */,
 				AB3CC0282AE4094F002AA60A /* Route.swift in Sources */,
-				AB3CC01F2AE4094F002AA60A /* AppState.swift in Sources */,
 				ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */,
 				AB3CC02A2AE4094F002AA60A /* MyUserDefaults.swift in Sources */,
 				AB3CC0242AE4094F002AA60A /* TrainsByDirection.swift in Sources */,
