@@ -26,6 +26,7 @@ extension NearbyStationsView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 24)
                 }
+                .fontWeight(appModel.appMode == .closest ? .bold : .regular)
             }).disabled(appModel.locationDenied == true)
 
         Button(
@@ -39,6 +40,7 @@ extension NearbyStationsView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 24)
                 }
+                .fontWeight(appModel.appMode == .closestOtherLine ? .bold : .regular)
 
             }).disabled(appModel.locationDenied == true)
     }

@@ -12,12 +12,13 @@ struct LineRow: View {
     let route: Route
 
     var body: some View {
-        VStack {
+        HStack {
+            Text(route.text)
+            Spacer()
             route.image
                 .padding(5)
                 .background(route.color)
                 .cornerRadius(6)
-            Text(route.text)
         }
     }
 }
@@ -36,9 +37,9 @@ extension Route {
     var text: String {
         switch self {
             case .red:
-                return "Red Line Stations"
+                return "Red line stations"
             case .green:
-                return "Green Line Stations"
+                return "Green line stations"
         }
     }
 

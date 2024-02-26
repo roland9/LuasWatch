@@ -28,6 +28,7 @@ extension FavouritesSidebarView: View {
 
                 StationRow(
                     station: station,
+                    isHighlighted: isHighlighted(for: station.name),
                     action: {
                         appModel.appMode = .favourite(station)
                     })
@@ -54,6 +55,15 @@ extension FavouritesSidebarView: View {
                     .foregroundColor(.gray)
             }
 
+        }
+    }
+
+    private func isHighlighted(for station: String) -> Bool {
+        if case .favourite(let favStation) = appModel.appMode,
+           favStation.name == station {
+            return true
+        } else {
+            return false
         }
     }
 }

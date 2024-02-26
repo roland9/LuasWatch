@@ -25,13 +25,14 @@ extension StationToolbar: ToolbarContent {
 
     var body: some ToolbarContent {
 
-        ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                // Perform an action here.
-            } label: {
-                Image(systemName: "map")
-            }
-        }
+        // for now: hide Map button 
+        //        ToolbarItem(placement: .topBarTrailing) {
+        //            Button {
+        //                // Perform an action here.
+        //            } label: {
+        //                Image(systemName: "map")
+        //            }
+        //        }
 
         ToolbarItemGroup(placement: .bottomBar) {
 
