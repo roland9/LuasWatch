@@ -15,7 +15,7 @@ public enum LocationDelegateError: Error {
     case locationServicesNotEnabled
     case locationAccessDenied
     case locationManagerError(Error)
-    case authStatus(CLAuthorizationStatus)
+//    case authStatus(CLAuthorizationStatus)
 }
 
 enum InternalState {
@@ -51,8 +51,9 @@ public class Location: NSObject {
     }
 
     public func update() {
-        if (locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error)) || internalState == .initializing
-        {
+        if (locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error)) ||
+            internalState == .initializing ||
+            locationAuthState == .unknown {
 
             myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
 
@@ -60,12 +61,11 @@ public class Location: NSObject {
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
 
-        } else if locationAuthState == .unknown {
-            myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
+        } else if locationAuthState == .denied {
+            myPrint("\(locationAuthState) \(internalState) -> calling delegate didFail(.denied)")
 
-            internalState = .gettingLocation
-            locationManager.delegate = self
-            locationManager.startUpdatingLocation()
+            delegate?.didFail(.locationAccessDenied)
+
         } else {
             assertionFailure("internal error")
             myPrint("🚨 NOT calling locationManager.startUpdatingLocation")
@@ -82,9 +82,13 @@ extension Location: CLLocationManagerDelegate {
         let nsError = error as NSError
 
         if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.denied.rawValue {
+            myPrint("didFail .locationAccessDenied")
             delegate?.didFail(.locationAccessDenied)
-        } else if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.locationUnknown.rawValue {
+//        } else if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.locationUnknown.rawValue {
+//            myPrint("didFail .locationUnknown")
+//            delegate?.didFail(.locationAccessDenied)
         } else {
+            myPrint("didFail .locationManagerError")
             delegate?.didFail(.locationManagerError(error))
         }
     }
@@ -97,7 +101,7 @@ extension Location: CLLocationManagerDelegate {
                 break
             case .denied, .restricted:
                 locationAuthState = .denied
-                delegate?.didFail(.authStatus(manager.authorizationStatus))
+                delegate?.didFail(.locationAccessDenied)
             case .authorizedAlways, .authorizedWhenInUse:
                 locationAuthState = .granted
                 delegate?.didEnableLocation()

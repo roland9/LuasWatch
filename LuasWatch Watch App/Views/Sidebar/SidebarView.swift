@@ -36,6 +36,11 @@ extension SidebarView: View {
                 Text("Nearby")
                     .font(.subheadline)
                     .frame(minHeight: 40)
+            } footer: {
+
+                if appModel.locationDenied {
+                    Text(LuasStrings.locationDeniedFooter)
+                }
             }
 
             /// Lines Green / Red
@@ -52,7 +57,11 @@ extension SidebarView: View {
                     .font(.subheadline)
                     .frame(minHeight: 40)
             } footer: {
-                Text("App Version 1.0.0")
+
+                let shortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(unknown)"
+                let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+
+                Text("\nApp Version \(shortVersion) (\(buildNumber))")
             }
 
             /// Recents
@@ -93,6 +102,18 @@ extension SidebarView: View {
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
     appModel.appMode = .favourite(stationGreen)
+
+    return SidebarView(selectedStation: $selectedStation)
+        .environmentObject(appModel)
+        .modelContainer(Previews().container)
+}
+
+#Preview("Sidebar (loc denied)") {
+    @State var selectedStation: TrainStation?
+
+    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+    appModel.appMode = .favourite(stationGreen)
+    appModel.locationDenied = true
 
     return SidebarView(selectedStation: $selectedStation)
         .environmentObject(appModel)

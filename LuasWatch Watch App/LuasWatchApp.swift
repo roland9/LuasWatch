@@ -30,9 +30,9 @@ struct LuasWatch_Watch_AppApp: App {
         }
     }()
 
-    let appModel = AppModel()
-    let location = Location()
-    var mainCoordinator: Coordinator!
+    private let appModel = AppModel()
+    private let location = Location()
+    private var mainCoordinator: Coordinator!
 
     init() {
         mainCoordinator = Coordinator(

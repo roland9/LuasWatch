@@ -10,30 +10,38 @@ import LuasKit
 extension Coordinator: LocationDelegate {
 
     func didFail(_ delegateError: LocationDelegateError) {
+        myPrint("error \(delegateError)")
 
         appModel.latestLocation = nil
 
         switch delegateError {
 
             case .locationServicesNotEnabled:
+                appModel.locationDenied = true
+
                 updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationServicesDisabled))
 
             case .locationAccessDenied:
+                appModel.locationDenied = true
+
+                // that does not show up -> do I need to set appModel.selectedStation =
                 updateWithAnimation(to: .errorGettingLocation(LuasStrings.locationAccessDenied))
 
             case .locationManagerError(let error):
                 updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
 
-            case .authStatus(let authStatusError):
-                if let errorMessage = authStatusError.localizedErrorMessage() {
-                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
-                } else {
-                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
-                }
+//            case .authStatus(let authStatusError):
+//                if let errorMessage = authStatusError.localizedErrorMessage() {
+//                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
+//                } else {
+//                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
+//                }
         }
     }
 
     func didEnableLocation() {
+        appModel.locationDenied = false
+        
         #if DEBUG
             if isRunningUnitTests() { return }
         #endif
@@ -47,6 +55,7 @@ extension Coordinator: LocationDelegate {
 
     func didGetLocation(_ location: CLLocation) {
 
+        appModel.locationDenied = false
         appModel.latestLocation = location
 
         // //////////////////////////////////////////////
