@@ -25,7 +25,7 @@ extension StationToolbar: ToolbarContent {
 
     var body: some ToolbarContent {
 
-        // for now: hide Map button 
+        // for now: hide Map button
         //        ToolbarItem(placement: .topBarTrailing) {
         //            Button {
         //                // Perform an action here.

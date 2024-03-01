@@ -53,7 +53,7 @@ class ModelsTests: XCTestCase {
     }
 
     func testGreenLineStations() {
-         XCTAssertEqual(TrainStations.sharedFromFile.greenLineStations.count, 35)
+        XCTAssertEqual(TrainStations.sharedFromFile.greenLineStations.count, 35)
     }
 
     func testRedLineStations() {
@@ -119,5 +119,91 @@ class ModelsTests: XCTestCase {
                 """
 
         XCTAssertEqual(expected, output)
+    }
+
+    func testHasOverflow_noInbound_noOutbound_returns_InboundFalse_OutboundSmallAndLarge_false() {
+
+        let trains = TrainsByDirection(
+            trainStation: stationHarcourt,
+            inbound: [],
+            outbound: [])
+
+        XCTAssertEqual(trains.inboundHasOverflowSmall, false)
+        XCTAssertEqual(trains.outboundHasOverflowSmall, false)
+        XCTAssertEqual(trains.inboundNoOverflowSmall, [])
+        XCTAssertEqual(trains.outboundNoOverflowSmall, [])
+
+        XCTAssertEqual(trains.inboundHasOverflowLarge, false)
+        XCTAssertEqual(trains.outboundHasOverflowLarge, false)
+        XCTAssertEqual(trains.inboundNoOverflowLarge, [])
+        XCTAssertEqual(trains.outboundNoOverflowLarge, [])
+    }
+
+    func testHasOverflow_threeInbound_threeOutbound_returns_InboundOutboundSmall_false_InbountLarge_false() {
+
+        let train = Train(destination: "Broombridge", direction: "Inbound", dueTime: "Due")
+        let trains = TrainsByDirection(
+            trainStation: stationHarcourt,
+            inbound: [train, train, train],
+            outbound: [train, train, train])
+
+        XCTAssertEqual(trains.inboundHasOverflowSmall, false)
+        XCTAssertEqual(trains.outboundHasOverflowSmall, false)
+        XCTAssertEqual(trains.inboundNoOverflowSmall, [train, train, train])
+        XCTAssertEqual(trains.outboundNoOverflowSmall, [train, train, train])
+
+        XCTAssertEqual(trains.inboundHasOverflowLarge, false)
+        XCTAssertEqual(trains.outboundHasOverflowLarge, false)
+        XCTAssertEqual(trains.inboundNoOverflowLarge, [train, train, train])
+        XCTAssertEqual(trains.outboundNoOverflowLarge, [train, train, train])
+    }
+
+    func testHasOverflow_fourInbound_fourOutbound_returns_InboundOutboundSmall_true_InbountOutboundLarge_false() {
+
+        let train1 = Train(destination: "Broombridge1", direction: "Inbound", dueTime: "Due")
+        let train2 = Train(destination: "Broombridge2", direction: "Inbound", dueTime: "Due")
+        let train3 = Train(destination: "Broombridge3", direction: "Inbound", dueTime: "Due")
+        let train4 = Train(destination: "Broombridge4", direction: "Inbound", dueTime: "Due")
+
+        let trains = TrainsByDirection(
+            trainStation: stationHarcourt,
+            inbound: [train1, train2, train3, train4],
+            outbound: [train1, train2, train3, train4])
+
+        XCTAssertEqual(trains.inboundHasOverflowSmall, true)
+        XCTAssertEqual(trains.outboundHasOverflowSmall, true)
+        XCTAssertEqual(trains.inboundNoOverflowSmall, [train1, train2, train3])
+        XCTAssertEqual(trains.outboundNoOverflowSmall, [train1, train2, train3])
+
+        XCTAssertEqual(trains.inboundHasOverflowLarge, false)
+        XCTAssertEqual(trains.outboundHasOverflowLarge, false)
+        XCTAssertEqual(trains.inboundNoOverflowLarge, [train1, train2, train3, train4])
+        XCTAssertEqual(trains.outboundNoOverflowLarge, [train1, train2, train3, train4])
+    }
+
+    func testHasOverflow_sevenInbound_sevenOutbound_returns_InboundOutboundSmall_true_InbountOutboundLarge_true() {
+
+        let train1 = Train(destination: "Broombridge1", direction: "Inbound", dueTime: "Due")
+        let train2 = Train(destination: "Broombridge2", direction: "Inbound", dueTime: "Due")
+        let train3 = Train(destination: "Broombridge3", direction: "Inbound", dueTime: "Due")
+        let train4 = Train(destination: "Broombridge4", direction: "Inbound", dueTime: "Due")
+        let train5 = Train(destination: "Broombridge5", direction: "Inbound", dueTime: "Due")
+        let train6 = Train(destination: "Broombridge6", direction: "Inbound", dueTime: "Due")
+        let train7 = Train(destination: "Broombridge7", direction: "Inbound", dueTime: "Due")
+
+        let trains = TrainsByDirection(
+            trainStation: stationHarcourt,
+            inbound: [train1, train2, train3, train4, train5, train6, train7],
+            outbound: [train1, train2, train3, train4, train5, train6, train7])
+
+        XCTAssertEqual(trains.inboundHasOverflowSmall, true)
+        XCTAssertEqual(trains.outboundHasOverflowSmall, true)
+        XCTAssertEqual(trains.inboundNoOverflowSmall, [train1, train2, train3])
+        XCTAssertEqual(trains.outboundNoOverflowSmall, [train1, train2, train3])
+
+        XCTAssertEqual(trains.inboundHasOverflowLarge, true)
+        XCTAssertEqual(trains.outboundHasOverflowLarge, true)
+        XCTAssertEqual(trains.inboundNoOverflowLarge, [train1, train2, train3, train4, train5, train6])
+        XCTAssertEqual(trains.outboundNoOverflowLarge, [train1, train2, train3, train4, train5, train6])
     }
 }

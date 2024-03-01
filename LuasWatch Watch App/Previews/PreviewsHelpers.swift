@@ -23,5 +23,6 @@ import SwiftUI
                         for: .tabView)
             }
         }
+        .environmentObject(appModel)
     }
 #endif

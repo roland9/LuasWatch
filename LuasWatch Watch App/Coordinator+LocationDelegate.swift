@@ -29,19 +29,12 @@ extension Coordinator: LocationDelegate {
 
             case .locationManagerError(let error):
                 updateWithAnimation(to: .errorGettingLocation(error.localizedDescription))
-
-//            case .authStatus(let authStatusError):
-//                if let errorMessage = authStatusError.localizedErrorMessage() {
-//                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationAuthError(errorMessage)))
-//                } else {
-//                    updateWithAnimation(to: .errorGettingLocation(LuasStrings.gettingLocationOtherError))
-//                }
         }
     }
 
     func didEnableLocation() {
         appModel.locationDenied = false
-        
+
         #if DEBUG
             if isRunningUnitTests() { return }
         #endif

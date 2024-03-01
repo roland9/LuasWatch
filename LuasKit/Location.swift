@@ -15,7 +15,6 @@ public enum LocationDelegateError: Error {
     case locationServicesNotEnabled
     case locationAccessDenied
     case locationManagerError(Error)
-//    case authStatus(CLAuthorizationStatus)
 }
 
 enum InternalState {
@@ -51,9 +50,10 @@ public class Location: NSObject {
     }
 
     public func update() {
-        if (locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error)) ||
-            internalState == .initializing ||
-            locationAuthState == .unknown {
+        if (locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error))
+            || internalState == .initializing
+            || locationAuthState == .unknown
+        {
 
             myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
 
@@ -84,9 +84,7 @@ extension Location: CLLocationManagerDelegate {
         if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.denied.rawValue {
             myPrint("didFail .locationAccessDenied")
             delegate?.didFail(.locationAccessDenied)
-//        } else if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.locationUnknown.rawValue {
-//            myPrint("didFail .locationUnknown")
-//            delegate?.didFail(.locationAccessDenied)
+
         } else {
             myPrint("didFail .locationManagerError")
             delegate?.didFail(.locationManagerError(error))

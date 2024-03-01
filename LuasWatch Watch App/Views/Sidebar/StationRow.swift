@@ -21,7 +21,7 @@ extension StationRow {
         Button(
             action: { action() },
             label: {
-                
+
                 let dotColour = station.route == .red ? Color("luasRed") : Color("luasGreen")
 
                 HStack {

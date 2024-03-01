@@ -6,8 +6,11 @@
 import SwiftUI
 
 struct DueView: View {
-    var destination: String
-    var due: String
+    let destination: String
+    let due: String
+}
+
+extension DueView {
 
     var body: some View {
 

@@ -60,7 +60,8 @@ extension FavouritesSidebarView: View {
 
     private func isHighlighted(for station: String) -> Bool {
         if case .favourite(let favStation) = appModel.appMode,
-           favStation.name == station {
+            favStation.name == station
+        {
             return true
         } else {
             return false

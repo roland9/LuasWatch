@@ -28,7 +28,7 @@ struct Preview_AppRunning: PreviewProvider {
 
             LuasView()
                 .environmentObject(AppState(
-                    state: .errorGettingDueTimes(stationRed,
+                    state: .errorGettingDueTimes(stationRedLongName,
                                                  genericError)))
                 .previewDisplayName("error getting due times (specific)")
 

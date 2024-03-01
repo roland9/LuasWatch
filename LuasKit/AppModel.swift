@@ -93,7 +93,7 @@ public class AppModel: ObservableObject {
     @Published public var allowStationTabviewUpdates: Bool = true
 
     @Published public var locationDenied: Bool = false
-    
+
     public init() {
         if let storedAppModeData = UserDefaults.standard.object(forKey: "AppMode") as? Data,
             let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData)

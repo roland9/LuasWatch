@@ -21,7 +21,8 @@ public struct LuasStrings {
             comment: "")
 
     public static func errorGettingDueTimes(station: String) -> String {
-        NSLocalizedString("Error getting due times for station \(station)", comment: "Error shown when network loading failed; with placeholder for station")
+        NSLocalizedString(
+            "Error getting due times for station \(station)", comment: "Error shown when network loading failed; with placeholder for station")
     }
 
     public static let errorNoInternet =
@@ -74,6 +75,8 @@ public struct LuasStrings {
 
     public static let noTrains = NSLocalizedString("No trains due", comment: "String shown when no trains in specified direction")
 
-    public static let locationDeniedFooter = NSLocalizedString("Unable to determine closest station, because location access not granted or disabled.\nYou can still select a station manually.", comment: "Label shown when location access was denied by user, to explain why nearby stations won't work")
+    public static let locationDeniedFooter = NSLocalizedString(
+        "Unable to determine closest station, because location access not granted or disabled.\nYou can still select a station manually.",
+        comment: "Label shown when location access was denied by user, to explain why nearby stations won't work")
 }
 // swiftlint:enable line_length

@@ -43,4 +43,39 @@ public struct TrainsByDirection {
 
         return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"
     }
+
+    private static let cutoffSmall = 3
+    private static let cutoffLarge = 6
+
+    public var inboundHasOverflowSmall: Bool {
+        inbound.count > Self.cutoffSmall
+    }
+
+    public var outboundHasOverflowSmall: Bool {
+        outbound.count > Self.cutoffSmall
+    }
+
+    public var inboundHasOverflowLarge: Bool {
+        inbound.count > Self.cutoffLarge
+    }
+
+    public var outboundHasOverflowLarge: Bool {
+        outbound.count > Self.cutoffLarge
+    }
+
+    public var inboundNoOverflowSmall: [Train] {
+        inboundHasOverflowSmall ? Array(inbound.prefix(upTo: Self.cutoffSmall)) : inbound
+    }
+
+    public var outboundNoOverflowSmall: [Train] {
+        outboundHasOverflowSmall ? Array(outbound.prefix(upTo: Self.cutoffSmall)) : outbound
+    }
+
+    public var inboundNoOverflowLarge: [Train] {
+        inboundHasOverflowLarge ? Array(inbound.prefix(upTo: Self.cutoffLarge)) : inbound
+    }
+
+    public var outboundNoOverflowLarge: [Train] {
+        outboundHasOverflowLarge ? Array(outbound.prefix(upTo: Self.cutoffLarge)) : outbound
+    }
 }

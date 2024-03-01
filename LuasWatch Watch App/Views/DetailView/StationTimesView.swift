@@ -13,7 +13,7 @@ struct StationTimesView: View {
 
     @State private var direction: Direction = .both
 
-    var trains: TrainsByDirection
+    let trains: TrainsByDirection
     var isLoading: Bool = false
 }
 
@@ -33,29 +33,26 @@ extension StationTimesView {
                 switch direction {
 
                     case .inbound:
-                        if trains.inbound.count > 0 {
-                            SimpleTimetableView(
-                                trains: trains.inbound,
-                                isLoading: isLoading)
-                        } else {
+                        if trains.inbound.count == 0 {
                             NoTrainsView()
                                 .timeTableStyle()
+                        } else {
+                            SimpleTimetableView(
+                                trainsByDirection: trains, direction: .inbound)
                         }
 
                     case .outbound:
-                        if trains.outbound.count > 0 {
-                            SimpleTimetableView(
-                                trains: trains.outbound,
-                                isLoading: isLoading)
-                        } else {
+                        if trains.outbound.count == 0 {
                             NoTrainsView()
                                 .timeTableStyle()
+                        } else {
+                            SimpleTimetableView(
+                                trainsByDirection: trains, direction: .outbound)
                         }
 
                     case .both:
                         DoubleTimetableView(
-                            trainsByDirection: trains,
-                            isLoading: isLoading)
+                            trainsByDirection: trains, isLoading: isLoading)
                 }
             }
 

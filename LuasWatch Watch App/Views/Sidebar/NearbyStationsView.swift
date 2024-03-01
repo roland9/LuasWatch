@@ -27,7 +27,8 @@ extension NearbyStationsView: View {
                         .frame(maxWidth: 24)
                 }
                 .fontWeight(appModel.appMode == .closest ? .bold : .regular)
-            }).disabled(appModel.locationDenied == true)
+            }
+        ).disabled(appModel.locationDenied == true)
 
         Button(
             action: { appModel.appMode = .closestOtherLine },
@@ -42,7 +43,8 @@ extension NearbyStationsView: View {
                 }
                 .fontWeight(appModel.appMode == .closestOtherLine ? .bold : .regular)
 
-            }).disabled(appModel.locationDenied == true)
+            }
+        ).disabled(appModel.locationDenied == true)
     }
 }
 

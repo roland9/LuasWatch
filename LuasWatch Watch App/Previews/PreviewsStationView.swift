@@ -26,6 +26,14 @@ import SwiftUI
     makeTabView(AppModel(.foundDueTimes(trainsRed_4_4)), .red)
 }
 
+#Preview("0/4") {
+    makeTabView(AppModel(.foundDueTimes(trainsRed_0_4)), .red)
+}
+
+#Preview("7/7") {
+    makeTabView(AppModel(.foundDueTimes(trainsRed_7_7)), .red)
+}
+
 #Preview("OneWay") {
     makeTabView(AppModel(.foundDueTimes(trainsOneWayStation)), .green)
 }
