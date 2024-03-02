@@ -30,29 +30,52 @@ extension StationTimesView {
 
                 Spacer()
 
-                switch direction {
+                if trains.trainStation.allowsSwitchingDirection {
 
-                    case .inbound:
-                        if trains.inbound.count == 0 {
-                            NoTrainsView()
-                                .timeTableStyle()
-                        } else {
-                            SimpleTimetableView(
-                                trainsByDirection: trains, direction: .inbound)
-                        }
+                    switch direction {
 
-                    case .outbound:
-                        if trains.outbound.count == 0 {
-                            NoTrainsView()
-                                .timeTableStyle()
-                        } else {
-                            SimpleTimetableView(
-                                trainsByDirection: trains, direction: .outbound)
-                        }
+                        case .inbound:
+                            if trains.inbound.isEmpty {
+                                NoTrainsView()
+                                    .timeTableStyle()
+                            } else {
+                                SimpleTimetableView(
+                                    trainsByDirection: trains, direction: .inbound)
+                            }
 
-                    case .both:
-                        DoubleTimetableView(
-                            trainsByDirection: trains, isLoading: isLoading)
+                        case .outbound:
+                            if trains.outbound.isEmpty {
+                                NoTrainsView()
+                                    .timeTableStyle()
+                            } else {
+                                SimpleTimetableView(
+                                    trainsByDirection: trains, direction: .outbound)
+                            }
+
+                        case .both:
+                            DoubleTimetableView(
+                                trainsByDirection: trains, isLoading: isLoading)
+                    }
+                    
+                } else {
+
+                    // we have a .terminal or .oneway station -> only show the inbound or outbound trains
+                    if !trains.inbound.isEmpty {
+
+                        SimpleTimetableView(
+                            trainsByDirection: trains, direction: .inbound)
+
+                    } else if !trains.outbound.isEmpty {
+
+                        SimpleTimetableView(
+                            trainsByDirection: trains, direction: .outbound)
+
+                    } else {
+
+                        NoTrainsView()
+                            .timeTableStyle()
+                    }
+
                 }
             }
 
