@@ -47,14 +47,21 @@ extension StationToolbar: ToolbarContent {
                 modelContext.createOrUpdate(shortCode: shortCode, to: direction)
 
             } label: {
-                switch direction {
 
-                    case .inbound:
-                        Image(systemName: "arrow.left")
-                    case .outbound:
-                        Image(systemName: "arrow.right")
-                    case .both:
-                        Image(systemName: "arrow.left.arrow.right")
+                if trains.trainStation.allowsSwitchingDirection {
+
+                    switch direction {
+                        case .inbound:
+                            Image(systemName: "arrow.left")
+                        case .outbound:
+                            Image(systemName: "arrow.right")
+                        case .both:
+                            Image(systemName: "arrow.left.arrow.right")
+                    }
+
+                } else {
+                    // if station is terminal or a one way stop: show hard coded arrow; we disable the button below
+                    Image(systemName: "arrow.right")
                 }
             }
             .onAppear {
