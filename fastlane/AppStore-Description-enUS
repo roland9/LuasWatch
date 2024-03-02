@@ -1,0 +1,10 @@
+This app shows the departure times of the closest Luas station:
+
+• Launch the app on your watch - use a Complication, ask Siri ('launch the LuasWatch app') or just tap the app icon
+• That’s it!
+• If the closest station is not the one you're interested in, you can select any other station from a list.
+
+How the app works:
+• Gets your location to find the closest Luas station (Red or Green line)
+• Contacts the Luas Real Time Passenger Information (RTPI) service
+• Shows you the departure times
