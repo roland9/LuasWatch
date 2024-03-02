@@ -38,27 +38,37 @@ struct SimpleEntry: TimelineEntry {
 
 struct LuasWatchComplicationsEntryView : View {
     @Environment(\.widgetFamily) var family
+    @Environment(\.widgetRenderingMode) var renderingMode
 
     var body: some View {
         switch family {
-            case .accessoryInline:
-                Image("Icon (Complication)")
-                    .resizable()
-                    .containerBackground(.black, for: .widget)
 
             case .accessoryCorner:
-                Image("IconComplication91.2")
-                    .resizable()
-                    .containerBackground(.black, for: .widget)
+                if renderingMode == .fullColor {
+                    Image("IconComplication91.2")
+                        .resizable()
+                        .containerBackground(.black, for: .widget)
+                } else {
+                    Image("IconComplicationTransparent91.2")
+                        .resizable()
+                        .containerBackground(.black, for: .widget)
+                }
 
             case .accessoryCircular:
-                Image("IconComplication120")
-                    .resizable()
-                    .containerBackground(.black, for: .widget)
+                if renderingMode == .fullColor {
+                    // full color Preview doesn't work, unlike in .accessoryCorner?  but seems to be OK on device
+                    Image("IconComplication120")
+                        .resizable()
+                        .containerBackground(.black, for: .widget)
+                } else {
+                    Image("IconComplicationTransparent120")
+                        .resizable()
+                        .containerBackground(.black, for: .widget)
+                }
 
-            case .accessoryRectangular:
-                Image("Icon (Complication)")
-                    .resizable()
+                // we don't support these but Swift requires these cases
+            case .accessoryRectangular, .accessoryInline:
+                Text("LuasWatch")
                     .containerBackground(.black, for: .widget)
 
             @unknown default:
@@ -87,11 +97,12 @@ struct LuasWatchComplications_Previews: PreviewProvider {
     static var previews: some View {
 
         LuasWatchComplicationsEntryView()
-            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-            .previewDisplayName("accessory circular")
+            .previewContext(WidgetPreviewContext(family: .accessoryCorner))
+            .previewDisplayName("corner")
 
         LuasWatchComplicationsEntryView()
-            .previewContext(WidgetPreviewContext(family: .accessoryCorner))
-            .previewDisplayName("accessory corner")
+            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+            .previewDisplayName("circular")
+
     }
 }
