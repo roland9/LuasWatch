@@ -56,7 +56,7 @@ extension StationTimesView {
                             DoubleTimetableView(
                                 trainsByDirection: trains, isLoading: isLoading)
                     }
-                    
+
                 } else {
 
                     // we have a .terminal or .oneway station -> only show the inbound or outbound trains

@@ -7,6 +7,8 @@ import LuasKit
 import SwiftUI
 
 struct LinesView {
+    @EnvironmentObject var appModel: AppModel
+
     var actionGreen: () -> Void
     var actionRed: () -> Void
 }
@@ -20,7 +22,7 @@ extension LinesView: View {
             // so we center the lineRowView
             HStack {
                 Spacer()
-                LineRow(route: .green)
+                LineRow(route: .green, isHighlighted: isHighlighted(for: .green))
                 Spacer()
             }
         }
@@ -31,11 +33,21 @@ extension LinesView: View {
         } label: {
             HStack {
                 Spacer()
-                LineRow(route: .red)
+                LineRow(route: .red, isHighlighted: isHighlighted(for: .red))
                 Spacer()
             }
         }
         .padding(.vertical, 8)
+    }
+
+    private func isHighlighted(for route: Route) -> Bool {
+        if case .specific(let specificStation) = appModel.appMode,
+            specificStation.route == route
+        {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

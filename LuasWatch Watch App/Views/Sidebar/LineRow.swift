@@ -10,10 +10,16 @@ import SwiftUI
 struct LineRow: View {
 
     let route: Route
+    let isHighlighted: Bool
+}
+
+extension LineRow {
 
     var body: some View {
         HStack {
             Text(route.text)
+                .fontWeight(isHighlighted ? .bold : .regular)
+
             Spacer()
             route.image
                 .padding(5)

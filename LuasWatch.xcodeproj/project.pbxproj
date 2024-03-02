@@ -105,6 +105,7 @@
 		ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */; };
 		ABF0388F2B9265FD000034D6 /* DoubleTimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */; };
 		ABF038912B926AB5000034D6 /* OverflowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038902B926AB5000034D6 /* OverflowView.swift */; };
+		ABF038932B933639000034D6 /* StationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038922B933639000034D6 /* StationsModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -321,6 +322,7 @@
 		ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LuasFormatting.swift"; sourceTree = "<group>"; };
 		ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTimetableView.swift; sourceTree = "<group>"; };
 		ABF038902B926AB5000034D6 /* OverflowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowView.swift; sourceTree = "<group>"; };
+		ABF038922B933639000034D6 /* StationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -659,6 +661,7 @@
 				AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */,
 				AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */,
 				AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */,
+				ABF038922B933639000034D6 /* StationsModal.swift */,
 				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
 				AB89FB8A2B49B7B50020A943 /* LineRow.swift */,
 				AB89FB882B49B6BE0020A943 /* StationRow.swift */,
@@ -1197,6 +1200,7 @@
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */,
 				ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */,
+				ABF038932B933639000034D6 /* StationsModal.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,

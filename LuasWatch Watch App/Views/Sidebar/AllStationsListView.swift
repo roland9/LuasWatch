@@ -22,11 +22,11 @@ extension AllStationsListView: View {
 
             ScrollView {
                 NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.greenLineStations)) {
-                    LineRow(route: .green)
+                    LineRow(route: .green, isHighlighted: false)
                 }
 
                 NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.redLineStations)) {
-                    LineRow(route: .red)
+                    LineRow(route: .red, isHighlighted: false)
                 }
             }
         })
@@ -51,30 +51,6 @@ extension AllStationsListView: View {
             }
         )
         .navigationTitle("Add to favourites")
-    }
-}
-
-struct StationsModal: View {
-
-    @State var stations: [TrainStation]
-
-    var action: (TrainStation) -> Void
-
-    var body: some View {
-        List {
-            ForEach(stations, id: \.stationId) { (station) in
-
-                // need a button here because just text only supports tap on the text but not full width
-                Button(
-                    action: {
-                        action(station)
-                    },
-                    label: {
-                        Text(station.name)
-                            .font(.system(.headline))
-                    })
-            }
-        }
     }
 }
 
