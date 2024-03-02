@@ -6,6 +6,7 @@
 import LuasKit
 import SwiftUI
 
+#if DEBUG
 #Preview("No trains") {
     makeTabView(AppModel(.foundDueTimes(trainsNoTrains)), .green)
 }
@@ -25,3 +26,4 @@ import SwiftUI
 #Preview("Long name 3") {
     makeTabView(AppModel(.foundDueTimes(trainLongNameThree)), .green)
 }
+#endif

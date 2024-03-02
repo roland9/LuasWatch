@@ -71,6 +71,7 @@ extension FavouritesSidebarView: View {
 
 #warning("improve visuals - nested header??")
 
+#if DEBUG
 #Preview("Favourites") {
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
     appModel.appMode = .favourite(stationGreen)
@@ -97,3 +98,4 @@ extension FavouritesSidebarView: View {
         .modelContainer(Previews(addSample: false).container)
     }
 }
+#endif

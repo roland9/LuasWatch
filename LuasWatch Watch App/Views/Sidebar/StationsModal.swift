@@ -44,6 +44,7 @@ extension StationsModal {
     }
 }
 
+#if DEBUG
 #Preview("Stations Modal (green)") {
 
     let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsGreen)))
@@ -58,3 +59,4 @@ extension StationsModal {
     )
     .environmentObject(appModel)
 }
+#endif

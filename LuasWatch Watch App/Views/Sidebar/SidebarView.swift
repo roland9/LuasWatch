@@ -97,6 +97,7 @@ extension SidebarView: View {
     }
 }
 
+#if DEBUG
 #Preview("Sidebar") {
     @State var selectedStation: TrainStation?
 
@@ -119,3 +120,4 @@ extension SidebarView: View {
         .environmentObject(appModel)
         .modelContainer(Previews().container)
 }
+#endif

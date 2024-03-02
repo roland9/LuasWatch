@@ -15,7 +15,6 @@ import SwiftUI
             .environmentObject(appModel)
             .modelContainer(Previews().container)
     }
-#endif
 
 #Preview("idle") {
     luasView(state: .idle)
@@ -52,3 +51,4 @@ import SwiftUI
 #Preview("OK") {
     luasView(state: .foundDueTimes(trainsGreen))
 }
+#endif
