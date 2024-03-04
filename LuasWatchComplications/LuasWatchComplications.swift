@@ -41,40 +41,35 @@ struct LuasWatchComplicationsEntryView : View {
     @Environment(\.widgetRenderingMode) var renderingMode
 
     var body: some View {
+        let gradient = Gradient(stops: [
+            .init(color: Color("WidgetBackground"), location: 0),
+            .init(color: Color("WidgetBackgroundGradientTo"), location: 1)])
+            .opacity(renderingMode == .fullColor ? 1.0: 0.2)
+
         switch family {
 
             case .accessoryCorner:
-                if renderingMode == .fullColor {
-                    Image("IconComplication91.2")
-                        .resizable()
-                        .containerBackground(.black, for: .widget)
-                } else {
-                    Image("IconComplicationTransparent91.2")
-                        .resizable()
-                        .containerBackground(.black, for: .widget)
-                }
+                // WIP pick correct size
+                Image("ComplicationIcon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .containerBackground(gradient, for: .widget)
 
             case .accessoryCircular:
-                if renderingMode == .fullColor {
-                    // full color Preview doesn't work, unlike in .accessoryCorner?  but seems to be OK on device
-                    Image("IconComplication120")
-                        .resizable()
-                        .containerBackground(.black, for: .widget)
-                } else {
-                    Image("IconComplicationTransparent120")
-                        .resizable()
-                        .containerBackground(.black, for: .widget)
-                }
+                Image("ComplicationIcon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .containerBackground(gradient, for: .widget)
 
                 // we don't support these but Swift requires these cases
             case .accessoryRectangular, .accessoryInline:
                 Text("LuasWatch")
-                    .containerBackground(.black, for: .widget)
+                    .containerBackground(.clear, for: .widget)
 
             @unknown default:
                 // unknown widgetFamily
                 Text("LuasWatch")
-                    .containerBackground(.black, for: .widget)
+                    .containerBackground(.clear, for: .widget)
         }
     }
 }
