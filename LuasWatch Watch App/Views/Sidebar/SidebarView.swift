@@ -98,26 +98,26 @@ extension SidebarView: View {
 }
 
 #if DEBUG
-#Preview("Sidebar") {
-    @State var selectedStation: TrainStation?
+    #Preview("Sidebar") {
+        @State var selectedStation: TrainStation?
 
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
+        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        appModel.appMode = .favourite(stationGreen)
 
-    return SidebarView(selectedStation: $selectedStation)
-        .environmentObject(appModel)
-        .modelContainer(Previews().container)
-}
+        return SidebarView(selectedStation: $selectedStation)
+            .environmentObject(appModel)
+            .modelContainer(Previews().container)
+    }
 
-#Preview("Sidebar (loc denied)") {
-    @State var selectedStation: TrainStation?
+    #Preview("Sidebar (loc denied)") {
+        @State var selectedStation: TrainStation?
 
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
-    appModel.locationDenied = true
+        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        appModel.appMode = .favourite(stationGreen)
+        appModel.locationDenied = true
 
-    return SidebarView(selectedStation: $selectedStation)
-        .environmentObject(appModel)
-        .modelContainer(Previews().container)
-}
+        return SidebarView(selectedStation: $selectedStation)
+            .environmentObject(appModel)
+            .modelContainer(Previews().container)
+    }
 #endif

@@ -49,19 +49,19 @@ extension NearbyStationsView: View {
 }
 
 #if DEBUG
-#Preview("Nearby") {
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
+    #Preview("Nearby") {
+        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        appModel.appMode = .favourite(stationGreen)
 
-    return List {
-        Section {
-            NearbyStationsView()
-                .environmentObject(appModel)
-        } header: {
-            Text("Nearby")
-                .font(.subheadline)
-                .frame(minHeight: 40)
+        return List {
+            Section {
+                NearbyStationsView()
+                    .environmentObject(appModel)
+            } header: {
+                Text("Nearby")
+                    .font(.subheadline)
+                    .frame(minHeight: 40)
+            }
         }
     }
-}
 #endif

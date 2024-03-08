@@ -45,18 +45,18 @@ extension StationsModal {
 }
 
 #if DEBUG
-#Preview("Stations Modal (green)") {
+    #Preview("Stations Modal (green)") {
 
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsGreen)))
-    appModel.appMode = .specific(stationGreen)
+        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsGreen)))
+        appModel.appMode = .specific(stationGreen)
 
-    // highlight in preview doesn't work??  does it used StoredAppMode?
-    return StationsModal(
-        stations: TrainStations.sharedFromFile.greenLineStations,
-        action: { _ in
-            //
-        }
-    )
-    .environmentObject(appModel)
-}
+        // highlight in preview doesn't work??  does it used StoredAppMode?
+        return StationsModal(
+            stations: TrainStations.sharedFromFile.greenLineStations,
+            action: { _ in
+                //
+            }
+        )
+        .environmentObject(appModel)
+    }
 #endif

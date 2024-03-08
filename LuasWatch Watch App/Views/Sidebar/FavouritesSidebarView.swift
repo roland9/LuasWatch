@@ -72,30 +72,30 @@ extension FavouritesSidebarView: View {
 #warning("improve visuals - nested header??")
 
 #if DEBUG
-#Preview("Favourites") {
-    let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
+    #Preview("Favourites") {
+        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        appModel.appMode = .favourite(stationGreen)
 
-    return List {
-        Section {
-            FavouritesSidebarView()
-        } header: {
-            FavouritesHeaderView()
+        return List {
+            Section {
+                FavouritesSidebarView()
+            } header: {
+                FavouritesHeaderView()
+            }
+            .environmentObject(appModel)
+            .modelContainer(Previews().container)
         }
-        .environmentObject(appModel)
-        .modelContainer(Previews().container)
     }
-}
 
-#Preview("Favourites (empty)") {
+    #Preview("Favourites (empty)") {
 
-    return List {
-        Section {
-            FavouritesSidebarView()
-        } header: {
-            FavouritesHeaderView()
+        return List {
+            Section {
+                FavouritesSidebarView()
+            } header: {
+                FavouritesHeaderView()
+            }
+            .modelContainer(Previews(addSample: false).container)
         }
-        .modelContainer(Previews(addSample: false).container)
     }
-}
 #endif
