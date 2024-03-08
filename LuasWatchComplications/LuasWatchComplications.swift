@@ -44,19 +44,19 @@ struct LuasWatchComplicationsEntryView : View {
         let gradient = Gradient(stops: [
             .init(color: Color("WidgetBackground"), location: 0),
             .init(color: Color("WidgetBackgroundGradientTo"), location: 1)])
-            .opacity(renderingMode == .fullColor ? 1.0: 0.2)
+            .opacity(renderingMode == .fullColor ? 1.0: 0.15)
 
         switch family {
 
             case .accessoryCorner:
                 // WIP pick correct size
-                Image("ComplicationIcon")
+                Image("IconComplication76")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .containerBackground(gradient, for: .widget)
 
             case .accessoryCircular:
-                Image("ComplicationIcon")
+                Image("IconComplication100")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .containerBackground(gradient, for: .widget)
@@ -83,6 +83,7 @@ struct LuasWatchComplications: Widget {
             LuasWatchComplicationsEntryView()
         }
         .configurationDisplayName("LUAS Times")
+        .containerBackgroundRemovable(false)
         .description("Show departure times of the closest Luas station.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner])
     }
