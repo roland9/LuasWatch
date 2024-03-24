@@ -3,8 +3,8 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 public struct TrainStations {
 
@@ -23,18 +23,21 @@ public struct TrainStations {
             var stationTypeValue: TrainStation.StationType = .twoway
 
             if let stationTypeString = station["type"] as? String,
-               let stationType = TrainStation.StationType(rawValue: stationTypeString) {
+                let stationType = TrainStation.StationType(rawValue: stationTypeString)
+            {
                 stationTypeValue = stationType
             }
 
-            return TrainStation(stationId: station["stationId"] as! String,
-                                stationIdShort: station["stationIdShort"] as! String,
-                                shortCode: station["shortCode"] as! String,
-                                route: Route(station["route"] as! String)!,
-                                name: station["name"] as! String,
-                                location: CLLocation(latitude: CLLocationDegrees(station["lat"] as! Double),
-                                                     longitude: CLLocationDegrees(station["long"] as! Double)),
-                                stationType: stationTypeValue)
+            return TrainStation(
+                stationId: station["stationId"] as! String,
+                stationIdShort: station["stationIdShort"] as! String,
+                shortCode: station["shortCode"] as! String,
+                route: Route(station["route"] as! String)!,
+                name: station["name"] as! String,
+                location: CLLocation(
+                    latitude: CLLocationDegrees(station["lat"] as! Double),
+                    longitude: CLLocationDegrees(station["long"] as! Double)),
+                stationType: stationTypeValue)
         }
         // swiftlint:enable force_cast
     }
@@ -71,8 +74,10 @@ public struct TrainStations {
         closestStation(from: location, stations: stations)
     }
 
-    public func closestStation(from location: CLLocation,
-                               stations: [TrainStation]) -> TrainStation? {
+    public func closestStation(
+        from location: CLLocation,
+        stations: [TrainStation]
+    ) -> TrainStation? {
         var closestStationSoFar: TrainStation?
 
         stations.forEach { (station) in
@@ -100,5 +105,23 @@ public struct TrainStations {
             case .green:
                 return closestStation(from: location, stations: greenLineStations)
         }
+    }
+
+    public func station(shortCode: String) -> TrainStation? {
+        stations
+            .filter { $0.shortCode == shortCode }
+            .first
+    }
+
+    public static var unknown: TrainStation {
+        TrainStation(
+            stationId: "id",
+            stationIdShort: "unknown",
+            shortCode: "unknown",
+            route: .green,
+            name: "Unknown",
+            location: CLLocation(
+                latitude: CLLocationDegrees(53.3163934083453),
+                longitude: CLLocationDegrees(-6.25344151996991)))
     }
 }

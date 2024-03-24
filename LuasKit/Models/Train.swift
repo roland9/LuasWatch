@@ -8,7 +8,7 @@ import Foundation
 public struct Train: CustomStringConvertible, Hashable, Codable {
 
     public var id: String {
-        direction + dueTime
+        UUID().uuidString
     }
 
     public let destination: String
@@ -20,8 +20,15 @@ public struct Train: CustomStringConvertible, Hashable, Codable {
     }
 
     public var dueTimeDescription: String {
-        "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " +
-        ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
+        "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
+    }
+
+    public var destinationDescription: String {
+        destination.replacingOccurrences(of: "LUAS ", with: "")
+    }
+
+    public var dueTimeDescription2: String {
+        (dueTime.lowercased() == "due") ? "Due" : dueTime
     }
 
     public var destinationDueTimeDescription: String {

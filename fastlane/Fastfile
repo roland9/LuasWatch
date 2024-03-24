@@ -8,7 +8,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do |lane, options|
-    xcversion(version: "14.3")
+    xcversion(version: "15.0")
   end
 
   def build_app
@@ -50,11 +50,13 @@ platform :ios do
 
   desc "Run unit tests"
   lane :test do
-    run_tests(devices: ["Apple Watch Series 7 - 41mm"],
-              scheme: "LuasWatch WatchKit App",
-              testplan: "LuasWatch WatchKit App")
-    run_tests(devices: ["iPhone 8"],
-              scheme: "LuasKitIOSTests")
+    run_tests(
+              devices: ["Apple Watch Series 9 (45mm)"],
+              ## destination: "platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)",
+              scheme: "LuasKitTests",
+              testplan: "LuasKitTests",
+              buildlog_path: "./fastlane/fastlane-buildlog",
+              derived_data_path: "~/Library/Developer/Xcode/DerivedData")
   end
 
 end

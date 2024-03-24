@@ -38,28 +38,38 @@ struct SimpleEntry: TimelineEntry {
 
 struct LuasWatchComplicationsEntryView : View {
     @Environment(\.widgetFamily) var family
+    @Environment(\.widgetRenderingMode) var renderingMode
 
     var body: some View {
+        let gradient = Gradient(stops: [
+            .init(color: Color("WidgetBackground"), location: 0),
+            .init(color: Color("WidgetBackgroundGradientTo"), location: 1)])
+            .opacity(renderingMode == .fullColor ? 1.0: 0.15)
+
         switch family {
-            case .accessoryInline:
-                Image("IconRound (Complication)")
-                    .resizable()
 
             case .accessoryCorner:
-                Image("IconComplication91.2")
+                // WIP pick correct size
+                Image("IconComplication76")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .containerBackground(gradient, for: .widget)
 
             case .accessoryCircular:
-                Image("IconComplication120")
+                Image("IconComplication100")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .containerBackground(gradient, for: .widget)
 
-            case .accessoryRectangular:
-                Image("IconRound (Complication)")
-                    .resizable()
+                // we don't support these but Swift requires these cases
+            case .accessoryRectangular, .accessoryInline:
+                Text("LuasWatch")
+                    .containerBackground(.clear, for: .widget)
 
             @unknown default:
                 // unknown widgetFamily
                 Text("LuasWatch")
+                    .containerBackground(.clear, for: .widget)
         }
     }
 }
@@ -73,6 +83,7 @@ struct LuasWatchComplications: Widget {
             LuasWatchComplicationsEntryView()
         }
         .configurationDisplayName("LUAS Times")
+        .containerBackgroundRemovable(false)
         .description("Show departure times of the closest Luas station.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner])
     }
@@ -82,11 +93,12 @@ struct LuasWatchComplications_Previews: PreviewProvider {
     static var previews: some View {
 
         LuasWatchComplicationsEntryView()
-            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-            .previewDisplayName("accessory circular")
+            .previewContext(WidgetPreviewContext(family: .accessoryCorner))
+            .previewDisplayName("corner")
 
         LuasWatchComplicationsEntryView()
-            .previewContext(WidgetPreviewContext(family: .accessoryCorner))
-            .previewDisplayName("accessory corner")
+            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+            .previewDisplayName("circular")
+
     }
 }

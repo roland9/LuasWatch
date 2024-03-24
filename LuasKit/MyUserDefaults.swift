@@ -6,21 +6,21 @@
 import Foundation
 
 public struct MyUserDefaults {
-	fileprivate static let userDefaultsKeySelectedStation = "SelectedStationIdShort"
+    fileprivate static let userDefaultsKeySelectedStation = "SelectedStationIdShort"
 
-	public static func userSelectedSpecificStation() -> TrainStation? {
-		guard let stationId = UserDefaults.standard.string(forKey: userDefaultsKeySelectedStation),
-			let station = TrainStations.sharedFromFile.stations.filter({ $0.stationIdShort == stationId }).first
-			else { return nil }
+    public static func userSelectedSpecificStation() -> TrainStation? {
+        guard let stationId = UserDefaults.standard.string(forKey: userDefaultsKeySelectedStation),
+            let station = TrainStations.sharedFromFile.stations.filter({ $0.stationIdShort == stationId }).first
+        else { return nil }
 
-		return station
-	}
+        return station
+    }
 
-	public static func saveSelectedStation(_ station: TrainStation) {
-		UserDefaults.standard.set(station.stationIdShort, forKey: userDefaultsKeySelectedStation)
-	}
+    public static func saveSelectedStation(_ station: TrainStation) {
+        UserDefaults.standard.set(station.stationIdShort, forKey: userDefaultsKeySelectedStation)
+    }
 
-	public static func wipeUserSelectedStation() {
-		UserDefaults.standard.removeObject(forKey: userDefaultsKeySelectedStation)
-	}
+    public static func wipeUserSelectedStation() {
+        UserDefaults.standard.removeObject(forKey: userDefaultsKeySelectedStation)
+    }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */; };
+		AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */; };
 		AB0BD34B2AE6F61700EB51AF /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB0BD3562AE6F64C00EB51AF /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */; };
 		AB0BD3572AE6F64C00EB51AF /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */; };
@@ -35,16 +37,25 @@
 		AB0BD3A92AE7086700EB51AF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3A82AE7086700EB51AF /* Coordinator.swift */; };
 		AB0BD3AB2AE70AFD00EB51AF /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB0BD3AC2AE70AFD00EB51AF /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCE82B42E5430060AAD5 /* StationView.swift */; };
+		AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */; };
+		AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */; };
+		AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */; };
+		AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */; };
+		AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */; };
+		AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF52B4315440060AAD5 /* LinesView.swift */; };
+		AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */; };
 		AB2453F32AE424B40007FA7C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F22AE424B40007FA7C /* WidgetKit.framework */; };
 		AB2453F52AE424B40007FA7C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F42AE424B40007FA7C /* SwiftUI.framework */; };
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
 		AB2453FA2AE424B50007FA7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2453F92AE424B50007FA7C /* Assets.xcassets */; };
 		AB2453FE2AE424B50007FA7C /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */; };
+		AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */; };
 		AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0082AE4094F002AA60A /* APIParser.swift */; };
 		AB3CC01C2AE4094F002AA60A /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */; };
 		AB3CC01D2AE4094F002AA60A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00A2AE4094F002AA60A /* API.swift */; };
 		AB3CC01E2AE4094F002AA60A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00B2AE4094F002AA60A /* Parser.swift */; };
-		AB3CC01F2AE4094F002AA60A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00C2AE4094F002AA60A /* AppState.swift */; };
 		AB3CC0202AE4094F002AA60A /* luasStops.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3CC00D2AE4094F002AA60A /* luasStops.json */; };
 		AB3CC0212AE4094F002AA60A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00E2AE4094F002AA60A /* Location.swift */; };
 		AB3CC0222AE4094F002AA60A /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00F2AE4094F002AA60A /* Logging.swift */; };
@@ -64,23 +75,37 @@
 		AB695E442AE41C1F00B6DB99 /* LuasWatch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E432AE41C1F00B6DB99 /* LuasWatch_Watch_AppTests.swift */; };
 		AB695E4E2AE41C1F00B6DB99 /* LuasWatch_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E4D2AE41C1F00B6DB99 /* LuasWatch_Watch_AppUITests.swift */; };
 		AB695E502AE41C1F00B6DB99 /* LuasWatch_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E4F2AE41C1F00B6DB99 /* LuasWatch_Watch_AppUITestsLaunchTests.swift */; };
-		AB695E702AE41CAC00B6DB99 /* PreviewsStationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E5F2AE41CAC00B6DB99 /* PreviewsStationsModal.swift */; };
 		AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */; };
-		AB695E722AE41CAC00B6DB99 /* PreviewsTapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E612AE41CAC00B6DB99 /* PreviewsTapOverlay.swift */; };
-		AB695E732AE41CAC00B6DB99 /* PreviewsAppStartup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E622AE41CAC00B6DB99 /* PreviewsAppStartup.swift */; };
-		AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E632AE41CAC00B6DB99 /* PreviewsAppResult.swift */; };
-		AB695E752AE41CAC00B6DB99 /* PreviewsAppRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E642AE41CAC00B6DB99 /* PreviewsAppRunning.swift */; };
 		AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */; };
-		AB695E772AE41CAC00B6DB99 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E672AE41CAC00B6DB99 /* LoadingAnimationView.swift */; };
-		AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E682AE41CAC00B6DB99 /* TrainsListView.swift */; };
-		AB695E792AE41CAC00B6DB99 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E692AE41CAC00B6DB99 /* HeaderView.swift */; };
-		AB695E7A2AE41CAC00B6DB99 /* ChangeStationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E6A2AE41CAC00B6DB99 /* ChangeStationButton.swift */; };
-		AB695E7B2AE41CAC00B6DB99 /* TapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E6B2AE41CAC00B6DB99 /* TapOverlayView.swift */; };
-		AB695E7C2AE41CAC00B6DB99 /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E6C2AE41CAC00B6DB99 /* LuasView.swift */; };
 		AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */; };
 		AB695E7F2AE41D5800B6DB99 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB695E802AE41D5800B6DB99 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB695E842AE41EAE00B6DB99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */; };
+		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
+		AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRow.swift */; };
+		AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRow.swift */; };
+		AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */; };
+		AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F482B6FCD0800F23497 /* StationDirection.swift */; };
+		AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */; };
+		AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */; };
+		ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */; };
+		ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AA2B78E34A00C1F8F7 /* Utils.swift */; };
+		ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */; };
+		ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */; };
+		ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */; };
+		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
+		ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */; };
+		ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA512B78211D0015DB81 /* StationTimesView.swift */; };
+		ABD1CA542B7826610015DB81 /* SimpleTimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA532B7826610015DB81 /* SimpleTimetableView.swift */; };
+		ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA552B7828870015DB81 /* StationToolbar.swift */; };
+		ABD285812B5DB3F00000011C /* PreviewsStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD285802B5DB3F00000011C /* PreviewsStationView.swift */; };
+		ABE7F19C2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */; };
+		ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19D2B8A5C1C00AE0644 /* PreviewsHelpers.swift */; };
+		ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */; };
+		ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */; };
+		ABF0388F2B9265FD000034D6 /* DoubleTimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */; };
+		ABF038912B926AB5000034D6 /* OverflowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038902B926AB5000034D6 /* OverflowView.swift */; };
+		ABF038932B933639000034D6 /* StationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038922B933639000034D6 /* StationsModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +215,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsListView.swift; sourceTree = "<group>"; };
+		AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		AB0BD3472AE6F61700EB51AF /* LuasKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
 		AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -220,17 +247,26 @@
 		AB0BD3972AE7071200EB51AF /* PreviewsAppResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppResult.swift; sourceTree = "<group>"; };
 		AB0BD3982AE7071200EB51AF /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
 		AB0BD3A82AE7086700EB51AF /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		AB0BFCE82B42E5430060AAD5 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
+		AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesSidebarView.swift; sourceTree = "<group>"; };
+		AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previews.swift; sourceTree = "<group>"; };
+		AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStation.swift; sourceTree = "<group>"; };
+		AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsView.swift; sourceTree = "<group>"; };
+		AB0BFCF52B4315440060AAD5 /* LinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesView.swift; sourceTree = "<group>"; };
+		AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesHeaderView.swift; sourceTree = "<group>"; };
 		AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LuasWatchComplicationsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2453F22AE424B40007FA7C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB2453F42AE424B40007FA7C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchComplications.swift; sourceTree = "<group>"; };
 		AB2453F92AE424B50007FA7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2453FB2AE424B50007FA7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
+		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		AB3CC0082AE4094F002AA60A /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasMockAPI.swift; sourceTree = "<group>"; };
 		AB3CC00A2AE4094F002AA60A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB3CC00B2AE4094F002AA60A /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		AB3CC00C2AE4094F002AA60A /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AB3CC00D2AE4094F002AA60A /* luasStops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = luasStops.json; sourceTree = "<group>"; };
 		AB3CC00E2AE4094F002AA60A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		AB3CC00F2AE4094F002AA60A /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
@@ -256,22 +292,37 @@
 		AB695E492AE41C1F00B6DB99 /* LuasWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LuasWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB695E4D2AE41C1F00B6DB99 /* LuasWatch_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatch_Watch_AppUITests.swift; sourceTree = "<group>"; };
 		AB695E4F2AE41C1F00B6DB99 /* LuasWatch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		AB695E5F2AE41CAC00B6DB99 /* PreviewsStationsModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsStationsModal.swift; sourceTree = "<group>"; };
 		AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsData.swift; sourceTree = "<group>"; };
-		AB695E612AE41CAC00B6DB99 /* PreviewsTapOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsTapOverlay.swift; sourceTree = "<group>"; };
-		AB695E622AE41CAC00B6DB99 /* PreviewsAppStartup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppStartup.swift; sourceTree = "<group>"; };
-		AB695E632AE41CAC00B6DB99 /* PreviewsAppResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppResult.swift; sourceTree = "<group>"; };
-		AB695E642AE41CAC00B6DB99 /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
 		AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantLocationAuthView.swift; sourceTree = "<group>"; };
-		AB695E672AE41CAC00B6DB99 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
-		AB695E682AE41CAC00B6DB99 /* TrainsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsListView.swift; sourceTree = "<group>"; };
-		AB695E692AE41CAC00B6DB99 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		AB695E6A2AE41CAC00B6DB99 /* ChangeStationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStationButton.swift; sourceTree = "<group>"; };
-		AB695E6B2AE41CAC00B6DB99 /* TapOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapOverlayView.swift; sourceTree = "<group>"; };
-		AB695E6C2AE41CAC00B6DB99 /* LuasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
 		AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		AB89FB882B49B6BE0020A943 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
+		AB89FB8A2B49B7B50020A943 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
+		AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch Watch App.xctestplan"; sourceTree = "<group>"; };
+		AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extensions.swift"; sourceTree = "<group>"; };
+		AB925F482B6FCD0800F23497 /* StationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDirection.swift; sourceTree = "<group>"; };
+		AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+Codable.swift"; sourceTree = "<group>"; };
+		AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
+		ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMainScreen.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ABC207AA2B78E34A00C1F8F7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+Extensions.swift"; sourceTree = "<group>"; };
+		ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Animiation.swift"; sourceTree = "<group>"; };
+		ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAllStates.swift; sourceTree = "<group>"; };
+		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
+		ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
+		ABD1CA512B78211D0015DB81 /* StationTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTimesView.swift; sourceTree = "<group>"; };
+		ABD1CA532B7826610015DB81 /* SimpleTimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimetableView.swift; sourceTree = "<group>"; };
+		ABD1CA552B7828870015DB81 /* StationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationToolbar.swift; sourceTree = "<group>"; };
+		ABD285802B5DB3F00000011C /* PreviewsStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationView.swift; sourceTree = "<group>"; };
+		ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationView_EdgeCases.swift; sourceTree = "<group>"; };
+		ABE7F19D2B8A5C1C00AE0644 /* PreviewsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsHelpers.swift; sourceTree = "<group>"; };
+		ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTrainsView.swift; sourceTree = "<group>"; };
+		ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LuasFormatting.swift"; sourceTree = "<group>"; };
+		ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTimetableView.swift; sourceTree = "<group>"; };
+		ABF038902B926AB5000034D6 /* OverflowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowView.swift; sourceTree = "<group>"; };
+		ABF038922B933639000034D6 /* StationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +475,16 @@
 			path = Previews;
 			sourceTree = "<group>";
 		};
+		AB0BFCF22B4312370060AAD5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB0BFCF02B42ECEF0060AAD5 /* FavouriteStation.swift */,
+				AB925F482B6FCD0800F23497 /* StationDirection.swift */,
+				AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		AB15B8772686815E005BF013 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +507,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */,
 				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
 				AB57F0DE230B3C1900BA8B53 /* LuasKit */,
 				AB695E312AE41C1D00B6DB99 /* LuasWatch Watch App */,
@@ -509,8 +571,11 @@
 				AB3CC01A2AE4094F002AA60A /* LuasKit.h */,
 				AB3CC0112AE4094F002AA60A /* Models */,
 				AB3CC0072AE4094F002AA60A /* API */,
-				AB3CC00C2AE4094F002AA60A /* AppState.swift */,
+				AB8220782B49F79200022CA0 /* AppModel.swift */,
+				AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */,
+				AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */,
 				AB3CC00E2AE4094F002AA60A /* Location.swift */,
+				ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */,
 				AB3CC00D2AE4094F002AA60A /* luasStops.json */,
 				AB3CC0102AE4094F002AA60A /* LuasStrings.swift */,
 				AB3CC0192AE4094F002AA60A /* LuasExtensions.swift */,
@@ -526,6 +591,11 @@
 			children = (
 				AB695E322AE41C1D00B6DB99 /* LuasWatchApp.swift */,
 				AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */,
+				AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */,
+				ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */,
+				AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */,
+				ABC207AA2B78E34A00C1F8F7 /* Utils.swift */,
+				AB0BFCF22B4312370060AAD5 /* Models */,
 				AB695E652AE41CAC00B6DB99 /* Views */,
 				AB695E5E2AE41CAC00B6DB99 /* Previews */,
 				AB695E362AE41C1E00B6DB99 /* Assets.xcassets */,
@@ -554,12 +624,12 @@
 		AB695E5E2AE41CAC00B6DB99 /* Previews */ = {
 			isa = PBXGroup;
 			children = (
-				AB695E622AE41CAC00B6DB99 /* PreviewsAppStartup.swift */,
-				AB695E642AE41CAC00B6DB99 /* PreviewsAppRunning.swift */,
-				AB695E632AE41CAC00B6DB99 /* PreviewsAppResult.swift */,
-				AB695E5F2AE41CAC00B6DB99 /* PreviewsStationsModal.swift */,
-				AB695E612AE41CAC00B6DB99 /* PreviewsTapOverlay.swift */,
+				ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */,
+				ABD285802B5DB3F00000011C /* PreviewsStationView.swift */,
+				ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */,
 				AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */,
+				AB0BFCEE2B42ECA80060AAD5 /* Previews.swift */,
+				ABE7F19D2B8A5C1C00AE0644 /* PreviewsHelpers.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";
@@ -567,13 +637,10 @@
 		AB695E652AE41CAC00B6DB99 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AB695E6C2AE41CAC00B6DB99 /* LuasView.swift */,
-				AB695E682AE41CAC00B6DB99 /* TrainsListView.swift */,
-				AB695E6A2AE41CAC00B6DB99 /* ChangeStationButton.swift */,
-				AB695E692AE41CAC00B6DB99 /* HeaderView.swift */,
-				AB695E672AE41CAC00B6DB99 /* LoadingAnimationView.swift */,
-				AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */,
-				AB695E6B2AE41CAC00B6DB99 /* TapOverlayView.swift */,
+				ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */,
+				ABE7F1992B895C5D00AE0644 /* Sidebar */,
+				ABE7F19A2B895E2500AE0644 /* DetailView */,
+				AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -584,6 +651,40 @@
 				AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ABE7F1992B895C5D00AE0644 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */,
+				AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */,
+				AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */,
+				AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */,
+				AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */,
+				ABF038922B933639000034D6 /* StationsModal.swift */,
+				AB0BFCF52B4315440060AAD5 /* LinesView.swift */,
+				AB89FB8A2B49B7B50020A943 /* LineRow.swift */,
+				AB89FB882B49B6BE0020A943 /* StationRow.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		ABE7F19A2B895E2500AE0644 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				AB0BFCE82B42E5430060AAD5 /* StationView.swift */,
+				ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */,
+				AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */,
+				ABD1CA512B78211D0015DB81 /* StationTimesView.swift */,
+				ABD1CA532B7826610015DB81 /* SimpleTimetableView.swift */,
+				ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */,
+				ABF038902B926AB5000034D6 /* OverflowView.swift */,
+				ABD1CA552B7828870015DB81 /* StationToolbar.swift */,
+				ABD1CA4D2B781DDD0015DB81 /* DueView.swift */,
+				ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */,
+				ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -604,6 +705,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB0BD3502AE6F61700EB51AF /* Build configuration list for PBXNativeTarget "LuasKitTests" */;
 			buildPhases = (
+				AB925F432B6FAD7800F23497 /* Run swift-format */,
 				AB0BD3432AE6F61700EB51AF /* Sources */,
 				AB0BD3442AE6F61700EB51AF /* Frameworks */,
 				AB0BD3452AE6F61700EB51AF /* Resources */,
@@ -749,6 +851,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB695E582AE41C1F00B6DB99 /* Build configuration list for PBXNativeTarget "LuasWatch Watch AppTests" */;
 			buildPhases = (
+				AB925F452B6FAEB200F23497 /* Run swift-format */,
 				AB695E3B2AE41C1E00B6DB99 /* Sources */,
 				AB695E3C2AE41C1E00B6DB99 /* Frameworks */,
 				AB695E3D2AE41C1E00B6DB99 /* Resources */,
@@ -789,7 +892,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = mApps.ie;
 				TargetAttributes = {
 					AB0BD3462AE6F61700EB51AF = {
@@ -937,6 +1040,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AB925F432B6FAD7800F23497 /* Run swift-format */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run swift-format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=$PATH:/opt/homebrew/bin/\n\nif which swift-format >/dev/null; then\n    swift-format -i --configuration myConfiguration.json --ignore-unparsable-files -p -r LuasKit\nelse\n    echo \"warning: swift-format not installed\"\nfi\n";
+		};
+		AB925F452B6FAEB200F23497 /* Run swift-format */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run swift-format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=$PATH:/opt/homebrew/bin/\n\nif which swift-format >/dev/null; then\n    swift-format -i --configuration myConfiguration.json --ignore-unparsable-files -p -r \"LuasWatch Watch App\" -r \"LuasWatch Watch AppTests\"\nelse\n    echo \"warning: swift-format not installed\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AB0BD3432AE6F61700EB51AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1005,13 +1149,16 @@
 				AB3CC0272AE4094F002AA60A /* TrainStations.swift in Sources */,
 				AB3CC0252AE4094F002AA60A /* TrainStation.swift in Sources */,
 				AB3CC0262AE4094F002AA60A /* Train.swift in Sources */,
+				AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */,
 				AB3CC02B2AE4094F002AA60A /* LuasExtensions.swift in Sources */,
 				AB3CC0282AE4094F002AA60A /* Route.swift in Sources */,
-				AB3CC01F2AE4094F002AA60A /* AppState.swift in Sources */,
+				ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */,
 				AB3CC02A2AE4094F002AA60A /* MyUserDefaults.swift in Sources */,
 				AB3CC0242AE4094F002AA60A /* TrainsByDirection.swift in Sources */,
 				AB3CC0292AE4094F002AA60A /* Direction.swift in Sources */,
+				AB8220792B49F79200022CA0 /* AppModel.swift in Sources */,
 				AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */,
+				AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */,
 				AB3CC0232AE4094F002AA60A /* LuasStrings.swift in Sources */,
 				AB3CC0222AE4094F002AA60A /* Logging.swift in Sources */,
 				AB3CC01D2AE4094F002AA60A /* API.swift in Sources */,
@@ -1024,21 +1171,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB695E7A2AE41CAC00B6DB99 /* ChangeStationButton.swift in Sources */,
-				AB695E7C2AE41CAC00B6DB99 /* LuasView.swift in Sources */,
+				AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */,
 				AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */,
+				ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */,
+				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
+				ABF038912B926AB5000034D6 /* OverflowView.swift in Sources */,
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
+				ABD285812B5DB3F00000011C /* PreviewsStationView.swift in Sources */,
 				AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */,
-				AB695E742AE41CAC00B6DB99 /* PreviewsAppResult.swift in Sources */,
-				AB695E782AE41CAC00B6DB99 /* TrainsListView.swift in Sources */,
-				AB695E702AE41CAC00B6DB99 /* PreviewsStationsModal.swift in Sources */,
+				ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */,
+				ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */,
+				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
+				AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */,
+				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
+				AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */,
+				AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */,
+				ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */,
+				ABD1CA542B7826610015DB81 /* SimpleTimetableView.swift in Sources */,
+				ABE7F19C2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift in Sources */,
+				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,
 				AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */,
-				AB695E722AE41CAC00B6DB99 /* PreviewsTapOverlay.swift in Sources */,
-				AB695E792AE41CAC00B6DB99 /* HeaderView.swift in Sources */,
-				AB695E7B2AE41CAC00B6DB99 /* TapOverlayView.swift in Sources */,
-				AB695E772AE41CAC00B6DB99 /* LoadingAnimationView.swift in Sources */,
-				AB695E732AE41CAC00B6DB99 /* PreviewsAppStartup.swift in Sources */,
-				AB695E752AE41CAC00B6DB99 /* PreviewsAppRunning.swift in Sources */,
+				ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */,
+				AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */,
+				AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */,
+				ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */,
+				ABF0388F2B9265FD000034D6 /* DoubleTimetableView.swift in Sources */,
+				ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */,
+				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
+				ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */,
+				ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */,
+				ABF038932B933639000034D6 /* StationsModal.swift in Sources */,
+				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
+				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
+				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
+				ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */,
+				AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */,
+				AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */,
+				AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,6 +1282,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1135,6 +1305,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1336,7 +1507,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
@@ -1367,7 +1537,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;
@@ -1376,6 +1545,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1406,9 +1576,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 122;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DYLIB_CURRENT_VERSION = 120;
+				DYLIB_CURRENT_VERSION = 121;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1427,7 +1597,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1443,6 +1613,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1473,9 +1644,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 122;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DYLIB_CURRENT_VERSION = 120;
+				DYLIB_CURRENT_VERSION = 121;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1488,7 +1659,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1529,7 +1700,6 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,4";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1564,7 +1734,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,4";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1583,6 +1752,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LuasWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = LuasWatch;
@@ -1603,7 +1773,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
@@ -1620,6 +1789,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LuasWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = LuasWatch;
@@ -1639,7 +1809,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;
@@ -1688,6 +1857,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1711,6 +1881,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;

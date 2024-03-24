@@ -3,36 +3,66 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftData
+import SwiftUI
 
 @main
 struct LuasWatch_Watch_AppApp: App {
-    @Environment (\.scenePhase) var scenePhase
 
-    let appState = AppState()
-    let location = Location()
-    var mainCoordinator: Coordinator!
+    @Environment(\.scenePhase) var scenePhase
+
+    private var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            FavouriteStation.self,
+            StationDirection.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+            // WIP create sample data
+
+            return container
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+
+    private let appModel = AppModel()
+    private let location = Location()
+    private var mainCoordinator: Coordinator!
 
     init() {
-        mainCoordinator = Coordinator(appState: appState, location: location)
-        appState.changeable = mainCoordinator
+        mainCoordinator = Coordinator(
+            appModel: appModel,
+            location: location)
+
+        #if DEBUG
+            if isRunningUnitTests() { return }
+        #endif
+
         mainCoordinator.start()
     }
 
     var body: some Scene {
 
         WindowGroup {
-            LuasView()
-                .environmentObject(appState)
+            LuasMainScreen()
         }
+        .environmentObject(appModel)
+        .modelContainer(sharedModelContainer)
+
         .onChange(of: scenePhase) {
-            switch $0 {
+            switch scenePhase {
                 case .background, .inactive:
+                    myPrint("App did enter background or because inactive -> invalidateTimer")
                     mainCoordinator.invalidateTimer()
 
                 case .active:
-                    mainCoordinator.scheduleTimer()
+                    myPrint("App became active -> fireAndScheduleTimer")
+                    mainCoordinator.fireAndScheduleTimer()
 
                 @unknown default:
                     break

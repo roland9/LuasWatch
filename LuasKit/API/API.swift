@@ -18,7 +18,8 @@ public protocol API {
 }
 
 public enum APIError: Error {
-    case noTrains(String), invalidXML(String)
+    case noTrains(String)
+    case invalidXML(String)
 }
 
 public struct LuasAPI: API {
@@ -40,8 +41,7 @@ public struct LuasAPI: API {
 
             // if we get message, we return that as an error
             // otherwise we return an error: no trains
-            throw APIError.noTrains(trainsByDirection.message ??
-                                    "\(LuasStrings.noTrainsErrorMessage)\n\n\(LuasStrings.noTrainsFallbackExplanation)")
+            throw APIError.noTrains(trainsByDirection.message ?? "\(LuasStrings.noTrainsErrorMessage)\n\n\(LuasStrings.noTrainsFallbackExplanation)")
         } else {
             return trainsByDirection
         }
@@ -54,7 +54,11 @@ public struct RealAPIWorker: APIWorker {
 
         let url = URL(string: "https://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=\(shortCode)&encrypt=false")!
 
-        let (data, _) = try await URLSession.shared.data(from: url)
+        let urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5)
+
+        let session = URLSession.shared
+
+        let (data, _) = try await session.data(for: urlRequest)
 
         return data
     }

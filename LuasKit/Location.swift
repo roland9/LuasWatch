@@ -6,16 +6,15 @@
 import CoreLocation
 
 public protocol LocationDelegate: AnyObject {
-	func didFail(_ error: LocationDelegateError)
+    func didFail(_ error: LocationDelegateError)
     func didEnableLocation()
-	func didGetLocation(_ location: CLLocation)
+    func didGetLocation(_ location: CLLocation)
 }
 
 public enum LocationDelegateError: Error {
-	case locationServicesNotEnabled
-	case locationAccessDenied
-	case locationManagerError(Error)
-	case authStatus(CLAuthorizationStatus)
+    case locationServicesNotEnabled
+    case locationAccessDenied
+    case locationManagerError(Error)
 }
 
 enum InternalState {
@@ -28,122 +27,114 @@ enum LocationAuthState {
 
 public class Location: NSObject {
 
-	public weak var delegate: LocationDelegate?
+    public weak var delegate: LocationDelegate?
 
-	var locationAuthState: LocationAuthState = .unknown
+    var locationAuthState: LocationAuthState = .unknown
     var internalState: InternalState = .initializing
 
-	let locationManager = CLLocationManager()
-
-	public override init() {
-        super.init()
-        locationManager.delegate = self
-    }
+    let locationManager = CLLocationManager()
 
     public func promptLocationAuth() {
+        myPrint(#function)
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
     }
 
-    // start getting location
+    /// start getting location
     public func start() {
-        myPrint("startUpdatingLocation")
-        internalState = .gettingLocation
-        locationManager.startUpdatingLocation()
-	}
+        myPrint("calling locationManager.startUpdatingLocation")
 
-    #warning("that will be called very shortly after start because timer fires & calls update")
-    
-	public func update() {
-        if locationAuthState == .granted &&
-            (internalState == .stoppedUpdatingLocation || internalState == .error) {
-            myPrint("startUpdatingLocation")
+        internalState = .gettingLocation
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
+
+    public func update() {
+        if (locationAuthState == .granted && (internalState == .stoppedUpdatingLocation || internalState == .error))
+            || internalState == .initializing
+            || locationAuthState == .unknown
+        {
+
+            myPrint("\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
 
             internalState = .gettingLocation
+            locationManager.delegate = self
             locationManager.startUpdatingLocation()
+
+        } else if locationAuthState == .denied {
+            myPrint("\(locationAuthState) \(internalState) -> calling delegate didFail(.denied)")
+
+            delegate?.didFail(.locationAccessDenied)
+
+        } else {
+            assertionFailure("internal error")
+            myPrint("🚨 NOT calling locationManager.startUpdatingLocation")
         }
-	}
+    }
 }
 
 extension Location: CLLocationManagerDelegate {
 
-	public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-		myPrint("\(error)")
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        myPrint("\(error)")
 
-		internalState = .error
-		let nsError = error as NSError
+        internalState = .error
+        let nsError = error as NSError
 
-		if nsError.domain == kCLErrorDomain &&
-			nsError.code == CLError.Code.denied.rawValue {
-			delegate?.didFail(.locationAccessDenied)
-		} else if nsError.domain == kCLErrorDomain &&
-			nsError.code == CLError.Code.locationUnknown.rawValue {
-		} else {
-			delegate?.didFail(.locationManagerError(error))
-		}
-	}
+        if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.denied.rawValue {
+            myPrint("didFail .locationAccessDenied")
+            delegate?.didFail(.locationAccessDenied)
+
+        } else {
+            myPrint("didFail .locationManagerError")
+            delegate?.didFail(.locationManagerError(error))
+        }
+    }
 
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         myPrint("\(manager.authorizationStatus.description)")
 
-		switch manager.authorizationStatus {
+        switch manager.authorizationStatus {
             case .notDetermined:
                 break
-			case .denied, .restricted:
+            case .denied, .restricted:
                 locationAuthState = .denied
-				delegate?.didFail(.authStatus(manager.authorizationStatus))
-			case .authorizedAlways, .authorizedWhenInUse:
+                delegate?.didFail(.locationAccessDenied)
+            case .authorizedAlways, .authorizedWhenInUse:
                 locationAuthState = .granted
                 delegate?.didEnableLocation()
-			@unknown default:
-				myPrint("default")
-		}
-	}
+            @unknown default:
+                myPrint("default")
+        }
+    }
 
-	public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		myPrint("\(locations)")
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        myPrint("\(locations)")
 
-		let lastLocation = locations.last!
+        guard let lastLocation = locations.last else {
+            assertionFailure("internal error")
+            myPrint("🚨 internal error: expected a location in the locations array")
+            return
+        }
 
-		// TODOLATER If it's a relatively recent event, turn off updates to save power. Also, turn on again later
+        let howRecent = lastLocation.timestamp.timeIntervalSinceNow
 
-		let howRecent = lastLocation.timestamp.timeIntervalSinceNow
+        if abs(howRecent) < 15.0 {
 
-		if abs(howRecent) < 15.0 {
+            if lastLocation.horizontalAccuracy < 100 && lastLocation.verticalAccuracy < 100 {
+                myPrint("last location quite precise -> stopping location updates for now")
 
-            // we should kill previous API requests if there is a newer location
-			delegate?.didGetLocation(lastLocation)
+                internalState = .stoppedUpdatingLocation
+                /// it seems that calling stopUpdatingLocation() does still deliver sometimes 3 location updates, which causes superfluous API calls....
+                /// setting the delegate to nil avoids that (but need to remember to set it to self again!)
+                locationManager.delegate = nil
+                locationManager.stopUpdatingLocation()
+            }
 
-			if lastLocation.horizontalAccuracy < 100 &&
-				lastLocation.verticalAccuracy < 100 {
-				myPrint("last location quite precise -> stopping location updates for now")
+            delegate?.didGetLocation(lastLocation)
 
-				internalState = .stoppedUpdatingLocation
-				locationManager.stopUpdatingLocation()
-			}
-
-		} else {
-			myPrint("ignoring lastLocation because too old (\(howRecent) seconds ago")
-		}
-	}
-
-}
-
-extension CLAuthorizationStatus: CustomStringConvertible {
-    public var description: String {
-        switch self {
-             case .notDetermined:
-                 return "Not Determined"
-             case .restricted:
-                 return "Restricted"
-             case .denied:
-                 return "Denied"
-             case .authorizedAlways:
-                 return "Authorized Always"
-             case .authorizedWhenInUse:
-                 return "Authorized When In Use"
-             @unknown default:
-                 return "Unknown"
+        } else {
+            myPrint("ignoring lastLocation because too old (\(howRecent) seconds ago")
         }
     }
 }

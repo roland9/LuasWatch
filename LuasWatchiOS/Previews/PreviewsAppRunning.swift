@@ -22,13 +22,13 @@ struct Preview_AppRunning: PreviewProvider {
                                                              shortCode: "CAB",
                                                              route: .green,
                                                              name: "Cabra",
-                                                             location: location),
-                                                location)))
+                                                             locationBluebell: locationBluebell),
+                                                locationBluebell)))
                 .previewDisplayName("while getting info...")
 
             LuasView()
                 .environmentObject(AppState(
-                    state: .errorGettingDueTimes(stationRed,
+                    state: .errorGettingDueTimes(stationRedLongName,
                                                  genericError)))
                 .previewDisplayName("error getting due times (specific)")
 
