@@ -40,7 +40,7 @@ class APITests: XCTestCase {
             _ = try await api.dueTimes(for: stationHarcourt)
             XCTFail("unexpected")
         } catch {
-            XCTAssertEqual(error.localizedDescription, "A server with the specified hostname could not be found.")
+            XCTAssertEqual(error.localizedDescription, "A server with the specified hostname could not be found. INVALID")
         }
     }
 

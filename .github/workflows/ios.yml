@@ -10,24 +10,19 @@ jobs:
   build:
     name: Build and Test LuasKit scheme using watchOS simulator
     runs-on: macos-14
+    env:
+      scheme: 'LuasKit'
+      project: 'LuasWatch.xcodeproj'
+      platform: 'watchOS Simulator'
+      device: 'Apple Watch SE (40mm) (2nd generation)'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build
-        env:
-          scheme: 'LuasKit'
-          project: 'LuasWatch.xcodeproj'
-          platform: 'watchOS Simulator'
-          device: 'Apple Watch SE (40mm) (2nd generation)'
         run: |
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           xcodebuild build-for-testing -scheme "$scheme" -project "$project" -destination "platform=$platform,name=$device"
       - name: Test
-        env:
-          scheme: 'LuasKit'
-          project: 'LuasWatch.xcodeproj'
-          platform: 'watchOS Simulator'
-          device: 'Apple Watch SE (40mm) (2nd generation)'
         run: |
           xcodebuild test-without-building -scheme "$scheme" -project "$project" -destination "platform=$platform,name=$device"
