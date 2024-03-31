@@ -32,7 +32,11 @@ import SwiftUI
         luasView(state: .errorGettingLocation("Error getting location."))
     }
 
-    #Preview("errStat") {
+    #Preview("errFar1") {
+        luasView(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway))
+    }
+
+    #Preview("errFar2") {
         luasView(state: .errorGettingStationTooFarAway("Some internal error getting station."))
     }
 

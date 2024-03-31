@@ -17,7 +17,7 @@ public struct LuasStrings {
 
     public static let tooFarAway =
     NSLocalizedString(
-        "Looks like the closest Luas station is quite far away.\n\n" + "Please try again later when you’re closer to the Dublin Area.",
+        "Closest Luas station is quite far away.\n\n" + "Please try again closer to Dublin.",
         comment: "")
 
     public static func errorGettingDueTimes(station: String) -> String {
