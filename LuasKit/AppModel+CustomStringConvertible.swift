@@ -18,7 +18,7 @@ extension AppModel.AppState: CustomStringConvertible {
                 return LuasStrings.locationAuthorizationUnknown
             case .errorGettingLocation(let errorMessage):
                 return errorMessage
-            case .errorGettingStation:
+            case .errorGettingStationTooFarAway:
                 return LuasStrings.errorGettingStation
             case .loadingDueTimes(let trainStation, _):
                 return LuasStrings.gettingDueTimes(trainStation)

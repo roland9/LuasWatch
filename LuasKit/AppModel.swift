@@ -19,8 +19,8 @@ public class AppModel: ObservableObject {
         case locationAuthorizationUnknown
         case errorGettingLocation(String)
 
-        case errorGettingStation(String)
-        /// in case the user is too far away from Dublin area
+        /// when user is too far away from Dublin area
+        case errorGettingStationTooFarAway(String)
 
         case loadingDueTimes(TrainStation, TrainsByDirection?)
         case errorGettingDueTimes(TrainStation, String)

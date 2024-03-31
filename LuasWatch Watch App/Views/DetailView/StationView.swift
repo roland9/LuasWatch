@@ -32,7 +32,7 @@ extension StationView: View {
             case .errorGettingLocation:
                 LuasTextView(text: appModel.appState.description)
 
-            case .errorGettingStation(let errorMessage):
+            case .errorGettingStationTooFarAway(let errorMessage):
                 LuasTextView(text: errorMessage)
 
             case .loadingDueTimes(_, let trains):

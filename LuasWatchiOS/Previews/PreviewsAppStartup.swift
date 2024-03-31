@@ -47,10 +47,10 @@ struct Preview_AppStartup: PreviewProvider {
 			LuasView().environmentObject(AppState(state: .errorGettingLocation(LuasStrings.gettingLocationOtherError)))
 				.previewDisplayName("error getting location - other error")
 
-			LuasView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+			LuasView().environmentObject(AppState(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway)))
 				.previewDisplayName("error getting station - too far away")
 
-			LuasView().environmentObject(AppState(state: .errorGettingStation(LuasStrings.tooFarAway)))
+			LuasView().environmentObject(AppState(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway)))
 				.environment(\.sizeCategory, .accessibilityExtraExtraLarge)
 				.previewDisplayName("error getting station - too far away (larger)")
 		}

@@ -41,6 +41,10 @@ extension SidebarView: View {
                 if appModel.locationDenied {
                     Text(LuasStrings.locationDeniedFooter)
                 }
+
+                if case .errorGettingStationTooFarAway = appModel.appState {
+                    Text(LuasStrings.tooFarAway)
+                }
             }
 
             /// Lines Green / Red

@@ -29,4 +29,15 @@ import SwiftUI
             .environmentObject(appModel)
             .modelContainer(Previews().container)
     }
+
+    #Preview("Sidebar (far away)") {
+        @State var selectedStation: TrainStation?
+
+        let appModel = AppModel(AppModel.AppState(.errorGettingStationTooFarAway(LuasStrings.tooFarAway)))
+        appModel.appMode = .closest
+
+        return SidebarView(selectedStation: $selectedStation)
+            .environmentObject(appModel)
+            .modelContainer(Previews().container)
+    }
 #endif

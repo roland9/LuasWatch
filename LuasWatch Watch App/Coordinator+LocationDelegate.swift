@@ -87,7 +87,7 @@ extension Coordinator: LocationDelegate {
                     return
                 }
 
-                updateWithAnimation(to: .errorGettingStation(LuasStrings.tooFarAway))
+                updateWithAnimation(to: .errorGettingStationTooFarAway(LuasStrings.tooFarAway))
             }
         }
     }
