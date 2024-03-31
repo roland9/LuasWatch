@@ -50,6 +50,7 @@
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
 		AB2453FA2AE424B50007FA7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2453F92AE424B50007FA7C /* Assets.xcassets */; };
 		AB2453FE2AE424B50007FA7C /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB3339B62BBA064F00DEE4DC /* PreviewsSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3339B52BBA064F00DEE4DC /* PreviewsSidebar.swift */; };
 		AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */; };
 		AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */; };
 		AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0082AE4094F002AA60A /* APIParser.swift */; };
@@ -261,6 +262,7 @@
 		AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchComplications.swift; sourceTree = "<group>"; };
 		AB2453F92AE424B50007FA7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2453FB2AE424B50007FA7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB3339B52BBA064F00DEE4DC /* PreviewsSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsSidebar.swift; sourceTree = "<group>"; };
 		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
 		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		AB3CC0082AE4094F002AA60A /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */,
+				AB3339B52BBA064F00DEE4DC /* PreviewsSidebar.swift */,
 				ABD285802B5DB3F00000011C /* PreviewsStationView.swift */,
 				ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */,
 				AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */,
@@ -1202,6 +1205,7 @@
 				ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */,
 				ABF038932B933639000034D6 /* StationsModal.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
+				AB3339B62BBA064F00DEE4DC /* PreviewsSidebar.swift in Sources */,
 				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
 				ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */,
