@@ -10,6 +10,9 @@ struct DoubleTimetableView: View {
 
     let trainsByDirection: TrainsByDirection
     var isLoading: Bool
+}
+
+extension DoubleTimetableView {
 
     var body: some View {
 

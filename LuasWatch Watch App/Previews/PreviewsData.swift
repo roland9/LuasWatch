@@ -13,6 +13,10 @@ import SwiftUI
         latitude: CLLocationDegrees(53.3292817872831),
         longitude: CLLocationDegrees(-6.33382500275916))
 
+    let locationMarlborough = CLLocation(
+        latitude: CLLocationDegrees(53.3492448734525),
+        longitude: CLLocationDegrees(-6.25773158174389))
+
     let userLocation = CLLocation(
         latitude: locationBluebell.coordinate.latitude + 0.00425,
         longitude: locationBluebell.coordinate.longitude + 0.005)
@@ -95,14 +99,22 @@ import SwiftUI
         inbound: [trainGreen3],
         outbound: [trainGreen1, trainGreen2])
 
-    private let stationOneWay = TrainStation(
+    let noTrainsGreen = TrainsByDirection(
+        trainStation: stationGreen, inbound: [], outbound: [])
+
+    let stationOneWay = TrainStation(
         stationId: "stationId",
-        stationIdShort: "LUAS69",
+        stationIdShort: "LUAS62",
         shortCode: "MAR",
         route: .green,
         name: "Marlborough",
-        location: locationBluebell,
+        location: locationMarlborough,
         stationType: .oneway)
+    let trainsMarlborough = TrainsByDirection(
+        trainStation: stationOneWay,
+        inbound: [trainGreen3],
+        outbound: [])
+
     let trainsOneWayStation = TrainsByDirection(
         trainStation: stationOneWay,
         inbound: [trainGreen2, trainGreen3],

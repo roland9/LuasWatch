@@ -45,6 +45,7 @@
 		AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */; };
 		AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF52B4315440060AAD5 /* LinesView.swift */; };
 		AB0BFCF82B4319290060AAD5 /* FavouritesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */; };
+		AB0FF9E82C0288B7003D3643 /* StationTimesViewLoadingFirstTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0FF9E72C0288B7003D3643 /* StationTimesViewLoadingFirstTime.swift */; };
 		AB2453F32AE424B40007FA7C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F22AE424B40007FA7C /* WidgetKit.framework */; };
 		AB2453F52AE424B40007FA7C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2453F42AE424B40007FA7C /* SwiftUI.framework */; };
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
@@ -93,6 +94,8 @@
 		ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AA2B78E34A00C1F8F7 /* Utils.swift */; };
 		ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */; };
 		ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */; };
+		ABC24A7B2C0289D30004014B /* StationToolbarLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */; };
+		ABC24A7D2C028E120004014B /* TrainsViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */; };
 		ABCDB4C42B5DADE40068EFAA /* PreviewsErrorStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */; };
 		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
 		ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */; };
@@ -256,6 +259,7 @@
 		AB0BFCF32B43129F0060AAD5 /* NearbyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsView.swift; sourceTree = "<group>"; };
 		AB0BFCF52B4315440060AAD5 /* LinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesView.swift; sourceTree = "<group>"; };
 		AB0BFCF72B4319290060AAD5 /* FavouritesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesHeaderView.swift; sourceTree = "<group>"; };
+		AB0FF9E72C0288B7003D3643 /* StationTimesViewLoadingFirstTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTimesViewLoadingFirstTime.swift; sourceTree = "<group>"; };
 		AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LuasWatchComplicationsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2453F22AE424B40007FA7C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB2453F42AE424B40007FA7C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -311,6 +315,8 @@
 		ABC207AA2B78E34A00C1F8F7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+Extensions.swift"; sourceTree = "<group>"; };
 		ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Animiation.swift"; sourceTree = "<group>"; };
+		ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationToolbarLoading.swift; sourceTree = "<group>"; };
+		ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsViewLoading.swift; sourceTree = "<group>"; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsErrorStates.swift; sourceTree = "<group>"; };
 		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
 		ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
@@ -679,12 +685,15 @@
 				ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */,
 				AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */,
 				ABD1CA512B78211D0015DB81 /* StationTimesView.swift */,
+				AB0FF9E72C0288B7003D3643 /* StationTimesViewLoadingFirstTime.swift */,
 				ABD1CA532B7826610015DB81 /* SimpleTimetableView.swift */,
 				ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */,
 				ABF038902B926AB5000034D6 /* OverflowView.swift */,
 				ABD1CA552B7828870015DB81 /* StationToolbar.swift */,
+				ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */,
 				ABD1CA4D2B781DDD0015DB81 /* DueView.swift */,
 				ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */,
+				ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */,
 				ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */,
 			);
 			path = DetailView;
@@ -1175,12 +1184,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */,
+				ABC24A7D2C028E120004014B /* TrainsViewLoading.swift in Sources */,
+				ABC24A7B2C0289D30004014B /* StationToolbarLoading.swift in Sources */,
 				AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */,
 				ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */,
 				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
 				ABF038912B926AB5000034D6 /* OverflowView.swift in Sources */,
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
 				ABD285812B5DB3F00000011C /* PreviewsStationView.swift in Sources */,
+				AB0FF9E82C0288B7003D3643 /* StationTimesViewLoadingFirstTime.swift in Sources */,
 				AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */,
 				ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */,
 				ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */,
