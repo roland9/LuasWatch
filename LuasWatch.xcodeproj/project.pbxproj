@@ -88,12 +88,11 @@
 		AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F482B6FCD0800F23497 /* StationDirection.swift */; };
 		AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */; };
 		AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */; };
-		AB9D3F092BF409EA00584B69 /* PreviewsLoadingStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9D3F082BF409EA00584B69 /* PreviewsLoadingStates.swift */; };
 		ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */; };
 		ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AA2B78E34A00C1F8F7 /* Utils.swift */; };
 		ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */; };
 		ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */; };
-		ABCDB4C42B5DADE40068EFAA /* PreviewsErrorStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */; };
+		ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */; };
 		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
 		ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */; };
 		ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA512B78211D0015DB81 /* StationTimesView.swift */; };
@@ -305,13 +304,12 @@
 		AB925F482B6FCD0800F23497 /* StationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDirection.swift; sourceTree = "<group>"; };
 		AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+Codable.swift"; sourceTree = "<group>"; };
 		AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
-		AB9D3F082BF409EA00584B69 /* PreviewsLoadingStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsLoadingStates.swift; sourceTree = "<group>"; };
 		ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMainScreen.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABC207AA2B78E34A00C1F8F7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+Extensions.swift"; sourceTree = "<group>"; };
 		ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Animiation.swift"; sourceTree = "<group>"; };
-		ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsErrorStates.swift; sourceTree = "<group>"; };
+		ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsAllStates.swift; sourceTree = "<group>"; };
 		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
 		ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
 		ABD1CA512B78211D0015DB81 /* StationTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTimesView.swift; sourceTree = "<group>"; };
@@ -626,8 +624,7 @@
 		AB695E5E2AE41CAC00B6DB99 /* Previews */ = {
 			isa = PBXGroup;
 			children = (
-				ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */,
-				AB9D3F082BF409EA00584B69 /* PreviewsLoadingStates.swift */,
+				ABCDB4C32B5DADE40068EFAA /* PreviewsAllStates.swift */,
 				ABD285802B5DB3F00000011C /* PreviewsStationView.swift */,
 				ABE7F19B2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift */,
 				AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */,
@@ -1194,7 +1191,7 @@
 				ABE7F19C2B8A5BEA00AE0644 /* PreviewsStationView_EdgeCases.swift in Sources */,
 				AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */,
 				AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */,
-				ABCDB4C42B5DADE40068EFAA /* PreviewsErrorStates.swift in Sources */,
+				ABCDB4C42B5DADE40068EFAA /* PreviewsAllStates.swift in Sources */,
 				AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */,
 				AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */,
 				ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */,
@@ -1207,7 +1204,6 @@
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
 				AB0BFCF42B43129F0060AAD5 /* NearbyStationsView.swift in Sources */,
-				AB9D3F092BF409EA00584B69 /* PreviewsLoadingStates.swift in Sources */,
 				ABD1CA522B78211D0015DB81 /* StationTimesView.swift in Sources */,
 				AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */,
 				AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */,
