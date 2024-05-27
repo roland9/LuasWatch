@@ -73,7 +73,7 @@ extension FavouritesSidebarView: View {
 
 #if DEBUG
     #Preview("Favourites") {
-        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
         appModel.appMode = .favourite(stationGreen)
 
         return List {

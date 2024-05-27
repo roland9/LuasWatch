@@ -7,7 +7,7 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-    private func luasView(state: AppModel.AppState) -> some View {
+    private func luasView(state: AppState) -> some View {
         let appModel = AppModel(state)
         appModel.appMode = .favourite(stationGreen)
 

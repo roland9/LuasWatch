@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension AppModel.AppState: CustomStringConvertible {
+extension AppState: CustomStringConvertible {
 
     public var description: String {
         switch self {
@@ -30,7 +30,7 @@ extension AppModel.AppState: CustomStringConvertible {
     }
 }
 
-extension AppModel.AppMode: CustomStringConvertible {
+extension AppMode: CustomStringConvertible {
 
     public var description: String {
         switch self {

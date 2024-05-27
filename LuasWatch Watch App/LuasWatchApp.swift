@@ -62,6 +62,13 @@ struct LuasWatch_Watch_AppApp: App {
 
                 case .active:
                     myPrint("App became active -> fireAndScheduleTimer")
+
+                    #if DEBUG
+                        if appModel.mockMode == true {
+                            return
+                        }
+                    #endif
+
                     mainCoordinator.fireAndScheduleTimer()
 
                 @unknown default:

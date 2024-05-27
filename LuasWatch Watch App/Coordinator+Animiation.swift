@@ -8,7 +8,7 @@ import SwiftUI
 
 extension Coordinator {
 
-    func updateWithAnimation(to state: AppModel.AppState) {
+    func updateWithAnimation(to state: AppState) {
 
         withAnimation {
             DispatchQueue.main.async { [weak self] in
