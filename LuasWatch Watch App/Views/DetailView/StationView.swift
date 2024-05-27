@@ -35,11 +35,11 @@ extension StationView: View {
             case .errorGettingStation(let errorMessage):
                 LuasTextView(text: errorMessage)
 
-            case .loadingDueTimes(let trainStation, let trains):
-                if let trains {
-                    StationTimesView(trains: trains, isLoading: true)
+            case .loadingDueTimes(let trainStation, let cachedTrains):
+                if let cachedTrains {
+                    StationTimesView(trains: cachedTrains, isLoading: true)
                 } else {
-                    // the trains are nil: don't have any cached trains and loading that station for the first time
+                    // no cachedTrains: we're loading that station for the first time
                     StationTimesViewLoadingFirstTime(trainStation: trainStation)
                 }
 

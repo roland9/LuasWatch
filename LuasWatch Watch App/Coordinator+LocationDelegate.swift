@@ -106,9 +106,9 @@ extension Coordinator: LocationDelegate {
                 updateWithAnimation(
                     to: .loadingDueTimes(
                         closestStation,
-                        cachedTrains.trains))
+                        cachedTrains: cachedTrains.trains))
             } else {
-                updateWithAnimation(to: .loadingDueTimes(closestStation, nil))
+                updateWithAnimation(to: .loadingDueTimes(closestStation, cachedTrains: nil))
             }
         } else {
             myPrint("SidebarView is up -> ignore so we don't interfere UI")

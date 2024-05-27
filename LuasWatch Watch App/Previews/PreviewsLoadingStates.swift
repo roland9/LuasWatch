@@ -16,17 +16,16 @@ import SwiftUI
             .modelContainer(Previews().container)
     }
 
-    // new: should show other elements / frame now
     #Preview("loading") {
-        luasView(state: .loadingDueTimes(stationGreen, nil))
+        luasView(state: .loadingDueTimes(stationGreen, cachedTrains: nil))
     }
 
     #Preview("loading (cached)") {
-        luasView(state: .loadingDueTimes(stationGreen, trainsGreen))
+        luasView(state: .loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
     }
 
     #Preview("loading 1Way (cached)") {
-        luasView(state: .loadingDueTimes(stationOneWay, trainsMarlborough))
+        luasView(state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
     }
 
     #Preview("noTrains") {
