@@ -14,7 +14,6 @@ struct StationTimesView: View {
     @State private var direction: Direction = .both
 
     let trains: TrainsByDirection
-    var isLoading: Bool = false
 }
 
 extension StationTimesView {
@@ -54,7 +53,7 @@ extension StationTimesView {
 
                         case .both:
                             DoubleTimetableView(
-                                trainsByDirection: trains, isLoading: isLoading)
+                                trainsByDirection: trains)
                     }
 
                 } else {
@@ -86,8 +85,7 @@ extension StationTimesView {
             .toolbar {
                 StationToolbar(
                     direction: $direction,
-                    trains: trains,
-                    isLoading: isLoading)
+                    trains: trains)
             }
         }
     }

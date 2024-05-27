@@ -37,7 +37,7 @@ extension StationView: View {
 
             case .loadingDueTimes(let trainStation, let cachedTrains):
                 if let cachedTrains {
-                    StationTimesView(trains: cachedTrains, isLoading: true)
+                    StationTimesView(trains: cachedTrains)
                 } else {
                     // no cachedTrains: we're loading that station for the first time
                     StationTimesViewLoadingFirstTime(trainStation: trainStation)

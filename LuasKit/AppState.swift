@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// state machine, drives UI
+/// App's state machine, drives UI
 public enum AppState {
 
     case idle
@@ -24,5 +24,16 @@ public enum AppState {
 
     public init(_ state: AppState) {
         self = state
+    }
+}
+
+public extension AppState {
+    
+    var isLoading: Bool {
+        if case .loadingDueTimes = self {
+            return true
+        } else {
+            return false
+        }
     }
 }

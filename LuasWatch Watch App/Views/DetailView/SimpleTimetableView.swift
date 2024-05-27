@@ -8,6 +8,8 @@ import SwiftUI
 
 struct SimpleTimetableView: View {
 
+    @EnvironmentObject private var appModel: AppModel
+
     let trainsByDirection: TrainsByDirection
     let direction: Direction
 }
@@ -15,8 +17,10 @@ struct SimpleTimetableView: View {
 extension SimpleTimetableView {
 
     var body: some View {
+
         var trains = [Train]()
         var hasOverflow = false
+
         switch direction {
             /// noOverflowLarge cuts off after 6 - WIP: show overflow in subsequent tabView
             case .inbound:
@@ -42,5 +46,6 @@ extension SimpleTimetableView {
             Spacer()
         }
         .timeTableStyle()
+        .opacity(appModel.appState.isLoading ? 0.52 : 1.0)
     }
 }

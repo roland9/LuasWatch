@@ -10,6 +10,8 @@ struct StationToolbar {
 
     @Environment(\.modelContext) private var modelContext
 
+    @EnvironmentObject private var appModel: AppModel
+
     // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
     @State private var isFavourite: Bool = false
 
@@ -18,7 +20,6 @@ struct StationToolbar {
     @Binding var direction: Direction
 
     let trains: TrainsByDirection
-    let isLoading: Bool
 }
 
 extension StationToolbar: ToolbarContent {
@@ -69,7 +70,7 @@ extension StationToolbar: ToolbarContent {
             }
             .disabled(!isSwitchingDirectionEnabled)
 
-            if isLoading {
+            if appModel.appState.isLoading {
                 Text(LuasStrings.loadingDueTimes)
                     .font(.subheadline)
             }

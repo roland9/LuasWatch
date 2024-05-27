@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// how user decided how current station should be determined
+/// The way the user decided how current station should be determined
 public enum AppMode: Equatable {
 
     /// need location

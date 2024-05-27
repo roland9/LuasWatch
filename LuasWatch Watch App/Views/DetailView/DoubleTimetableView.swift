@@ -8,8 +8,9 @@ import SwiftUI
 
 struct DoubleTimetableView: View {
 
+    @EnvironmentObject private var appModel: AppModel
+
     let trainsByDirection: TrainsByDirection
-    var isLoading: Bool
 }
 
 extension DoubleTimetableView {
@@ -52,6 +53,6 @@ extension DoubleTimetableView {
             }
         }
         .timeTableStyle()
-        .opacity(isLoading ? 0.52 : 1.0)
+        .opacity(appModel.appState.isLoading ? 0.52 : 1.0)
     }
 }

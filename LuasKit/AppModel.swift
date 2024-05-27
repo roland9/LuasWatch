@@ -45,6 +45,7 @@ public class AppModel: ObservableObject {
     @Published public var locationDenied: Bool = false
 
 #if DEBUG
+    // so we can simulate app state in a sequence
     public let mockMode = false
 #endif
     
