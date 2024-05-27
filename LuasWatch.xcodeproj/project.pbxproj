@@ -98,6 +98,7 @@
 		ABC24A7D2C028E120004014B /* TrainsViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */; };
 		ABC24A7F2C0525F50004014B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7E2C0525F50004014B /* AppState.swift */; };
 		ABC24A812C0526950004014B /* AppMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A802C0526950004014B /* AppMode.swift */; };
+		ABC24A832C052DBB0004014B /* ToolbarInactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A822C052DBB0004014B /* ToolbarInactive.swift */; };
 		ABCDB4C42B5DADE40068EFAA /* PreviewsErrorStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */; };
 		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
 		ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */; };
@@ -321,6 +322,7 @@
 		ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsViewLoading.swift; sourceTree = "<group>"; };
 		ABC24A7E2C0525F50004014B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		ABC24A802C0526950004014B /* AppMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMode.swift; sourceTree = "<group>"; };
+		ABC24A822C052DBB0004014B /* ToolbarInactive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarInactive.swift; sourceTree = "<group>"; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsErrorStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsErrorStates.swift; sourceTree = "<group>"; };
 		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
 		ABD1CA4F2B781F730015DB81 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
@@ -697,6 +699,7 @@
 				ABF038902B926AB5000034D6 /* OverflowView.swift */,
 				ABD1CA552B7828870015DB81 /* StationToolbar.swift */,
 				ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */,
+				ABC24A822C052DBB0004014B /* ToolbarInactive.swift */,
 				ABD1CA4D2B781DDD0015DB81 /* DueView.swift */,
 				ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */,
 				ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */,
@@ -1205,6 +1208,7 @@
 				ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */,
 				ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */,
 				AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */,
+				ABC24A832C052DBB0004014B /* ToolbarInactive.swift in Sources */,
 				AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */,
 				AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */,
 				AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */,
