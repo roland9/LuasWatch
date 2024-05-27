@@ -40,6 +40,24 @@ class Coordinator: NSObject {
 
     func start() {
 
+        #if DEBUG
+        if appModel.mockMode == true {
+            // force specific app flow for debugging and taking screenshots
+            
+            appModel.appState = .gettingLocation
+    
+            executeAfterDelay { [weak self] in
+                self?.appModel.appState = .errorGettingLocation("error getting location")
+                
+                self?.executeAfterDelay {
+                    self?.appModel.appState = .locationAuthorizationUnknown
+                }
+            }
+            return
+        }
+        #endif
+        
+        
         // //////////////////////////////////////////////
         // step 1: if required, determine location
         location.delegate = self
@@ -129,4 +147,12 @@ class Coordinator: NSObject {
             }
         }
     }
+
+#if DEBUG
+    private func executeAfterDelay(_ block: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            block()
+        }
+    }
+#endif
 }

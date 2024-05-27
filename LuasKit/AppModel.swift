@@ -94,6 +94,10 @@ public class AppModel: ObservableObject {
 
     @Published public var locationDenied: Bool = false
 
+#if DEBUG
+    public let mockMode = true
+#endif
+    
     public init() {
         if let storedAppModeData = UserDefaults.standard.object(forKey: "AppMode") as? Data,
             let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData)
