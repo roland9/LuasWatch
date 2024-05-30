@@ -8,7 +8,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do |lane, options|
-    xcversion(version: "15.0")
+    xcversion(version: "15.4")
   end
 
   def build_app
