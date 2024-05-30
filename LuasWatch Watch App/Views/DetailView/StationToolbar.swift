@@ -19,7 +19,7 @@ struct StationToolbar {
 
     @Binding var direction: Direction
 
-    let trains: TrainsByDirection
+    let trainStation: TrainStation
 }
 
 extension StationToolbar: ToolbarContent {
@@ -43,13 +43,13 @@ extension StationToolbar: ToolbarContent {
                     direction = direction.next()
                 }
 
-                let shortCode = trains.trainStation.shortCode
+                let shortCode = trainStation.shortCode
                 myPrint("\(#function) createOrUpdate \(shortCode) to \(direction)")
                 modelContext.createOrUpdate(shortCode: shortCode, to: direction)
 
             } label: {
 
-                if trains.trainStation.allowsSwitchingDirection {
+                if trainStation.allowsSwitchingDirection {
 
                     switch direction {
                         case .inbound:
@@ -66,7 +66,7 @@ extension StationToolbar: ToolbarContent {
                 }
             }
             .onAppear {
-                isSwitchingDirectionEnabled = trains.trainStation.allowsSwitchingDirection
+                isSwitchingDirectionEnabled = trainStation.allowsSwitchingDirection
             }
             .disabled(!isSwitchingDirectionEnabled)
 
@@ -77,13 +77,13 @@ extension StationToolbar: ToolbarContent {
 
             /// Favourite
             Button {
-                modelContext.toggleFavouriteStation(shortCode: trains.trainStation.shortCode)
+                modelContext.toggleFavouriteStation(shortCode: trainStation.shortCode)
                 isFavourite.toggle()
             } label: {
                 isFavourite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
             }
             .onAppear {
-                isFavourite = modelContext.doesFavouriteStationExist(shortCode: trains.trainStation.shortCode)
+                isFavourite = modelContext.doesFavouriteStationExist(shortCode: trainStation.shortCode)
             }
         }
     }

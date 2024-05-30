@@ -34,6 +34,9 @@ extension SimpleTimetableView {
                 trains = trainsByDirection.inbound
         }
 
+        // we should always have train here, see where we're calling this view from
+        assert(trains.count > 0)
+
         return VStack {
             ForEach(trains, id: \.id) {
                 DueView(
