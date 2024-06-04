@@ -8,7 +8,7 @@ import SwiftData
 import SwiftUI
 
 @main
-struct LuasWatch_Watch_AppApp: App {
+struct LuasWatch_Watch_App: App {
 
     @Environment(\.scenePhase) var scenePhase
 
