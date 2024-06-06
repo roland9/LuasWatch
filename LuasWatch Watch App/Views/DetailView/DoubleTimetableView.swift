@@ -29,7 +29,7 @@ extension DoubleTimetableView {
                         due: $0.dueTimeDescription2)
                 }
                 if trainsByDirection.inboundHasOverflowSmall {
-                    OverflowView()
+                    OverflowDotsView()
                 }
                 Spacer()
             }
@@ -47,7 +47,7 @@ extension DoubleTimetableView {
                         due: $0.dueTimeDescription2)
                 }
                 if trainsByDirection.outboundHasOverflowSmall {
-                    OverflowView()
+                    OverflowDotsView()
                 }
                 Spacer()
             }

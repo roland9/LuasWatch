@@ -110,7 +110,7 @@
 		ABE7F1A02B8A62FC00AE0644 /* NoTrainsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */; };
 		ABE7F1A22B8A63EC00AE0644 /* View+LuasFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */; };
 		ABF0388F2B9265FD000034D6 /* DoubleTimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */; };
-		ABF038912B926AB5000034D6 /* OverflowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038902B926AB5000034D6 /* OverflowView.swift */; };
+		ABF038912B926AB5000034D6 /* OverflowDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038902B926AB5000034D6 /* OverflowDotsView.swift */; };
 		ABF038932B933639000034D6 /* StationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF038922B933639000034D6 /* StationsModal.swift */; };
 /* End PBXBuildFile section */
 
@@ -333,7 +333,7 @@
 		ABE7F19F2B8A62FC00AE0644 /* NoTrainsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTrainsView.swift; sourceTree = "<group>"; };
 		ABE7F1A12B8A63EC00AE0644 /* View+LuasFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LuasFormatting.swift"; sourceTree = "<group>"; };
 		ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTimetableView.swift; sourceTree = "<group>"; };
-		ABF038902B926AB5000034D6 /* OverflowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowView.swift; sourceTree = "<group>"; };
+		ABF038902B926AB5000034D6 /* OverflowDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowDotsView.swift; sourceTree = "<group>"; };
 		ABF038922B933639000034D6 /* StationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -693,7 +693,7 @@
 				ABD1CA512B78211D0015DB81 /* StationTimesView.swift */,
 				ABD1CA532B7826610015DB81 /* SimpleTimetableView.swift */,
 				ABF0388E2B9265FD000034D6 /* DoubleTimetableView.swift */,
-				ABF038902B926AB5000034D6 /* OverflowView.swift */,
+				ABF038902B926AB5000034D6 /* OverflowDotsView.swift */,
 				ABD1CA552B7828870015DB81 /* StationToolbar.swift */,
 				ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */,
 				ABC24A822C052DBB0004014B /* ToolbarInactive.swift */,
@@ -1197,7 +1197,7 @@
 				AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */,
 				ABD1CA562B7828870015DB81 /* StationToolbar.swift in Sources */,
 				AB0BFCF12B42ECEF0060AAD5 /* FavouriteStation.swift in Sources */,
-				ABF038912B926AB5000034D6 /* OverflowView.swift in Sources */,
+				ABF038912B926AB5000034D6 /* OverflowDotsView.swift in Sources */,
 				AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */,
 				ABD285812B5DB3F00000011C /* PreviewsStationView.swift in Sources */,
 				AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */,

@@ -44,7 +44,7 @@ extension SimpleTimetableView {
                     due: $0.dueTimeDescription2)
             }
             if hasOverflow {
-                OverflowView()
+                OverflowDotsView()
             }
             Spacer()
         }
