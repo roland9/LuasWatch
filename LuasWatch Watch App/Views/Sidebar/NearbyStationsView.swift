@@ -50,7 +50,7 @@ extension NearbyStationsView: View {
 
 #if DEBUG
     #Preview("Nearby") {
-        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
         appModel.appMode = .favourite(stationGreen)
 
         return List {

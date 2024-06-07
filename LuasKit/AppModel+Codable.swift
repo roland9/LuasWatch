@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension AppModel.AppMode: Codable {
+extension AppMode: Codable {
 
     // https://stackoverflow.com/questions/69979095/codable-enum-with-arguments-and-fails-at-compile-time
 

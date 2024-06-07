@@ -75,6 +75,8 @@ public struct LuasStrings {
 
     public static let noTrains = NSLocalizedString("No trains due", comment: "String shown when no trains in specified direction")
 
+    public static let trainsLoading = NSLocalizedString("Loading trains...", comment: "String shown when trains are loading for station")
+
     public static let locationDeniedFooter = NSLocalizedString(
         "Unable to determine closest station, because location access not granted or disabled.\nYou can still select a station manually.",
         comment: "Label shown when location access was denied by user, to explain why nearby stations won't work")

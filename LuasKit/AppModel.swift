@@ -10,56 +10,6 @@ import SwiftUI
 // @Observable does not work -  circular reference?
 public class AppModel: ObservableObject {
 
-    /// state machine, drives UI
-    public enum AppState {
-
-        case idle
-
-        case gettingLocation
-        case locationAuthorizationUnknown
-        case errorGettingLocation(String)
-
-        case errorGettingStation(String)
-        /// in case the user is too far away from Dublin area
-
-        case loadingDueTimes(TrainStation, TrainsByDirection?)
-        case errorGettingDueTimes(TrainStation, String)
-
-        case foundDueTimes(TrainsByDirection)
-
-        public init(_ state: AppState) {
-            self = state
-        }
-    }
-
-    /// how user decided how current station should be determined
-    public enum AppMode: Equatable {
-
-        /// need location
-        case closest
-        case closestOtherLine
-
-        /// no location required, because user selected specific station (via various options)
-        case favourite(TrainStation)
-        case nearby(TrainStation)
-        case specific(TrainStation)
-        case recents(TrainStation)
-
-        public var specificStation: TrainStation? {
-            switch self {
-
-                case .closest, .closestOtherLine:
-                    return nil
-                case .favourite(let station), .nearby(let station), .specific(let station), .recents(let station):
-                    return station
-            }
-        }
-
-        public var needsLocation: Bool {
-            self == .closest || self == .closestOtherLine
-        }
-    }
-
     @Published public var appState: AppState = .idle
 
     @Published public var appMode: AppMode = .closest {
@@ -94,6 +44,11 @@ public class AppModel: ObservableObject {
 
     @Published public var locationDenied: Bool = false
 
+#if DEBUG
+    // so we can simulate app state in a sequence
+    public let mockMode = false
+#endif
+    
     public init() {
         if let storedAppModeData = UserDefaults.standard.object(forKey: "AppMode") as? Data,
             let storedAppMode = try? JSONDecoder().decode(AppMode.self, from: storedAppModeData)

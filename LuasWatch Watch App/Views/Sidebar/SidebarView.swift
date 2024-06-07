@@ -101,7 +101,7 @@ extension SidebarView: View {
     #Preview("Sidebar") {
         @State var selectedStation: TrainStation?
 
-        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
         appModel.appMode = .favourite(stationGreen)
 
         return SidebarView(selectedStation: $selectedStation)
@@ -112,7 +112,7 @@ extension SidebarView: View {
     #Preview("Sidebar (loc denied)") {
         @State var selectedStation: TrainStation?
 
-        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsOneWayStation)))
+        let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
         appModel.appMode = .favourite(stationGreen)
         appModel.locationDenied = true
 

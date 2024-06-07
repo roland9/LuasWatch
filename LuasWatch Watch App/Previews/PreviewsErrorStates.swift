@@ -7,7 +7,7 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-    private func luasView(state: AppModel.AppState) -> some View {
+    private func luasView(state: AppState) -> some View {
         let appModel = AppModel(state)
         appModel.appMode = .favourite(stationGreen)
 
@@ -36,19 +36,7 @@ import SwiftUI
         luasView(state: .errorGettingStation("Some internal error getting station."))
     }
 
-    #Preview("loading") {
-        luasView(state: .loadingDueTimes(stationGreen, nil))
-    }
-
-    #Preview("loading (cached)") {
-        luasView(state: .loadingDueTimes(stationGreen, trainsGreen))
-    }
-
     #Preview("errLoading") {
         luasView(state: .errorGettingDueTimes(stationGreen, "Error loading due times - could not access internet?"))
-    }
-
-    #Preview("OK") {
-        luasView(state: .foundDueTimes(trainsGreen))
     }
 #endif

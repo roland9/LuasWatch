@@ -47,7 +47,7 @@ extension StationsModal {
 #if DEBUG
     #Preview("Stations Modal (green)") {
 
-        let appModel = AppModel(AppModel.AppState(.foundDueTimes(trainsGreen)))
+        let appModel = AppModel(AppState(.foundDueTimes(trainsGreen)))
         appModel.appMode = .specific(stationGreen)
 
         // highlight in preview doesn't work??  does it used StoredAppMode?

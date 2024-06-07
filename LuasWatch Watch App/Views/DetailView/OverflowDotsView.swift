@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct OverflowView: View {
+struct OverflowDotsView: View {
     var body: some View {
         Text("...")
             .offset(CGSize(width: 0, height: -6))

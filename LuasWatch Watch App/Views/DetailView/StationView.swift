@@ -35,18 +35,14 @@ extension StationView: View {
             case .errorGettingStation(let errorMessage):
                 LuasTextView(text: errorMessage)
 
-            case .loadingDueTimes(_, let trains):
-                if let trains {
-                    StationTimesView(trains: trains, isLoading: true)
-                } else {
-                    LuasTextView(text: appModel.appState.description)
-                }
+            case .loadingDueTimes(let trainStation, let cachedTrains):
+                StationTimesView(trainStation: trainStation, trains: cachedTrains)
 
             case .errorGettingDueTimes(_, let message):
                 LuasTextView(text: message)
 
             case .foundDueTimes(let trains):
-                StationTimesView(trains: trains)
+                StationTimesView(trainStation: trains.trainStation, trains: trains)
         }
     }
 }
