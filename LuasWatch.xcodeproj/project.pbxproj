@@ -21,20 +21,6 @@
 		AB0BD3742AE7062400EB51AF /* LuasWatchiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3732AE7062400EB51AF /* LuasWatchiOSTests.swift */; };
 		AB0BD37E2AE7062400EB51AF /* LuasWatchiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD37D2AE7062400EB51AF /* LuasWatchiOSUITests.swift */; };
 		AB0BD3802AE7062400EB51AF /* LuasWatchiOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD37F2AE7062400EB51AF /* LuasWatchiOSUITestsLaunchTests.swift */; };
-		AB0BD39A2AE7071200EB51AF /* GrantLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38B2AE7071200EB51AF /* GrantLocationAuthView.swift */; };
-		AB0BD39B2AE7071200EB51AF /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38C2AE7071200EB51AF /* LoadingAnimationView.swift */; };
-		AB0BD39C2AE7071200EB51AF /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38D2AE7071200EB51AF /* TrainsListView.swift */; };
-		AB0BD39D2AE7071200EB51AF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38E2AE7071200EB51AF /* HeaderView.swift */; };
-		AB0BD39E2AE7071200EB51AF /* ChangeStationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38F2AE7071200EB51AF /* ChangeStationButton.swift */; };
-		AB0BD39F2AE7071200EB51AF /* TapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3902AE7071200EB51AF /* TapOverlayView.swift */; };
-		AB0BD3A02AE7071200EB51AF /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3912AE7071200EB51AF /* LuasView.swift */; };
-		AB0BD3A12AE7071200EB51AF /* PreviewsStationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3932AE7071200EB51AF /* PreviewsStationsModal.swift */; };
-		AB0BD3A22AE7071200EB51AF /* PreviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3942AE7071200EB51AF /* PreviewsData.swift */; };
-		AB0BD3A32AE7071200EB51AF /* PreviewsTapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3952AE7071200EB51AF /* PreviewsTapOverlay.swift */; };
-		AB0BD3A42AE7071200EB51AF /* PreviewsAppStartup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3962AE7071200EB51AF /* PreviewsAppStartup.swift */; };
-		AB0BD3A52AE7071200EB51AF /* PreviewsAppResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3972AE7071200EB51AF /* PreviewsAppResult.swift */; };
-		AB0BD3A62AE7071200EB51AF /* PreviewsAppRunning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3982AE7071200EB51AF /* PreviewsAppRunning.swift */; };
-		AB0BD3A92AE7086700EB51AF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3A82AE7086700EB51AF /* Coordinator.swift */; };
 		AB0BD3AB2AE70AFD00EB51AF /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB0BD3AC2AE70AFD00EB51AF /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCE82B42E5430060AAD5 /* StationView.swift */; };
@@ -81,6 +67,12 @@
 		AB695E7F2AE41D5800B6DB99 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB695E802AE41D5800B6DB99 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB695E842AE41EAE00B6DB99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */; };
+		AB77CA752C13A91600EF1BB3 /* LuasWatchAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77CA742C13A91600EF1BB3 /* LuasWatchAppIntent.swift */; };
+		AB77CA762C13AC0E00EF1BB3 /* TestDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3552AE6F64C00EB51AF /* TestDefinitions.swift */; };
+		AB7997242C13B01D000A66C0 /* LuasWatchSpecificStationAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7997232C13B01D000A66C0 /* LuasWatchSpecificStationAppIntent.swift */; };
+		AB7997262C16558C000A66C0 /* LuasWatchiOSAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7997252C16558C000A66C0 /* LuasWatchiOSAppShortcuts.swift */; };
+		AB7997282C165647000A66C0 /* DirectionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7997272C165647000A66C0 /* DirectionEnum.swift */; };
+		AB79972A2C16569D000A66C0 /* LuasKit+AppIntentsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7997292C16569D000A66C0 /* LuasKit+AppIntentsExtensions.swift */; };
 		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
 		AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRow.swift */; };
 		AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRow.swift */; };
@@ -239,20 +231,6 @@
 		AB0BD3792AE7062400EB51AF /* LuasWatchiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasWatchiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0BD37D2AE7062400EB51AF /* LuasWatchiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchiOSUITests.swift; sourceTree = "<group>"; };
 		AB0BD37F2AE7062400EB51AF /* LuasWatchiOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchiOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		AB0BD38B2AE7071200EB51AF /* GrantLocationAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantLocationAuthView.swift; sourceTree = "<group>"; };
-		AB0BD38C2AE7071200EB51AF /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
-		AB0BD38D2AE7071200EB51AF /* TrainsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsListView.swift; sourceTree = "<group>"; };
-		AB0BD38E2AE7071200EB51AF /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		AB0BD38F2AE7071200EB51AF /* ChangeStationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStationButton.swift; sourceTree = "<group>"; };
-		AB0BD3902AE7071200EB51AF /* TapOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapOverlayView.swift; sourceTree = "<group>"; };
-		AB0BD3912AE7071200EB51AF /* LuasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
-		AB0BD3932AE7071200EB51AF /* PreviewsStationsModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsStationsModal.swift; sourceTree = "<group>"; };
-		AB0BD3942AE7071200EB51AF /* PreviewsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsData.swift; sourceTree = "<group>"; };
-		AB0BD3952AE7071200EB51AF /* PreviewsTapOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsTapOverlay.swift; sourceTree = "<group>"; };
-		AB0BD3962AE7071200EB51AF /* PreviewsAppStartup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppStartup.swift; sourceTree = "<group>"; };
-		AB0BD3972AE7071200EB51AF /* PreviewsAppResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppResult.swift; sourceTree = "<group>"; };
-		AB0BD3982AE7071200EB51AF /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
-		AB0BD3A82AE7086700EB51AF /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB0BFCE82B42E5430060AAD5 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesSidebarView.swift; sourceTree = "<group>"; };
@@ -302,6 +280,12 @@
 		AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantLocationAuthView.swift; sourceTree = "<group>"; };
 		AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AB77CA732C13A4A600EF1BB3 /* LuasWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LuasWatch Watch App.entitlements"; sourceTree = "<group>"; };
+		AB77CA742C13A91600EF1BB3 /* LuasWatchAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchAppIntent.swift; sourceTree = "<group>"; };
+		AB7997232C13B01D000A66C0 /* LuasWatchSpecificStationAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchSpecificStationAppIntent.swift; sourceTree = "<group>"; };
+		AB7997252C16558C000A66C0 /* LuasWatchiOSAppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchiOSAppShortcuts.swift; sourceTree = "<group>"; };
+		AB7997272C165647000A66C0 /* DirectionEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionEnum.swift; sourceTree = "<group>"; };
+		AB7997292C16569D000A66C0 /* LuasKit+AppIntentsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LuasKit+AppIntentsExtensions.swift"; sourceTree = "<group>"; };
 		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
@@ -425,10 +409,13 @@
 		AB0BD3612AE7062300EB51AF /* LuasWatchiOS */ = {
 			isa = PBXGroup;
 			children = (
-				AB0BD3A82AE7086700EB51AF /* Coordinator.swift */,
+				AB0BD3622AE7062300EB51AF /* LuasWatchiOSApp.swift */,
+				AB7997232C13B01D000A66C0 /* LuasWatchSpecificStationAppIntent.swift */,
+				AB7997252C16558C000A66C0 /* LuasWatchiOSAppShortcuts.swift */,
+				AB7997292C16569D000A66C0 /* LuasKit+AppIntentsExtensions.swift */,
+				AB7997272C165647000A66C0 /* DirectionEnum.swift */,
 				AB0BD3922AE7071200EB51AF /* Previews */,
 				AB0BD38A2AE7071200EB51AF /* Views */,
-				AB0BD3622AE7062300EB51AF /* LuasWatchiOSApp.swift */,
 				AB0BD3662AE7062400EB51AF /* Assets.xcassets */,
 				AB0BD3682AE7062400EB51AF /* Preview Content */,
 			);
@@ -463,13 +450,6 @@
 		AB0BD38A2AE7071200EB51AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AB0BD38B2AE7071200EB51AF /* GrantLocationAuthView.swift */,
-				AB0BD38C2AE7071200EB51AF /* LoadingAnimationView.swift */,
-				AB0BD38D2AE7071200EB51AF /* TrainsListView.swift */,
-				AB0BD38E2AE7071200EB51AF /* HeaderView.swift */,
-				AB0BD38F2AE7071200EB51AF /* ChangeStationButton.swift */,
-				AB0BD3902AE7071200EB51AF /* TapOverlayView.swift */,
-				AB0BD3912AE7071200EB51AF /* LuasView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -477,12 +457,6 @@
 		AB0BD3922AE7071200EB51AF /* Previews */ = {
 			isa = PBXGroup;
 			children = (
-				AB0BD3932AE7071200EB51AF /* PreviewsStationsModal.swift */,
-				AB0BD3942AE7071200EB51AF /* PreviewsData.swift */,
-				AB0BD3952AE7071200EB51AF /* PreviewsTapOverlay.swift */,
-				AB0BD3962AE7071200EB51AF /* PreviewsAppStartup.swift */,
-				AB0BD3972AE7071200EB51AF /* PreviewsAppResult.swift */,
-				AB0BD3982AE7071200EB51AF /* PreviewsAppRunning.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";
@@ -603,12 +577,14 @@
 		AB695E312AE41C1D00B6DB99 /* LuasWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				AB77CA732C13A4A600EF1BB3 /* LuasWatch Watch App.entitlements */,
 				AB695E322AE41C1D00B6DB99 /* LuasWatchApp.swift */,
 				AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */,
 				AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */,
 				ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */,
 				AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */,
 				ABC207AA2B78E34A00C1F8F7 /* Utils.swift */,
+				AB77CA742C13A91600EF1BB3 /* LuasWatchAppIntent.swift */,
 				AB0BFCF22B4312370060AAD5 /* Models */,
 				AB695E652AE41CAC00B6DB99 /* Views */,
 				AB695E5E2AE41CAC00B6DB99 /* Previews */,
@@ -1116,21 +1092,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB0BD39E2AE7071200EB51AF /* ChangeStationButton.swift in Sources */,
-				AB0BD3A02AE7071200EB51AF /* LuasView.swift in Sources */,
-				AB0BD3A92AE7086700EB51AF /* Coordinator.swift in Sources */,
-				AB0BD39D2AE7071200EB51AF /* HeaderView.swift in Sources */,
-				AB0BD39B2AE7071200EB51AF /* LoadingAnimationView.swift in Sources */,
-				AB0BD3A42AE7071200EB51AF /* PreviewsAppStartup.swift in Sources */,
-				AB0BD39F2AE7071200EB51AF /* TapOverlayView.swift in Sources */,
-				AB0BD3A62AE7071200EB51AF /* PreviewsAppRunning.swift in Sources */,
-				AB0BD39A2AE7071200EB51AF /* GrantLocationAuthView.swift in Sources */,
-				AB0BD3A32AE7071200EB51AF /* PreviewsTapOverlay.swift in Sources */,
-				AB0BD3A52AE7071200EB51AF /* PreviewsAppResult.swift in Sources */,
-				AB0BD3A22AE7071200EB51AF /* PreviewsData.swift in Sources */,
-				AB0BD3A12AE7071200EB51AF /* PreviewsStationsModal.swift in Sources */,
+				AB7997262C16558C000A66C0 /* LuasWatchiOSAppShortcuts.swift in Sources */,
+				AB7997282C165647000A66C0 /* DirectionEnum.swift in Sources */,
+				AB7997242C13B01D000A66C0 /* LuasWatchSpecificStationAppIntent.swift in Sources */,
+				AB77CA762C13AC0E00EF1BB3 /* TestDefinitions.swift in Sources */,
 				AB0BD3632AE7062300EB51AF /* LuasWatchiOSApp.swift in Sources */,
-				AB0BD39C2AE7071200EB51AF /* TrainsListView.swift in Sources */,
+				AB79972A2C16569D000A66C0 /* LuasKit+AppIntentsExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1223,6 +1190,7 @@
 				AB0BFCF62B4315440060AAD5 /* LinesView.swift in Sources */,
 				ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */,
 				ABE7F19E2B8A5C1C00AE0644 /* PreviewsHelpers.swift in Sources */,
+				AB77CA752C13A91600EF1BB3 /* LuasWatchAppIntent.swift in Sources */,
 				ABF038932B933639000034D6 /* StationsModal.swift in Sources */,
 				AB0BFCEF2B42ECA80060AAD5 /* Previews.swift in Sources */,
 				ABD1CA502B781F730015DB81 /* LuasTextView.swift in Sources */,
@@ -1772,6 +1740,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "LuasWatch Watch App/LuasWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LuasWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;
@@ -1809,6 +1778,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "LuasWatch Watch App/LuasWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LuasWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 2H43Y8J8SC;

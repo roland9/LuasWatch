@@ -24,21 +24,43 @@ public struct TrainsByDirection {
         self.message = message
     }
 
-    public func shortcutOutput(direction: Direction) -> String {
+    private func format(trains: [Train], output: inout String) {
+
+        // group by destination
+        let dictionary = Dictionary(
+            grouping: trains,
+            by: { (element: Train) in
+                element.destination
+            })
+
+        for key in dictionary.keys {
+            output += "LUAS to \(key) "
+
+            var isFirst = true
+            for train in dictionary[key] ?? [] {
+                output += "\(isFirst == false ? " and " : "")" + train.destinationDueTimeDescription
+                isFirst = false
+            }
+
+            if String(output.suffix(10)) == "is due now" {
+                output += ".\n"
+            } else {
+                output += String(output.suffix(2) == " 1" ? " minute.\n" : " minutes.\n")
+            }
+        }
+    }
+
+    public func formatForShortcut(direction: Direction) -> String {
         var output = ""
 
+        /// first add inbound trains...
         if direction == .inbound || direction == .both {
-            output +=
-                inbound
-                .compactMap { $0.destinationDueTimeDescription + ".\n" }
-                .joined()
+            format(trains: inbound, output: &output)
         }
 
+        /// ... then add outbound
         if direction == .outbound || direction == .both {
-            output +=
-                outbound
-                .compactMap { $0.destinationDueTimeDescription + ".\n" }
-                .joined()
+            format(trains: outbound, output: &output)
         }
 
         return output.count > 0 ? output : "No trains found for \(trainStation.name) LUAS stop.\n"

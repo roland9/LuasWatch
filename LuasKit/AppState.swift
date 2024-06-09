@@ -19,7 +19,7 @@ public enum AppState {
 
     // cachedTrains is optional because when we load that station for the first time, we won't have any trains cached
     case loadingDueTimes(TrainStation, cachedTrains: TrainsByDirection?)
-    
+
     case errorGettingDueTimes(TrainStation, String)
 
     case foundDueTimes(TrainsByDirection)
@@ -29,9 +29,9 @@ public enum AppState {
     }
 }
 
-public extension AppState {
-    
-    var isLoading: Bool {
+extension AppState {
+
+    public var isLoading: Bool {
         if case .loadingDueTimes = self {
             return true
         } else {

@@ -32,7 +32,7 @@ public struct Train: CustomStringConvertible, Hashable, Codable {
     }
 
     public var destinationDueTimeDescription: String {
-        "Luas to \(destination) \(dueTime.lowercased() == "due" ? "is Due" : "in \(dueTime)")"
+        "\(dueTime.lowercased() == "due" ? "is due now" : "in \(dueTime)")"
     }
 
     public init(destination: String, direction: String, dueTime: String) {
