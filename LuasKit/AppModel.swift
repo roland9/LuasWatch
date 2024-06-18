@@ -44,6 +44,14 @@ public class AppModel: ObservableObject {
 
     @Published public var locationDenied: Bool = false
 
+    public var highlightedStation: TrainStation? {
+        if case .specific(let specificStation) = appMode {
+            return specificStation
+        }
+
+        return nil
+    }
+
 #if DEBUG
     // so we can simulate app state in a sequence
     public let mockMode = false

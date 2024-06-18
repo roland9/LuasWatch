@@ -8,6 +8,7 @@ import SwiftData
 import SwiftUI
 
 struct AllStationsListView {
+    @EnvironmentObject var appModel: AppModel
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
@@ -37,6 +38,7 @@ extension AllStationsListView: View {
     private func stationsListView(stations: [TrainStation]) -> some View {
         StationsModal(
             stations: stations,
+            highlightedStation: appModel.highlightedStation,
             action: { station in
 
                 if modelContext.doesFavouriteStationExist(shortCode: station.shortCode) == false {

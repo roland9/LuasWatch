@@ -7,39 +7,41 @@ import LuasKit
 import SwiftUI
 
 struct StationsModal: View {
-    @EnvironmentObject var appModel: AppModel
 
-    @State var stations: [TrainStation]
+    var stations: [TrainStation]
+    var highlightedStation: TrainStation?
+
     var action: (TrainStation) -> Void
 }
 
 extension StationsModal {
 
     var body: some View {
-        List {
-            ForEach(stations, id: \.stationId) { (station) in
+        ScrollViewReader { (reader) in
+            List {
+                ForEach(stations, id: \.stationId) { (station) in
 
-                // need a button here because just text only supports tap on the text but not full width
-                Button(
-                    action: {
-                        action(station)
-                    },
-                    label: {
-                        Text(station.name)
-                            .font(.system(.headline))
-                            .fontWeight(isHighlighted(for: station.name) ? .bold : .regular)
-                    })
+                    // need a button here because just text only supports tap on the text but not full width
+                    Button(
+                        action: {
+                            action(station)
+                        },
+                        label: {
+                            Text(station.name)
+                                .font(.system(.headline))
+                                .fontWeight(highlightedStation?.name == station.name ? .bold : .regular)
+                        }
+                    )
+                    .id(station.shortCode)
+                }
             }
-        }
-    }
-
-    private func isHighlighted(for station: String) -> Bool {
-        if case .specific(let specificStation) = appModel.appMode,
-            specificStation.name == station
-        {
-            return true
-        } else {
-            return false
+            .onAppear {
+                // if we have a highlightedStation, scroll to it (will show up near bottom of screen)
+                guard let highlightedStation else {
+                    return
+                }
+                reader.scrollTo(highlightedStation.shortCode)
+            }
         }
     }
 }
