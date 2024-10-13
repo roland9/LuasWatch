@@ -6,7 +6,9 @@
     "spaces" : 2
   },
   "indentConditionalCompilationBlocks" : true,
-  "indentSwitchCaseLabels" : true,
+
+  "_comment": "IMHO that switch is wrong - indentSwitchCaseLabels should be true;  but it's what Xcode 16 gets shipped with?",
+  "indentSwitchCaseLabels" : false,
   "lineBreakAroundMultilineExpressionChainComponents" : false,
   "lineBreakBeforeControlFlowKeywords" : false,
   "lineBreakBeforeEachArgument" : false,
@@ -64,6 +66,6 @@
     "ValidateDocumentationComments" : false
   },
   "spacesAroundRangeFormationOperators" : false,
-  "tabWidth" : 8,
+  "tabWidth" : 2,
   "version" : 1
 }
