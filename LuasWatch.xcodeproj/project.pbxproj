@@ -267,6 +267,7 @@
 		AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchComplications.swift; sourceTree = "<group>"; };
 		AB2453F92AE424B50007FA7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2453FB2AE424B50007FA7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB387B402CBBE202002D4B4A /* myConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myConfiguration.json; sourceTree = "<group>"; };
 		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
 		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		AB3CC0082AE4094F002AA60A /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
@@ -519,6 +520,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				AB387B402CBBE202002D4B4A /* myConfiguration.json */,
 				AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */,
 				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
 				AB57F0DE230B3C1900BA8B53 /* LuasKit */,
