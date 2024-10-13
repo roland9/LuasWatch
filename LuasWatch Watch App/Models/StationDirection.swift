@@ -10,15 +10,15 @@ import SwiftData
 @Model
 final class StationDirection: CustomDebugStringConvertible {
 
-    let shortCode: StationShortCode
-    var direction: Direction
+  let shortCode: StationShortCode
+  var direction: Direction
 
-    init(shortCode: StationShortCode, direction: Direction) {
-        self.shortCode = shortCode
-        self.direction = direction
-    }
+  init(shortCode: StationShortCode, direction: Direction) {
+    self.shortCode = shortCode
+    self.direction = direction
+  }
 
-    var debugDescription: String {
-        "Station Direction: \(direction)"
-    }
+  var debugDescription: String {
+    "Station Direction: \(direction)"
+  }
 }

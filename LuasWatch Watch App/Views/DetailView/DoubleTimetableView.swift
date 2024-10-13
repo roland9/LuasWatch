@@ -8,51 +8,51 @@ import SwiftUI
 
 struct DoubleTimetableView: View {
 
-    @EnvironmentObject private var appModel: AppModel
+  @EnvironmentObject private var appModel: AppModel
 
-    let trainsByDirection: TrainsByDirection
+  let trainsByDirection: TrainsByDirection
 }
 
 extension DoubleTimetableView {
 
-    var body: some View {
+  var body: some View {
 
-        VStack {
-            if trainsByDirection.inbound.count == 0 {
-                NoTrainsView()
+    VStack {
+      if trainsByDirection.inbound.count == 0 {
+        NoTrainsView()
 
-            } else {
-                /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
-                ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
-                    DueView(
-                        destination: $0.destinationDescription,
-                        due: $0.dueTimeDescription2)
-                }
-                if trainsByDirection.inboundHasOverflowSmall {
-                    OverflowDotsView()
-                }
-                Spacer()
-            }
-
-            Divider()
-
-            if trainsByDirection.outbound.count == 0 {
-                NoTrainsView()
-
-            } else {
-                /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
-                ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
-                    DueView(
-                        destination: $0.destinationDescription,
-                        due: $0.dueTimeDescription2)
-                }
-                if trainsByDirection.outboundHasOverflowSmall {
-                    OverflowDotsView()
-                }
-                Spacer()
-            }
+      } else {
+        /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
+        ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
+          DueView(
+            destination: $0.destinationDescription,
+            due: $0.dueTimeDescription2)
         }
-        .timeTableStyle()
-        .opacity(appModel.appState.isLoading ? 0.52 : 1.0)
+        if trainsByDirection.inboundHasOverflowSmall {
+          OverflowDotsView()
+        }
+        Spacer()
+      }
+
+      Divider()
+
+      if trainsByDirection.outbound.count == 0 {
+        NoTrainsView()
+
+      } else {
+        /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
+        ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
+          DueView(
+            destination: $0.destinationDescription,
+            due: $0.dueTimeDescription2)
+        }
+        if trainsByDirection.outboundHasOverflowSmall {
+          OverflowDotsView()
+        }
+        Spacer()
+      }
     }
+    .timeTableStyle()
+    .opacity(appModel.appState.isLoading ? 0.52 : 1.0)
+  }
 }

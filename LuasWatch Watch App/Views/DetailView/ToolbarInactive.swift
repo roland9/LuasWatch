@@ -7,30 +7,30 @@ import LuasKit
 import SwiftUI
 
 struct ToolbarInactive {
-    // no properties
+  // no properties
 }
 
 extension ToolbarInactive: ToolbarContent {
 
-    var body: some ToolbarContent {
+  var body: some ToolbarContent {
 
-        ToolbarItemGroup(placement: .bottomBar) {
+    ToolbarItemGroup(placement: .bottomBar) {
 
-            /// Change direction
-            Button {
-                // nop
-            } label: {
-                Image(systemName: "arrow.left.arrow.right")
-            }
-            .disabled(true)
+      /// Change direction
+      Button {
+        // nop
+      } label: {
+        Image(systemName: "arrow.left.arrow.right")
+      }
+      .disabled(true)
 
-            /// Favourite
-            Button {
-                // nop
-            } label: {
-                Image(systemName: "heart")
-            }
-            .disabled(true)
-        }
+      /// Favourite
+      Button {
+        // nop
+      } label: {
+        Image(systemName: "heart")
+      }
+      .disabled(true)
     }
+  }
 }

@@ -7,26 +7,26 @@ import CoreLocation
 
 extension CLLocation {
 
-    func isQuiteRecent() -> Bool {
-        timestamp.timeIntervalSinceNow > -20.0
-    }
+  func isQuiteRecent() -> Bool {
+    timestamp.timeIntervalSinceNow > -20.0
+  }
 }
 
 extension CLAuthorizationStatus {
 
-    func localizedErrorMessage() -> String? {
-        switch self {
-            case .notDetermined:
-                return NSLocalizedString("auth status not determined (yet)", comment: "")
+  func localizedErrorMessage() -> String? {
+    switch self {
+    case .notDetermined:
+      return NSLocalizedString("auth status not determined (yet)", comment: "")
 
-            case .restricted:
-                return NSLocalizedString("auth status restricted", comment: "")
+    case .restricted:
+      return NSLocalizedString("auth status restricted", comment: "")
 
-            case .denied:
-                return NSLocalizedString("auth status denied", comment: "")
+    case .denied:
+      return NSLocalizedString("auth status denied", comment: "")
 
-            default:
-                return nil
-        }
+    default:
+      return nil
     }
+  }
 }

@@ -6,23 +6,23 @@
 import SwiftUI
 
 struct DueView: View {
-    let destination: String
-    let due: String
+  let destination: String
+  let due: String
 }
 
 extension DueView {
 
-    var body: some View {
+  var body: some View {
 
-        HStack {
-            Text(destination)
-                .font(.caption2)
-                .monospaced()
-            Spacer()
-            Text(due)
-                .font(.caption2)
-                .monospaced()
-        }
-        .foregroundColor(.yellow)
+    HStack {
+      Text(destination)
+        .font(.caption2)
+        .monospaced()
+      Spacer()
+      Text(due)
+        .font(.caption2)
+        .monospaced()
     }
+    .foregroundColor(.yellow)
+  }
 }

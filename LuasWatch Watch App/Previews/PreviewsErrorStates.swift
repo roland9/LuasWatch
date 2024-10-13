@@ -7,36 +7,38 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-    private func luasView(state: AppState) -> some View {
-        let appModel = AppModel(state)
-        appModel.appMode = .favourite(stationGreen)
+  private func luasView(state: AppState) -> some View {
+    let appModel = AppModel(state)
+    appModel.appMode = .favourite(stationGreen)
 
-        return LuasMainScreen()
-            .environmentObject(appModel)
-            .modelContainer(Previews().container)
-    }
+    return LuasMainScreen()
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
 
-    #Preview("idle") {
-        luasView(state: .idle)
-    }
+  #Preview("idle") {
+    luasView(state: .idle)
+  }
 
-    #Preview("gettingLoc") {
-        luasView(state: .gettingLocation)
-    }
+  #Preview("gettingLoc") {
+    luasView(state: .gettingLocation)
+  }
 
-    #Preview("authUnk") {
-        luasView(state: .locationAuthorizationUnknown)
-    }
+  #Preview("authUnk") {
+    luasView(state: .locationAuthorizationUnknown)
+  }
 
-    #Preview("locErr") {
-        luasView(state: .errorGettingLocation("Error getting location."))
-    }
+  #Preview("locErr") {
+    luasView(state: .errorGettingLocation("Error getting location."))
+  }
 
-    #Preview("errStat") {
-        luasView(state: .errorGettingStation("Some internal error getting station."))
-    }
+  #Preview("errStat") {
+    luasView(state: .errorGettingStation("Some internal error getting station."))
+  }
 
-    #Preview("errLoading") {
-        luasView(state: .errorGettingDueTimes(stationGreen, "Error loading due times - could not access internet?"))
-    }
+  #Preview("errLoading") {
+    luasView(
+      state: .errorGettingDueTimes(
+        stationGreen, "Error loading due times - could not access internet?"))
+  }
 #endif

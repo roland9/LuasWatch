@@ -7,22 +7,22 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-    func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
+  func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
 
-        @State var selectedStation: TrainStation? = trainsGreen.trainStation
+    @State var selectedStation: TrainStation? = trainsGreen.trainStation
 
-        return NavigationSplitView {
-            SidebarView(selectedStation: $selectedStation)
-        } detail: {
-            TabView(selection: $selectedStation) {
-                StationView()
-                    .environmentObject(appModel)
-                    .modelContainer(Previews().container)
-                    .containerBackground(
-                        route.color.gradient,
-                        for: .tabView)
-            }
-        }
-        .environmentObject(appModel)
+    return NavigationSplitView {
+      SidebarView(selectedStation: $selectedStation)
+    } detail: {
+      TabView(selection: $selectedStation) {
+        StationView()
+          .environmentObject(appModel)
+          .modelContainer(Previews().container)
+          .containerBackground(
+            route.color.gradient,
+            for: .tabView)
+      }
     }
+    .environmentObject(appModel)
+  }
 #endif

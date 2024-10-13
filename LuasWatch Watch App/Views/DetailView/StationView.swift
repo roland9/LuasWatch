@@ -8,41 +8,41 @@ import SwiftUI
 
 struct StationView {
 
-    @EnvironmentObject private var appModel: AppModel
+  @EnvironmentObject private var appModel: AppModel
 }
 
 extension StationView: View {
 
-    var body: some View {
+  var body: some View {
 
-        switch appModel.appState {
+    switch appModel.appState {
 
-            case .idle:
-                LuasTextView(text: "LuasWatch is starting...")
+    case .idle:
+      LuasTextView(text: "LuasWatch is starting...")
 
-            case .gettingLocation:
-                LuasTextView(text: "Getting location...")
+    case .gettingLocation:
+      LuasTextView(text: "Getting location...")
 
-            case .locationAuthorizationUnknown:
-                // WIP we need new approach to trigger location prompt via appModel?
-                GrantLocationAuthView(didTapButton: {
-                    appModel.appState = .gettingLocation
-                })
+    case .locationAuthorizationUnknown:
+      // WIP we need new approach to trigger location prompt via appModel?
+      GrantLocationAuthView(didTapButton: {
+        appModel.appState = .gettingLocation
+      })
 
-            case .errorGettingLocation:
-                LuasTextView(text: appModel.appState.description)
+    case .errorGettingLocation:
+      LuasTextView(text: appModel.appState.description)
 
-            case .errorGettingStation(let errorMessage):
-                LuasTextView(text: errorMessage)
+    case .errorGettingStation(let errorMessage):
+      LuasTextView(text: errorMessage)
 
-            case .loadingDueTimes(let trainStation, let cachedTrains):
-                StationTimesView(trainStation: trainStation, trains: cachedTrains)
+    case .loadingDueTimes(let trainStation, let cachedTrains):
+      StationTimesView(trainStation: trainStation, trains: cachedTrains)
 
-            case .errorGettingDueTimes(_, let message):
-                LuasTextView(text: message)
+    case .errorGettingDueTimes(_, let message):
+      LuasTextView(text: message)
 
-            case .foundDueTimes(let trains):
-                StationTimesView(trainStation: trains.trainStation, trains: trains)
-        }
+    case .foundDueTimes(let trains):
+      StationTimesView(trainStation: trains.trainStation, trains: trains)
     }
+  }
 }

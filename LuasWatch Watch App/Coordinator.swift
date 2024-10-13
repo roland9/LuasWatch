@@ -17,8 +17,7 @@ class Coordinator: NSObject {
   private static let refreshInterval = 12.0
   private var cancellable: AnyCancellable?
 
-  internal var previouslyLoadedTrains:
-    (for: TrainStation, trains: TrainsByDirection)?
+  internal var previouslyLoadedTrains: (for: TrainStation, trains: TrainsByDirection)?
 
   init(
     appModel: AppModel,

@@ -8,15 +8,15 @@ import SwiftUI
 
 struct TrainsViewLoading: View {
 
-    var body: some View {
-        VStack {
-            Spacer()
-            Text(LuasStrings.trainsLoading)
-                .font(.caption2)
-                .monospaced()
-                .foregroundColor(.yellow)
-                .frame(maxWidth: .infinity)
-            Spacer()
-        }
+  var body: some View {
+    VStack {
+      Spacer()
+      Text(LuasStrings.trainsLoading)
+        .font(.caption2)
+        .monospaced()
+        .foregroundColor(.yellow)
+        .frame(maxWidth: .infinity)
+      Spacer()
     }
+  }
 }

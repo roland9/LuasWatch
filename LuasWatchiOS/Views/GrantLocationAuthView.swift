@@ -3,26 +3,28 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
 import LuasKit
+import SwiftUI
 
 struct GrantLocationAuthView: View {
 
-    var didTapButton: () -> Void
+  var didTapButton: () -> Void
 
-    var body: some View {
+  var body: some View {
 
-        VStack {
-            Text(LuasStrings.locationAuthorizationUnknown)
-                .multilineTextAlignment(.center)
-                .frame(idealHeight: .greatestFiniteMagnitude)
-                .padding(.bottom)
+    VStack {
+      Text(LuasStrings.locationAuthorizationUnknown)
+        .multilineTextAlignment(.center)
+        .frame(idealHeight: .greatestFiniteMagnitude)
+        .padding(.bottom)
 
-            Button(action: {
-                didTapButton()
-            }, label: {
-                Text("OK")
-            })
-        }
+      Button(
+        action: {
+          didTapButton()
+        },
+        label: {
+          Text("OK")
+        })
     }
+  }
 }

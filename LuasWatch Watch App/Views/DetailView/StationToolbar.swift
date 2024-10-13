@@ -8,83 +8,83 @@ import SwiftUI
 
 struct StationToolbar {
 
-    @Environment(\.modelContext) private var modelContext
+  @Environment(\.modelContext) private var modelContext
 
-    @EnvironmentObject private var appModel: AppModel
+  @EnvironmentObject private var appModel: AppModel
 
-    // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
-    @State private var isFavourite: Bool = false
+  // have to let SwiftUI know that underlying context has changed -  can we avoid the isFavourite state?
+  @State private var isFavourite: Bool = false
 
-    @State private var isSwitchingDirectionEnabled: Bool = true
+  @State private var isSwitchingDirectionEnabled: Bool = true
 
-    @Binding var direction: Direction
+  @Binding var direction: Direction
 
-    let trainStation: TrainStation
+  let trainStation: TrainStation
 }
 
 extension StationToolbar: ToolbarContent {
 
-    var body: some ToolbarContent {
+  var body: some ToolbarContent {
 
-        // for now: hide Map button
-        //        ToolbarItem(placement: .topBarTrailing) {
-        //            Button {
-        //                // Perform an action here.
-        //            } label: {
-        //                Image(systemName: "map")
-        //            }
-        //        }
+    // for now: hide Map button
+    //        ToolbarItem(placement: .topBarTrailing) {
+    //            Button {
+    //                // Perform an action here.
+    //            } label: {
+    //                Image(systemName: "map")
+    //            }
+    //        }
 
-        ToolbarItemGroup(placement: .bottomBar) {
+    ToolbarItemGroup(placement: .bottomBar) {
 
-            /// Change direction
-            Button {
-                withAnimation {
-                    direction = direction.next()
-                }
-
-                let shortCode = trainStation.shortCode
-                myPrint("\(#function) createOrUpdate \(shortCode) to \(direction)")
-                modelContext.createOrUpdate(shortCode: shortCode, to: direction)
-
-            } label: {
-
-                if trainStation.allowsSwitchingDirection {
-
-                    switch direction {
-                        case .inbound:
-                            Image(systemName: "arrow.left")
-                        case .outbound:
-                            Image(systemName: "arrow.right")
-                        case .both:
-                            Image(systemName: "arrow.left.arrow.right")
-                    }
-
-                } else {
-                    // if station is terminal or a one way stop: show hard coded arrow; we disable the button below
-                    Image(systemName: "arrow.right")
-                }
-            }
-            .onAppear {
-                isSwitchingDirectionEnabled = trainStation.allowsSwitchingDirection
-            }
-            .disabled(!isSwitchingDirectionEnabled)
-
-            if appModel.appState.isLoading {
-                Text(LuasStrings.loadingDueTimes)
-                    .font(.subheadline)
-            }
-
-            /// Favourite
-            Button {
-                modelContext.toggleFavouriteStation(shortCode: trainStation.shortCode)
-                isFavourite.toggle()
-            } label: {
-                isFavourite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
-            }
-            .onAppear {
-                isFavourite = modelContext.doesFavouriteStationExist(shortCode: trainStation.shortCode)
-            }
+      /// Change direction
+      Button {
+        withAnimation {
+          direction = direction.next()
         }
+
+        let shortCode = trainStation.shortCode
+        myPrint("\(#function) createOrUpdate \(shortCode) to \(direction)")
+        modelContext.createOrUpdate(shortCode: shortCode, to: direction)
+
+      } label: {
+
+        if trainStation.allowsSwitchingDirection {
+
+          switch direction {
+          case .inbound:
+            Image(systemName: "arrow.left")
+          case .outbound:
+            Image(systemName: "arrow.right")
+          case .both:
+            Image(systemName: "arrow.left.arrow.right")
+          }
+
+        } else {
+          // if station is terminal or a one way stop: show hard coded arrow; we disable the button below
+          Image(systemName: "arrow.right")
+        }
+      }
+      .onAppear {
+        isSwitchingDirectionEnabled = trainStation.allowsSwitchingDirection
+      }
+      .disabled(!isSwitchingDirectionEnabled)
+
+      if appModel.appState.isLoading {
+        Text(LuasStrings.loadingDueTimes)
+          .font(.subheadline)
+      }
+
+      /// Favourite
+      Button {
+        modelContext.toggleFavouriteStation(shortCode: trainStation.shortCode)
+        isFavourite.toggle()
+      } label: {
+        isFavourite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
+      }
+      .onAppear {
+        isFavourite = modelContext.doesFavouriteStationExist(shortCode: trainStation.shortCode)
+      }
     }
+  }
 }
