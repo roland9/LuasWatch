@@ -8,16 +8,16 @@ import SwiftUI
 
 extension Coordinator {
 
-    func updateWithAnimation(to state: AppState) {
+  func updateWithAnimation(to state: AppState) {
 
-        withAnimation {
-            if Thread.isMainThread {
-                appModel.appState = state
-            } else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.appModel.appState = state
-                }
-            }
+    withAnimation {
+      if Thread.isMainThread {
+        appModel.appState = state
+      } else {
+        DispatchQueue.main.async { [weak self] in
+          self?.appModel.appState = state
         }
+      }
     }
+  }
 }

@@ -8,32 +8,35 @@ import Foundation
 // inspired by https://gist.github.com/ccheptea/324e40dc905c961d87a62f65f7ba0462
 
 public func myPrint(
-    _ items: Any..., separator: String = " ", terminator: String = "\n", function: String = #function, file: String = #file, line: Int = #line
+  _ items: Any..., separator: String = " ", terminator: String = "\n", function: String = #function,
+  file: String = #file, line: Int = #line
 ) {
 
-    #if DEBUG
+  #if DEBUG
 
-        let formatter: DateFormatter = {
-            let _formatter = DateFormatter()
-            _formatter.dateFormat = "HH:mm:ss.SSS"
-            return _formatter
-        }()
+    let formatter: DateFormatter = {
+      let _formatter = DateFormatter()
+      _formatter.dateFormat = "HH:mm:ss.SSS"
+      return _formatter
+    }()
 
-        var idx = items.startIndex
-        let endIdx = items.endIndex
+    var idx = items.startIndex
+    let endIdx = items.endIndex
 
-        let dateString = formatter.string(from: NSDate.now)
+    let dateString = formatter.string(from: NSDate.now)
 
-        let lastSlashIndex = (file.lastIndex(of: "/") ?? String.Index(utf16Offset: 0, in: file))
-        let nextIndex = file.index(after: lastSlashIndex)
-        let filename = file.suffix(from: nextIndex).replacingOccurrences(of: ".swift", with: "")
+    let lastSlashIndex = (file.lastIndex(of: "/") ?? String.Index(utf16Offset: 0, in: file))
+    let nextIndex = file.index(after: lastSlashIndex)
+    let filename = file.suffix(from: nextIndex).replacingOccurrences(of: ".swift", with: "")
 
-        let prefix = "\(dateString) \(filename).\(function):\(line)"
+    let prefix = "\(dateString) \(filename).\(function):\(line)"
 
-        repeat {
-            Swift.print("\(prefix) \(items[idx])", separator: separator, terminator: idx == (endIdx - 1) ? terminator : separator)
-            idx += 1
-        } while idx < endIdx
+    repeat {
+      Swift.print(
+        "\(prefix) \(items[idx])", separator: separator,
+        terminator: idx == (endIdx - 1) ? terminator : separator)
+      idx += 1
+    } while idx < endIdx
 
-    #endif
+  #endif
 }

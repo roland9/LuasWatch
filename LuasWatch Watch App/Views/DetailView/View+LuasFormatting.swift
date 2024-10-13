@@ -7,11 +7,11 @@ import SwiftUI
 
 extension View {
 
-    func timeTableStyle() -> some View {
-        self
-            .padding(6)
-            .background(.black)
-            .border(.secondary).cornerRadius(2)
-            .padding(4)
-    }
+  func timeTableStyle() -> some View {
+    self
+      .padding(6)
+      .background(.black)
+      .border(.secondary).cornerRadius(2)
+      .padding(4)
+  }
 }

@@ -8,56 +8,60 @@ import SwiftData
 import SwiftUI
 
 struct AllStationsListView {
-    @EnvironmentObject var appModel: AppModel
-    @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
+  @EnvironmentObject var appModel: AppModel
+  @Environment(\.modelContext) private var modelContext
+  @Environment(\.dismiss) private var dismiss
 
-    @State var stations: [TrainStation]
+  @State var stations: [TrainStation]
 }
 
 extension AllStationsListView: View {
 
-    var body: some View {
+  var body: some View {
 
-        NavigationView(content: {
+    NavigationView(content: {
 
-            ScrollView {
-                NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.greenLineStations)) {
-                    LineRow(route: .green, isHighlighted: false)
-                }
+      ScrollView {
+        NavigationLink(
+          destination: stationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+        ) {
+          LineRow(route: .green, isHighlighted: false)
+        }
 
-                NavigationLink(destination: stationsListView(stations: TrainStations.sharedFromFile.redLineStations)) {
-                    LineRow(route: .red, isHighlighted: false)
-                }
-            }
-        })
-        .navigationTitle("Add to favourites")
-    }
+        NavigationLink(
+          destination: stationsListView(stations: TrainStations.sharedFromFile.redLineStations)
+        ) {
+          LineRow(route: .red, isHighlighted: false)
+        }
+      }
+    })
+    .navigationTitle("Add to favourites")
+  }
 
-    @ViewBuilder
-    private func stationsListView(stations: [TrainStation]) -> some View {
-        StationsModal(
-            stations: stations,
-            highlightedStation: appModel.highlightedStation,
-            action: { station in
+  @ViewBuilder
+  private func stationsListView(stations: [TrainStation]) -> some View {
+    StationsModal(
+      stations: stations,
+      highlightedStation: appModel.highlightedStation,
+      action: { station in
 
-                if modelContext.doesFavouriteStationExist(shortCode: station.shortCode) == false {
-                    modelContext.insert(FavouriteStation(shortCode: station.shortCode))
-                } else {
-                    myPrint("Favourite station already exists -> ignore")
-                }
+        if modelContext.doesFavouriteStationExist(shortCode: station.shortCode) == false {
+          modelContext.insert(FavouriteStation(shortCode: station.shortCode))
+        } else {
+          myPrint("Favourite station already exists -> ignore")
+        }
 
-                DispatchQueue.main.async {
-                    dismiss()
-                }
-            }
-        )
-        .navigationTitle("Add to favourites")
-    }
+        DispatchQueue.main.async {
+          dismiss()
+        }
+      }
+    )
+    .navigationTitle("Add to favourites")
+  }
 }
 
 #Preview("All Stations (green)") {
 
-    AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
-        .modelContainer(Previews().container)
+  AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+    .modelContainer(Previews().container)
 }

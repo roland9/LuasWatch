@@ -7,45 +7,45 @@ import Foundation
 
 extension AppState: CustomStringConvertible {
 
-    public var description: String {
-        switch self {
+  public var description: String {
+    switch self {
 
-            case .idle:
-                return "Idle"
-            case .gettingLocation:
-                return LuasStrings.gettingLocation
-            case .locationAuthorizationUnknown:
-                return LuasStrings.locationAuthorizationUnknown
-            case .errorGettingLocation(let errorMessage):
-                return errorMessage
-            case .errorGettingStation:
-                return LuasStrings.errorGettingStation
-            case .loadingDueTimes(let trainStation, _):
-                return LuasStrings.gettingDueTimes(trainStation)
-            case .errorGettingDueTimes(_, let errorMessage):
-                return errorMessage
-            case .foundDueTimes(let trains):
-                return LuasStrings.foundDueTimes(trains)
-        }
+    case .idle:
+      return "Idle"
+    case .gettingLocation:
+      return LuasStrings.gettingLocation
+    case .locationAuthorizationUnknown:
+      return LuasStrings.locationAuthorizationUnknown
+    case .errorGettingLocation(let errorMessage):
+      return errorMessage
+    case .errorGettingStation:
+      return LuasStrings.errorGettingStation
+    case .loadingDueTimes(let trainStation, _):
+      return LuasStrings.gettingDueTimes(trainStation)
+    case .errorGettingDueTimes(_, let errorMessage):
+      return errorMessage
+    case .foundDueTimes(let trains):
+      return LuasStrings.foundDueTimes(trains)
     }
+  }
 }
 
 extension AppMode: CustomStringConvertible {
 
-    public var description: String {
-        switch self {
-            case .closest:
-                return "closest"
-            case .closestOtherLine:
-                return "closestOtherLine"
-            case .favourite(let station):
-                return "favourite: \(station.name)"
-            case .nearby(let station):
-                return "nearby \(station.name)"
-            case .specific(let station):
-                return "specific: \(station.name)"
-            case .recents(let station):
-                return "recents: \(station.name)"
-        }
+  public var description: String {
+    switch self {
+    case .closest:
+      return "closest"
+    case .closestOtherLine:
+      return "closestOtherLine"
+    case .favourite(let station):
+      return "favourite: \(station.name)"
+    case .nearby(let station):
+      return "nearby \(station.name)"
+    case .specific(let station):
+      return "specific: \(station.name)"
+    case .recents(let station):
+      return "recents: \(station.name)"
     }
+  }
 }

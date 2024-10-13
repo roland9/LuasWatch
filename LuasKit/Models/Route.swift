@@ -8,26 +8,26 @@ import Foundation
 typealias JSONDictionary = [String: Any]
 
 public enum Route: Int, Codable {
-    case red, green
+  case red, green
 }
 
 extension Route {
-    init?(_ routeString: String) {
-        if routeString == "Red" {
-            self = .red
-        } else if routeString == "Green" {
-            self = .green
-        } else {
-            return nil
-        }
+  init?(_ routeString: String) {
+    if routeString == "Red" {
+      self = .red
+    } else if routeString == "Green" {
+      self = .green
+    } else {
+      return nil
     }
+  }
 
-    public var other: Route {
-        switch self {
-            case .red:
-                return .green
-            case .green:
-                return .red
-        }
+  public var other: Route {
+    switch self {
+    case .red:
+      return .green
+    case .green:
+      return .red
     }
+  }
 }

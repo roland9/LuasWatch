@@ -6,8 +6,8 @@
 import Foundation
 
 #if DEBUG
-    // see http://stackoverflow.com/questions/6748087/xcode-test-vs-debug-preprocessor-macros
-    func isRunningUnitTests() -> Bool {
-        NSClassFromString("XCTestCase") != nil
-    }
+  // see http://stackoverflow.com/questions/6748087/xcode-test-vs-debug-preprocessor-macros
+  func isRunningUnitTests() -> Bool {
+    NSClassFromString("XCTestCase") != nil
+  }
 #endif

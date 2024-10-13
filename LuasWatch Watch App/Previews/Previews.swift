@@ -6,54 +6,54 @@
 import SwiftData
 
 struct Previews {
-    let container: ModelContainer
+  let container: ModelContainer
 
-    lazy var context: ModelContext = {
-        ModelContext(container)
-    }()
+  lazy var context: ModelContext = {
+    ModelContext(container)
+  }()
 
-    init(addSample: Bool = true) {
-        self.init([
-            FavouriteStation.self,
-            StationDirection.self,
-        ])
+  init(addSample: Bool = true) {
+    self.init([
+      FavouriteStation.self,
+      StationDirection.self,
+    ])
 
-        if addSample {
-            addSampleData()
-        }
+    if addSample {
+      addSampleData()
     }
+  }
 
-    private init(
-        _ types: [any PersistentModel.Type],
-        isStoredInMemoryOnly: Bool = true
-    ) {
+  private init(
+    _ types: [any PersistentModel.Type],
+    isStoredInMemoryOnly: Bool = true
+  ) {
 
-        let schema = Schema(types)
-        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isStoredInMemoryOnly)
-        self.container = try! ModelContainer(for: schema, configurations: [config])
-    }
+    let schema = Schema(types)
+    let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isStoredInMemoryOnly)
+    self.container = try! ModelContainer(for: schema, configurations: [config])
+  }
 
-    mutating func addSampleData() {
-        _ = FavouriteStation.addPreviews(into: context)
-    }
+  mutating func addSampleData() {
+    _ = FavouriteStation.addPreviews(into: context)
+  }
 }
 
 extension FavouriteStation {
-    static func addPreviews(into context: ModelContext) -> [FavouriteStation] {
-        [
-            "RAN",
-            "TAL",
-            "HOS",
-            "KIN",
-            "BEE",
-            "CCK",
-            "GAL",
-            "Invalid",
-        ]
-        .map {
-            let station = FavouriteStation(shortCode: $0)
-            context.insert(station)
-            return station
-        }
+  static func addPreviews(into context: ModelContext) -> [FavouriteStation] {
+    [
+      "RAN",
+      "TAL",
+      "HOS",
+      "KIN",
+      "BEE",
+      "CCK",
+      "GAL",
+      "Invalid",
+    ]
+    .map {
+      let station = FavouriteStation(shortCode: $0)
+      context.insert(station)
+      return station
     }
+  }
 }

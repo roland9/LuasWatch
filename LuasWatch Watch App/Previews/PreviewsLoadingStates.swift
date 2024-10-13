@@ -7,32 +7,32 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-    private func luasView(state: AppState) -> some View {
-        let appModel = AppModel(state)
-        appModel.appMode = .favourite(stationGreen)
+  private func luasView(state: AppState) -> some View {
+    let appModel = AppModel(state)
+    appModel.appMode = .favourite(stationGreen)
 
-        return LuasMainScreen()
-            .environmentObject(appModel)
-            .modelContainer(Previews().container)
-    }
+    return LuasMainScreen()
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
 
-    #Preview("loading") {
-        luasView(state: .loadingDueTimes(stationGreen, cachedTrains: nil))
-    }
+  #Preview("loading") {
+    luasView(state: .loadingDueTimes(stationGreen, cachedTrains: nil))
+  }
 
-    #Preview("loading (cached)") {
-        luasView(state: .loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
-    }
+  #Preview("loading (cached)") {
+    luasView(state: .loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
+  }
 
-    #Preview("loading 1Way (cached)") {
-        luasView(state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
-    }
+  #Preview("loading 1Way (cached)") {
+    luasView(state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
+  }
 
-    #Preview("noTrains") {
-        luasView(state: .foundDueTimes(noTrainsGreen))
-    }
+  #Preview("noTrains") {
+    luasView(state: .foundDueTimes(noTrainsGreen))
+  }
 
-    #Preview("OK") {
-        luasView(state: .foundDueTimes(trainsGreen))
-    }
+  #Preview("OK") {
+    luasView(state: .foundDueTimes(trainsGreen))
+  }
 #endif

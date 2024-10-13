@@ -7,37 +7,38 @@ import Foundation
 
 public struct Train: CustomStringConvertible, Hashable, Codable {
 
-    public var id: String {
-        UUID().uuidString
-    }
+  public var id: String {
+    UUID().uuidString
+  }
 
-    public let destination: String
-    public let direction: String
-    public let dueTime: String
+  public let destination: String
+  public let direction: String
+  public let dueTime: String
 
-    public var description: String {
-        "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
-    }
+  public var description: String {
+    "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
+  }
 
-    public var dueTimeDescription: String {
-        "\(destination.replacingOccurrences(of: "LUAS ", with: "")): " + ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
-    }
+  public var dueTimeDescription: String {
+    "\(destination.replacingOccurrences(of: "LUAS ", with: "")): "
+      + ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
+  }
 
-    public var destinationDescription: String {
-        destination.replacingOccurrences(of: "LUAS ", with: "")
-    }
+  public var destinationDescription: String {
+    destination.replacingOccurrences(of: "LUAS ", with: "")
+  }
 
-    public var dueTimeDescription2: String {
-        (dueTime.lowercased() == "due") ? "Due" : dueTime
-    }
+  public var dueTimeDescription2: String {
+    (dueTime.lowercased() == "due") ? "Due" : dueTime
+  }
 
-    public var destinationDueTimeDescription: String {
-        "Luas to \(destination) \(dueTime.lowercased() == "due" ? "is Due" : "in \(dueTime)")"
-    }
+  public var destinationDueTimeDescription: String {
+    "Luas to \(destination) \(dueTime.lowercased() == "due" ? "is Due" : "in \(dueTime)")"
+  }
 
-    public init(destination: String, direction: String, dueTime: String) {
-        self.destination = destination
-        self.direction = direction
-        self.dueTime = dueTime
-    }
+  public init(destination: String, direction: String, dueTime: String) {
+    self.destination = destination
+    self.direction = direction
+    self.dueTime = dueTime
+  }
 }

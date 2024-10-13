@@ -8,40 +8,40 @@ import Foundation
 // credit to BenS https://github.com/nsscreencast/425-parsing-xml-in-swift/blob/master/SwiftParsingXML/SwiftParsingXML/main.swift
 
 protocol ParserDelegate: XMLParserDelegate {
-    var delegateStack: ParserDelegateStack? { get set }
-    func didBecomeActive()
+  var delegateStack: ParserDelegateStack? { get set }
+  func didBecomeActive()
 }
 
 extension ParserDelegate {
-    func didBecomeActive() {}
+  func didBecomeActive() {}
 }
 
 protocol NodeParser: ParserDelegate {
-    associatedtype Item
-    var result: Item? { get }
+  associatedtype Item
+  var result: Item? { get }
 }
 
 class ParserDelegateStack {
-    private var parsers: [ParserDelegate] = []
-    private let xmlParser: XMLParser
+  private var parsers: [ParserDelegate] = []
+  private let xmlParser: XMLParser
 
-    init(xmlParser: XMLParser) {
-        self.xmlParser = xmlParser
-    }
+  init(xmlParser: XMLParser) {
+    self.xmlParser = xmlParser
+  }
 
-    func push(_ parser: ParserDelegate) {
-        parser.delegateStack = self
-        xmlParser.delegate = parser
-        parsers.append(parser)
-    }
+  func push(_ parser: ParserDelegate) {
+    parser.delegateStack = self
+    xmlParser.delegate = parser
+    parsers.append(parser)
+  }
 
-    func pop() {
-        parsers.removeLast()
-        if let next = parsers.last {
-            xmlParser.delegate = next
-            next.didBecomeActive()
-        } else {
-            xmlParser.delegate = nil
-        }
+  func pop() {
+    parsers.removeLast()
+    if let next = parsers.last {
+      xmlParser.delegate = next
+      next.didBecomeActive()
+    } else {
+      xmlParser.delegate = nil
     }
+  }
 }
