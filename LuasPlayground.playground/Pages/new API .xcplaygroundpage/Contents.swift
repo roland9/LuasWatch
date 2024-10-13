@@ -1,5 +1,4 @@
 import CoreLocation
-import PlaygroundSupport
 import LuasKit
 
 let userLocation = CLLocation(latitude: CLLocationDegrees(53.3163934083453), longitude: CLLocationDegrees(-6.25344151996991))
@@ -15,4 +14,10 @@ let station = TrainStation(stationId: "stationId",
 
 let realAPI = LuasAPI(apiWorker: RealAPIWorker())
 
-myPrint(try await realAPI.dueTimes(for: station))
+Task {
+  do {
+    myPrint(try await realAPI.dueTimes(for: station))
+  } catch {
+    print("exception \(error)")
+  }
+}
