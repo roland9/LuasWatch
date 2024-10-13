@@ -9,6 +9,7 @@ import SwiftUI
 struct LuasMainScreen {
 
     @EnvironmentObject var appModel: AppModel
+    @State var selectedTabView = 1
 }
 
 extension LuasMainScreen: View {
@@ -24,19 +25,40 @@ extension LuasMainScreen: View {
 
         } detail: {
 
-            StationView()
+            TabView(selection: $selectedTabView) {
+                StationView()
+                    .containerBackground(
+                        appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
+                        for: .navigation
+                    )
+                    .tag(1)
+
+                StationsModal(
+                    stations: appModel.selectedStation?.route == .green
+                        ? TrainStations.sharedFromFile.greenLineStations : TrainStations.sharedFromFile.redLineStations,
+                    highlightedStation: appModel.selectedStation,
+                    action: { station in
+                        appModel.appMode = .specific(station)
+                        withAnimation {
+                            selectedTabView = 1
+                        }
+                    }
+                )
                 .containerBackground(
                     appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
                     for: .navigation
                 )
+                .tag(2)
 
-                .onAppear(perform: {
-                    appModel.allowStationTabviewUpdates = true
-                })
-
-                .onDisappear(perform: {
-                    appModel.allowStationTabviewUpdates = false
-                })
+            }
+            .tabViewStyle(.verticalPage)
+            .onAppear {
+                selectedTabView = 1
+                appModel.allowStationTabviewUpdates = true
+            }
+            .onDisappear {
+                appModel.allowStationTabviewUpdates = false
+            }
 
         }
     }

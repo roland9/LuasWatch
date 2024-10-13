@@ -64,15 +64,13 @@ extension SidebarView: View {
                 Text("\nApp Version \(shortVersion) (\(buildNumber))")
             }
 
-            /// Recents
-            //            RecentsView()
-
         }
         .sheet(
             isPresented: $isGreenStationsViewPresented,
             content: {
                 StationsModal(
                     stations: TrainStations.sharedFromFile.greenLineStations,
+                    highlightedStation: appModel.highlightedStation,
                     action: {
                         appModel.appMode = .specific($0)
                         isGreenStationsViewPresented = false
@@ -84,6 +82,7 @@ extension SidebarView: View {
             content: {
                 StationsModal(
                     stations: TrainStations.sharedFromFile.redLineStations,
+                    highlightedStation: appModel.highlightedStation,
                     action: {
                         appModel.appMode = .specific($0)
                         isRedStationsViewPresented = false
