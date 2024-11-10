@@ -29,7 +29,7 @@ import SwiftUI
     name: "Bluebell",
     location: locationBluebell)
 
-  private let stationRedLongName = TrainStation(
+  let stationRedLongName = TrainStation(
     stationId: "stationId",
     stationIdShort: "LUAS8",
     shortCode: "BLU",

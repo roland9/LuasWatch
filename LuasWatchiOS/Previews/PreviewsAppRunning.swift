@@ -7,55 +7,47 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-  // swiftlint:disable:next type_name
-  struct Preview_AppRunning: PreviewProvider {
-    static let genericError = "Some generic error"
+  let genericError = "Some generic error"
 
-    static var previews: some View {
+  #Preview("while getting info") {
+    LuasMainScreen()
+      .environmentObject(
+        makeAppModel(
+          state: .loadingDueTimes(
+            TrainStation(
+              stationId: "stationId",
+              stationIdShort: "LUAS70",
+              shortCode: "CAB",
+              route: .green,
+              name: "Cabra",
+              location: locationBluebell), cachedTrains: nil))
+      )
+  }
 
-      Group {
-        LuasView()
-          .environmentObject(
-            AppState(
-              state: .gettingDueTimes(
-                TrainStation(
-                  stationId: "stationId",
-                  stationIdShort: "LUAS70",
-                  shortCode: "CAB",
-                  route: .green,
-                  name: "Cabra",
-                  locationBluebell: locationBluebell),
-                locationBluebell))
-          )
-          .previewDisplayName("while getting info...")
+  #Preview("errGetDueTimes (spec)") {
+    LuasMainScreen()
+      .environmentObject(
+        makeAppModel(
+          state: .errorGettingDueTimes(stationRedLongName, genericError))
+      )
+  }
 
-        LuasView()
-          .environmentObject(
-            AppState(
-              state: .errorGettingDueTimes(
-                stationRedLongName,
-                genericError))
-          )
-          .previewDisplayName("error getting due times (specific)")
+  #Preview("errGetDueTimes (gen)") {
+    LuasMainScreen()
+      .environmentObject(
+        makeAppModel(
+          state: .errorGettingDueTimes(
+            stationGreen,
+            LuasStrings.errorGettingDueTimes(station: stationGreen.name)))
+      )
+  }
 
-        LuasView()
-          .environmentObject(
-            AppState(
-              state: .errorGettingDueTimes(
-                stationGreen,
-                LuasStrings.errorGettingDueTimes))
-          )
-          .previewDisplayName("error getting due times (generic)")
-
-        LuasView()
-          .environmentObject(
-            AppState(
-              state: .errorGettingDueTimes(
-                stationGreen,
-                LuasStrings.errorNoInternet))
-          )
-          .previewDisplayName("error getting due times (offline)")
-      }
-    }
+  #Preview("errGetDueTimes (offline)") {
+    LuasMainScreen()
+      .environmentObject(
+        makeAppModel(
+          state: .errorGettingDueTimes(
+            stationRedLongName, LuasStrings.errorNoInternet))
+      )
   }
 #endif
