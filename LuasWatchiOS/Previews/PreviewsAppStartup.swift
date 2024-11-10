@@ -22,15 +22,6 @@ import SwiftUI
         makeAppModel(state: .gettingLocation))
   }
 
-  #Preview("getLoc - 38mm") {
-    LuasMainScreen()
-      .environmentObject(
-        makeAppModel(state: .gettingLocation)
-      )
-      .environment(\.sizeCategory, .accessibilityExtraExtraLarge)
-      .previewDevice("Apple Watch Series 3 - 38mm")
-  }
-
   #Preview("err - locDisabled") {
     LuasMainScreen()
       .environmentObject(

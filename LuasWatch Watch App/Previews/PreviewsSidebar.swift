@@ -8,16 +8,6 @@ import SwiftUI
 
 #if DEBUG
 
-  func makeAppModel(
-    state: AppState, appMode: AppMode = .closest, locationDenied: Bool = false
-  ) -> AppModel {
-    let appModel = AppModel(state)
-    appModel.appMode = appMode
-    appModel.locationDenied = locationDenied
-
-    return appModel
-  }
-
   #Preview("normal") {
     @Previewable @State var selectedStation: TrainStation?
     let appModel = makeAppModel(

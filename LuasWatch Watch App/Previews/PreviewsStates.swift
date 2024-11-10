@@ -7,14 +7,6 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-  private func luasView(state: AppState) -> some View {
-    let appModel = AppModel(state)
-    appModel.appMode = .favourite(stationGreen)
-
-    return LuasMainScreen()
-      .environmentObject(appModel)
-      .modelContainer(Previews().container)
-  }
 
   #Preview("idle") {
     luasView(state: .idle)

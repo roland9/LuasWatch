@@ -72,9 +72,13 @@ extension FavouritesSidebarView: View {
 }
 
 #if DEBUG
+
+/// this preview doesn't work -  context wrong in previews?
   #Preview("Favourites") {
+    let container = Previews().container
+
     let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
+    appModel.appMode = .closest
 
     return List {
       Section {
@@ -82,8 +86,8 @@ extension FavouritesSidebarView: View {
       } header: {
         FavouritesHeaderView()
       }
+      .modelContainer(container)
       .environmentObject(appModel)
-      .modelContainer(Previews().container)
     }
   }
 

@@ -11,8 +11,8 @@ typealias StationShortCode = String
 @Model
 final class FavouriteStation: CustomDebugStringConvertible {
 
-  let shortCode: StationShortCode
-  let dateAdded: Date
+  var shortCode: StationShortCode
+  var dateAdded: Date
 
   public init(shortCode: StationShortCode) {
     self.shortCode = shortCode

@@ -17,12 +17,32 @@ import SwiftUI
       TabView(selection: $selectedStation) {
         StationView()
           .environmentObject(appModel)
-          .modelContainer(Previews().container)
           .containerBackground(
             route.color.gradient,
             for: .tabView)
       }
     }
     .environmentObject(appModel)
+    .modelContainer(Previews().container)
   }
+
+  func luasView(state: AppState) -> some View {
+    let appModel = AppModel(state)
+    appModel.appMode = .favourite(stationGreen)
+
+    return LuasMainScreen()
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
+
+  func makeAppModel(
+    state: AppState, appMode: AppMode = .closest, locationDenied: Bool = false
+  ) -> AppModel {
+    let appModel = AppModel(state)
+    appModel.appMode = appMode
+    appModel.locationDenied = locationDenied
+
+    return appModel
+  }
+
 #endif
