@@ -23,13 +23,15 @@ extension AllStationsListView: View {
 
       ScrollView {
         NavigationLink(
-          destination: stationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+          destination: stationsListView(
+            stations: TrainStations.sharedFromFile.greenLineStations)
         ) {
           LineRow(route: .green, isHighlighted: false)
         }
 
         NavigationLink(
-          destination: stationsListView(stations: TrainStations.sharedFromFile.redLineStations)
+          destination: stationsListView(
+            stations: TrainStations.sharedFromFile.redLineStations)
         ) {
           LineRow(route: .red, isHighlighted: false)
         }
@@ -45,7 +47,9 @@ extension AllStationsListView: View {
       highlightedStation: appModel.highlightedStation,
       action: { station in
 
-        if modelContext.doesFavouriteStationExist(shortCode: station.shortCode) == false {
+        if modelContext.doesFavouriteStationExist(shortCode: station.shortCode)
+          == false
+        {
           modelContext.insert(FavouriteStation(shortCode: station.shortCode))
         } else {
           myPrint("Favourite station already exists -> ignore")

@@ -7,6 +7,8 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
+
+  @MainActor
   func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
 
     @State var selectedStation: TrainStation? = trainsGreen.trainStation
@@ -26,6 +28,7 @@ import SwiftUI
     .modelContainer(Previews().container)
   }
 
+  @MainActor
   func luasView(state: AppState) -> some View {
     let appModel = AppModel(state)
     appModel.appMode = .favourite(stationGreen)
