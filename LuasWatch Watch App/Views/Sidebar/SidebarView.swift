@@ -43,7 +43,7 @@ extension SidebarView: View {
         }
 
         if case .errorGettingStationTooFarAway = appModel.appState {
-            Text(LuasStrings.tooFarAway)
+          Text(LuasStrings.tooFarAway)
         }
       }
 
@@ -63,8 +63,10 @@ extension SidebarView: View {
       } footer: {
 
         let shortVersion =
-          Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(unknown)"
-        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+          Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+          ?? "(unknown)"
+        let buildNumber =
+          Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
 
         Text("\nApp Version \(shortVersion) (\(buildNumber))")
       }
