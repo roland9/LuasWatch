@@ -25,7 +25,8 @@ import SwiftUI
   }
 
   #Preview("loading 1Way (cached)") {
-    luasView(state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
+    luasView(
+      state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
   }
 
   #Preview("noTrains") {

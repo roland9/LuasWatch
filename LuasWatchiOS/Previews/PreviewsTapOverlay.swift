@@ -7,19 +7,14 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-  // swiftlint:disable:next type_name
-  struct Preview_TapOverlay: PreviewProvider {
+  #Preview("tapOverlay") {
+    ZStack {
+      LuasMainScreen()
+        .environmentObject(
+          makeAppModel(state: .foundDueTimes(trainsRed_1_1)))
 
-    static var previews: some View {
-
-      ZStack {
-        LuasView()
-          .environmentObject(AppState(state: .foundDueTimes(trainsRed_1_1, userLocation)))
-
-        LuasView()
-          .overlayView("Showing outbound trains only")
-      }
-      .previewDisplayName("Tap overlay view")
+//      LuasMainScreen()
+//        .overlayView("Showing outbound trains only")
     }
   }
 #endif

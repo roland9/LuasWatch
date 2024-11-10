@@ -41,6 +41,10 @@ extension SidebarView: View {
         if appModel.locationDenied {
           Text(LuasStrings.locationDeniedFooter)
         }
+
+        if case .errorGettingStationTooFarAway = appModel.appState {
+            Text(LuasStrings.tooFarAway)
+        }
       }
 
       /// Lines Green / Red
@@ -96,28 +100,3 @@ extension SidebarView: View {
     .listStyle(.carousel)
   }
 }
-
-#if DEBUG
-  #Preview("Sidebar") {
-    @Previewable @State var selectedStation: TrainStation?
-
-    let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
-
-    return SidebarView(selectedStation: $selectedStation)
-      .environmentObject(appModel)
-      .modelContainer(Previews().container)
-  }
-
-  #Preview("Sidebar (loc denied)") {
-    @Previewable @State var selectedStation: TrainStation?
-
-    let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
-    appModel.locationDenied = true
-
-    return SidebarView(selectedStation: $selectedStation)
-      .environmentObject(appModel)
-      .modelContainer(Previews().container)
-  }
-#endif

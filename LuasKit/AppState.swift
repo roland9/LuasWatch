@@ -14,8 +14,8 @@ public enum AppState {
   case locationAuthorizationUnknown
   case errorGettingLocation(String)
 
-  /// in case the user is too far away from Dublin area
-  case errorGettingStation(String)
+  /// when user is too far away from Dublin area
+  case errorGettingStationTooFarAway(String)
 
   // cachedTrains is optional because when we load that station for the first time, we won't have any trains cached
   case loadingDueTimes(TrainStation, cachedTrains: TrainsByDirection?)
