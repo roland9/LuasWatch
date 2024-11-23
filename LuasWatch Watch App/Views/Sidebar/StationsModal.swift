@@ -29,7 +29,8 @@ extension StationsModal {
             label: {
               Text(station.name)
                 .font(.system(.headline))
-                .fontWeight(highlightedStation?.name == station.name ? .bold : .regular)
+                .fontWeight(
+                  highlightedStation?.name == station.name ? .bold : .regular)
             }
           )
           .id(station.shortCode)
@@ -49,16 +50,13 @@ extension StationsModal {
 #if DEBUG
   #Preview("Stations Modal (green)") {
 
-    let appModel = AppModel(AppState(.foundDueTimes(trainsGreen)))
-    appModel.appMode = .specific(stationGreen)
-
     // highlight in preview doesn't work??  does it used StoredAppMode?
-    return StationsModal(
+    StationsModal(
       stations: TrainStations.sharedFromFile.greenLineStations,
       action: { _ in
         //
       }
     )
-    .environmentObject(appModel)
+    .environmentObject(makeAppModel(state: .foundDueTimes(trainsGreen)))
   }
 #endif

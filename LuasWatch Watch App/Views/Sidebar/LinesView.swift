@@ -51,15 +51,20 @@ extension LinesView: View {
   }
 }
 
-#Preview("Lines") {
-  List {
-    Section {
-      LinesView(actionGreen: {}, actionRed: {})
-    } header: {
-      Text("Lines")
-        .font(.subheadline)
-        .frame(minHeight: 40)
-    }
+#if DEBUG
 
+  #Preview("Lines") {
+
+    List {
+      Section {
+        LinesView(actionGreen: {}, actionRed: {})
+          .environmentObject(makeAppModel(state: .foundDueTimes(trainsGreen)))
+      } header: {
+        Text("Lines")
+          .font(.subheadline)
+          .frame(minHeight: 40)
+      }
+    }
   }
-}
+
+#endif

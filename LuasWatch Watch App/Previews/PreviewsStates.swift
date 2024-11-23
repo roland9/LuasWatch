@@ -7,43 +7,35 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-  private func luasView(state: AppState) -> some View {
-    let appModel = AppModel(state)
-    appModel.appMode = .favourite(stationGreen)
-
-    return LuasMainScreen()
-      .environmentObject(appModel)
-      .modelContainer(Previews().container)
-  }
 
   #Preview("idle") {
-    luasView(state: .idle)
+    luasMainScreen(state: .idle)
   }
 
   #Preview("gettingLoc") {
-    luasView(state: .gettingLocation)
+    luasMainScreen(state: .gettingLocation)
   }
 
   #Preview("authUnk") {
-    luasView(state: .locationAuthorizationUnknown)
+    luasMainScreen(state: .locationAuthorizationUnknown)
   }
 
   #Preview("locErr") {
-    luasView(state: .errorGettingLocation("Error getting location."))
+    luasMainScreen(state: .errorGettingLocation("Error getting location."))
   }
 
   #Preview("errStation") {
-    luasView(
+    luasMainScreen(
       state: .errorGettingStationTooFarAway(
         "Some internal error getting station."))
   }
 
   #Preview("errFarAway") {
-    luasView(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway))
+    luasMainScreen(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway))
   }
 
   #Preview("errLoading") {
-    luasView(
+    luasMainScreen(
       state: .errorGettingDueTimes(
         stationGreen, "Error loading due times - could not access internet?"))
   }

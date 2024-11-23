@@ -90,16 +90,14 @@ struct LuasWatchComplications: Widget {
   }
 }
 
-struct LuasWatchComplications_Previews: PreviewProvider {
-  static var previews: some View {
+#Preview("corner", as: .accessoryCorner, widget: {
+  LuasWatchComplications()
+}, timelineProvider: {
+  Provider()
+})
 
-    LuasWatchComplicationsEntryView()
-      .previewContext(WidgetPreviewContext(family: .accessoryCorner))
-      .previewDisplayName("corner")
-
-    LuasWatchComplicationsEntryView()
-      .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-      .previewDisplayName("circular")
-
-  }
-}
+#Preview("circular", as: .accessoryCircular, widget: {
+  LuasWatchComplications()
+}, timelineProvider: {
+  Provider()
+})

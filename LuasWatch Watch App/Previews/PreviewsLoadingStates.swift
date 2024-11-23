@@ -7,33 +7,25 @@ import LuasKit
 import SwiftUI
 
 #if DEBUG
-  private func luasView(state: AppState) -> some View {
-    let appModel = AppModel(state)
-    appModel.appMode = .favourite(stationGreen)
-
-    return LuasMainScreen()
-      .environmentObject(appModel)
-      .modelContainer(Previews().container)
-  }
 
   #Preview("loading") {
-    luasView(state: .loadingDueTimes(stationGreen, cachedTrains: nil))
+    luasMainScreen(state: .loadingDueTimes(stationGreen, cachedTrains: nil))
   }
 
   #Preview("loading (cached)") {
-    luasView(state: .loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
+    luasMainScreen(state: .loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
   }
 
   #Preview("loading 1Way (cached)") {
-    luasView(
+    luasMainScreen(
       state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
   }
 
   #Preview("noTrains") {
-    luasView(state: .foundDueTimes(noTrainsGreen))
+    luasMainScreen(state: .foundDueTimes(noTrainsGreen))
   }
 
   #Preview("OK") {
-    luasView(state: .foundDueTimes(trainsGreen))
+    luasMainScreen(state: .foundDueTimes(trainsGreen))
   }
 #endif

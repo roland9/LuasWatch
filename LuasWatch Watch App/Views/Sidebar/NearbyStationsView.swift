@@ -49,14 +49,14 @@ extension NearbyStationsView: View {
 }
 
 #if DEBUG
-  #Preview("Nearby") {
-    let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
 
-    return List {
+  #Preview("Nearby") {
+
+    List {
       Section {
         NearbyStationsView()
-          .environmentObject(appModel)
+          .environmentObject(
+            makeAppModel(state: .foundDueTimes(trainsOneWayStation)))
       } header: {
         Text("Nearby")
           .font(.subheadline)

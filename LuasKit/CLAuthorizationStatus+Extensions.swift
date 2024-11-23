@@ -5,8 +5,9 @@
 
 import CoreLocation
 
-extension CLAuthorizationStatus: CustomStringConvertible {
-  public var description: String {
+extension CLAuthorizationStatus {
+
+  public var readableDescription: String {
     switch self {
     case .notDetermined:
       return "Not Determined"

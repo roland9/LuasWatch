@@ -5,12 +5,11 @@
 
 import SwiftData
 
+@MainActor
 struct Previews {
   let container: ModelContainer
 
-  lazy var context: ModelContext = {
-    ModelContext(container)
-  }()
+  // NB: need to use mainContext otherwise Previews don't work!
 
   init(addSample: Bool = true) {
     self.init([
@@ -34,7 +33,7 @@ struct Previews {
   }
 
   mutating func addSampleData() {
-    _ = FavouriteStation.addPreviews(into: context)
+    _ = FavouriteStation.addPreviews(into: container.mainContext)
   }
 }
 

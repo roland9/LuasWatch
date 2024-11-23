@@ -94,7 +94,7 @@ extension Location: CLLocationManagerDelegate {
   }
 
   public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    myPrint("\(manager.authorizationStatus.description)")
+    myPrint("authorizationStatus: \(manager.authorizationStatus.readableDescription)")
 
     switch manager.authorizationStatus {
     case .notDetermined:

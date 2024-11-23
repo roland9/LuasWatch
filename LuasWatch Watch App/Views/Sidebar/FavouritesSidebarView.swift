@@ -72,24 +72,24 @@ extension FavouritesSidebarView: View {
 }
 
 #if DEBUG
-  #Preview("Favourites") {
-    let appModel = AppModel(AppState(.foundDueTimes(trainsOneWayStation)))
-    appModel.appMode = .favourite(stationGreen)
 
-    return List {
+  #Preview("Favourites") {
+
+    List {
       Section {
         FavouritesSidebarView()
       } header: {
         FavouritesHeaderView()
       }
-      .environmentObject(appModel)
       .modelContainer(Previews().container)
+      .environmentObject(
+        makeAppModel(state: .foundDueTimes(trainsOneWayStation)))
     }
   }
 
   #Preview("Favourites (empty)") {
 
-    return List {
+    List {
       Section {
         FavouritesSidebarView()
       } header: {
