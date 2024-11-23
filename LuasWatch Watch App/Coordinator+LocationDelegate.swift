@@ -106,15 +106,12 @@ extension Coordinator: LocationDelegate {
       {
         /// only use the cached trains list if they actually match the station we're about to load
         /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
-
-        /// DON'T use updateWithAnimation() here, at first launch it shows empty content?!?
-          appModel.appState = .loadingDueTimes(
-            closestStation, cachedTrains: cachedTrains.trains)
+        updateWithAnimation(
+          to: .loadingDueTimes(
+            closestStation,
+            cachedTrains: cachedTrains.trains))
       } else {
-
-        /// DON'T use updateWithAnimation() here, at first launch it shows empty content?!?
-        appModel.appState = .loadingDueTimes(
-          closestStation, cachedTrains: nil)
+        updateWithAnimation(to: .loadingDueTimes(closestStation, cachedTrains: nil))
       }
     } else {
       myPrint("SidebarView is up -> ignore so we don't interfere UI")
