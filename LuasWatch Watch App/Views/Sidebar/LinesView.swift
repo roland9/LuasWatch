@@ -51,6 +51,8 @@ extension LinesView: View {
   }
 }
 
+#if DEBUG
+
 #Preview("Lines") {
 
   List {
@@ -64,3 +66,5 @@ extension LinesView: View {
     }
   }
 }
+
+#endif

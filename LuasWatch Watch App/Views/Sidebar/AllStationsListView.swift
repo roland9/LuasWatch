@@ -64,9 +64,13 @@ extension AllStationsListView: View {
   }
 }
 
+#if DEBUG
+
 #Preview("All Stations (green)") {
 
   AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
     .environmentObject(makeAppModel(state: .gettingLocation))
     .modelContainer(Previews().container)
 }
+
+#endif

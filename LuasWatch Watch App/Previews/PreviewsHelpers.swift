@@ -29,7 +29,7 @@ import SwiftUI
   }
 
   @MainActor
-  func luasView(state: AppState) -> some View {
+  func luasMainScreen(state: AppState) -> some View {
     let appModel = AppModel(state)
     appModel.appMode = .favourite(stationGreen)
 
@@ -39,7 +39,7 @@ import SwiftUI
   }
 
   func makeAppModel(
-    state: AppState, appMode: AppMode = .closest, locationDenied: Bool = false
+    state: AppState, appMode: AppMode = .specific(stationGreen), locationDenied: Bool = false
   ) -> AppModel {
     let appModel = AppModel(state)
     appModel.appMode = appMode
