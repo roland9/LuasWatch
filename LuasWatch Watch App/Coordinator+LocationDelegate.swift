@@ -108,8 +108,8 @@ extension Coordinator: LocationDelegate {
         /// (otherwise the UI looks wrong, e.g. might show the incorrect line color
 
         /// DON'T use updateWithAnimation() here, at first launch it shows empty content?!?
-          appModel.appState = .loadingDueTimes(
-            closestStation, cachedTrains: cachedTrains.trains)
+        appModel.appState = .loadingDueTimes(
+          closestStation, cachedTrains: cachedTrains.trains)
       } else {
 
         /// DON'T use updateWithAnimation() here, at first launch it shows empty content?!?
