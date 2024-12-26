@@ -4,6 +4,8 @@
 //
 import CoreLocation
 
+typealias JSONDictionary = [String: Any]
+
 public struct TrainStations: Sendable {
 
   // MARK: - Properties
