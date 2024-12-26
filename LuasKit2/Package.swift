@@ -4,21 +4,28 @@
 import PackageDescription
 
 let package = Package(
-    name: "LuasKit2",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "LuasKit2",
-            targets: ["LuasKit2"]),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "LuasKit2"),
-        .testTarget(
-            name: "LuasKit2Tests",
-            dependencies: ["LuasKit2"]
-        ),
-    ]
+  name: "LuasKit2",
+  products: [
+    // Products define the executables and libraries a package produces, making them visible to other packages.
+    .library(
+      name: "LuasKit2",
+      targets: ["LuasKit2"])
+  ],
+  targets: [
+    // Targets are the basic building blocks of a package, defining a module or a test suite.
+    // Targets can depend on other targets in this package and products from dependencies.
+    .target(
+      name: "LuasKit2",
+      resources: [
+        .process("Resources/luasStops.json")
+      ]
+    ),
+    .testTarget(
+      name: "LuasKit2Tests",
+      dependencies: ["LuasKit2"],
+      resources: [
+        .process("Resources/luasStops_test.json")
+      ]
+    ),
+  ]
 )

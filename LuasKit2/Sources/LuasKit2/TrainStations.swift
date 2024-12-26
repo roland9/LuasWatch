@@ -4,18 +4,41 @@
 //
 import CoreLocation
 
-public struct TrainStations {
+public struct TrainStations: Sendable {
+
+  // MARK: - Properties
 
   public let stations: [TrainStation]
 
-//  public static let sharedFromFile = Self.fromFile()
+  // MARK: - Initializers
 
-  private static func fromFile() -> TrainStations {
-    TrainStations(fromFile: "luasStops")
+  public init?() {
+    // https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package#Access-a-resource-in-code
+    guard let url = Bundle.module.url(forResource: "luasStops", withExtension: "json") else {
+      return nil
+    }
+
+    self.init(url: url)
   }
 
+  internal init(url: URL) {
+    guard let data = try? Data(contentsOf: url),
+    let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
+          let stationsArray = json["stations"] as? [JSONDictionary] else {
+      fatalError("could not parse JSON file")
+    }
+    
+    self.stations = Self.trainStations(from: stationsArray)
+  }
+
+  internal init(stations: [TrainStation]) {
+    self.stations = stations
+  }
+
+  // MARK: - Private Methods
+
   fileprivate static func trainStations(from stationsArray: [JSONDictionary]) -> [TrainStation] {
-    // swiftlint:disable force_cast
+
     stationsArray.compactMap { (station) in
 
       var stationTypeValue: TrainStation.StationType = .twoway
@@ -26,36 +49,32 @@ public struct TrainStations {
         stationTypeValue = stationType
       }
 
+      guard
+        let stationIdShort = station["stationIdShort"] as? String,
+        let shortCode = station["shortCode"] as? String,
+        let routeRawValue = station["route"] as? String,
+        let route = Route(rawValue: routeRawValue),
+        let name = station["name"] as? String,
+        let lat = station["lat"] as? Double,
+        let long = station["long"] as? Double
+      else {
+        assertionFailure("could not parse station")
+        return nil
+      }
+
       return TrainStation(
-        stationIdShort: station["stationIdShort"] as! String,
-        shortCode: station["shortCode"] as! String,
-        route: Route(rawValue: station["route"] as! String)!,
-        name: station["name"] as! String,
+        stationIdShort: stationIdShort,
+        shortCode: shortCode,
+        route: route,
+        name: name,
         location: CLLocation(
-          latitude: CLLocationDegrees(station["lat"] as! Double),
-          longitude: CLLocationDegrees(station["long"] as! Double)),
+          latitude: CLLocationDegrees(lat),
+          longitude: CLLocationDegrees(long)),
         stationType: stationTypeValue)
     }
-    // swiftlint:enable force_cast
   }
 
-  private init(fromFile fileName: String) {
-    let identifier = "ie.mapps.LuasKit"
-
-    guard
-      let luasStopsFile = Bundle(identifier: identifier)?
-        .url(forResource: fileName, withExtension: "json"),
-      let data = try? Data(contentsOf: luasStopsFile),
-      let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
-      let stationsArray = json["stations"] as? [JSONDictionary]
-    else { fatalError("could not parse JSON file") }
-
-    self.stations = Self.trainStations(from: stationsArray)
-  }
-
-  public init(stations: [TrainStation]) {
-    self.stations = stations
-  }
+  // MARK: - Helpers
 
   public var redLineStations: [TrainStation] {
     stations

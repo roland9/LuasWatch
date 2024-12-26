@@ -34,6 +34,35 @@ let stationRed = TrainStation(
   #expect(stations.redLineStations == [stationRed])
 }
 
+enum TestingError: Error {
+  case initialzerFailed
+}
+
+@Test func trainStation_initializer() async throws {
+
+  guard let stations = TrainStations() else {
+    throw TestingError.initialzerFailed
+  }
+
+  #expect(stations.stations.count == 67)
+  #expect(stations.greenLineStations.count == 35)
+  #expect(stations.redLineStations.count == 32)
+}
+
+@Test func trainStation_initializer_url() async throws {
+
+  let bundleURL = Bundle.module.url(forResource: "luasStops_test", withExtension: "json")!
+
+  #expect(bundleURL.description.contains("LuasKit2Tests.xctest/"))
+  #expect(bundleURL.description.hasSuffix("bundle/luasStops_test.json"))
+
+  let stations = TrainStations(url: bundleURL)
+
+  #expect(stations.stations.count == 67)
+  #expect(stations.greenLineStations.count == 35)
+  #expect(stations.redLineStations.count == 32)
+}
+
 @Test func trainStations_closestFromLocation() throws {
 
   let closeLocation = CLLocation(
