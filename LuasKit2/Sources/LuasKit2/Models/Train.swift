@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Train: CustomStringConvertible, Hashable, Codable {
+public struct Train: CustomStringConvertible, Hashable, Codable, Sendable {
 
   // MARK: - Properties
   

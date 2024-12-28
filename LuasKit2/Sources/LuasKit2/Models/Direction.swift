@@ -6,7 +6,7 @@
 import AppIntents
 import Foundation
 
-public enum Direction: Int, CaseIterable, Codable, CustomStringConvertible {
+public enum Direction: Int, Equatable, CaseIterable, Codable, CustomStringConvertible {
 
   case both, inbound, outbound
 
@@ -21,7 +21,7 @@ public enum Direction: Int, CaseIterable, Codable, CustomStringConvertible {
     }
   }
 
-  public func next() -> Direction {
+  public var next: Direction {
     switch self {
     case .both:
       return .inbound
