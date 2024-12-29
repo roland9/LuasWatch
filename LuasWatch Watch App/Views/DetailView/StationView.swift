@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 struct StationView {
@@ -42,7 +43,7 @@ extension StationView: View {
       LuasTextView(text: message)
 
     case .foundDueTimes(let trains):
-      StationTimesView(trainStation: trains.trainStation, trains: trains)
+      StationTimesView(trainStation: trains.station, trains: trains)
     }
   }
 }

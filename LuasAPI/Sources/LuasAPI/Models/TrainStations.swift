@@ -25,11 +25,11 @@ public struct TrainStations: Sendable {
 
   internal init(url: URL) {
     guard let data = try? Data(contentsOf: url),
-    let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
+          let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary,
           let stationsArray = json["stations"] as? [JSONDictionary] else {
       fatalError("could not parse JSON file")
     }
-    
+
     self.stations = Self.trainStations(from: stationsArray)
   }
 
@@ -46,7 +46,7 @@ public struct TrainStations: Sendable {
       var stationTypeValue: TrainStation.StationType = .twoway
 
       if let stationTypeString = station["type"] as? String,
-        let stationType = TrainStation.StationType(rawValue: stationTypeString)
+         let stationType = TrainStation.StationType(rawValue: stationTypeString)
       {
         stationTypeValue = stationType
       }
@@ -118,10 +118,10 @@ public struct TrainStations: Sendable {
 
   public func closestStation(from location: CLLocation, route: Route) -> TrainStation? {
     switch route {
-    case .red:
-      return closestStation(from: location, stations: redLineStations)
-    case .green:
-      return closestStation(from: location, stations: greenLineStations)
+      case .red:
+        return closestStation(from: location, stations: redLineStations)
+      case .green:
+        return closestStation(from: location, stations: greenLineStations)
     }
   }
 

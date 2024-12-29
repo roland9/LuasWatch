@@ -80,9 +80,10 @@
 		AB695E712AE41CAC00B6DB99 /* PreviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E602AE41CAC00B6DB99 /* PreviewsData.swift */; };
 		AB695E762AE41CAC00B6DB99 /* GrantLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E662AE41CAC00B6DB99 /* GrantLocationAuthView.swift */; };
 		AB695E7D2AE41CAC00B6DB99 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */; };
-		AB695E7F2AE41D5800B6DB99 /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
 		AB695E802AE41D5800B6DB99 /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB695E842AE41EAE00B6DB99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */; };
+		AB79B57D2D21A614001E20F8 /* LuasAPI in Frameworks */ = {isa = PBXBuildFile; productRef = AB79B57C2D21A614001E20F8 /* LuasAPI */; };
+		AB79B57F2D21A614001E20F8 /* LuasApp in Frameworks */ = {isa = PBXBuildFile; productRef = AB79B57E2D21A614001E20F8 /* LuasApp */; };
 		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
 		AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRow.swift */; };
 		AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRow.swift */; };
@@ -394,7 +395,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB695E7F2AE41D5800B6DB99 /* LuasKit.framework in Frameworks */,
+				AB79B57D2D21A614001E20F8 /* LuasAPI in Frameworks */,
+				AB79B57F2D21A614001E20F8 /* LuasApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2058,6 +2060,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AB79B57C2D21A614001E20F8 /* LuasAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LuasAPI;
+		};
+		AB79B57E2D21A614001E20F8 /* LuasApp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LuasApp;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AB364CF92308276C00C73EF6 /* Project object */;
 }

@@ -7,7 +7,7 @@ import Foundation
 
 // inspired by https://gist.github.com/ccheptea/324e40dc905c961d87a62f65f7ba0462
 
-public func myPrint(
+internal func myPrint(
   _ items: Any..., separator: String = " ", terminator: String = "\n", function: String = #function,
   file: String = #file, line: Int = #line
 ) {

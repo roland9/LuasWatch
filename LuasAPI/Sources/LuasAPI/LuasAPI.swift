@@ -9,7 +9,7 @@ public struct LuasAPI {
 
   private let session: URLSessionLoading
 
-  init(session: URLSessionLoading) {
+  public init(session: URLSessionLoading) {
     self.session = session
   }
 

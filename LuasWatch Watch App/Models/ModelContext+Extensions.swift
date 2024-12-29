@@ -3,9 +3,10 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import Foundation
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftData
+import SwiftUI
 
 extension ModelContext {
 
@@ -48,7 +49,7 @@ extension ModelContext {
       return .both
     }
 
-    if station.isFinalStop || station.isOneWayStop {
+    if station.isFinalStop || station.stationType == .oneway {
       return .both  // because we're not sure whether API returns the trains in inbound or outbound array
     } else {
 

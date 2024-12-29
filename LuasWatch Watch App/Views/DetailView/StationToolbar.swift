@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 struct StationToolbar {
@@ -40,7 +41,7 @@ extension StationToolbar: ToolbarContent {
       /// Change direction
       Button {
         withAnimation {
-          direction = direction.next()
+          direction = direction.next
         }
 
         let shortCode = trainStation.shortCode

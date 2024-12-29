@@ -3,7 +3,7 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasApp
 import SwiftUI
 
 struct TrainsViewLoading: View {

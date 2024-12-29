@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftData
 import SwiftUI
 
@@ -57,7 +58,7 @@ extension StationTimesView {
   @ViewBuilder
   fileprivate func timetableView(for trains: TrainsByDirection) -> some View {
 
-    if trains.trainStation.allowsSwitchingDirection {
+    if trains.station.allowsSwitchingDirection {
 
       switch direction {
 

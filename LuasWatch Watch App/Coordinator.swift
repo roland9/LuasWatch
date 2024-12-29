@@ -5,13 +5,14 @@
 
 import Combine
 import Foundation
-import LuasKit
+import LuasAPI
+import LuasApp
 
 class Coordinator: NSObject {
 
   internal let appModel: AppModel
   internal var location: Location
-  internal let api = LuasAPI(apiWorker: RealAPIWorker())
+  internal let api = LuasAPI(session: URLSession.shared)
 
   private var timer: Timer?
   private static let refreshInterval = 12.0

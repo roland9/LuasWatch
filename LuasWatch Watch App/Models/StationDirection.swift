@@ -3,8 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import Foundation
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftData
 
 @Model

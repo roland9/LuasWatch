@@ -7,6 +7,29 @@ import CoreLocation
 
 public struct TrainStation: CustomStringConvertible, Hashable, Identifiable, Sendable {
 
+  public let stationIdShort: String  // that is the 'id' required for the API
+  public let shortCode: String  // three-letter code, such as 'RAN'; for the XML API
+  public let route: Route
+  public let name: String
+  public let location: CLLocation
+  public let stationType: StationType
+
+  public init(
+    stationIdShort: String,
+    shortCode: String,
+    route: Route,
+    name: String,
+    location: CLLocation,
+    stationType: TrainStation.StationType = .twoway
+  ) {
+    self.stationIdShort = stationIdShort
+    self.shortCode = shortCode
+    self.route = route
+    self.name = name
+    self.location = location
+    self.stationType = stationType
+  }
+
   public var id: String {
     stationIdShort
   }
@@ -14,13 +37,6 @@ public struct TrainStation: CustomStringConvertible, Hashable, Identifiable, Sen
   public enum StationType: String, Sendable {
     case twoway, oneway, terminal
   }
-
-  public let stationIdShort: String  // that is the 'id' required for the API
-  public let shortCode: String  // three-letter code, such as 'RAN'; for the XML API
-  public let route: Route
-  public let name: String
-  public let location: CLLocation
-  public let stationType: StationType
 
   public var description: String {
     "<\(stationIdShort)> \"\(name)\"  (\(location.coordinate.latitude)/\(location.coordinate.longitude))  type: .\(stationType)"

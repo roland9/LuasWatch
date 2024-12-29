@@ -4,8 +4,8 @@
 //
 
 import CoreLocation
-import Foundation
-import LuasKit
+import LuasAPI
+import LuasApp
 
 extension Coordinator: LocationDelegate {
 
