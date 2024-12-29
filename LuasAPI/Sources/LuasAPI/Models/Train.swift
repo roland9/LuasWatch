@@ -28,23 +28,19 @@ public struct Train: CustomStringConvertible, Hashable, Codable, Sendable {
   // MARK: - Computed Properties
 
   public var description: String {
-    "\(destination.replacingOccurrences(of: "LUAS ", with: "")): \'\(dueTimeDescription)\'"
+    "\(destinationDescription): "
+    + ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
   }
 
-  public var dueTimeDescription: String {
-    "\(destination.replacingOccurrences(of: "LUAS ", with: "")): "
-      + ((dueTime.lowercased() == "due") ? "Due" : "\(dueTime) mins")
+  public var dueTimeDescriptionShort: String {
+    (dueTime.lowercased() == "due") ? "Due" : dueTime
   }
-
-//  public var dueTimeDescription2: String {
-//    (dueTime.lowercased() == "due") ? "Due" : dueTime
-//  }
 
   public var destinationDescription: String {
     destination.replacingOccurrences(of: "LUAS ", with: "")
   }
 
   public var destinationDueTimeDescription: String {
-    "Luas to \(destination) \(dueTime.lowercased() == "due" ? "is Due" : "in \(dueTime)")"
+    "Luas to \(destinationDescription) \(dueTime.lowercased() == "due" ? "is Due" : "in \(dueTime)")"
   }
 }
