@@ -15,6 +15,8 @@ struct SidebarView {
 
   @State var isGreenStationsViewPresented = false
   @State var isRedStationsViewPresented = false
+
+  private static let trainStations = TrainStations()
 }
 
 extension SidebarView: View {
@@ -77,7 +79,7 @@ extension SidebarView: View {
       isPresented: $isGreenStationsViewPresented,
       content: {
         StationsModal(
-          stations: TrainStations.sharedFromFile.greenLineStations,
+          stations: Self.trainStations.greenLineStations,
           highlightedStation: appModel.highlightedStation,
           action: {
             appModel.appMode = .specific($0)
@@ -89,7 +91,7 @@ extension SidebarView: View {
       isPresented: $isRedStationsViewPresented,
       content: {
         StationsModal(
-          stations: TrainStations.sharedFromFile.redLineStations,
+          stations: Self.trainStations.redLineStations,
           highlightedStation: appModel.highlightedStation,
           action: {
             appModel.appMode = .specific($0)

@@ -11,6 +11,8 @@ struct LuasMainScreen {
 
   @EnvironmentObject var appModel: AppModel
   @State var selectedTabView = 1
+
+  private static let trainStations = TrainStations()
 }
 
 extension LuasMainScreen: View {
@@ -36,8 +38,8 @@ extension LuasMainScreen: View {
 
         StationsModal(
           stations: appModel.selectedStation?.route == .green
-            ? TrainStations.sharedFromFile.greenLineStations
-            : TrainStations.sharedFromFile.redLineStations,
+            ? Self.trainStations.greenLineStations
+            : Self.trainStations.redLineStations,
           highlightedStation: appModel.selectedStation,
           action: { station in
             appModel.appMode = .specific(station)

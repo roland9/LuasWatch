@@ -14,6 +14,8 @@ struct AllStationsListView {
   @Environment(\.dismiss) private var dismiss
 
   @State var stations: [TrainStation]
+
+  private static let trainStations = TrainStations()
 }
 
 extension AllStationsListView: View {
@@ -25,14 +27,14 @@ extension AllStationsListView: View {
       ScrollView {
         NavigationLink(
           destination: stationsListView(
-            stations: TrainStations.sharedFromFile.greenLineStations)
+            stations: Self.trainStations.greenLineStations)
         ) {
           LineRow(route: .green, isHighlighted: false)
         }
 
         NavigationLink(
           destination: stationsListView(
-            stations: TrainStations.sharedFromFile.redLineStations)
+            stations: Self.trainStations.redLineStations)
         ) {
           LineRow(route: .red, isHighlighted: false)
         }
@@ -69,7 +71,7 @@ extension AllStationsListView: View {
 
   #Preview("All Stations (green)") {
 
-    AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+    AllStationsListView(stations: TrainStations().greenLineStations)
       .environmentObject(makeAppModel(state: .gettingLocation))
       .modelContainer(Previews().container)
   }

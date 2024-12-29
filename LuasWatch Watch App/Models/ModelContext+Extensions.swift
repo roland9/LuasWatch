@@ -45,7 +45,7 @@ extension ModelContext {
 
   func directionConsideringStationType(for shortCode: String) -> Direction {
 
-    guard let station = TrainStations.sharedFromFile.station(shortCode: shortCode) else {
+    guard let station = TrainStations().station(shortCode: shortCode) else {
       return .both
     }
 

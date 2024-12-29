@@ -2,6 +2,7 @@
 //  Created by Roland Gropmair on 23/04/2023.
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
+
 import CoreLocation
 
 typealias JSONDictionary = [String: Any]
@@ -14,10 +15,10 @@ public struct TrainStations: Sendable {
 
   // MARK: - Initializers
 
-  public init?() {
+  public init() {
     // https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package#Access-a-resource-in-code
     guard let url = Bundle.module.url(forResource: "luasStops", withExtension: "json") else {
-      return nil
+      fatalError("expected luasStops.json file in bundle")
     }
 
     self.init(url: url)

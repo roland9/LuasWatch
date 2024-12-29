@@ -17,15 +17,9 @@ struct TrainStationsTests {
     #expect(stations.redLineStations == [stationRed])
   }
 
-  enum TestingError: Error {
-    case initialzerFailed
-  }
-
   @Test func trainStations_initializer() async throws {
 
-    guard let stations = TrainStations() else {
-      throw TestingError.initialzerFailed
-    }
+    let stations = TrainStations()
 
     #expect(stations.stations.count == 67)
     #expect(stations.greenLineStations.count == 35)

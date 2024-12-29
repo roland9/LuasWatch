@@ -28,6 +28,8 @@ extension AppMode: Codable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let base = try container.decode(CodingBase.self, forKey: .base)
 
+    let trainStations = TrainStations()
+
     switch base {
 
     case .closest:
@@ -36,28 +38,28 @@ extension AppMode: Codable {
       self = .closestOtherLine
     case .favourite:
       let shortCode = try container.decode(String.self, forKey: .stationValue)
-      if let station = TrainStations()?.station(shortCode: shortCode) {
+      if let station = trainStations.station(shortCode: shortCode) {
         self = .favourite(station)
       } else {
         self = .closest
       }
     case .nearby:
       let shortCode = try container.decode(String.self, forKey: .stationValue)
-        if let station = TrainStations()?.station(shortCode: shortCode) {
+        if let station = trainStations.station(shortCode: shortCode) {
         self = .nearby(station)
       } else {
         self = .closest
       }
     case .specific:
       let shortCode = try container.decode(String.self, forKey: .stationValue)
-        if let station = TrainStations()?.station(shortCode: shortCode) {
+        if let station = trainStations.station(shortCode: shortCode) {
         self = .specific(station)
       } else {
         self = .closest
       }
     case .recents:
       let shortCode = try container.decode(String.self, forKey: .stationValue)
-        if let station = TrainStations()?.station(shortCode: shortCode) {
+        if let station = trainStations.station(shortCode: shortCode) {
         self = .recents(station)
       } else {
         self = .closest

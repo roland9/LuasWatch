@@ -14,7 +14,9 @@ struct FavouritesSidebarView {
   @Environment(\.modelContext) private var modelContext
 
   @Query(sort: \FavouriteStation.dateAdded, order: .reverse)
+
   private var favouriteStations: [FavouriteStation]
+  private static let trainStations = TrainStations()
 }
 
 extension FavouritesSidebarView: View {
@@ -26,7 +28,7 @@ extension FavouritesSidebarView: View {
       ForEach(favouriteStations) { station in
 
         let station =
-          TrainStations.sharedFromFile.station(shortCode: station.shortCode)
+          Self.trainStations.station(shortCode: station.shortCode)
           ?? TrainStations.unknown
 
         StationRow(

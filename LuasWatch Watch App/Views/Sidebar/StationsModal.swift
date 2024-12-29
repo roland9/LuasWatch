@@ -53,7 +53,7 @@ extension StationsModal {
 
     // highlight in preview doesn't work??  does it used StoredAppMode?
     StationsModal(
-      stations: TrainStations.sharedFromFile.greenLineStations,
+      stations: TrainStations().greenLineStations,
       action: { _ in
         //
       }
