@@ -20,20 +20,6 @@
                ReferencedContainer = "container:LuasWatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB695E272AE41C1C00B6DB99"
-               BuildableName = "LuasWatch.app"
-               BlueprintName = "LuasWatch"
-               ReferencedContainer = "container:LuasWatch.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
