@@ -307,6 +307,7 @@
 		AB695E6D2AE41CAC00B6DB99 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB79B57A2D219ADE001E20F8 /* LuasAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuasAPI; sourceTree = "<group>"; };
+		AB79B57B2D219B9E001E20F8 /* LuasApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuasApp; sourceTree = "<group>"; };
 		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
@@ -524,6 +525,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				AB79B57B2D219B9E001E20F8 /* LuasApp */,
 				AB79B57A2D219ADE001E20F8 /* LuasAPI */,
 				AB387B402CBBE202002D4B4A /* myConfiguration.json */,
 				AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */,
