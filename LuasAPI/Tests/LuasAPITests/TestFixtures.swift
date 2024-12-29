@@ -4,7 +4,7 @@
 
 import CoreLocation
 
-@testable import LuasKit2
+@testable import LuasAPI
 
 let locationBluebell = CLLocation(
   latitude: CLLocationDegrees(53.3292817872831),

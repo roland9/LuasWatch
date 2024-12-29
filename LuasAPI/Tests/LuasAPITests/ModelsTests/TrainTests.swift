@@ -4,7 +4,7 @@
 
 import Testing
 
-@testable import LuasKit2
+@testable import LuasAPI
 
 struct TrainTests {
 

@@ -5,7 +5,7 @@
 import CoreLocation
 import Testing
 
-@testable import LuasKit2
+@testable import LuasAPI
 
 fileprivate let station = TrainStation(
   stationIdShort: "short id",

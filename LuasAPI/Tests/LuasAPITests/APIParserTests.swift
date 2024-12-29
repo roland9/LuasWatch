@@ -6,7 +6,7 @@ import CoreLocation
 import Foundation
 import Testing
 
-@testable import LuasKit2
+@testable import LuasAPI
 
 struct APIParserTests {
 

@@ -5,7 +5,7 @@
 import CoreLocation
 import Testing
 
-@testable import LuasKit2
+@testable import LuasAPI
 
 struct TrainStationsTests {
 
@@ -36,7 +36,7 @@ struct TrainStationsTests {
 
     let bundleURL = Bundle.module.url(forResource: "luasStops_test", withExtension: "json")!
 
-    #expect(bundleURL.description.contains("LuasKit2Tests.xctest/"))
+    #expect(bundleURL.description.contains("LuasAPITests.xctest/"))
     #expect(bundleURL.description.hasSuffix("bundle/luasStops_test.json"))
 
     let stations = TrainStations(url: bundleURL)

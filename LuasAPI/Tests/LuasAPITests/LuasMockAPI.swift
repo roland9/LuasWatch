@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import LuasKit2
+import LuasAPI
 
 struct LuasMockSession: URLSessionLoading {
   func data(for request: URLRequest) async throws -> (Data, URLResponse) {

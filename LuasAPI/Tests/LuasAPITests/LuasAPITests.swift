@@ -6,7 +6,7 @@
 import Foundation
 import Testing
 
-@testable import LuasKit2
+@testable import LuasAPI
 
 @Suite struct LuasAPITests {
 

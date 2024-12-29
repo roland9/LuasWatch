@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "LuasKit2",
+  name: "LuasAPI",
   platforms: [
          .iOS(.v18),
          .watchOS(.v11)
@@ -12,21 +12,21 @@ let package = Package(
   products: [
     // Products define the executables and libraries a package produces, making them visible to other packages.
     .library(
-      name: "LuasKit2",
-      targets: ["LuasKit2"])
+      name: "LuasAPI",
+      targets: ["LuasAPI"])
   ],
   targets: [
     // Targets are the basic building blocks of a package, defining a module or a test suite.
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
-      name: "LuasKit2",
+      name: "LuasAPI",
       resources: [
         .process("Resources/luasStops.json")
       ]
     ),
     .testTarget(
-      name: "LuasKit2Tests",
-      dependencies: ["LuasKit2"],
+      name: "LuasAPITests",
+      dependencies: ["LuasAPI"],
       resources: [
         .process("Resources/luasStops_test.json")
       ]
