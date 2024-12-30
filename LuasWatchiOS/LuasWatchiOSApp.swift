@@ -3,28 +3,53 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import LuasKit
 import SwiftUI
+import SwiftData
+
+import LuasAPI
+import LuasApp
 
 @main
 struct LuasWatchiOSApp: App {
   @Environment(\.scenePhase) var scenePhase
 
-  let appState = AppState()
+  private var sharedModelContainer: ModelContainer = {
+    let schema = Schema([
+      FavouriteStation.self,
+      StationDirection.self,
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+    do {
+      let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+      // WIP create sample data
+
+      return container
+    } catch {
+      fatalError("Could not create ModelContainer: \(error)")
+    }
+  }()
+
+  let appModel = AppModel()
   let location = Location()
   var mainCoordinator: Coordinator!
 
   init() {
-    mainCoordinator = Coordinator(appState: appState, location: location)
-    appState.changeable = mainCoordinator
+    mainCoordinator = Coordinator(
+      appModel: appModel,
+      location: location)
+
     mainCoordinator.start()
   }
 
   var body: some Scene {
     WindowGroup {
-      LuasView()
-        .environmentObject(appState)
+      LuasMainScreen()
     }
+    .environmentObject(appModel)
+    .modelContainer(sharedModelContainer)
+
     .onChange(of: scenePhase) {
       switch $0 {
       case .background, .inactive:
@@ -37,6 +62,5 @@ struct LuasWatchiOSApp: App {
         break
       }
     }
-
   }
 }

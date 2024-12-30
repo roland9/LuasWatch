@@ -3,10 +3,11 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import LuasAPI
-import LuasApp
 import SwiftData
 import SwiftUI
+
+import LuasAPI
+import LuasApp
 
 @main
 struct LuasWatch_Watch_App: App {

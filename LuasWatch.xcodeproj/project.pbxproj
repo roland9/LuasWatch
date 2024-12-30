@@ -21,17 +21,7 @@
 		AB0BD3742AE7062400EB51AF /* LuasWatchiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3732AE7062400EB51AF /* LuasWatchiOSTests.swift */; };
 		AB0BD37E2AE7062400EB51AF /* LuasWatchiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD37D2AE7062400EB51AF /* LuasWatchiOSUITests.swift */; };
 		AB0BD3802AE7062400EB51AF /* LuasWatchiOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD37F2AE7062400EB51AF /* LuasWatchiOSUITestsLaunchTests.swift */; };
-		AB0BD39A2AE7071200EB51AF /* GrantLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38B2AE7071200EB51AF /* GrantLocationAuthView.swift */; };
-		AB0BD39B2AE7071200EB51AF /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38C2AE7071200EB51AF /* LoadingAnimationView.swift */; };
-		AB0BD39C2AE7071200EB51AF /* TrainsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38D2AE7071200EB51AF /* TrainsListView.swift */; };
-		AB0BD39D2AE7071200EB51AF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38E2AE7071200EB51AF /* HeaderView.swift */; };
-		AB0BD39E2AE7071200EB51AF /* ChangeStationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD38F2AE7071200EB51AF /* ChangeStationButton.swift */; };
-		AB0BD39F2AE7071200EB51AF /* TapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3902AE7071200EB51AF /* TapOverlayView.swift */; };
-		AB0BD3A02AE7071200EB51AF /* LuasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3912AE7071200EB51AF /* LuasView.swift */; };
-		AB0BD3A22AE7071200EB51AF /* PreviewsDataiOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3942AE7071200EB51AF /* PreviewsDataiOS.swift */; };
 		AB0BD3A92AE7086700EB51AF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3A82AE7086700EB51AF /* Coordinator.swift */; };
-		AB0BD3AB2AE70AFD00EB51AF /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
-		AB0BD3AC2AE70AFD00EB51AF /* LuasKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB0BFCE92B42E5430060AAD5 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCE82B42E5430060AAD5 /* StationView.swift */; };
 		AB0BFCEB2B42E58A0060AAD5 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */; };
 		AB0BFCED2B42E7780060AAD5 /* FavouritesSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BFCEC2B42E7780060AAD5 /* FavouritesSidebarView.swift */; };
@@ -45,6 +35,47 @@
 		AB2453F82AE424B40007FA7C /* LuasWatchComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */; };
 		AB2453FA2AE424B50007FA7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2453F92AE424B50007FA7C /* Assets.xcassets */; };
 		AB2453FE2AE424B50007FA7C /* LuasWatchComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB3095A62D2315E100955598 /* LuasAPI in Frameworks */ = {isa = PBXBuildFile; productRef = AB3095A52D2315E100955598 /* LuasAPI */; };
+		AB3095A82D2315E100955598 /* LuasApp in Frameworks */ = {isa = PBXBuildFile; productRef = AB3095A72D2315E100955598 /* LuasApp */; };
+		AB3095AB2D23173200955598 /* Coordinator+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095AA2D23173200955598 /* Coordinator+LocationDelegate.swift */; };
+		AB3095AC2D23173200955598 /* Coordinator+Animiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095A92D23173200955598 /* Coordinator+Animiation.swift */; };
+		AB3095AE2D23177300955598 /* PreviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095AD2D23177300955598 /* PreviewsData.swift */; };
+		AB3095B02D23179C00955598 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095AF2D23179C00955598 /* CLLocation+Extensions.swift */; };
+		AB3095B22D2317F200955598 /* LuasMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B12D2317F200955598 /* LuasMainScreen.swift */; };
+		AB3095BD2D23182700955598 /* AllStationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B32D23182700955598 /* AllStationsListView.swift */; };
+		AB3095BE2D23182700955598 /* FavouritesSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B52D23182700955598 /* FavouritesSidebarView.swift */; };
+		AB3095BF2D23182700955598 /* StationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095BA2D23182700955598 /* StationRow.swift */; };
+		AB3095C02D23182700955598 /* NearbyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B82D23182700955598 /* NearbyStationsView.swift */; };
+		AB3095C12D23182700955598 /* StationsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095BB2D23182700955598 /* StationsModal.swift */; };
+		AB3095C22D23182700955598 /* LineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B62D23182700955598 /* LineRow.swift */; };
+		AB3095C32D23182700955598 /* LinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B72D23182700955598 /* LinesView.swift */; };
+		AB3095C42D23182700955598 /* FavouritesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B42D23182700955598 /* FavouritesHeaderView.swift */; };
+		AB3095C52D23182700955598 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095B92D23182700955598 /* SidebarView.swift */; };
+		AB3095D62D23186C00955598 /* LuasTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095CA2D23186C00955598 /* LuasTextView.swift */; };
+		AB3095D72D23186C00955598 /* TrainsViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095D32D23186C00955598 /* TrainsViewLoading.swift */; };
+		AB3095D82D23186C00955598 /* SimpleTimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095CD2D23186C00955598 /* SimpleTimetableView.swift */; };
+		AB3095D92D23186C00955598 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095D12D23186C00955598 /* StationView.swift */; };
+		AB3095DA2D23186C00955598 /* StationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095CF2D23186C00955598 /* StationToolbar.swift */; };
+		AB3095DB2D23186C00955598 /* OverflowDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095CC2D23186C00955598 /* OverflowDotsView.swift */; };
+		AB3095DC2D23186C00955598 /* GrantLocationAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095C92D23186C00955598 /* GrantLocationAuthView.swift */; };
+		AB3095DD2D23186C00955598 /* StationTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095CE2D23186C00955598 /* StationTimesView.swift */; };
+		AB3095DE2D23186C00955598 /* View+LuasFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095D42D23186C00955598 /* View+LuasFormatting.swift */; };
+		AB3095DF2D23186C00955598 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095C62D23186C00955598 /* Collection+Extensions.swift */; };
+		AB3095E02D23186C00955598 /* StationToolbarLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095D02D23186C00955598 /* StationToolbarLoading.swift */; };
+		AB3095E12D23186C00955598 /* ToolbarInactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095D22D23186C00955598 /* ToolbarInactive.swift */; };
+		AB3095E22D23186C00955598 /* DoubleTimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095C72D23186C00955598 /* DoubleTimetableView.swift */; };
+		AB3095E32D23186C00955598 /* NoTrainsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095CB2D23186C00955598 /* NoTrainsView.swift */; };
+		AB3095E42D23186C00955598 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095C82D23186C00955598 /* DueView.swift */; };
+		AB3095EC2D2318A400955598 /* PreviewsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095E62D2318A400955598 /* PreviewsHelpers.swift */; };
+		AB3095ED2D2318A400955598 /* PreviewsSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095E82D2318A400955598 /* PreviewsSidebar.swift */; };
+		AB3095EE2D2318A400955598 /* PreviewsStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095E92D2318A400955598 /* PreviewsStates.swift */; };
+		AB3095EF2D2318A400955598 /* PreviewsStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095EA2D2318A400955598 /* PreviewsStationView.swift */; };
+		AB3095F02D2318A400955598 /* Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095E52D2318A400955598 /* Previews.swift */; };
+		AB3095F12D2318A400955598 /* PreviewsLoadingStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095E72D2318A400955598 /* PreviewsLoadingStates.swift */; };
+		AB3095F22D2318A400955598 /* PreviewsStationView_EdgeCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095EB2D2318A400955598 /* PreviewsStationView_EdgeCases.swift */; };
+		AB3095F72D2318E200955598 /* ModelContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095F42D2318E200955598 /* ModelContext+Extensions.swift */; };
+		AB3095F82D2318E200955598 /* FavouriteStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095F32D2318E200955598 /* FavouriteStation.swift */; };
+		AB3095F92D2318E200955598 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095F52D2318E200955598 /* StationDirection.swift */; };
 		AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */; };
 		AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */; };
 		AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0082AE4094F002AA60A /* APIParser.swift */; };
@@ -163,17 +194,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AB0BD3AD2AE70AFD00EB51AF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				AB0BD3AC2AE70AFD00EB51AF /* LuasKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB2453FF2AE424B50007FA7C /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,19 +247,6 @@
 		AB0BD3792AE7062400EB51AF /* LuasWatchiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasWatchiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0BD37D2AE7062400EB51AF /* LuasWatchiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchiOSUITests.swift; sourceTree = "<group>"; };
 		AB0BD37F2AE7062400EB51AF /* LuasWatchiOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchiOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		AB0BD38B2AE7071200EB51AF /* GrantLocationAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantLocationAuthView.swift; sourceTree = "<group>"; };
-		AB0BD38C2AE7071200EB51AF /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
-		AB0BD38D2AE7071200EB51AF /* TrainsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsListView.swift; sourceTree = "<group>"; };
-		AB0BD38E2AE7071200EB51AF /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		AB0BD38F2AE7071200EB51AF /* ChangeStationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStationButton.swift; sourceTree = "<group>"; };
-		AB0BD3902AE7071200EB51AF /* TapOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapOverlayView.swift; sourceTree = "<group>"; };
-		AB0BD3912AE7071200EB51AF /* LuasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasView.swift; sourceTree = "<group>"; };
-		AB0BD3932AE7071200EB51AF /* PreviewsStationsModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsStationsModal.swift; sourceTree = "<group>"; };
-		AB0BD3942AE7071200EB51AF /* PreviewsDataiOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsDataiOS.swift; sourceTree = "<group>"; };
-		AB0BD3952AE7071200EB51AF /* PreviewsTapOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsTapOverlay.swift; sourceTree = "<group>"; };
-		AB0BD3962AE7071200EB51AF /* PreviewsAppStartup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppStartup.swift; sourceTree = "<group>"; };
-		AB0BD3972AE7071200EB51AF /* PreviewsAppResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppResult.swift; sourceTree = "<group>"; };
-		AB0BD3982AE7071200EB51AF /* PreviewsAppRunning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewsAppRunning.swift; sourceTree = "<group>"; };
 		AB0BD3A82AE7086700EB51AF /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AB0BFCE82B42E5430060AAD5 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		AB0BFCEA2B42E58A0060AAD5 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -256,6 +263,45 @@
 		AB2453F92AE424B50007FA7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2453FB2AE424B50007FA7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3095A42D23039A00955598 /* LuasAppTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = LuasAppTestPlan.xctestplan; path = LuasApp/Tests/LuasAppTestPlan.xctestplan; sourceTree = "<group>"; };
+		AB3095A92D23173200955598 /* Coordinator+Animiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Animiation.swift"; sourceTree = "<group>"; };
+		AB3095AA2D23173200955598 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
+		AB3095AD2D23177300955598 /* PreviewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsData.swift; sourceTree = "<group>"; };
+		AB3095AF2D23179C00955598 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
+		AB3095B12D2317F200955598 /* LuasMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMainScreen.swift; sourceTree = "<group>"; };
+		AB3095B32D23182700955598 /* AllStationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsListView.swift; sourceTree = "<group>"; };
+		AB3095B42D23182700955598 /* FavouritesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesHeaderView.swift; sourceTree = "<group>"; };
+		AB3095B52D23182700955598 /* FavouritesSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesSidebarView.swift; sourceTree = "<group>"; };
+		AB3095B62D23182700955598 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
+		AB3095B72D23182700955598 /* LinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesView.swift; sourceTree = "<group>"; };
+		AB3095B82D23182700955598 /* NearbyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsView.swift; sourceTree = "<group>"; };
+		AB3095B92D23182700955598 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		AB3095BA2D23182700955598 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
+		AB3095BB2D23182700955598 /* StationsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsModal.swift; sourceTree = "<group>"; };
+		AB3095C62D23186C00955598 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
+		AB3095C72D23186C00955598 /* DoubleTimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTimetableView.swift; sourceTree = "<group>"; };
+		AB3095C82D23186C00955598 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
+		AB3095C92D23186C00955598 /* GrantLocationAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantLocationAuthView.swift; sourceTree = "<group>"; };
+		AB3095CA2D23186C00955598 /* LuasTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasTextView.swift; sourceTree = "<group>"; };
+		AB3095CB2D23186C00955598 /* NoTrainsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTrainsView.swift; sourceTree = "<group>"; };
+		AB3095CC2D23186C00955598 /* OverflowDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowDotsView.swift; sourceTree = "<group>"; };
+		AB3095CD2D23186C00955598 /* SimpleTimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimetableView.swift; sourceTree = "<group>"; };
+		AB3095CE2D23186C00955598 /* StationTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTimesView.swift; sourceTree = "<group>"; };
+		AB3095CF2D23186C00955598 /* StationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationToolbar.swift; sourceTree = "<group>"; };
+		AB3095D02D23186C00955598 /* StationToolbarLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationToolbarLoading.swift; sourceTree = "<group>"; };
+		AB3095D12D23186C00955598 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
+		AB3095D22D23186C00955598 /* ToolbarInactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarInactive.swift; sourceTree = "<group>"; };
+		AB3095D32D23186C00955598 /* TrainsViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainsViewLoading.swift; sourceTree = "<group>"; };
+		AB3095D42D23186C00955598 /* View+LuasFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LuasFormatting.swift"; sourceTree = "<group>"; };
+		AB3095E52D2318A400955598 /* Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previews.swift; sourceTree = "<group>"; };
+		AB3095E62D2318A400955598 /* PreviewsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsHelpers.swift; sourceTree = "<group>"; };
+		AB3095E72D2318A400955598 /* PreviewsLoadingStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsLoadingStates.swift; sourceTree = "<group>"; };
+		AB3095E82D2318A400955598 /* PreviewsSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsSidebar.swift; sourceTree = "<group>"; };
+		AB3095E92D2318A400955598 /* PreviewsStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStates.swift; sourceTree = "<group>"; };
+		AB3095EA2D2318A400955598 /* PreviewsStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationView.swift; sourceTree = "<group>"; };
+		AB3095EB2D2318A400955598 /* PreviewsStationView_EdgeCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStationView_EdgeCases.swift; sourceTree = "<group>"; };
+		AB3095F32D2318E200955598 /* FavouriteStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStation.swift; sourceTree = "<group>"; };
+		AB3095F42D2318E200955598 /* ModelContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extensions.swift"; sourceTree = "<group>"; };
+		AB3095F52D2318E200955598 /* StationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDirection.swift; sourceTree = "<group>"; };
 		AB387B402CBBE202002D4B4A /* myConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myConfiguration.json; sourceTree = "<group>"; };
 		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
 		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
@@ -344,7 +390,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB0BD3AB2AE70AFD00EB51AF /* LuasKit.framework in Frameworks */,
+				AB3095A62D2315E100955598 /* LuasAPI in Frameworks */,
+				AB3095A82D2315E100955598 /* LuasApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,10 +467,14 @@
 		AB0BD3612AE7062300EB51AF /* LuasWatchiOS */ = {
 			isa = PBXGroup;
 			children = (
-				AB0BD3A82AE7086700EB51AF /* Coordinator.swift */,
-				AB0BD3922AE7071200EB51AF /* Previews */,
-				AB0BD38A2AE7071200EB51AF /* Views */,
 				AB0BD3622AE7062300EB51AF /* LuasWatchiOSApp.swift */,
+				AB3095AF2D23179C00955598 /* CLLocation+Extensions.swift */,
+				AB0BD3A82AE7086700EB51AF /* Coordinator.swift */,
+				AB3095A92D23173200955598 /* Coordinator+Animiation.swift */,
+				AB3095AA2D23173200955598 /* Coordinator+LocationDelegate.swift */,
+				AB3095F62D2318E200955598 /* Models */,
+				AB0BD38A2AE7071200EB51AF /* Views */,
+				AB0BD3922AE7071200EB51AF /* Previews */,
 				AB0BD3662AE7062400EB51AF /* Assets.xcassets */,
 				AB0BD3682AE7062400EB51AF /* Preview Content */,
 			);
@@ -458,13 +509,10 @@
 		AB0BD38A2AE7071200EB51AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AB0BD38B2AE7071200EB51AF /* GrantLocationAuthView.swift */,
-				AB0BD38C2AE7071200EB51AF /* LoadingAnimationView.swift */,
-				AB0BD38D2AE7071200EB51AF /* TrainsListView.swift */,
-				AB0BD38E2AE7071200EB51AF /* HeaderView.swift */,
-				AB0BD38F2AE7071200EB51AF /* ChangeStationButton.swift */,
-				AB0BD3902AE7071200EB51AF /* TapOverlayView.swift */,
-				AB0BD3912AE7071200EB51AF /* LuasView.swift */,
+				AB3095C62D23186C00955598 /* Collection+Extensions.swift */,
+				AB3095D52D23186C00955598 /* DetailView */,
+				AB3095BC2D23182700955598 /* Sidebar */,
+				AB3095B12D2317F200955598 /* LuasMainScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -472,12 +520,14 @@
 		AB0BD3922AE7071200EB51AF /* Previews */ = {
 			isa = PBXGroup;
 			children = (
-				AB0BD3932AE7071200EB51AF /* PreviewsStationsModal.swift */,
-				AB0BD3942AE7071200EB51AF /* PreviewsDataiOS.swift */,
-				AB0BD3952AE7071200EB51AF /* PreviewsTapOverlay.swift */,
-				AB0BD3962AE7071200EB51AF /* PreviewsAppStartup.swift */,
-				AB0BD3972AE7071200EB51AF /* PreviewsAppResult.swift */,
-				AB0BD3982AE7071200EB51AF /* PreviewsAppRunning.swift */,
+				AB3095E52D2318A400955598 /* Previews.swift */,
+				AB3095E62D2318A400955598 /* PreviewsHelpers.swift */,
+				AB3095E72D2318A400955598 /* PreviewsLoadingStates.swift */,
+				AB3095E82D2318A400955598 /* PreviewsSidebar.swift */,
+				AB3095E92D2318A400955598 /* PreviewsStates.swift */,
+				AB3095EA2D2318A400955598 /* PreviewsStationView.swift */,
+				AB3095EB2D2318A400955598 /* PreviewsStationView_EdgeCases.swift */,
+				AB3095AD2D23177300955598 /* PreviewsData.swift */,
 			);
 			path = Previews;
 			sourceTree = "<group>";
@@ -509,6 +559,53 @@
 				AB2453FB2AE424B50007FA7C /* Info.plist */,
 			);
 			path = LuasWatchComplications;
+			sourceTree = "<group>";
+		};
+		AB3095BC2D23182700955598 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				AB3095B32D23182700955598 /* AllStationsListView.swift */,
+				AB3095B42D23182700955598 /* FavouritesHeaderView.swift */,
+				AB3095B52D23182700955598 /* FavouritesSidebarView.swift */,
+				AB3095B62D23182700955598 /* LineRow.swift */,
+				AB3095B72D23182700955598 /* LinesView.swift */,
+				AB3095B82D23182700955598 /* NearbyStationsView.swift */,
+				AB3095B92D23182700955598 /* SidebarView.swift */,
+				AB3095BA2D23182700955598 /* StationRow.swift */,
+				AB3095BB2D23182700955598 /* StationsModal.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		AB3095D52D23186C00955598 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				AB3095C72D23186C00955598 /* DoubleTimetableView.swift */,
+				AB3095C82D23186C00955598 /* DueView.swift */,
+				AB3095C92D23186C00955598 /* GrantLocationAuthView.swift */,
+				AB3095CA2D23186C00955598 /* LuasTextView.swift */,
+				AB3095CB2D23186C00955598 /* NoTrainsView.swift */,
+				AB3095CC2D23186C00955598 /* OverflowDotsView.swift */,
+				AB3095CD2D23186C00955598 /* SimpleTimetableView.swift */,
+				AB3095CE2D23186C00955598 /* StationTimesView.swift */,
+				AB3095CF2D23186C00955598 /* StationToolbar.swift */,
+				AB3095D02D23186C00955598 /* StationToolbarLoading.swift */,
+				AB3095D12D23186C00955598 /* StationView.swift */,
+				AB3095D22D23186C00955598 /* ToolbarInactive.swift */,
+				AB3095D32D23186C00955598 /* TrainsViewLoading.swift */,
+				AB3095D42D23186C00955598 /* View+LuasFormatting.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		AB3095F62D2318E200955598 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB3095F32D2318E200955598 /* FavouriteStation.swift */,
+				AB3095F42D2318E200955598 /* ModelContext+Extensions.swift */,
+				AB3095F52D2318E200955598 /* StationDirection.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		AB364CF82308276C00C73EF6 = {
@@ -746,7 +843,6 @@
 				AB0BD35C2AE7062200EB51AF /* Sources */,
 				AB0BD35D2AE7062200EB51AF /* Frameworks */,
 				AB0BD35E2AE7062200EB51AF /* Resources */,
-				AB0BD3AD2AE70AFD00EB51AF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1116,16 +1212,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB0BD39E2AE7071200EB51AF /* ChangeStationButton.swift in Sources */,
-				AB0BD3A02AE7071200EB51AF /* LuasView.swift in Sources */,
 				AB0BD3A92AE7086700EB51AF /* Coordinator.swift in Sources */,
-				AB0BD39D2AE7071200EB51AF /* HeaderView.swift in Sources */,
-				AB0BD39B2AE7071200EB51AF /* LoadingAnimationView.swift in Sources */,
-				AB0BD39F2AE7071200EB51AF /* TapOverlayView.swift in Sources */,
-				AB0BD39A2AE7071200EB51AF /* GrantLocationAuthView.swift in Sources */,
-				AB0BD3A22AE7071200EB51AF /* PreviewsDataiOS.swift in Sources */,
+				AB3095B02D23179C00955598 /* CLLocation+Extensions.swift in Sources */,
+				AB3095B22D2317F200955598 /* LuasMainScreen.swift in Sources */,
+				AB3095AB2D23173200955598 /* Coordinator+LocationDelegate.swift in Sources */,
+				AB3095AC2D23173200955598 /* Coordinator+Animiation.swift in Sources */,
+				AB3095F72D2318E200955598 /* ModelContext+Extensions.swift in Sources */,
+				AB3095F82D2318E200955598 /* FavouriteStation.swift in Sources */,
+				AB3095F92D2318E200955598 /* StationDirection.swift in Sources */,
 				AB0BD3632AE7062300EB51AF /* LuasWatchiOSApp.swift in Sources */,
-				AB0BD39C2AE7071200EB51AF /* TrainsListView.swift in Sources */,
+				AB3095AE2D23177300955598 /* PreviewsData.swift in Sources */,
+				AB3095BD2D23182700955598 /* AllStationsListView.swift in Sources */,
+				AB3095BE2D23182700955598 /* FavouritesSidebarView.swift in Sources */,
+				AB3095BF2D23182700955598 /* StationRow.swift in Sources */,
+				AB3095C02D23182700955598 /* NearbyStationsView.swift in Sources */,
+				AB3095C12D23182700955598 /* StationsModal.swift in Sources */,
+				AB3095C22D23182700955598 /* LineRow.swift in Sources */,
+				AB3095C32D23182700955598 /* LinesView.swift in Sources */,
+				AB3095D62D23186C00955598 /* LuasTextView.swift in Sources */,
+				AB3095D72D23186C00955598 /* TrainsViewLoading.swift in Sources */,
+				AB3095D82D23186C00955598 /* SimpleTimetableView.swift in Sources */,
+				AB3095D92D23186C00955598 /* StationView.swift in Sources */,
+				AB3095DA2D23186C00955598 /* StationToolbar.swift in Sources */,
+				AB3095DB2D23186C00955598 /* OverflowDotsView.swift in Sources */,
+				AB3095DC2D23186C00955598 /* GrantLocationAuthView.swift in Sources */,
+				AB3095DD2D23186C00955598 /* StationTimesView.swift in Sources */,
+				AB3095DE2D23186C00955598 /* View+LuasFormatting.swift in Sources */,
+				AB3095DF2D23186C00955598 /* Collection+Extensions.swift in Sources */,
+				AB3095E02D23186C00955598 /* StationToolbarLoading.swift in Sources */,
+				AB3095E12D23186C00955598 /* ToolbarInactive.swift in Sources */,
+				AB3095E22D23186C00955598 /* DoubleTimetableView.swift in Sources */,
+				AB3095EC2D2318A400955598 /* PreviewsHelpers.swift in Sources */,
+				AB3095ED2D2318A400955598 /* PreviewsSidebar.swift in Sources */,
+				AB3095EE2D2318A400955598 /* PreviewsStates.swift in Sources */,
+				AB3095EF2D2318A400955598 /* PreviewsStationView.swift in Sources */,
+				AB3095F02D2318A400955598 /* Previews.swift in Sources */,
+				AB3095F12D2318A400955598 /* PreviewsLoadingStates.swift in Sources */,
+				AB3095F22D2318A400955598 /* PreviewsStationView_EdgeCases.swift in Sources */,
+				AB3095E32D23186C00955598 /* NoTrainsView.swift in Sources */,
+				AB3095E42D23186C00955598 /* DueView.swift in Sources */,
+				AB3095C42D23182700955598 /* FavouritesHeaderView.swift in Sources */,
+				AB3095C52D23182700955598 /* SidebarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2039,6 +2166,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AB3095A52D2315E100955598 /* LuasAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LuasAPI;
+		};
+		AB3095A72D2315E100955598 /* LuasApp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LuasApp;
+		};
 		AB79B57C2D21A614001E20F8 /* LuasAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LuasAPI;
