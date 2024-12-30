@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "154E4A5A-CC1C-4AEE-87B6-B48A910E4811",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "LuasAPITests",
+        "name" : "LuasAPITests"
+      }
+    }
+  ],
+  "version" : 1
+}

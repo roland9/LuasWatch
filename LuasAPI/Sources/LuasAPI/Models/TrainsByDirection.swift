@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct TrainsByDirection: Sendable {
+public struct TrainsByDirection: Equatable, Sendable {
 
   // MARK: - Properties
 

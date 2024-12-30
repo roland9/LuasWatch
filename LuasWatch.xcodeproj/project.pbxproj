@@ -255,6 +255,7 @@
 		AB2453F72AE424B40007FA7C /* LuasWatchComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchComplications.swift; sourceTree = "<group>"; };
 		AB2453F92AE424B50007FA7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2453FB2AE424B50007FA7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB3095A42D23039A00955598 /* LuasAppTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = LuasAppTestPlan.xctestplan; path = LuasApp/Tests/LuasAppTestPlan.xctestplan; sourceTree = "<group>"; };
 		AB387B402CBBE202002D4B4A /* myConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myConfiguration.json; sourceTree = "<group>"; };
 		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
 		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
@@ -294,6 +295,7 @@
 		AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB79B57A2D219ADE001E20F8 /* LuasAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuasAPI; sourceTree = "<group>"; };
 		AB79B57B2D219B9E001E20F8 /* LuasApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuasApp; sourceTree = "<group>"; };
+		AB79B5802D230098001E20F8 /* LuasAPITestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = LuasAPITestPlan.xctestplan; sourceTree = "<group>"; };
 		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
@@ -512,6 +514,8 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				AB3095A42D23039A00955598 /* LuasAppTestPlan.xctestplan */,
+				AB79B5802D230098001E20F8 /* LuasAPITestPlan.xctestplan */,
 				AB79B57B2D219B9E001E20F8 /* LuasApp */,
 				AB79B57A2D219ADE001E20F8 /* LuasAPI */,
 				AB387B402CBBE202002D4B4A /* myConfiguration.json */,

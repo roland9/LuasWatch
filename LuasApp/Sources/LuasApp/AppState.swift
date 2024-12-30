@@ -7,7 +7,7 @@ import Foundation
 import LuasAPI
 
 /// App's state machine, drives UI
-public enum AppState {
+public enum AppState: Equatable {
 
   case idle
 

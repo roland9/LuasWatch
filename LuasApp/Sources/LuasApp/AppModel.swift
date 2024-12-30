@@ -76,7 +76,7 @@ public class AppModel: ObservableObject {
         .specific(let station), .recents(let station):
         self.selectedStation = station
       // we don't need to trigger here do we?
-      //                    NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
+      // NotificationCenter.default.post(Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
       }
 
     } else {

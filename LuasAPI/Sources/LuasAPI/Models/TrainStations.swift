@@ -131,4 +131,16 @@ public struct TrainStations: Sendable {
       .filter { $0.shortCode == shortCode }
       .first
   }
+
+  public static var unknown: TrainStation {
+    TrainStation(
+      stationIdShort: "unknown",
+      shortCode: "unknown",
+      route: .green,
+      name: "Unknown",
+      location: CLLocation(
+        latitude: CLLocationDegrees(53.3163934083453),
+        longitude: CLLocationDegrees(-6.25344151996991))
+    )
+  }
 }
