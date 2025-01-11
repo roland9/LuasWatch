@@ -153,17 +153,21 @@ extension Coordinator: LocationDelegate {
         if let apiError = error as? APIError {
 
           switch apiError {
-          case .noTrains(let message):
-            updateWithAnimation(
-              to:
-                .errorGettingDueTimes(
-                  closestStation,
-                  message.count > 0
-                    ? message : LuasStrings.errorGettingDueTimes(station: closestStation.name)))
+            case .noTrainsButMessageFromAPI(let message):
+              updateWithAnimation(to:
+                  .errorGettingDueTimes(
+                    closestStation,
+                    message))
 
-          case .invalidXML:
-            updateWithAnimation(
-              to: .errorGettingDueTimes(closestStation, "Error reading server response"))
+            case .noTrains:
+              updateWithAnimation(to:
+                  .errorGettingDueTimes(
+                    closestStation,
+                    LuasStrings.noTrainsErrorMessage))
+
+            case .invalidXML:
+              updateWithAnimation(
+                to: .errorGettingDueTimes(closestStation, "Error reading server response"))
           }
 
         } else if (error as NSError).code == NSURLErrorNotConnectedToInternet {

@@ -11,11 +11,8 @@ import LuasAPI
 public struct LuasStrings {
 
   public static let noTrainsErrorMessage =
-    NSLocalizedString("Couldn’t get any trains.", comment: "")
-
-  public static let noTrainsFallbackExplanation =
     NSLocalizedString(
-      "Either Luas is not operating, or there is a problem with the Luas website.",
+      "Couldn’t get any trains.",
       comment: "")
 
   public static let tooFarAway =
@@ -46,7 +43,8 @@ public struct LuasStrings {
       "We are only able to find the closest station if you allow location services.\n\nPlease go to Settings -> Privacy -> Location Services to turn them on for LuasWatch.",
       comment: "")
 
-  public static func gettingLocationAuthError(_ errorMessage: String) -> String {
+  public static func gettingLocationAuthError(_ errorMessage: String) -> String
+  {
     NSLocalizedString(
       "Error getting your location:\n\n\(errorMessage)", comment: "")
   }
@@ -86,7 +84,8 @@ public struct LuasStrings {
     NSLocalizedString(
       "Cannot switch directions for one-way stops", comment: "")
 
-  public static func distance(station: TrainStation, distance: String) -> String {
+  public static func distance(station: TrainStation, distance: String) -> String
+  {
     NSLocalizedString(
       "\(station.name) stop is \(distance) away",
       comment:
