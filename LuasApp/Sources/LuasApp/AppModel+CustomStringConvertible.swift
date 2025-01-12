@@ -41,7 +41,7 @@ extension AppMode: CustomStringConvertible {
     case .favourite(let station):
       return "favourite: \(station.name)"
     case .nearby(let station):
-      return "nearby \(station.name)"
+      return "nearby: \(station.name)"
     case .specific(let station):
       return "specific: \(station.name)"
     case .recents(let station):
