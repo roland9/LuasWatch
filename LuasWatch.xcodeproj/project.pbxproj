@@ -9,12 +9,6 @@
 /* Begin PBXBuildFile section */
 		AB0A86CC2B460C74002E7E31 /* AllStationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */; };
 		AB0A86CE2B461767002E7E31 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */; };
-		AB0BD34B2AE6F61700EB51AF /* LuasKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */; };
-		AB0BD3562AE6F64C00EB51AF /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */; };
-		AB0BD3572AE6F64C00EB51AF /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */; };
-		AB0BD3582AE6F64C00EB51AF /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3532AE6F64C00EB51AF /* APITests.swift */; };
-		AB0BD3592AE6F64C00EB51AF /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3542AE6F64C00EB51AF /* SnapshotTests.swift */; };
-		AB0BD35A2AE6F64C00EB51AF /* TestDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3552AE6F64C00EB51AF /* TestDefinitions.swift */; };
 		AB0BD3632AE7062300EB51AF /* LuasWatchiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BD3622AE7062300EB51AF /* LuasWatchiOSApp.swift */; };
 		AB0BD3672AE7062400EB51AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0BD3662AE7062400EB51AF /* Assets.xcassets */; };
 		AB0BD36A2AE7062400EB51AF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0BD3692AE7062400EB51AF /* Preview Assets.xcassets */; };
@@ -78,23 +72,6 @@
 		AB3095F92D2318E200955598 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3095F52D2318E200955598 /* StationDirection.swift */; };
 		AB38CECE2B52F16C0074D901 /* Coordinator+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */; };
 		AB38CED02B52F28C0074D901 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */; };
-		AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0082AE4094F002AA60A /* APIParser.swift */; };
-		AB3CC01C2AE4094F002AA60A /* LuasMockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */; };
-		AB3CC01D2AE4094F002AA60A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00A2AE4094F002AA60A /* API.swift */; };
-		AB3CC01E2AE4094F002AA60A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00B2AE4094F002AA60A /* Parser.swift */; };
-		AB3CC0202AE4094F002AA60A /* luasStops.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3CC00D2AE4094F002AA60A /* luasStops.json */; };
-		AB3CC0212AE4094F002AA60A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00E2AE4094F002AA60A /* Location.swift */; };
-		AB3CC0222AE4094F002AA60A /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC00F2AE4094F002AA60A /* Logging.swift */; };
-		AB3CC0232AE4094F002AA60A /* LuasStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0102AE4094F002AA60A /* LuasStrings.swift */; };
-		AB3CC0242AE4094F002AA60A /* TrainsByDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0122AE4094F002AA60A /* TrainsByDirection.swift */; };
-		AB3CC0252AE4094F002AA60A /* TrainStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0132AE4094F002AA60A /* TrainStation.swift */; };
-		AB3CC0262AE4094F002AA60A /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0142AE4094F002AA60A /* Train.swift */; };
-		AB3CC0272AE4094F002AA60A /* TrainStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0152AE4094F002AA60A /* TrainStations.swift */; };
-		AB3CC0282AE4094F002AA60A /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0162AE4094F002AA60A /* Route.swift */; };
-		AB3CC0292AE4094F002AA60A /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0172AE4094F002AA60A /* Direction.swift */; };
-		AB3CC02A2AE4094F002AA60A /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0182AE4094F002AA60A /* MyUserDefaults.swift */; };
-		AB3CC02B2AE4094F002AA60A /* LuasExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CC0192AE4094F002AA60A /* LuasExtensions.swift */; };
-		AB3CC02C2AE4094F002AA60A /* LuasKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB3CC01A2AE4094F002AA60A /* LuasKit.h */; };
 		AB69277A2CE0D87C0076F9E3 /* PreviewsSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6927792CE0D87C0076F9E3 /* PreviewsSidebar.swift */; };
 		AB695E2E2AE41C1D00B6DB99 /* LuasWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AB695E2D2AE41C1C00B6DB99 /* LuasWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB695E332AE41C1D00B6DB99 /* LuasWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB695E322AE41C1D00B6DB99 /* LuasWatchApp.swift */; };
@@ -108,22 +85,16 @@
 		AB695E842AE41EAE00B6DB99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB695E6F2AE41CAC00B6DB99 /* Preview Assets.xcassets */; };
 		AB79B57D2D21A614001E20F8 /* LuasAPI in Frameworks */ = {isa = PBXBuildFile; productRef = AB79B57C2D21A614001E20F8 /* LuasAPI */; };
 		AB79B57F2D21A614001E20F8 /* LuasApp in Frameworks */ = {isa = PBXBuildFile; productRef = AB79B57E2D21A614001E20F8 /* LuasApp */; };
-		AB8220792B49F79200022CA0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8220782B49F79200022CA0 /* AppModel.swift */; };
 		AB89FB892B49B6BE0020A943 /* StationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB882B49B6BE0020A943 /* StationRow.swift */; };
 		AB89FB8B2B49B7B50020A943 /* LineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89FB8A2B49B7B50020A943 /* LineRow.swift */; };
 		AB925F472B6FB91500F23497 /* ModelContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */; };
 		AB925F492B6FCD0800F23497 /* StationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F482B6FCD0800F23497 /* StationDirection.swift */; };
-		AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */; };
-		AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */; };
 		AB9D3F092BF409EA00584B69 /* PreviewsLoadingStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9D3F082BF409EA00584B69 /* PreviewsLoadingStates.swift */; };
 		ABA68B242AF43977002A9F0D /* LuasMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */; };
 		ABC207AB2B78E34A00C1F8F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AA2B78E34A00C1F8F7 /* Utils.swift */; };
-		ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */; };
 		ABC207AF2B81653200C1F8F7 /* Coordinator+Animiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */; };
 		ABC24A7B2C0289D30004014B /* StationToolbarLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */; };
 		ABC24A7D2C028E120004014B /* TrainsViewLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */; };
-		ABC24A7F2C0525F50004014B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A7E2C0525F50004014B /* AppState.swift */; };
-		ABC24A812C0526950004014B /* AppMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A802C0526950004014B /* AppMode.swift */; };
 		ABC24A832C052DBB0004014B /* ToolbarInactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC24A822C052DBB0004014B /* ToolbarInactive.swift */; };
 		ABCDB4C42B5DADE40068EFAA /* PreviewsStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB4C32B5DADE40068EFAA /* PreviewsStates.swift */; };
 		ABD1CA4E2B781DDD0015DB81 /* DueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1CA4D2B781DDD0015DB81 /* DueView.swift */; };
@@ -142,13 +113,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AB0BD34C2AE6F61700EB51AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB364CF92308276C00C73EF6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AB57F0DC230B3C1900BA8B53;
-			remoteInfo = LuasKit;
-		};
 		AB0BD3702AE7062400EB51AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB364CF92308276C00C73EF6 /* Project object */;
@@ -231,13 +195,6 @@
 /* Begin PBXFileReference section */
 		AB0A86CB2B460C74002E7E31 /* AllStationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsListView.swift; sourceTree = "<group>"; };
 		AB0A86CD2B461767002E7E31 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
-		AB0BD3472AE6F61700EB51AF /* LuasKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuasKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
-		AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
-		AB0BD3532AE6F64C00EB51AF /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
-		AB0BD3542AE6F64C00EB51AF /* SnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
-		AB0BD3552AE6F64C00EB51AF /* TestDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDefinitions.swift; sourceTree = "<group>"; };
-		AB0BD35B2AE6F77300EB51AF /* LuasKitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = LuasKitTests.xctestplan; sourceTree = "<group>"; };
 		AB0BD3602AE7062200EB51AF /* LuasWatchiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatchiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0BD3622AE7062300EB51AF /* LuasWatchiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasWatchiOSApp.swift; sourceTree = "<group>"; };
 		AB0BD3662AE7062400EB51AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -305,26 +262,6 @@
 		AB387B402CBBE202002D4B4A /* myConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myConfiguration.json; sourceTree = "<group>"; };
 		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
 		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
-		AB3CC0082AE4094F002AA60A /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
-		AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasMockAPI.swift; sourceTree = "<group>"; };
-		AB3CC00A2AE4094F002AA60A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		AB3CC00B2AE4094F002AA60A /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		AB3CC00D2AE4094F002AA60A /* luasStops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = luasStops.json; sourceTree = "<group>"; };
-		AB3CC00E2AE4094F002AA60A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		AB3CC00F2AE4094F002AA60A /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
-		AB3CC0102AE4094F002AA60A /* LuasStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasStrings.swift; sourceTree = "<group>"; };
-		AB3CC0122AE4094F002AA60A /* TrainsByDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsByDirection.swift; sourceTree = "<group>"; };
-		AB3CC0132AE4094F002AA60A /* TrainStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainStation.swift; sourceTree = "<group>"; };
-		AB3CC0142AE4094F002AA60A /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
-		AB3CC0152AE4094F002AA60A /* TrainStations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainStations.swift; sourceTree = "<group>"; };
-		AB3CC0162AE4094F002AA60A /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		AB3CC0172AE4094F002AA60A /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		AB3CC0182AE4094F002AA60A /* MyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUserDefaults.swift; sourceTree = "<group>"; };
-		AB3CC0192AE4094F002AA60A /* LuasExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuasExtensions.swift; sourceTree = "<group>"; };
-		AB3CC01A2AE4094F002AA60A /* LuasKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuasKit.h; sourceTree = "<group>"; };
-		AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LuasKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB57F0E0230B3C1900BA8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB57F129230B432F00BA8B53 /* LuasKitIOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LuasKitIOS-Info.plist"; path = "/Users/rolandg/src/LuasWatch/LuasKitIOS-Info.plist"; sourceTree = "<absolute>"; };
 		AB6927792CE0D87C0076F9E3 /* PreviewsSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsSidebar.swift; sourceTree = "<group>"; };
 		AB695E282AE41C1C00B6DB99 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB695E2D2AE41C1C00B6DB99 /* LuasWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LuasWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,24 +279,18 @@
 		AB79B57A2D219ADE001E20F8 /* LuasAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuasAPI; sourceTree = "<group>"; };
 		AB79B57B2D219B9E001E20F8 /* LuasApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LuasApp; sourceTree = "<group>"; };
 		AB79B5802D230098001E20F8 /* LuasAPITestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = LuasAPITestPlan.xctestplan; sourceTree = "<group>"; };
-		AB8220782B49F79200022CA0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		AB89FB882B49B6BE0020A943 /* StationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRow.swift; sourceTree = "<group>"; };
 		AB89FB8A2B49B7B50020A943 /* LineRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRow.swift; sourceTree = "<group>"; };
 		AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "LuasWatch Watch App.xctestplan"; sourceTree = "<group>"; };
 		AB925F462B6FB91500F23497 /* ModelContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extensions.swift"; sourceTree = "<group>"; };
 		AB925F482B6FCD0800F23497 /* StationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDirection.swift; sourceTree = "<group>"; };
-		AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+Codable.swift"; sourceTree = "<group>"; };
-		AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppModel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
 		AB9D3F082BF409EA00584B69 /* PreviewsLoadingStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsLoadingStates.swift; sourceTree = "<group>"; };
 		ABA68B232AF43977002A9F0D /* LuasMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuasMainScreen.swift; sourceTree = "<group>"; };
 		ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LuasPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ABC207AA2B78E34A00C1F8F7 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+Extensions.swift"; sourceTree = "<group>"; };
 		ABC207AE2B81653200C1F8F7 /* Coordinator+Animiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Animiation.swift"; sourceTree = "<group>"; };
 		ABC24A7A2C0289D30004014B /* StationToolbarLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationToolbarLoading.swift; sourceTree = "<group>"; };
 		ABC24A7C2C028E120004014B /* TrainsViewLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainsViewLoading.swift; sourceTree = "<group>"; };
-		ABC24A7E2C0525F50004014B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		ABC24A802C0526950004014B /* AppMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMode.swift; sourceTree = "<group>"; };
 		ABC24A822C052DBB0004014B /* ToolbarInactive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarInactive.swift; sourceTree = "<group>"; };
 		ABCDB4C32B5DADE40068EFAA /* PreviewsStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsStates.swift; sourceTree = "<group>"; };
 		ABD1CA4D2B781DDD0015DB81 /* DueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueView.swift; sourceTree = "<group>"; };
@@ -378,14 +309,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AB0BD3442AE6F61700EB51AF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB0BD34B2AE6F61700EB51AF /* LuasKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB0BD35D2AE7062200EB51AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,13 +341,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB57F0DA230B3C1900BA8B53 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB695E2A2AE41C1C00B6DB99 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -451,19 +367,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB0BD3482AE6F61700EB51AF /* LuasKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				AB0BD35B2AE6F77300EB51AF /* LuasKitTests.xctestplan */,
-				AB0BD3532AE6F64C00EB51AF /* APITests.swift */,
-				AB0BD3512AE6F64C00EB51AF /* ModelsTests.swift */,
-				AB0BD3522AE6F64C00EB51AF /* ParserTests.swift */,
-				AB0BD3542AE6F64C00EB51AF /* SnapshotTests.swift */,
-				AB0BD3552AE6F64C00EB51AF /* TestDefinitions.swift */,
-			);
-			path = LuasKitTests;
-			sourceTree = "<group>";
-		};
 		AB0BD3612AE7062300EB51AF /* LuasWatchiOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,17 +521,14 @@
 				AB387B402CBBE202002D4B4A /* myConfiguration.json */,
 				AB925F442B6FAE5700F23497 /* LuasWatch Watch App.xctestplan */,
 				ABAFF5B424ED58A8004DB119 /* LuasPlayground.playground */,
-				AB57F0DE230B3C1900BA8B53 /* LuasKit */,
 				AB695E312AE41C1D00B6DB99 /* LuasWatch Watch App */,
 				AB695E422AE41C1F00B6DB99 /* LuasWatch Watch AppTests */,
 				AB695E4C2AE41C1F00B6DB99 /* LuasWatch Watch AppUITests */,
 				AB2453F62AE424B40007FA7C /* LuasWatchComplications */,
-				AB0BD3482AE6F61700EB51AF /* LuasKitTests */,
 				AB0BD3612AE7062300EB51AF /* LuasWatchiOS */,
 				AB0BD3722AE7062400EB51AF /* LuasWatchiOSTests */,
 				AB0BD37C2AE7062400EB51AF /* LuasWatchiOSUITests */,
 				AB364D002308276C00C73EF6 /* Products */,
-				AB57F129230B432F00BA8B53 /* LuasKitIOS-Info.plist */,
 				AB15B8772686815E005BF013 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -636,65 +536,16 @@
 		AB364D002308276C00C73EF6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */,
 				AB695E282AE41C1C00B6DB99 /* LuasWatch.app */,
 				AB695E2D2AE41C1C00B6DB99 /* LuasWatch Watch App.app */,
 				AB695E3F2AE41C1E00B6DB99 /* LuasWatch Watch AppTests.xctest */,
 				AB695E492AE41C1F00B6DB99 /* LuasWatch Watch AppUITests.xctest */,
 				AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */,
-				AB0BD3472AE6F61700EB51AF /* LuasKitTests.xctest */,
 				AB0BD3602AE7062200EB51AF /* LuasWatchiOS.app */,
 				AB0BD36F2AE7062400EB51AF /* LuasWatchiOSTests.xctest */,
 				AB0BD3792AE7062400EB51AF /* LuasWatchiOSUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		AB3CC0072AE4094F002AA60A /* API */ = {
-			isa = PBXGroup;
-			children = (
-				AB3CC00A2AE4094F002AA60A /* API.swift */,
-				AB3CC0092AE4094F002AA60A /* LuasMockAPI.swift */,
-				AB3CC0082AE4094F002AA60A /* APIParser.swift */,
-				AB3CC00B2AE4094F002AA60A /* Parser.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		AB3CC0112AE4094F002AA60A /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				AB3CC0162AE4094F002AA60A /* Route.swift */,
-				AB3CC0142AE4094F002AA60A /* Train.swift */,
-				AB3CC0132AE4094F002AA60A /* TrainStation.swift */,
-				AB3CC0152AE4094F002AA60A /* TrainStations.swift */,
-				AB3CC0172AE4094F002AA60A /* Direction.swift */,
-				AB3CC0122AE4094F002AA60A /* TrainsByDirection.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		AB57F0DE230B3C1900BA8B53 /* LuasKit */ = {
-			isa = PBXGroup;
-			children = (
-				AB3CC01A2AE4094F002AA60A /* LuasKit.h */,
-				AB3CC0112AE4094F002AA60A /* Models */,
-				AB3CC0072AE4094F002AA60A /* API */,
-				ABC24A7E2C0525F50004014B /* AppState.swift */,
-				ABC24A802C0526950004014B /* AppMode.swift */,
-				AB8220782B49F79200022CA0 /* AppModel.swift */,
-				AB925F4A2B715FAD00F23497 /* AppModel+Codable.swift */,
-				AB925F4C2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift */,
-				AB3CC00E2AE4094F002AA60A /* Location.swift */,
-				ABC207AC2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift */,
-				AB3CC00D2AE4094F002AA60A /* luasStops.json */,
-				AB3CC0102AE4094F002AA60A /* LuasStrings.swift */,
-				AB3CC0192AE4094F002AA60A /* LuasExtensions.swift */,
-				AB3CC00F2AE4094F002AA60A /* Logging.swift */,
-				AB3CC0182AE4094F002AA60A /* MyUserDefaults.swift */,
-				AB57F0E0230B3C1900BA8B53 /* Info.plist */,
-			);
-			path = LuasKit;
 			sourceTree = "<group>";
 		};
 		AB695E312AE41C1D00B6DB99 /* LuasWatch Watch App */ = {
@@ -805,37 +656,7 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		AB57F0D8230B3C1900BA8B53 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB3CC02C2AE4094F002AA60A /* LuasKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		AB0BD3462AE6F61700EB51AF /* LuasKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AB0BD3502AE6F61700EB51AF /* Build configuration list for PBXNativeTarget "LuasKitTests" */;
-			buildPhases = (
-				AB925F432B6FAD7800F23497 /* Run swift-format */,
-				AB0BD3432AE6F61700EB51AF /* Sources */,
-				AB0BD3442AE6F61700EB51AF /* Frameworks */,
-				AB0BD3452AE6F61700EB51AF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AB0BD34D2AE6F61700EB51AF /* PBXTargetDependency */,
-			);
-			name = LuasKitTests;
-			productName = LuasKitTests;
-			productReference = AB0BD3472AE6F61700EB51AF /* LuasKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		AB0BD35F2AE7062200EB51AF /* LuasWatchiOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB0BD3812AE7062400EB51AF /* Build configuration list for PBXNativeTarget "LuasWatchiOS" */;
@@ -905,24 +726,6 @@
 			productName = LuasWatchComplicationsExtension;
 			productReference = AB2453F12AE424B40007FA7C /* LuasWatchComplicationsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
-		};
-		AB57F0DC230B3C1900BA8B53 /* LuasKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AB57F0E9230B3C1900BA8B53 /* Build configuration list for PBXNativeTarget "LuasKit" */;
-			buildPhases = (
-				AB57F0D8230B3C1900BA8B53 /* Headers */,
-				AB57F0D9230B3C1900BA8B53 /* Sources */,
-				AB57F0DA230B3C1900BA8B53 /* Frameworks */,
-				AB57F0DB230B3C1900BA8B53 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LuasKit;
-			productName = LuasKit;
-			productReference = AB57F0DD230B3C1900BA8B53 /* LuasKit.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		AB695E272AE41C1C00B6DB99 /* LuasWatch */ = {
 			isa = PBXNativeTarget;
@@ -1009,9 +812,6 @@
 				LastUpgradeCheck = 1610;
 				ORGANIZATIONNAME = mApps.ie;
 				TargetAttributes = {
-					AB0BD3462AE6F61700EB51AF = {
-						CreatedOnToolsVersion = 15.0;
-					};
 					AB0BD35F2AE7062200EB51AF = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -1025,10 +825,6 @@
 					};
 					AB2453F02AE424B40007FA7C = {
 						CreatedOnToolsVersion = 15.0;
-					};
-					AB57F0DC230B3C1900BA8B53 = {
-						CreatedOnToolsVersion = 11.0;
-						LastSwiftMigration = 1500;
 					};
 					AB695E272AE41C1C00B6DB99 = {
 						CreatedOnToolsVersion = 15.0;
@@ -1061,13 +857,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AB57F0DC230B3C1900BA8B53 /* LuasKit */,
 				AB695E2C2AE41C1C00B6DB99 /* LuasWatch Watch App */,
 				AB2453F02AE424B40007FA7C /* LuasWatchComplicationsExtension */,
 				AB695E272AE41C1C00B6DB99 /* LuasWatch */,
 				AB695E3E2AE41C1E00B6DB99 /* LuasWatch Watch AppTests */,
 				AB695E482AE41C1F00B6DB99 /* LuasWatch Watch AppUITests */,
-				AB0BD3462AE6F61700EB51AF /* LuasKitTests */,
 				AB0BD35F2AE7062200EB51AF /* LuasWatchiOS */,
 				AB0BD36E2AE7062400EB51AF /* LuasWatchiOSTests */,
 				AB0BD3782AE7062400EB51AF /* LuasWatchiOSUITests */,
@@ -1076,13 +870,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AB0BD3452AE6F61700EB51AF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB0BD35E2AE7062200EB51AF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1111,14 +898,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2453FA2AE424B50007FA7C /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB57F0DB230B3C1900BA8B53 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB3CC0202AE4094F002AA60A /* luasStops.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,25 +934,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AB925F432B6FAD7800F23497 /* Run swift-format */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run swift-format";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=$PATH:/opt/homebrew/bin/\n\nif which swift-format >/dev/null; then\n    swift-format -i --configuration myConfiguration.json --ignore-unparsable-files -p -r LuasKit\nelse\n    echo \"warning: swift-format not installed\"\nfi\n";
-		};
 		AB925F452B6FAEB200F23497 /* Run swift-format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1196,18 +956,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AB0BD3432AE6F61700EB51AF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB0BD35A2AE6F64C00EB51AF /* TestDefinitions.swift in Sources */,
-				AB0BD3562AE6F64C00EB51AF /* ModelsTests.swift in Sources */,
-				AB0BD3592AE6F64C00EB51AF /* SnapshotTests.swift in Sources */,
-				AB0BD3582AE6F64C00EB51AF /* APITests.swift in Sources */,
-				AB0BD3572AE6F64C00EB51AF /* ParserTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB0BD35C2AE7062200EB51AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1281,34 +1029,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB57F0D9230B3C1900BA8B53 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB3CC01E2AE4094F002AA60A /* Parser.swift in Sources */,
-				AB3CC0272AE4094F002AA60A /* TrainStations.swift in Sources */,
-				ABC24A812C0526950004014B /* AppMode.swift in Sources */,
-				AB3CC0252AE4094F002AA60A /* TrainStation.swift in Sources */,
-				AB3CC0262AE4094F002AA60A /* Train.swift in Sources */,
-				AB925F4D2B715FCD00F23497 /* AppModel+CustomStringConvertible.swift in Sources */,
-				AB3CC02B2AE4094F002AA60A /* LuasExtensions.swift in Sources */,
-				AB3CC0282AE4094F002AA60A /* Route.swift in Sources */,
-				ABC207AD2B8156BB00C1F8F7 /* CLAuthorizationStatus+Extensions.swift in Sources */,
-				AB3CC02A2AE4094F002AA60A /* MyUserDefaults.swift in Sources */,
-				AB3CC0242AE4094F002AA60A /* TrainsByDirection.swift in Sources */,
-				AB3CC0292AE4094F002AA60A /* Direction.swift in Sources */,
-				ABC24A7F2C0525F50004014B /* AppState.swift in Sources */,
-				AB8220792B49F79200022CA0 /* AppModel.swift in Sources */,
-				AB3CC01B2AE4094F002AA60A /* APIParser.swift in Sources */,
-				AB925F4B2B715FAD00F23497 /* AppModel+Codable.swift in Sources */,
-				AB3CC0232AE4094F002AA60A /* LuasStrings.swift in Sources */,
-				AB3CC0222AE4094F002AA60A /* Logging.swift in Sources */,
-				AB3CC01D2AE4094F002AA60A /* API.swift in Sources */,
-				AB3CC0212AE4094F002AA60A /* Location.swift in Sources */,
-				AB3CC01C2AE4094F002AA60A /* LuasMockAPI.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB695E292AE41C1C00B6DB99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1378,11 +1098,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AB0BD34D2AE6F61700EB51AF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AB57F0DC230B3C1900BA8B53 /* LuasKit */;
-			targetProxy = AB0BD34C2AE6F61700EB51AF /* PBXContainerItemProxy */;
-		};
 		AB0BD3712AE7062400EB51AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AB0BD35F2AE7062200EB51AF /* LuasWatchiOS */;
@@ -1416,47 +1131,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		AB0BD34E2AE6F61700EB51AF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2H43Y8J8SC;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-			};
-			name = Debug;
-		};
-		AB0BD34F2AE6F61700EB51AF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2H43Y8J8SC;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-			};
-			name = Release;
-		};
 		AB0BD3822AE7062400EB51AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1805,72 +1479,6 @@
 			};
 			name = Release;
 		};
-		AB57F0E7230B3C1900BA8B53 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2H43Y8J8SC;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = LuasKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2,4";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AB57F0E8230B3C1900BA8B53 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2H43Y8J8SC;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				INFOPLIST_FILE = LuasKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				PRODUCT_BUNDLE_IDENTIFIER = ie.mapps.LuasKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = "1,2,4";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		AB695E522AE41C1F00B6DB99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2064,15 +1672,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AB0BD3502AE6F61700EB51AF /* Build configuration list for PBXNativeTarget "LuasKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AB0BD34E2AE6F61700EB51AF /* Debug */,
-				AB0BD34F2AE6F61700EB51AF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AB0BD3812AE7062400EB51AF /* Build configuration list for PBXNativeTarget "LuasWatchiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2114,15 +1713,6 @@
 			buildConfigurations = (
 				AB364D252308277100C73EF6 /* Debug */,
 				AB364D262308277100C73EF6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AB57F0E9230B3C1900BA8B53 /* Build configuration list for PBXNativeTarget "LuasKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AB57F0E7230B3C1900BA8B53 /* Debug */,
-				AB57F0E8230B3C1900BA8B53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
