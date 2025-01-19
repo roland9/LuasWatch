@@ -11,7 +11,8 @@ let station = TrainStation(
   shortCode: "BEE",
   route: .green,
   name: "Beechwood",
-  location: userLocation)
+  location: userLocation
+)
 
 let realAPI = LuasAPI(session: URLSession.shared)
 
