@@ -262,6 +262,7 @@
 		AB387B402CBBE202002D4B4A /* myConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myConfiguration.json; sourceTree = "<group>"; };
 		AB38CECD2B52F16C0074D901 /* Coordinator+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+LocationDelegate.swift"; sourceTree = "<group>"; };
 		AB38CECF2B52F28C0074D901 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
+		AB50A2082D4C26F0002A2DB8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB6927792CE0D87C0076F9E3 /* PreviewsSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewsSidebar.swift; sourceTree = "<group>"; };
 		AB695E282AE41C1C00B6DB99 /* LuasWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuasWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB695E2D2AE41C1C00B6DB99 /* LuasWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LuasWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -514,6 +515,7 @@
 		AB364CF82308276C00C73EF6 = {
 			isa = PBXGroup;
 			children = (
+				AB50A2082D4C26F0002A2DB8 /* README.md */,
 				AB3095A42D23039A00955598 /* LuasAppTestPlan.xctestplan */,
 				AB79B5802D230098001E20F8 /* LuasAPITestPlan.xctestplan */,
 				AB79B57B2D219B9E001E20F8 /* LuasApp */,
