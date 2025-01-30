@@ -4,8 +4,8 @@
 //
 
 import CoreLocation
-import Foundation
-import LuasKit
+import LuasAPI
+import LuasApp
 
 extension Coordinator: LocationDelegate {
 
@@ -53,7 +53,7 @@ extension Coordinator: LocationDelegate {
 
     // //////////////////////////////////////////////
     // step 2: we have location -> now find station
-    let allStations = TrainStations.sharedFromFile
+    let allStations = TrainStations()
 
     if let station = appModel.appMode.specificStation {
       myPrint(

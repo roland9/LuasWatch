@@ -4,7 +4,8 @@
 //
 
 import CoreLocation
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 #if DEBUG
@@ -22,7 +23,6 @@ import SwiftUI
     longitude: locationBluebell.coordinate.longitude + 0.005)
 
   private let stationRed = TrainStation(
-    stationId: "stationId",
     stationIdShort: "LUAS8",
     shortCode: "BLU",
     route: .red,
@@ -30,7 +30,6 @@ import SwiftUI
     location: locationBluebell)
 
   let stationRedLongName = TrainStation(
-    stationId: "stationId",
     stationIdShort: "LUAS8",
     shortCode: "BLU",
     route: .red,
@@ -68,27 +67,27 @@ import SwiftUI
     destination: "LUAS Saggart", direction: "Inbound", dueTime: "14")
 
   let trainsRed_1_1 = TrainsByDirection(
-    trainStation: stationRed,
+    station: stationRed,
     inbound: [trainRed3_inbound],
     outbound: [trainRed2_outbound])
   let trainsRed_2_1 = TrainsByDirection(
-    trainStation: stationRed,
+    station: stationRed,
     inbound: [trainRed1_inbound, trainRed3_inbound],
     outbound: [trainRed2_outbound])
   let trainsRed_3_2 = TrainsByDirection(
-    trainStation: stationRedLongName,
+    station: stationRedLongName,
     inbound: [trainRed1_inbound, trainRed2_inbound, trainRed3_inbound],
     outbound: [trainRed1_outbound, trainRed2_outbound])
   let trainsRed_4_4 = TrainsByDirection(
-    trainStation: stationRed,
+    station: stationRed,
     inbound: [trainRed1_inbound, trainRed2_inbound, trainRed3_inbound, trainRed4_inbound],
     outbound: [trainRed1_outbound, trainRed2_outbound, trainRed3_outbound, trainRed4_outbound])
   let trainsRed_0_4 = TrainsByDirection(
-    trainStation: stationRed,
+    station: stationRed,
     inbound: [],
     outbound: [trainRed1_outbound, trainRed2_outbound, trainRed3_outbound, trainRed4_outbound])
   let trainsRed_7_7 = TrainsByDirection(
-    trainStation: stationRedLongName,
+    station: stationRedLongName,
     inbound: [
       trainRed1_inbound, trainRed2_inbound, trainRed3_inbound, trainRed4_inbound, trainRed5_inbound,
       trainRed6_inbound, trainRed7_inbound,
@@ -100,7 +99,6 @@ import SwiftUI
     ])
 
   let stationGreen = TrainStation(
-    stationId: "stationId",
     stationIdShort: "LUAS69",
     shortCode: "PHI",
     route: .green,
@@ -114,15 +112,14 @@ import SwiftUI
   private let trainGreen3 = Train(
     destination: "LUAS Sandyford", direction: "Inbound", dueTime: "12")
   let trainsGreen = TrainsByDirection(
-    trainStation: stationGreen,
+    station: stationGreen,
     inbound: [trainGreen3],
     outbound: [trainGreen1, trainGreen2])
 
   let noTrainsGreen = TrainsByDirection(
-    trainStation: stationGreen, inbound: [], outbound: [])
+    station: stationGreen, inbound: [], outbound: [])
 
   let stationOneWay = TrainStation(
-    stationId: "stationId",
     stationIdShort: "LUAS62",
     shortCode: "MAR",
     route: .green,
@@ -130,17 +127,16 @@ import SwiftUI
     location: locationMarlborough,
     stationType: .oneway)
   let trainsMarlborough = TrainsByDirection(
-    trainStation: stationOneWay,
+    station: stationOneWay,
     inbound: [trainGreen3],
     outbound: [])
 
   let trainsOneWayStation = TrainsByDirection(
-    trainStation: stationOneWay,
+    station: stationOneWay,
     inbound: [trainGreen2, trainGreen3],
     outbound: [])
 
   private let stationFinalStop = TrainStation(
-    stationId: "stationId",
     stationIdShort: "stationIdShort",
     shortCode: "TAL",
     route: .red,
@@ -148,28 +144,28 @@ import SwiftUI
     location: locationBluebell,
     stationType: .terminal)
   let trainsFinalStop = TrainsByDirection(
-    trainStation: stationFinalStop,
+    station: stationFinalStop,
     inbound: [trainRed1_outbound, trainRed3_outbound],
     outbound: [])
 
-  let trainsNoTrains = TrainsByDirection(trainStation: stationGreen, inbound: [], outbound: [])
+  let trainsNoTrains = TrainsByDirection(station: stationGreen, inbound: [], outbound: [])
 
   let trainsNoOutboundTrains = TrainsByDirection(
-    trainStation: stationGreen, inbound: [trainGreen1], outbound: [])
+    station: stationGreen, inbound: [trainGreen1], outbound: [])
 
   let lotsOfTrains = TrainsByDirection(
-    trainStation: stationGreen,
+    station: stationGreen,
     inbound: [trainGreen1, trainGreen2, trainGreen3, trainGreen1, trainGreen2, trainGreen3],
     outbound: [trainGreen1, trainGreen2, trainGreen3, trainGreen1, trainGreen2, trainGreen3])
 
   let trainLongNameOne = TrainsByDirection(
-    trainStation: stationGreen,
+    station: stationGreen,
     inbound: [
       Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "Due")
     ], outbound: [])
 
   let trainLongNameThree = TrainsByDirection(
-    trainStation: stationGreen,
+    station: stationGreen,
     inbound: [
       Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "Due"),
       Train(destination: "LUAS The Long Point Station", direction: "Outbound", dueTime: "12"),

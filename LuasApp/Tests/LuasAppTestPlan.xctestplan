@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "DF673A9B-B211-4EE2-ACA8-63B39D5F3E2B",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "LuasAppTests",
+        "name" : "LuasAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

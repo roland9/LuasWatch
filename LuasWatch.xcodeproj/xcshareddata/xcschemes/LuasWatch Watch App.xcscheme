@@ -28,10 +28,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB695E272AE41C1C00B6DB99"
-               BuildableName = "LuasWatch.app"
-               BlueprintName = "LuasWatch"
-               ReferencedContainer = "container:LuasWatch.xcodeproj">
+               BlueprintIdentifier = "LuasAPI"
+               BuildableName = "LuasAPI"
+               BlueprintName = "LuasAPI"
+               ReferencedContainer = "container:LuasAPI">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "LuasApp"
+               BuildableName = "LuasApp"
+               BlueprintName = "LuasApp"
+               ReferencedContainer = "container:LuasApp">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

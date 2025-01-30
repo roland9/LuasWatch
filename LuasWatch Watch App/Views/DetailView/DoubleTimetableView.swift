@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 struct DoubleTimetableView: View {
@@ -26,7 +27,7 @@ extension DoubleTimetableView {
         ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
           DueView(
             destination: $0.destinationDescription,
-            due: $0.dueTimeDescription2)
+            due: $0.dueTimeDescriptionShort)
         }
         if trainsByDirection.inboundHasOverflowSmall {
           OverflowDotsView()
@@ -44,7 +45,7 @@ extension DoubleTimetableView {
         ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
           DueView(
             destination: $0.destinationDescription,
-            due: $0.dueTimeDescription2)
+            due: $0.dueTimeDescriptionShort)
         }
         if trainsByDirection.outboundHasOverflowSmall {
           OverflowDotsView()

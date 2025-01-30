@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 struct StationsModal: View {
@@ -19,7 +20,7 @@ extension StationsModal {
   var body: some View {
     ScrollViewReader { (reader) in
       List {
-        ForEach(stations, id: \.stationId) { (station) in
+        ForEach(stations, id: \.stationIdShort) { (station) in
 
           // need a button here because just text only supports tap on the text but not full width
           Button(
@@ -52,7 +53,7 @@ extension StationsModal {
 
     // highlight in preview doesn't work??  does it used StoredAppMode?
     StationsModal(
-      stations: TrainStations.sharedFromFile.greenLineStations,
+      stations: TrainStations().greenLineStations,
       action: { _ in
         //
       }

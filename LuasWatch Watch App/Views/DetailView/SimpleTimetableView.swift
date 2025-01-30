@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 struct SimpleTimetableView: View {
@@ -41,7 +42,7 @@ extension SimpleTimetableView {
       ForEach(trains, id: \.id) {
         DueView(
           destination: $0.destinationDescription,
-          due: $0.dueTimeDescription2)
+          due: $0.dueTimeDescriptionShort)
       }
       if hasOverflow {
         OverflowDotsView()

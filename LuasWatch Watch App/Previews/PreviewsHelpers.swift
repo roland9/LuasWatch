@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 #if DEBUG
@@ -11,7 +12,7 @@ import SwiftUI
   @MainActor
   func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
 
-    @State var selectedStation: TrainStation? = trainsGreen.trainStation
+    @State var selectedStation: TrainStation? = trainsGreen.station
 
     return NavigationSplitView {
       SidebarView(selectedStation: $selectedStation)

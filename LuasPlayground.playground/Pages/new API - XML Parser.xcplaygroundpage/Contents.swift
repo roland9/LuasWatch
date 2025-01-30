@@ -1,6 +1,7 @@
-import CoreLocation
 import Foundation
-import LuasKit
+import CoreLocation
+
+import LuasAPI
 
 /* example input
  <stopInfo created="2020-08-16T22:07:29" stop="Ranelagh" stopAbv="RAN">
@@ -211,7 +212,7 @@ class StopInfoParser: NSObject, NodeParser {
 
     result =
       TrainsByDirection(
-        trainStation: trainStation,
+        station: trainStation,
         inbound: directionsInboundParser.result ?? [],
         outbound: directionsOutboundParser.result ?? [],
         message: message)
@@ -225,8 +226,13 @@ let delegateStack = ParserDelegateStack(xmlParser: xmlParser)
 
 // we know this information based on the user location, no need to parse the xml for that
 let trainStation = TrainStation(
-  stationId: "theStationId", stationIdShort: "stationIdShort", shortCode: "RAN",
-  route: .green, name: "Ranelagh", location: CLLocation(), stationType: .twoway)
+  stationIdShort: "stationIdShort",
+  shortCode: "RAN",
+  route: .green,
+  name: "Ranelagh",
+  location: CLLocation(),
+  stationType: .twoway
+)
 
 let stopInfoParser = StopInfoParser(trainStation: trainStation)
 delegateStack.push(stopInfoParser)

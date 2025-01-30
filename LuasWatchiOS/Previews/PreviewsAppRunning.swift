@@ -3,8 +3,10 @@
 //  Copyright © 2021 mApps.ie. All rights reserved.
 //
 
-import LuasKit
 import SwiftUI
+
+import LuasAPI
+import LuasApp
 
 #if DEBUG
   let genericError = "Some generic error"
@@ -15,7 +17,6 @@ import SwiftUI
         makeAppModel(
           state: .loadingDueTimes(
             TrainStation(
-              stationId: "stationId",
               stationIdShort: "LUAS70",
               shortCode: "CAB",
               route: .green,

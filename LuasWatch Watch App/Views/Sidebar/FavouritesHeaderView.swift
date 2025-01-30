@@ -3,7 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasKit
+import LuasAPI
+import LuasApp
 import SwiftUI
 
 struct FavouritesHeaderView {
@@ -11,6 +12,8 @@ struct FavouritesHeaderView {
   @Environment(\.modelContext) private var modelContext
 
   @State var isStationsModalPresented = false
+
+  private static let trainStations = TrainStations()
 }
 
 extension FavouritesHeaderView: View {
@@ -36,7 +39,7 @@ extension FavouritesHeaderView: View {
       .sheet(
         isPresented: $isStationsModalPresented,
         content: {
-          AllStationsListView(stations: TrainStations.sharedFromFile.greenLineStations)
+          AllStationsListView(stations: Self.trainStations.greenLineStations)
         })
     }
   }
