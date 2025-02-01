@@ -10,6 +10,7 @@ import SwiftUI
 struct NearbyStationsView {
 
   @EnvironmentObject var appModel: AppModel
+  @Environment(\.dismiss) var dismiss
 }
 
 extension NearbyStationsView: View {
@@ -17,7 +18,10 @@ extension NearbyStationsView: View {
   var body: some View {
 
     Button(
-      action: { appModel.appMode = .closest },
+      action: {
+        appModel.appMode = .closest
+        dismiss()
+      },
       label: {
         HStack {
           Text("Closest station")
@@ -32,7 +36,10 @@ extension NearbyStationsView: View {
     ).disabled(appModel.locationDenied == true)
 
     Button(
-      action: { appModel.appMode = .closestOtherLine },
+      action: {
+        appModel.appMode = .closestOtherLine
+        dismiss()
+      },
       label: {
         HStack {
           Text("Closest other line station")

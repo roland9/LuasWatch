@@ -102,6 +102,5 @@ extension SidebarView: View {
       Color("luasTheme").gradient,
       for: .navigation
     )
-//    .listStyle(.carousel)
   }
 }

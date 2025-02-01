@@ -26,7 +26,7 @@ extension StationTimesView {
 
       VStack {
         Text(trainStation.name)
-          .font(.title3)
+          .font(.largeTitle)
           .padding(.bottom)
 
         if let trains {
@@ -57,6 +57,16 @@ extension StationTimesView {
 
   @ViewBuilder
   fileprivate func timetableView(for trains: TrainsByDirection) -> some View {
+
+    HStack {
+      Text("Destination")
+        .font(.title2)
+      Spacer()
+      Text("Minutes")
+        .font(.title2)
+    }
+    .padding(.horizontal, 26)
+    .padding(.bottom, -14)
 
     if trains.station.allowsSwitchingDirection {
 

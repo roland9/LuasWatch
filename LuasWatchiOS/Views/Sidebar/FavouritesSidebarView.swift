@@ -11,6 +11,7 @@ import SwiftUI
 struct FavouritesSidebarView {
 
   @EnvironmentObject var appModel: AppModel
+  @Environment(\.dismiss) var dismiss
   @Environment(\.modelContext) private var modelContext
 
   @Query(sort: \FavouriteStation.dateAdded, order: .reverse)
@@ -36,6 +37,7 @@ extension FavouritesSidebarView: View {
           isHighlighted: isHighlighted(for: station.name),
           action: {
             appModel.appMode = .favourite(station)
+            dismiss()
           })
 
       }.onDelete(perform: { indexSet in

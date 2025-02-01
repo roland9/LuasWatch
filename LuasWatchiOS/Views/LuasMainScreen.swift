@@ -11,7 +11,7 @@ import LuasApp
 struct LuasMainScreen {
 
   @EnvironmentObject var appModel: AppModel
-  @State var selectedTabView = 1
+  @State var isMenuPresented: Bool = false
 
   private static let trainStations = TrainStations()
 }
@@ -20,51 +20,19 @@ extension LuasMainScreen: View {
 
   var body: some View {
 
-    NavigationSplitView {
+    NavigationView {
 
-      SidebarView(selectedStation: $appModel.selectedStation)
-        .onAppear(perform: {
-          appModel.allowStationTabviewUpdates = false
-        })
-
-    } detail: {
-
-      TabView(selection: $selectedTabView) {
-        StationView()
-          .containerBackground(
-            appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
-            for: .navigation
-          )
-          .tag(1)
-
-        StationsModal(
-          stations: appModel.selectedStation?.route == .green
-            ? Self.trainStations.greenLineStations
-            : Self.trainStations.redLineStations,
-          highlightedStation: appModel.selectedStation,
-          action: { station in
-            appModel.appMode = .specific(station)
-            withAnimation {
-              selectedTabView = 1
+      StationView()
+        .sheet(isPresented: $isMenuPresented) {
+          SidebarView(selectedStation: $appModel.selectedStation)
+        }
+        .toolbar {
+          ToolbarItemGroup(placement: .topBarLeading) {
+            Button("Menu") {
+              isMenuPresented = true
             }
           }
-        )
-        .containerBackground(
-          appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
-          for: .navigation
-        )
-        .tag(2)
-
-      }
-//      .tabViewStyle(.verticalPage)
-      .onAppear {
-        selectedTabView = 1
-        appModel.allowStationTabviewUpdates = true
-      }
-      .onDisappear {
-        appModel.allowStationTabviewUpdates = false
-      }
-
+        }
     }
   }
 }
