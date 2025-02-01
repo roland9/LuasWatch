@@ -9,9 +9,10 @@ extension View {
 
   func timeTableStyle() -> some View {
     self
-      .padding(6)
+      .frame(height: 200.0)
+      .padding(16)
       .background(.black)
       .border(.secondary).cornerRadius(2)
-      .padding(4)
+      .padding(14)
   }
 }

@@ -16,11 +16,11 @@ extension DueView {
 
     HStack {
       Text(destination)
-        .font(.caption2)
+        .font(.title2)
         .monospaced()
       Spacer()
       Text(due)
-        .font(.caption2)
+        .font(.title2)
         .monospaced()
     }
     .foregroundColor(.yellow)

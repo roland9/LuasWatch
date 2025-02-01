@@ -13,7 +13,7 @@ struct NoTrainsView: View {
     VStack {
       Spacer()
       Text(LuasStrings.noTrains)
-        .font(.caption2)
+        .font(.title2)
         .monospaced()
         .foregroundColor(.yellow)
         .frame(maxWidth: .infinity)

@@ -12,7 +12,7 @@ struct TrainsViewLoading: View {
     VStack {
       Spacer()
       Text(LuasStrings.trainsLoading)
-        .font(.caption2)
+        .font(.body)
         .monospaced()
         .foregroundColor(.yellow)
         .frame(maxWidth: .infinity)

@@ -12,7 +12,7 @@ struct LuasTextView: View {
     HStack {
       Spacer()
       Text(text)
-        .font(.caption2)
+        .font(.title2)
         .monospaced()
       Spacer()
     }

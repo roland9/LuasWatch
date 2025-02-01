@@ -29,8 +29,6 @@ extension StationTimesView {
           .font(.title3)
           .padding(.bottom)
 
-        Spacer()
-
         if let trains {
 
           timetableView(for: trains)
@@ -41,6 +39,8 @@ extension StationTimesView {
           TrainsViewLoading()
             .timeTableStyle()
         }
+        
+        Spacer()
       }
 
       .onAppear {
