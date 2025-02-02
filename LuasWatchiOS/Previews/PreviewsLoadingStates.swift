@@ -10,16 +10,26 @@ import SwiftUI
 #if DEBUG
 
   #Preview("loading") {
-    luasMainScreen(state: .loadingDueTimes(stationGreen, cachedTrains: nil))
+    luasMainScreen(
+      state: .loadingDueTimes(stationGreen,
+                              cachedTrains: nil)
+    )
   }
 
   #Preview("loading (cached)") {
-    luasMainScreen(state: .loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
+    luasMainScreen(
+      state: .loadingDueTimes(stationGreen,
+                              cachedTrains: trainsGreen)
+    )
   }
 
   #Preview("loading 1Way (cached)") {
     luasMainScreen(
-      state: .loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
+      state: .loadingDueTimes(
+        stationOneWay,
+        cachedTrains: trainsMarlborough
+      )
+    )
   }
 
   #Preview("noTrains") {

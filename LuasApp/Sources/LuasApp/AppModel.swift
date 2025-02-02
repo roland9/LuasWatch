@@ -85,8 +85,15 @@ public class AppModel: ObservableObject {
     }
   }
 
-  // for previews
+  #if DEBUG
+  // for SwiftUI Previews
   public init(_ state: AppState) {
     self.appState = state
   }
+  public init(_ state: AppState,
+              userLocation: CLLocation) {
+    self.appState = state
+    self.latestLocation = userLocation
+  }
+  #endif
 }

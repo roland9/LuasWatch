@@ -10,6 +10,7 @@ import SwiftUI
 
 struct StationTimesView: View {
 
+  @EnvironmentObject private var appModel: AppModel
   @Environment(\.modelContext) private var modelContext
 
   @State private var direction: Direction = .both
@@ -33,13 +34,16 @@ extension StationTimesView {
 
           timetableView(for: trains)
 
+          if let userLocation = appModel.latestLocation {
+            ClosestStationsView(userLocation: userLocation)
+          }
+
         } else {
 
           // no cachedTrains: we're loading that station for the first time
           TrainsViewLoading()
             .timeTableStyle()
         }
-        
         Spacer()
       }
 

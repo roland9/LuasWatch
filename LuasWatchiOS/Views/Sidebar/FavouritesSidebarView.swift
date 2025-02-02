@@ -30,7 +30,7 @@ extension FavouritesSidebarView: View {
 
         let station =
           Self.trainStations.station(shortCode: station.shortCode)
-          ?? TrainStations.unknown
+          ?? TrainStation.unknown
 
         StationRow(
           station: station,

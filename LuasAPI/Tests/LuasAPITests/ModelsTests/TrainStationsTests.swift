@@ -61,7 +61,8 @@ struct TrainStationsTests {
     #expect(stations.closestStation(from: closeLocation) == stationRed)
     #expect(stations.closestStation(from: veryCloseLocation) == stationRed)
     #expect(stations.closestStation(from: locationMarlborough) == stationGreen)
-    #expect(stations.closestStation(from: farAwayLocation) == nil)
+
+    // previously: filtered out all stations that were quite far away (20km) - but that's not required anymore
   }
 
   @Test func trainStations_closestFromLocationRoute() throws {

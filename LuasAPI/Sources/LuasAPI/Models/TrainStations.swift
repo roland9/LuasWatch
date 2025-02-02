@@ -77,17 +77,7 @@ public struct TrainStations: Sendable {
     }
   }
 
-  // MARK: - Helpers
-
-  public var redLineStations: [TrainStation] {
-    allStations
-      .filter { $0.route == .red }
-  }
-
-  public var greenLineStations: [TrainStation] {
-    allStations
-      .filter { $0.route == .green }
-  }
+  // MARK: - Sorting closest Stations
 
   public func closestStation(from location: CLLocation) -> TrainStation? {
     allStations.closestStation(from: location)
@@ -102,10 +92,20 @@ public struct TrainStations: Sendable {
     }
   }
 
-  func closestStationsSorted(from location: CLLocation) -> [TrainStation] {
-    allStations.sorted { (station1, station2) -> Bool in
-      station1.location.distance(from: location) < station2.location.distance(from: location)
-    }
+  public func closestStationsSorted(from location: CLLocation) -> [TrainStation] {
+    allStations.closestStations(from: location)
+  }
+
+  // MARK: - Helpers
+
+  public var redLineStations: [TrainStation] {
+    allStations
+      .filter { $0.route == .red }
+  }
+
+  public var greenLineStations: [TrainStation] {
+    allStations
+      .filter { $0.route == .green }
   }
 
   public func station(shortCode: String) -> TrainStation? {
@@ -117,24 +117,13 @@ public struct TrainStations: Sendable {
 
 private extension Array where Element == TrainStation {
 
-  func closestStation(from location: CLLocation) -> TrainStation? {
-    var closestStationSoFar: TrainStation?
-
-    self.forEach { (station) in
-      // don't consider stations if they're too far away, currently 20km
-      if station.location.distance(from: location) > 20000 {
-        return
-      }
-
-      if let closest = closestStationSoFar {
-        if station.location.distance(from: location) < closest.location.distance(from: location) {
-          closestStationSoFar = station
-        }
-      } else {
-        closestStationSoFar = station
-      }
+  func closestStations(from location: CLLocation) -> [TrainStation] {
+    sorted { (station1, station2) -> Bool in
+      station1.location.distance(from: location) < station2.location.distance(from: location)
     }
+  }
 
-    return closestStationSoFar
+  func closestStation(from location: CLLocation) -> TrainStation? {
+    closestStations(from: location).first
   }
 }
