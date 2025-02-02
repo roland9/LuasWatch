@@ -20,7 +20,7 @@ public struct TrainStation: CustomStringConvertible, Hashable, Identifiable, Sen
     route: Route,
     name: String,
     location: CLLocation,
-    stationType: TrainStation.StationType = .twoway
+    stationType: StationType = .twoway
   ) {
     self.stationIdShort = stationIdShort
     self.shortCode = shortCode
@@ -30,11 +30,22 @@ public struct TrainStation: CustomStringConvertible, Hashable, Identifiable, Sen
     self.stationType = stationType
   }
 
+  // need custom implementation because location does not compare lat/long when checking for equatable
+  static public func == (lhs: TrainStation, rhs: TrainStation) -> Bool {
+    lhs.stationIdShort == rhs.stationIdShort &&
+    lhs.shortCode == rhs.shortCode &&
+    lhs.route == rhs.route &&
+    lhs.name == rhs.name &&
+    lhs.location.coordinate.latitude == rhs.location.coordinate.latitude &&
+    lhs.location.coordinate.longitude == rhs.location.coordinate.longitude &&
+    lhs.stationType == rhs.stationType
+  }
+
   public var id: String {
     stationIdShort
   }
 
-  public enum StationType: String, Sendable {
+  public enum StationType: String, Sendable, Equatable {
     case twoway, oneway, terminal
   }
 
@@ -67,5 +78,17 @@ public struct TrainStation: CustomStringConvertible, Hashable, Identifiable, Sen
     formatter.numberFormatter.maximumSignificantDigits = 1
 
     return formatter.string(from: distance)
+  }
+
+  public static var unknown: TrainStation {
+    TrainStation(
+      stationIdShort: "unknown",
+      shortCode: "unknown",
+      route: .green,
+      name: "Unknown",
+      location: CLLocation(
+        latitude: CLLocationDegrees(53.3163934083453),
+        longitude: CLLocationDegrees(-6.25344151996991))
+    )
   }
 }

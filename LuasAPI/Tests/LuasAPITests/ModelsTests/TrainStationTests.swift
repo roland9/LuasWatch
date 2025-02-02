@@ -99,4 +99,18 @@ struct TrainStationTests {
     )
     #expect(station.distance(from: locationFarAway) == "10 km")
   }
+
+  @Test func trainStation_unknownStation() throws {
+    let unknownStation = TrainStation(
+      stationIdShort: "unknown",
+      shortCode: "unknown",
+      route: .green,
+      name: "Unknown",
+      location: CLLocation(
+        latitude: CLLocationDegrees(53.3163934083453),
+        longitude: CLLocationDegrees(-6.25344151996991))
+    )
+
+    #expect(unknownStation == TrainStation.unknown)
+  }
 }
