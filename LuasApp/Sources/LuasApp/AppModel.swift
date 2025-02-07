@@ -43,6 +43,7 @@ public class AppModel: ObservableObject {
 
   @Published public var latestLocation: CLLocation?
 
+// maybe not required for iOS?
   @Published public var allowStationTabviewUpdates: Bool = true
 
   @Published public var locationDenied: Bool = false
