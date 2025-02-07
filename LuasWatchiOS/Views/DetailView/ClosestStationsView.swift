@@ -17,12 +17,15 @@ struct ClosestStationsView: View {
       Text("Closest Stations")
         .font(.headline)
 
-      let fiveClosestStations = TrainStations()
+      let sevenClosestStations = TrainStations()
         .closestStationsSorted(from: userLocation)
-        .prefix(5)
+        .prefix(7)
 
-      List(fiveClosestStations) { station in
-        Text(station.name)
+      List(sevenClosestStations) { station in
+        StationRow(station: station,
+                   isHighlighted: false) {
+          // WIP
+        }
       }
     }
   }
