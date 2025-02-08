@@ -13,14 +13,12 @@ struct ClosestStationsView: View {
   var userLocation: CLLocation
 
   var body: some View {
+
+    let sevenClosestStations = TrainStations()
+      .closestStationsSorted(from: userLocation)
+      .prefix(7)
+
     VStack {
-      Text("Closest Stations")
-        .font(.headline)
-
-      let sevenClosestStations = TrainStations()
-        .closestStationsSorted(from: userLocation)
-        .prefix(7)
-
       List(sevenClosestStations) { station in
         StationRow(station: station,
                    isHighlighted: false) {
@@ -31,11 +29,11 @@ struct ClosestStationsView: View {
   }
 }
 
-#Preview {
-  let closeLocation = CLLocation(
-    latitude: locationBluebell.coordinate.latitude + 0.00425,
-    longitude: locationBluebell.coordinate.longitude + 0.005
-  )
-
-  ClosestStationsView(userLocation: closeLocation)
-}
+//#Preview {
+//  let closeLocation = CLLocation(
+//    latitude: locationBluebell.coordinate.latitude + 0.00425,
+//    longitude: locationBluebell.coordinate.longitude + 0.005
+//  )
+//
+//  ClosestStationsView(userLocation: closeLocation)
+//}
