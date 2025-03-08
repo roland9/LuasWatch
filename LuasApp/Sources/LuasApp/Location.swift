@@ -4,6 +4,7 @@
 //
 
 import CoreLocation
+import LuasAPI
 
 public protocol LocationDelegate: AnyObject {
   func didFail(_ error: LocationDelegateError)
