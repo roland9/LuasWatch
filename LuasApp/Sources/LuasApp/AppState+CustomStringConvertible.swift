@@ -1,0 +1,31 @@
+//
+//  Created by Roland Gropmair on 05/02/2024.
+//  Copyright © 2024 mApps.ie. All rights reserved.
+//
+
+import Foundation
+
+extension AppState: CustomStringConvertible {
+
+  public var description: String {
+    switch self {
+
+    case .idle:
+      return "Idle"
+    case .gettingLocation:
+      return LuasStrings.gettingLocation
+    case .locationAuthorizationUnknown:
+      return LuasStrings.locationAuthorizationUnknown
+    case .errorGettingLocation(let errorMessage):
+      return errorMessage
+    case .errorGettingStationTooFarAway:
+      return LuasStrings.errorGettingStation
+    case .loadingDueTimes(let trainStation, _):
+      return LuasStrings.gettingDueTimes(trainStation)
+    case .errorGettingDueTimes(_, let errorMessage):
+      return errorMessage
+    case .foundDueTimes(let trains):
+      return LuasStrings.foundDueTimes(trains)
+    }
+  }
+}

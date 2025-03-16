@@ -13,7 +13,7 @@ platform :ios do
 
   def build_app
     gym(
-      scheme: "LuasWatch WatchKit App",
+      scheme: "LuasWatch",
       destination: "generic/platform=watchOS",
       export_xcargs: "-allowProvisioningUpdates",
       # output_directory: "build/",

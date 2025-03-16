@@ -3,13 +3,17 @@
 //  Copyright © 2023 mApps.ie. All rights reserved.
 //
 
-import LuasAPI
-import LuasApp
 import SwiftData
 import SwiftUI
+import OSLog
+
+import LuasAPI
+import LuasApp
 
 @main
 struct LuasWatch_Watch_App: App {
+
+  let logger = Logger(subsystem: "LuasWatch", category: "LuasWatch_Watch_App")
 
   @Environment(\.scenePhase) var scenePhase
 
@@ -58,11 +62,11 @@ struct LuasWatch_Watch_App: App {
     .onChange(of: scenePhase) {
       switch scenePhase {
       case .background, .inactive:
-        myPrint("App did enter background or because inactive -> invalidateTimer")
+          logger.info("App did enter background or because inactive -> invalidateTimer")
         mainCoordinator.invalidateTimer()
 
       case .active:
-        myPrint("App became active -> fireAndScheduleTimer")
+          logger.info("App became active -> fireAndScheduleTimer")
 
         #if DEBUG
           if appModel.mockMode == true {

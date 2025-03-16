@@ -4,6 +4,9 @@
 //
 
 import CoreLocation
+import OSLog
+
+import LuasAPI
 
 public protocol LocationDelegate: AnyObject {
   func didFail(_ error: LocationDelegateError)
@@ -34,15 +37,19 @@ public class Location: NSObject {
 
   let locationManager = CLLocationManager()
 
+  let logger = Logger(subsystem: "LuasApp", category: "Location")
+
   public func promptLocationAuth() {
-    myPrint(#function)
+    logger.info(#function)
+
+    locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     locationManager.requestWhenInUseAuthorization()
   }
 
   /// start getting location
   public func start() {
-    myPrint("calling locationManager.startUpdatingLocation")
+    logger.info("calling locationManager.startUpdatingLocation")
 
     internalState = .gettingLocation
     locationManager.delegate = self
@@ -56,21 +63,20 @@ public class Location: NSObject {
       || locationAuthState == .unknown
     {
 
-      myPrint(
-        "\(locationAuthState) \(internalState) -> calling locationManager.startUpdatingLocation")
+      logger.info("\(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> calling locationManager.startUpdatingLocation")
 
       internalState = .gettingLocation
       locationManager.delegate = self
       locationManager.startUpdatingLocation()
 
     } else if locationAuthState == .denied {
-      myPrint("\(locationAuthState) \(internalState) -> calling delegate didFail(.denied)")
+      logger.info("\(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> calling delegate didFail(.denied)")
 
       delegate?.didFail(.locationAccessDenied)
 
     } else {
       assertionFailure("internal error")
-      myPrint("🚨 NOT calling locationManager.startUpdatingLocation")
+      logger.error("🚨 NOT calling locationManager.startUpdatingLocation")
     }
   }
 }
@@ -78,23 +84,23 @@ public class Location: NSObject {
 extension Location: CLLocationManagerDelegate {
 
   public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    myPrint("\(error)")
+    logger.error("\(error)")
 
     internalState = .error
     let nsError = error as NSError
 
     if nsError.domain == kCLErrorDomain && nsError.code == CLError.Code.denied.rawValue {
-      myPrint("didFail .locationAccessDenied")
+      logger.error("didFail .locationAccessDenied")
       delegate?.didFail(.locationAccessDenied)
 
     } else {
-      myPrint("didFail .locationManagerError")
+      logger.error("didFail .locationManagerError")
       delegate?.didFail(.locationManagerError(error))
     }
   }
 
   public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    myPrint("authorizationStatus: \(manager.authorizationStatus.readableDescription)")
+    logger.info("authorizationStatus: \(manager.authorizationStatus.readableDescription)")
 
     switch manager.authorizationStatus {
     case .notDetermined:
@@ -106,18 +112,18 @@ extension Location: CLLocationManagerDelegate {
       locationAuthState = .granted
       delegate?.didEnableLocation()
     @unknown default:
-      myPrint("default")
+        logger.info("default")
     }
   }
 
   public func locationManager(
     _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]
   ) {
-    myPrint("\(locations)")
+    logger.info("\(locations)")
 
     guard let lastLocation = locations.last else {
       assertionFailure("internal error")
-      myPrint("🚨 internal error: expected a location in the locations array")
+      logger.error("🚨 internal error: expected a location in the locations array")
       return
     }
 
@@ -126,7 +132,7 @@ extension Location: CLLocationManagerDelegate {
     if abs(howRecent) < 15.0 {
 
       if lastLocation.horizontalAccuracy < 100 && lastLocation.verticalAccuracy < 100 {
-        myPrint("last location quite precise -> stopping location updates for now")
+        logger.debug("last location quite precise -> stopping location updates for now")
 
         internalState = .stoppedUpdatingLocation
         /// it seems that calling stopUpdatingLocation() does still deliver sometimes 3 location updates, which causes superfluous API calls....
@@ -138,7 +144,7 @@ extension Location: CLLocationManagerDelegate {
       delegate?.didGetLocation(lastLocation)
 
     } else {
-      myPrint("ignoring lastLocation because too old (\(howRecent) seconds ago")
+      logger.info("ignoring lastLocation because too old (\(howRecent) seconds ago")
     }
   }
 }

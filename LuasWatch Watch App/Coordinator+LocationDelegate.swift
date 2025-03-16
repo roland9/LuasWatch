@@ -4,13 +4,14 @@
 //
 
 import CoreLocation
+
 import LuasAPI
 import LuasApp
 
 extension Coordinator: LocationDelegate {
 
   func didFail(_ delegateError: LocationDelegateError) {
-    myPrint("error \(delegateError)")
+    logger.error("error \(delegateError)")
 
     appModel.latestLocation = nil
 
@@ -42,7 +43,7 @@ extension Coordinator: LocationDelegate {
     if appModel.appMode.needsLocation {
       location.start()
     } else {
-      myPrint("no location auth needed for the current appMode \(appModel.appMode)")
+      logger.info("no location auth needed for the current appMode \(self.appModel.appMode)")
     }
   }
 
@@ -56,37 +57,37 @@ extension Coordinator: LocationDelegate {
     let allStations = TrainStations()
 
     if let station = appModel.appMode.specificStation {
-      myPrint(
+      logger.debug(
         "step 2a: got location now, but user selected specific station before -> use this station now"
       )
       handle(station)
 
     } else {
-      myPrint("step 2b: got location; find closest station (no matter which line)")
+      logger.debug("step 2b: got location; find closest station (no matter which line)")
 
       if let closestStation = allStations.closestStation(from: location) {
 
         if appModel.appMode == .closest {
-          myPrint("found closest station <\(closestStation.name)>")
+          logger.debug("found closest station <\(closestStation.name)>")
           handle(closestStation)
         } else if appModel.appMode == .closestOtherLine,
           let closestOtherLine = allStations.closestStation(
             from: location, route: closestStation.route.other)
         {
-          myPrint("found closest other line station <\(closestOtherLine.name)>")
+          logger.debug("found closest other line station <\(closestOtherLine.name)>")
           handle(closestOtherLine)
         } else {
           assertionFailure("internal error")
           // this should not happen unless we missed an appMode case;  as fallback let's use the closestStation
-          myPrint("found closest station <\(closestStation.name)>")
+          logger.debug("found closest station <\(closestStation.name)>")
           handle(closestStation)
         }
 
       } else {
-        myPrint("step 2c: no station found -> user too far away")
+        logger.debug("step 2c: no station found -> user too far away")
 
         guard appModel.allowStationTabviewUpdates == true else {
-          myPrint("SidebarView is up -> ignore new location so we don't interfere UI")
+          logger.debug("SidebarView is up -> ignore new location so we don't interfere UI")
           return
         }
 
@@ -117,7 +118,7 @@ extension Coordinator: LocationDelegate {
           closestStation, cachedTrains: nil)
       }
     } else {
-      myPrint("SidebarView is up -> ignore so we don't interfere UI")
+      logger.debug("SidebarView is up -> ignore so we don't interfere UI")
     }
 
     // //////////////////////////////////////////////
@@ -126,56 +127,69 @@ extension Coordinator: LocationDelegate {
 
       do {
 
-        myPrint("calling API for station \(closestStation.name) ...")
+        logger.debug("calling API for station \(closestStation.name) ...")
 
         let trains = try await self.api.dueTimes(for: closestStation)
 
-        myPrint("... got trains \(trains)")
+        logger.debug("... got trains \(String(describing: trains))")
 
         previouslyLoadedTrains = (for: closestStation, trains: trains)
         if appModel.allowStationTabviewUpdates {
           updateWithAnimation(to: .foundDueTimes(trains))
         } else {
-          myPrint("SidebarView is up -> ignore so we don't interfere UI")
+          logger.debug("SidebarView is up -> ignore so we don't interfere UI")
         }
 
       } catch {
 
-        myPrint("...caught error \(error.localizedDescription)")
+        logger.error("...caught error \(error.localizedDescription)")
 
         previouslyLoadedTrains = nil
 
         guard appModel.allowStationTabviewUpdates else {
-          myPrint("SidebarView is up -> ignore so we don't interfere UI")
+          logger.debug("SidebarView is up -> ignore so we don't interfere UI")
           return
         }
 
         if let apiError = error as? APIError {
 
           switch apiError {
-          case .noTrains(let message):
+
+          case .noTrainsButMessageFromAPI(let message):
             updateWithAnimation(
-              to:
-                .errorGettingDueTimes(
-                  closestStation,
-                  message.count > 0
-                    ? message : LuasStrings.errorGettingDueTimes(station: closestStation.name)))
+              to: .errorGettingDueTimes(
+                closestStation,
+                message))
+
+          case .noTrains:
+            updateWithAnimation(
+              to: .errorGettingDueTimes(
+                closestStation,
+                LuasStrings.noTrainsErrorMessage))
 
           case .invalidXML:
             updateWithAnimation(
-              to: .errorGettingDueTimes(closestStation, "Error reading server response"))
+              to: .errorGettingDueTimes(
+                closestStation,
+                "Error reading server response"))
           }
 
         } else if (error as NSError).code == NSURLErrorNotConnectedToInternet {
           updateWithAnimation(
             to: .errorGettingDueTimes(
               closestStation,
-              LuasStrings.errorNoInternet))
+              LuasStrings.errorNoInternet
+            )
+          )
         } else {
           updateWithAnimation(
             to: .errorGettingDueTimes(
               closestStation,
-              LuasStrings.errorGettingDueTimes(station: closestStation.name)))
+              LuasStrings.errorGettingDueTimes(
+                station: closestStation.name
+              )
+            )
+          )
         }
       }
     }

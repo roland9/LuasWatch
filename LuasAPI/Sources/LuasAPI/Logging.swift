@@ -5,11 +5,24 @@
 
 import Foundation
 
+public protocol Printable {
+  func print(
+      _ items: String,
+      separator: String,
+      terminator: String
+  )
+}
+
 // inspired by https://gist.github.com/ccheptea/324e40dc905c961d87a62f65f7ba0462
 
 public func myPrint(
-  _ items: Any..., separator: String = " ", terminator: String = "\n", function: String = #function,
-  file: String = #file, line: Int = #line
+  _ items: Any...,
+  separator: String = " ",
+  terminator: String = "\n",
+  function: String = #function,
+  file: String = #file,
+  line: Int = #line,
+  printFunction: (any Printable)? = nil
 ) {
 
   #if DEBUG
@@ -32,9 +45,16 @@ public func myPrint(
     let prefix = "\(dateString) \(filename).\(function):\(line)"
 
     repeat {
-      Swift.print(
-        "\(prefix) \(items[idx])", separator: separator,
-        terminator: idx == (endIdx - 1) ? terminator : separator)
+      if let printFunction {
+        printFunction.print(
+          "\(prefix) \(items[idx])", separator: separator,
+          terminator: idx == (endIdx - 1) ? terminator : separator)
+      } else {
+        Swift.print(
+          "\(prefix) \(items[idx])", separator: separator,
+          terminator: idx == (endIdx - 1) ? terminator : separator)
+      }
+
       idx += 1
     } while idx < endIdx
 
