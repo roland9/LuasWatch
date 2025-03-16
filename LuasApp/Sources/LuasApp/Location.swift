@@ -41,6 +41,8 @@ public class Location: NSObject {
 
   public func promptLocationAuth() {
     logger.info(#function)
+
+    locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     locationManager.requestWhenInUseAuthorization()
   }
