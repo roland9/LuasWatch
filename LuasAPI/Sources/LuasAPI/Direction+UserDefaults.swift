@@ -27,14 +27,16 @@ extension Direction {
     let userDefaults = UserDefaults.standard
 
     if var directions = userDefaults.object(forKey: userDefaultsKey) as? [String: Int] {
+      logger.info("updating directions \(directions)")
+
       directions[station] = direction.rawValue
       userDefaults.set(directions, forKey: userDefaultsKey)
-      myPrint("updating directions \(directions)")
     } else {
       // first time we set anything: start from scratch with dictionary with only one entry
+      logger.info("setting direction \(direction)")
+
       let direction: [String: Int] = [station: direction.rawValue]
       userDefaults.set(direction, forKey: userDefaultsKey)
-      myPrint("setting direction \(direction)")
     }
   }
 }

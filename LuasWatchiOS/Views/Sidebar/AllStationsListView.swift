@@ -3,10 +3,12 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasAPI
-import LuasApp
 import SwiftData
 import SwiftUI
+import OSLog
+
+import LuasAPI
+import LuasApp
 
 struct AllStationsListView {
   @EnvironmentObject var appModel: AppModel
@@ -14,6 +16,8 @@ struct AllStationsListView {
   @Environment(\.dismiss) private var dismiss
 
   @State var stations: [TrainStation]
+
+  let logger = Logger(subsystem: "LuasWatchiOS", category: "AllStationsListView")
 
   private static let trainStations = TrainStations()
 }
@@ -55,7 +59,7 @@ extension AllStationsListView: View {
         {
           modelContext.insert(FavouriteStation(shortCode: station.shortCode))
         } else {
-          myPrint("Favourite station already exists -> ignore")
+          logger.debug("Favourite station already exists -> ignore")
         }
 
         DispatchQueue.main.async {

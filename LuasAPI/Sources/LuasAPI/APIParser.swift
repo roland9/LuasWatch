@@ -4,10 +4,11 @@
 //
 
 import Foundation
+import OSLog
 
 struct APIParser {
 
-  static let shouldLog = false
+  static let logger = Logger(subsystem: "LuasAPI", category: "APIParser")
 
   class MessageParser: NSObject, NodeParser {
     var delegateStack: ParserDelegateStack?
@@ -18,9 +19,7 @@ struct APIParser {
     override init() {}
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-      if shouldLog {
-        myPrint("📄 \(String( describing: string))")
-      }
+      logger.debug("📄 \(String( describing: string))")
       // fix: in some cases the parser calls this delegate back twice,
       // e.g. with input 'No service Stephen’s Green – Beechwood. See news',
       // the second time has '’s Green – Beechwood. See news'
@@ -32,9 +31,7 @@ struct APIParser {
       _ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?,
       qualifiedName qName: String?
     ) {
-      if shouldLog {
-        myPrint("📄 \(self.classForCoder) message: \(String( describing: message))")
-      }
+      logger.debug("📄 \(self.classForCoder) message: \(String( describing: self.message))")
       result = message
       delegateStack?.pop()
     }
@@ -55,9 +52,7 @@ struct APIParser {
       qualifiedName qName: String?,
       attributes attributeDict: [String: String] = [:]
     ) {
-      if shouldLog {
-        myPrint("🔛 \(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
-      }
+      logger.debug("🔛 \(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
 
       if elementName == "tram" {
         if  // let destination = attributeDict["destination"],
@@ -101,17 +96,15 @@ struct APIParser {
       _ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
       qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]
     ) {
-      if shouldLog {
-        myPrint("\(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
-      }
+      logger.debug("\(self.classForCoder) parsing \(elementName) attributeDict \(attributeDict)")
 
       switch elementName {
       case "stopInfo":
         // we don't need to parse that info; we hand that in based on the API call we're making for the station
-        if shouldLog { myPrint("skip stopInfo") }
+          logger.debug("skip stopInfo")
 
       case "message":
-        delegateStack?.push(messageParser)
+          delegateStack?.push(messageParser)
 
       case "direction":
 

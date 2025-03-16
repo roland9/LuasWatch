@@ -5,6 +5,7 @@
 
 import SwiftUI
 import SwiftData
+import OSLog
 
 import LuasAPI
 import LuasApp
@@ -12,6 +13,8 @@ import LuasApp
 @main
 struct LuasWatchiOSApp: App {
   @Environment(\.scenePhase) var scenePhase
+
+  let logger = Logger(subsystem: "LuasWatchiOS", category: "LuasWatchiOSApp")
 
   private var sharedModelContainer: ModelContainer = {
     let schema = Schema([
@@ -53,10 +56,13 @@ struct LuasWatchiOSApp: App {
     .onChange(of: scenePhase) {
       switch $0 {
       case .background, .inactive:
-        mainCoordinator.invalidateTimer()
+          logger.info("App did enter background or because inactive -> invalidateTimer")
+          mainCoordinator.invalidateTimer()
 
       case .active:
-        mainCoordinator.scheduleTimer()
+          logger.info("App became active -> fireAndScheduleTimer")
+
+          mainCoordinator.fireAndScheduleTimer()
 
       @unknown default:
         break
