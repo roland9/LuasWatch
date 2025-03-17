@@ -3,21 +3,16 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasAPI
-import LuasApp
 import SwiftUI
+
+import LuasApp
 
 struct NoTrainsView: View {
 
   var body: some View {
-    VStack {
-      Spacer()
-      Text(LuasStrings.noTrains)
-        .font(.caption2)
-        .monospaced()
-        .foregroundColor(.yellow)
-        .frame(maxWidth: .infinity)
-      Spacer()
-    }
+    Text(LuasStrings.noTrains)
+
+    // note: don't add .timeTableStyle() here
+    // we need it for combined DoubleTimetableView
   }
 }

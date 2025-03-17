@@ -3,41 +3,40 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
+import SwiftUI
+
 import LuasAPI
 import LuasApp
-import SwiftUI
 
 #if DEBUG
 
-  #Preview("idle") {
-    luasMainScreen(state: .idle)
-  }
+#Preview("idle") {
+  makeTabView(AppModel(.idle))
+}
 
-  #Preview("gettingLoc") {
-    luasMainScreen(state: .gettingLocation)
-  }
+#Preview("gettingLoc") {
+  makeTabView(AppModel(.gettingLocation))
+}
 
-  #Preview("authUnk") {
-    luasMainScreen(state: .locationAuthorizationUnknown)
-  }
+#Preview("authUnk") {
+  makeTabView(AppModel(.locationAuthorizationUnknown))
+}
 
-  #Preview("locErr") {
-    luasMainScreen(state: .errorGettingLocation("Error getting location."))
-  }
+#Preview("locErr") {
+  makeTabView(AppModel(.errorGettingLocation("Error getting location.")))
+}
 
-  #Preview("errStation") {
-    luasMainScreen(
-      state: .errorGettingStationTooFarAway(
-        "Some internal error getting station."))
-  }
+#Preview("errStation") {
+  makeTabView(AppModel(.errorGettingStationTooFarAway(
+    "Some internal error getting station.")))
+}
 
-  #Preview("errFarAway") {
-    luasMainScreen(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway))
-  }
+#Preview("errFarAway") {
+  makeTabView(AppModel(.errorGettingStationTooFarAway(LuasStrings.tooFarAway)))
+}
 
-  #Preview("errLoading") {
-    luasMainScreen(
-      state: .errorGettingDueTimes(
-        stationGreen, "Error loading due times - could not access internet?"))
-  }
+#Preview("errLoading") {
+  makeTabView(AppModel(.errorGettingDueTimes(
+    stationGreen, "Error loading due times - could not access internet?")))
+}
 #endif

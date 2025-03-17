@@ -23,16 +23,18 @@ extension SimpleTimetableView {
     var hasOverflow = false
 
     switch direction {
-    /// noOverflowLarge cuts off after 6 - WIP: show overflow in subsequent tabView
-    case .inbound:
-      trains = trainsByDirection.inboundNoOverflowLarge
-      hasOverflow = trainsByDirection.inboundHasOverflowLarge
-    case .outbound:
-      trains = trainsByDirection.outboundNoOverflowLarge
-      hasOverflow = trainsByDirection.outboundHasOverflowLarge
-    case .both:
-      assertionFailure("expected either .inbound OR .outbound - not .both")
-      trains = trainsByDirection.inbound
+        /// noOverflowLarge cuts off after 6 - WIP: show overflow in subsequent tabView
+      case .inbound:
+        trains = trainsByDirection.inboundNoOverflowLarge
+        hasOverflow = trainsByDirection.inboundHasOverflowLarge
+
+      case .outbound:
+        trains = trainsByDirection.outboundNoOverflowLarge
+        hasOverflow = trainsByDirection.outboundHasOverflowLarge
+
+      case .both:
+        assertionFailure("expected either .inbound OR .outbound - not .both")
+        trains = trainsByDirection.inbound
     }
 
     // we should always have train here, see where we're calling this view from
@@ -47,7 +49,6 @@ extension SimpleTimetableView {
       if hasOverflow {
         OverflowDotsView()
       }
-      Spacer()
     }
     .timeTableStyle()
     .opacity(appModel.appState.isLoading ? 0.52 : 1.0)

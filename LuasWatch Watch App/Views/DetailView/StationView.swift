@@ -3,47 +3,97 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
+import SwiftUI
+
 import LuasAPI
 import LuasApp
-import SwiftUI
 
 struct StationView {
 
   @EnvironmentObject private var appModel: AppModel
+  @Environment(\.modelContext) private var modelContext
+
+  @State private var direction: Direction = .both
 }
 
 extension StationView: View {
 
   var body: some View {
 
-    switch appModel.appState {
+    makeStationView(for: appModel.appState)
 
-    case .idle:
-      LuasTextView(text: "LuasWatch is starting...")
+      .toolbar {
 
-    case .gettingLocation:
-      LuasTextView(text: "Getting location...")
+        switch appModel.appState {
 
-    case .locationAuthorizationUnknown:
-      // WIP we need new approach to trigger location prompt via appModel?
-      GrantLocationAuthView(didTapButton: {
-        appModel.appState = .gettingLocation
-      })
+            // everything with LuasTextView has 'inactive' toolbar
+          case .idle, .gettingLocation,
+              .errorGettingLocation, .errorGettingStationTooFarAway, .errorGettingDueTimes:
+            ToolbarInactive()
 
-    case .errorGettingLocation:
-      LuasTextView(text: appModel.appState.description)
+          case .locationAuthorizationUnknown:
+            ToolbarInactive()
 
-    case .errorGettingStationTooFarAway(let errorMessage):
-      LuasTextView(text: errorMessage)
+          case .loadingDueTimes(let station, _):
+            StationToolbar(
+              direction: $direction,
+              trainStation: station
+            )
 
-    case .loadingDueTimes(let trainStation, let cachedTrains):
-      StationTimesView(trainStation: trainStation, trains: cachedTrains)
+          case .foundDueTimes(let trains):
+            StationToolbar(
+              direction: $direction,
+              trainStation: trains.station
+            )
+        }
+      }
+  }
 
-    case .errorGettingDueTimes(_, let message):
-      LuasTextView(text: message)
+  @ViewBuilder
+  fileprivate func makeStationView(for appState: AppState) -> some View {
+    switch appState {
 
-    case .foundDueTimes(let trains):
-      StationTimesView(trainStation: trains.station, trains: trains)
+      case .idle:
+        LuasTextView(text: "LuasWatch is starting...")
+
+      case .gettingLocation:
+        LuasTextView(text: "Getting location...")
+
+      case .locationAuthorizationUnknown:
+        // WIP we need new approach to trigger location prompt via appModel?
+        GrantLocationAuthView(didTapButton: {
+          appModel.appState = .gettingLocation
+        })
+
+      case .errorGettingLocation:
+        LuasTextView(text: appModel.appState.description)
+
+      case .errorGettingStationTooFarAway(let errorMessage):
+        LuasTextView(text: errorMessage)
+        
+      case .loadingDueTimes(let trainStation, let cachedTrains):
+        StationTimesView(
+          direction: direction,
+          trainStation: trainStation,
+          trains: cachedTrains
+        )
+        .onAppear {
+          direction = modelContext.directionConsideringStationType(for: trainStation.shortCode)
+        }
+
+      case .errorGettingDueTimes(_, let message):
+        LuasTextView(text: message)
+
+      case .foundDueTimes(let trains):
+        StationTimesView(
+          direction: direction,
+          trainStation: trains.station,
+          trains: trains
+        )
+        .onAppear {
+          direction = modelContext.directionConsideringStationType(for: trains.station.shortCode)
+        }
     }
   }
+
 }

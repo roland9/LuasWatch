@@ -32,7 +32,6 @@ extension DoubleTimetableView {
         if trainsByDirection.inboundHasOverflowSmall {
           OverflowDotsView()
         }
-        Spacer()
       }
 
       Divider()
@@ -50,8 +49,9 @@ extension DoubleTimetableView {
         if trainsByDirection.outboundHasOverflowSmall {
           OverflowDotsView()
         }
-        Spacer()
       }
+
+      Spacer()
     }
     .timeTableStyle()
     .opacity(appModel.appState.isLoading ? 0.52 : 1.0)
