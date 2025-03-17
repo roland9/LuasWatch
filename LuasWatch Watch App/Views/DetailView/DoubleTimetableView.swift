@@ -19,35 +19,44 @@ extension DoubleTimetableView {
   var body: some View {
 
     VStack {
-      if trainsByDirection.inbound.count == 0 {
-        NoTrainsView()
 
-      } else {
-        /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
-        ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
-          DueView(
-            destination: $0.destinationDescription,
-            due: $0.dueTimeDescriptionShort)
-        }
-        if trainsByDirection.inboundHasOverflowSmall {
-          OverflowDotsView()
+      Group {
+        if trainsByDirection.inbound.count == 0 {
+          NoTrainsView()
+
+        } else {
+          /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
+          ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
+            DueView(
+              destination: $0.destinationDescription,
+              due: $0.dueTimeDescriptionShort)
+          }
+
+          if trainsByDirection.inboundHasOverflowSmall {
+            OverflowDotsView()
+          }
         }
       }
 
+      Spacer()
+
       Divider()
 
-      if trainsByDirection.outbound.count == 0 {
-        NoTrainsView()
+      Group {
+        if trainsByDirection.outbound.count == 0 {
+          NoTrainsView()
 
-      } else {
-        /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
-        ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
-          DueView(
-            destination: $0.destinationDescription,
-            due: $0.dueTimeDescriptionShort)
-        }
-        if trainsByDirection.outboundHasOverflowSmall {
-          OverflowDotsView()
+        } else {
+          /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
+          ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
+            DueView(
+              destination: $0.destinationDescription,
+              due: $0.dueTimeDescriptionShort)
+          }
+
+          if trainsByDirection.outboundHasOverflowSmall {
+            OverflowDotsView()
+          }
         }
       }
 

@@ -11,35 +11,35 @@ import LuasApp
 #if DEBUG
 
 #Preview("idle") {
-  makeTabView(AppModel(.idle), .green)
+  makeTabView(.idle)
 }
 
 #Preview("auth") {
-  makeTabView(AppModel(.locationAuthorizationUnknown), .green)
+  makeTabView(.locationAuthorizationUnknown)
 }
 
 #Preview("loading") {
-  makeTabView(AppModel(.loadingDueTimes(stationGreen, cachedTrains: nil)), .green)
+  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: nil))
 }
 
 #Preview("loading cache") {
-  makeTabView(AppModel(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen)), .green)
+  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
 }
 
 #Preview("Phibs") {
-  makeTabView(AppModel(.foundDueTimes(trainsGreen)), .green)
+  makeTabView(.foundDueTimes(trainsGreen))
 }
 
 #Preview("No trains") {
-  makeTabView(AppModel(.foundDueTimes(trainsNoTrains)), .green)
+  makeTabView(.foundDueTimes(trainsNoTrains))
 }
 
 #Preview("No out") {
-  makeTabView(AppModel(.foundDueTimes(trainsNoOutboundTrains)), .green)
+  makeTabView(.foundDueTimes(trainsNoOutboundTrains))
 }
 
 #Preview("Lots") {
-  makeTabView(AppModel(.foundDueTimes(lotsOfTrains)), .green)
+  makeTabView(.foundDueTimes(lotsOfTrains))
 }
 
 #endif

@@ -10,22 +10,22 @@ import LuasApp
 
 #if DEBUG
 #Preview("No trains") {
-  makeTabView(AppModel(.foundDueTimes(trainsNoTrains)), .green)
+  makeTabView(.foundDueTimes(trainsNoTrains))
 }
 
 #Preview("No out") {
-  makeTabView(AppModel(.foundDueTimes(trainsNoOutboundTrains)), .green)
+  makeTabView(.foundDueTimes(trainsNoOutboundTrains))
 }
 
 #Preview("Lots") {
-  makeTabView(AppModel(.foundDueTimes(lotsOfTrains)), .green)
+  makeTabView(.foundDueTimes(lotsOfTrains))
 }
 
 #Preview("Long name 1") {
-  makeTabView(AppModel(.foundDueTimes(trainLongNameOne)), .green)
+  makeTabView(.foundDueTimes(trainLongNameOne))
 }
 
 #Preview("Long name 3") {
-  makeTabView(AppModel(.foundDueTimes(trainLongNameThree)), .green)
+  makeTabView(.foundDueTimes(trainLongNameThree))
 }
 #endif

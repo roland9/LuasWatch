@@ -11,32 +11,32 @@ import LuasApp
 #if DEBUG
 
 #Preview("idle") {
-  makeTabView(AppModel(.idle))
+  makeTabView(.idle)
 }
 
 #Preview("gettingLoc") {
-  makeTabView(AppModel(.gettingLocation))
+  makeTabView(.gettingLocation)
 }
 
 #Preview("authUnk") {
-  makeTabView(AppModel(.locationAuthorizationUnknown))
+  makeTabView(.locationAuthorizationUnknown)
 }
 
 #Preview("locErr") {
-  makeTabView(AppModel(.errorGettingLocation("Error getting location.")))
+  makeTabView(.errorGettingLocation("Error getting location."))
 }
 
 #Preview("errStation") {
-  makeTabView(AppModel(.errorGettingStationTooFarAway(
-    "Some internal error getting station.")))
+  makeTabView(.errorGettingStationTooFarAway(
+    "Some internal error getting station."))
 }
 
 #Preview("errFarAway") {
-  makeTabView(AppModel(.errorGettingStationTooFarAway(LuasStrings.tooFarAway)))
+  makeTabView(.errorGettingStationTooFarAway(LuasStrings.tooFarAway))
 }
 
 #Preview("errLoading") {
-  makeTabView(AppModel(.errorGettingDueTimes(
-    stationGreen, "Error loading due times - could not access internet?")))
+  makeTabView(.errorGettingDueTimes(
+    stationGreen, "Error loading due times - could not access internet?"))
 }
 #endif

@@ -11,6 +11,7 @@ struct TrainsViewLoading: View {
 
   var body: some View {
     Text(LuasStrings.trainsLoading)
+      .frame(minHeight: 90)
       .timeTableStyle()
   }
 }

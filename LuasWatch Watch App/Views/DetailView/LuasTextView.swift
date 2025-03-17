@@ -11,6 +11,7 @@ struct LuasTextView: View {
 
   var body: some View {
     Text(text)
+      .frame(minHeight: 90)
       .timeTableStyle()
   }
 }

@@ -12,7 +12,7 @@ import LuasApp
 
 @MainActor
 func makeTabView(
-  _ appModel: AppModel,
+  _ appState: AppState,
   _ route: Route = .green
 ) -> some View {
 
@@ -23,13 +23,12 @@ func makeTabView(
   } detail: {
     TabView(selection: $selectedStation) {
       StationView()
-        .environmentObject(appModel)
         .containerBackground(
           route.color.gradient,
           for: .tabView)
     }
   }
-  .environmentObject(appModel)
+  .environmentObject(AppModel(appState))
   .modelContainer(Previews().container)
 }
 

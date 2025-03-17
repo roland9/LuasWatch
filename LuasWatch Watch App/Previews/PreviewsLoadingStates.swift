@@ -11,22 +11,22 @@ import LuasApp
 #if DEBUG
 
 #Preview("loading") {
-  makeTabView(AppModel(.loadingDueTimes(stationGreen, cachedTrains: nil)))
+  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: nil))
 }
 
 #Preview("loading (cached)") {
-  makeTabView(AppModel(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen)))
+  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
 }
 
 #Preview("loading 1Way (cached)") {
-  makeTabView(AppModel(.loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough)))
+  makeTabView(.loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
 }
 
 #Preview("noTrains") {
-  makeTabView(AppModel(.foundDueTimes(noTrainsGreen)))
+  makeTabView(.foundDueTimes(noTrainsGreen))
 }
 
 #Preview("OK") {
-  makeTabView(AppModel(.foundDueTimes(trainsGreen)))
+  makeTabView(.foundDueTimes(trainsGreen))
 }
 #endif
