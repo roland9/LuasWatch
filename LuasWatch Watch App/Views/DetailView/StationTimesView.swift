@@ -12,7 +12,7 @@ struct StationTimesView: View {
 
   @Environment(\.modelContext) private var modelContext
 
-  @State var direction: Direction
+  @Binding var direction: Direction
 
   let trainStation: TrainStation
   let trains: TrainsByDirection?
@@ -26,9 +26,8 @@ extension StationTimesView {
 
       Text(trainStation.name)
         .font(.title3)
+        .frame(height: 10)
         .padding(.bottom)
-
-      Spacer()
 
       if let trains {
         timetableView(for: trains, direction: direction)

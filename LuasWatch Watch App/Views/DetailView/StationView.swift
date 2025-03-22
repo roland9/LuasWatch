@@ -73,7 +73,7 @@ extension StationView: View {
         
       case .loadingDueTimes(let trainStation, let cachedTrains):
         StationTimesView(
-          direction: direction,
+          direction: $direction,
           trainStation: trainStation,
           trains: cachedTrains
         )
@@ -86,7 +86,7 @@ extension StationView: View {
 
       case .foundDueTimes(let trains):
         StationTimesView(
-          direction: direction,
+          direction: $direction,
           trainStation: trains.station,
           trains: trains
         )
