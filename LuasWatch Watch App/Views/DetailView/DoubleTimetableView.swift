@@ -20,47 +20,40 @@ extension DoubleTimetableView {
 
     VStack {
 
-      Group {
-        if trainsByDirection.inbound.count == 0 {
-          NoTrainsView()
+      if trainsByDirection.inbound.count == 0 {
+        NoTrainsView()
 
-        } else {
-          /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
-          ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
-            DueView(
-              destination: $0.destinationDescription,
-              due: $0.dueTimeDescriptionShort)
-          }
+      } else {
+        /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
+        ForEach(trainsByDirection.inboundNoOverflowSmall, id: \.id) {
+          DueView(
+            destination: $0.destinationDescription,
+            due: $0.dueTimeDescriptionShort)
+        }
 
-          if trainsByDirection.inboundHasOverflowSmall {
-            OverflowDotsView()
-          }
+        if trainsByDirection.inboundHasOverflowSmall {
+          OverflowDotsView()
         }
       }
-
-      Spacer()
 
       Divider()
 
-      Group {
-        if trainsByDirection.outbound.count == 0 {
-          NoTrainsView()
+      if trainsByDirection.outbound.count == 0 {
+        NoTrainsView()
 
-        } else {
-          /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
-          ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
-            DueView(
-              destination: $0.destinationDescription,
-              due: $0.dueTimeDescriptionShort)
-          }
+      } else {
+        /// noOverflowSmall cuts off after 3 - WIP: show overflow in subsequent tabView
+        ForEach(trainsByDirection.outboundNoOverflowSmall, id: \.id) {
+          DueView(
+            destination: $0.destinationDescription,
+            due: $0.dueTimeDescriptionShort)
+        }
 
-          if trainsByDirection.outboundHasOverflowSmall {
-            OverflowDotsView()
-          }
+        if trainsByDirection.outboundHasOverflowSmall {
+          OverflowDotsView()
         }
       }
 
-      Spacer()
     }
     .timeTableStyle()
     .opacity(appModel.appState.isLoading ? 0.52 : 1.0)
