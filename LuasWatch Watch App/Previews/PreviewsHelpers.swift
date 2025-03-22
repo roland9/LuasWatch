@@ -21,12 +21,14 @@ func makeTabView(
   return NavigationSplitView {
     SidebarView(selectedStation: $selectedStation)
   } detail: {
+
     TabView(selection: $selectedStation) {
       StationView()
         .containerBackground(
           route.color.gradient,
           for: .tabView)
     }
+//    .tabViewStyle(.verticalPage)
   }
   .environmentObject(AppModel(appState))
   .modelContainer(Previews().container)
