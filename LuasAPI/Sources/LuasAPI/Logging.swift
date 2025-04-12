@@ -15,6 +15,7 @@ public protocol Printable {
 
 // inspired by https://gist.github.com/ccheptea/324e40dc905c961d87a62f65f7ba0462
 
+/// not used anymore, we're just using `OSLog` now
 public func myPrint(
   _ items: Any...,
   separator: String = " ",
