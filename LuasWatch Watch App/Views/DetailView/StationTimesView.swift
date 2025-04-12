@@ -12,7 +12,7 @@ struct StationTimesView: View {
 
   @Environment(\.modelContext) private var modelContext
 
-  @State private var direction: Direction = .both
+  @Binding var direction: Direction
 
   let trainStation: TrainStation
   let trains: TrainsByDirection?
@@ -22,41 +22,29 @@ extension StationTimesView {
 
   var body: some View {
 
-    NavigationStack {
+    VStack {
 
-      VStack {
-        Text(trainStation.name)
-          .font(.title3)
-          .padding(.bottom)
+      Text(trainStation.name)
+        .font(.title3)
+        .frame(height: 10)
+        .padding(.bottom)
 
-        Spacer()
+      if let trains {
+        timetableView(for: trains, direction: direction)
 
-        if let trains {
+      } else {
 
-          timetableView(for: trains)
-
-        } else {
-
-          // no cachedTrains: we're loading that station for the first time
-          TrainsViewLoading()
-            .timeTableStyle()
-        }
+        // no cachedTrains: we're loading that station for the first time
+        TrainsViewLoading()
       }
 
-      .onAppear {
-        direction = modelContext.directionConsideringStationType(for: trainStation.shortCode)
-      }
-
-      .toolbar {
-        StationToolbar(
-          direction: $direction,
-          trainStation: trainStation)
-      }
+      Spacer()
     }
   }
 
   @ViewBuilder
-  fileprivate func timetableView(for trains: TrainsByDirection) -> some View {
+  fileprivate func timetableView(for trains: TrainsByDirection,
+                                 direction: Direction) -> some View {
 
     if trains.station.allowsSwitchingDirection {
 
@@ -64,8 +52,10 @@ extension StationTimesView {
 
       case .inbound:
         if trains.inbound.isEmpty {
+
           NoTrainsView()
             .timeTableStyle()
+
         } else {
           SimpleTimetableView(
             trainsByDirection: trains, direction: .inbound)
@@ -73,8 +63,10 @@ extension StationTimesView {
 
       case .outbound:
         if trains.outbound.isEmpty {
+
           NoTrainsView()
             .timeTableStyle()
+
         } else {
           SimpleTimetableView(
             trainsByDirection: trains, direction: .outbound)

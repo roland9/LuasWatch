@@ -3,50 +3,57 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
+import SwiftUI
+
 import LuasAPI
 import LuasApp
-import SwiftUI
 
 #if DEBUG
 
-  @MainActor
-  func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
+@MainActor
+func makeTabView(
+  _ appState: AppState,
+  _ route: Route = .green
+) -> some View {
 
-    @State var selectedStation: TrainStation? = trainsGreen.station
+  @State var selectedStation: TrainStation? = trainsGreen.station
 
-    return NavigationSplitView {
-      SidebarView(selectedStation: $selectedStation)
-    } detail: {
-      TabView(selection: $selectedStation) {
-        StationView()
-          .environmentObject(appModel)
-          .containerBackground(
-            route.color.gradient,
-            for: .tabView)
-      }
+  return NavigationSplitView {
+    SidebarView(selectedStation: $selectedStation)
+  } detail: {
+
+    TabView(selection: $selectedStation) {
+      StationView()
+        .containerBackground(
+          route.color.gradient,
+          for: .tabView)
     }
+//    .tabViewStyle(.verticalPage)
+  }
+  .environmentObject(AppModel(appState))
+  .modelContainer(Previews().container)
+}
+
+@MainActor
+func luasMainScreen(state: AppState) -> some View {
+  let appModel = AppModel(state)
+  appModel.appMode = .favourite(stationGreen)
+
+  return LuasMainScreen()
     .environmentObject(appModel)
     .modelContainer(Previews().container)
-  }
+}
 
-  @MainActor
-  func luasMainScreen(state: AppState) -> some View {
-    let appModel = AppModel(state)
-    appModel.appMode = .favourite(stationGreen)
+func makeAppModel(
+  state: AppState,
+  appMode: AppMode = .specific(stationGreen),
+  locationDenied: Bool = false
+) -> AppModel {
+  let appModel = AppModel(state)
+  appModel.appMode = appMode
+  appModel.locationDenied = locationDenied
 
-    return LuasMainScreen()
-      .environmentObject(appModel)
-      .modelContainer(Previews().container)
-  }
-
-  func makeAppModel(
-    state: AppState, appMode: AppMode = .specific(stationGreen), locationDenied: Bool = false
-  ) -> AppModel {
-    let appModel = AppModel(state)
-    appModel.appMode = appMode
-    appModel.locationDenied = locationDenied
-
-    return appModel
-  }
+  return appModel
+}
 
 #endif

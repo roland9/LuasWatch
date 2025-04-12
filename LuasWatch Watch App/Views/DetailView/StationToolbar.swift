@@ -3,9 +3,11 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
+import SwiftUI
+import OSLog
+
 import LuasAPI
 import LuasApp
-import SwiftUI
 
 struct StationToolbar {
 
@@ -19,6 +21,8 @@ struct StationToolbar {
   @State private var isSwitchingDirectionEnabled: Bool = true
 
   @Binding var direction: Direction
+
+  let logger = Logger(subsystem: "LuasWatch", category: "StationToolbar")
 
   let trainStation: TrainStation
 }
@@ -45,7 +49,7 @@ extension StationToolbar: ToolbarContent {
         }
 
         let shortCode = trainStation.shortCode
-        myPrint("\(#function) createOrUpdate \(shortCode) to \(direction)")
+        logger.debug("\(#function) createOrUpdate \(shortCode) to \(direction)")
         modelContext.createOrUpdate(shortCode: shortCode, to: direction)
 
       } label: {

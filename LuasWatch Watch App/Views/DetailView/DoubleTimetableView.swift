@@ -19,6 +19,7 @@ extension DoubleTimetableView {
   var body: some View {
 
     VStack {
+
       if trainsByDirection.inbound.count == 0 {
         NoTrainsView()
 
@@ -29,10 +30,10 @@ extension DoubleTimetableView {
             destination: $0.destinationDescription,
             due: $0.dueTimeDescriptionShort)
         }
+
         if trainsByDirection.inboundHasOverflowSmall {
           OverflowDotsView()
         }
-        Spacer()
       }
 
       Divider()
@@ -47,11 +48,12 @@ extension DoubleTimetableView {
             destination: $0.destinationDescription,
             due: $0.dueTimeDescriptionShort)
         }
+
         if trainsByDirection.outboundHasOverflowSmall {
           OverflowDotsView()
         }
-        Spacer()
       }
+
     }
     .timeTableStyle()
     .opacity(appModel.appState.isLoading ? 0.52 : 1.0)

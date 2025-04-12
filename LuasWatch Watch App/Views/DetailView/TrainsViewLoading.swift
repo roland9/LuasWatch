@@ -3,20 +3,15 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasApp
 import SwiftUI
+
+import LuasApp
 
 struct TrainsViewLoading: View {
 
   var body: some View {
-    VStack {
-      Spacer()
-      Text(LuasStrings.trainsLoading)
-        .font(.caption2)
-        .monospaced()
-        .foregroundColor(.yellow)
-        .frame(maxWidth: .infinity)
-      Spacer()
-    }
+    Text(LuasStrings.trainsLoading)
+      .frame(minHeight: 90)
+      .timeTableStyle()
   }
 }

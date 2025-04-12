@@ -11,7 +11,7 @@ jobs:
     name: Build and Test LuasKit scheme using watchOS simulator
     runs-on: macos-14
     env:
-      scheme: 'LuasKit'
+      scheme: 'LuasAPI'
       project: 'LuasWatch.xcodeproj'
       platform: 'watchOS Simulator'
       device: 'Apple Watch SE (40mm) (2nd generation)'
@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup Swift
+        uses: SwiftyLab/setup-swift@latest
+
       - name: Build
         run: |
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)

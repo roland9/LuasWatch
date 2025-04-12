@@ -5,8 +5,11 @@
 
 import AppIntents
 import Foundation
+import OSLog
 
 public enum Direction: Int, Equatable, CaseIterable, Codable, CustomStringConvertible {
+
+  static let logger = Logger(subsystem: "LuasAPI", category: "Direction")
 
   case both, inbound, outbound
 

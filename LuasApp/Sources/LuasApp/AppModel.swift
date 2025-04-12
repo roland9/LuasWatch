@@ -6,10 +6,14 @@
 import CoreLocation
 import Foundation
 import SwiftUI
+import OSLog
+
 import LuasAPI
 
 // @Observable does not work -  circular reference?
 public class AppModel: ObservableObject {
+
+  let logger = Logger(subsystem: "LuasApp", category: "AppModel")
 
   @Published public var appState: AppState = .idle
 
@@ -31,7 +35,7 @@ public class AppModel: ObservableObject {
           Notification(name: Notification.Name("LuasWatch.RetriggerTimer")))
 
       } catch {
-        myPrint("error encoding appMode \(error)")
+        logger.error("error encoding appMode \(error)")
       }
     }
   }
@@ -43,6 +47,7 @@ public class AppModel: ObservableObject {
 
   @Published public var latestLocation: CLLocation?
 
+// maybe not required for iOS?
   @Published public var allowStationTabviewUpdates: Bool = true
 
   @Published public var locationDenied: Bool = false
@@ -85,8 +90,15 @@ public class AppModel: ObservableObject {
     }
   }
 
-  // for previews
+  #if DEBUG
+  // for SwiftUI Previews
   public init(_ state: AppState) {
     self.appState = state
   }
+  public init(_ state: AppState,
+              userLocation: CLLocation) {
+    self.appState = state
+    self.latestLocation = userLocation
+  }
+  #endif
 }

@@ -5,6 +5,8 @@
 
 import Combine
 import Foundation
+import OSLog
+
 import LuasAPI
 import LuasApp
 
@@ -19,6 +21,8 @@ class Coordinator: NSObject {
   private var cancellable: AnyCancellable?
 
   internal var previouslyLoadedTrains: (for: TrainStation, trains: TrainsByDirection)?
+
+  let logger = Logger(subsystem: "LuasWatch", category: "Coordinator")
 
   init(
     appModel: AppModel,
@@ -67,21 +71,21 @@ class Coordinator: NSObject {
 
     if appModel.appMode.needsLocation {
 
-      myPrint(
-        "need location auth for current appMode \(appModel.appMode) -> prompt for location auth"
+      logger.info(
+        "need location auth for current appMode \(self.appModel.appMode) -> prompt for location auth"
       )
       location.promptLocationAuth()
       /// we will call location.start() once user has authorized location access
 
     } else {
-      myPrint(
-        "no location auth needed for the current appMode \(appModel.appMode)")
+      logger.info(
+        "no location auth needed for the current appMode \(self.appModel.appMode)")
 
       /// don't call handle here -> because  when app goes to active`fireAndScheduleTimer` will be called by changing of the scenePhase
 
       //    guard let specificStation = appModel.appMode.specificStation else {
       //        assertionFailure("internal error")
-      //        myPrint("🚨 internal error: expected specific station in appModel")
+      //        logger.error("🚨 internal error: expected specific station in appModel")
       //        return
       //    }
       //    handle(specificStation)
@@ -101,7 +105,7 @@ class Coordinator: NSObject {
   }
 
   func fireAndScheduleTimer() {
-    myPrint(#function)
+    logger.info(#function)
 
     invalidateTimer()
 
@@ -115,7 +119,7 @@ class Coordinator: NSObject {
 
   // schedule timer for regular interval
   internal func scheduleTimer() {
-    myPrint("\(#function)")
+    logger.info("\(#function)")
 
     timer = Timer.scheduledTimer(
       timeInterval: Self.refreshInterval,
@@ -124,17 +128,17 @@ class Coordinator: NSObject {
   }
 
   @objc func timerDidFire() {
-    myPrint("\(#function)")
+    logger.info("\(#function)")
 
     guard appModel.allowStationTabviewUpdates == true else {
-      myPrint(
+      logger.debug(
         "SidebarView is up -> ignore timer firing so we don't interfere UI")
       return
     }
 
     if let station = appModel.appMode.specificStation {
 
-      myPrint("User selected station -> skip location update")
+      logger.debug("User selected station -> skip location update")
       handle(station)
 
     } else {
@@ -144,13 +148,13 @@ class Coordinator: NSObject {
       if let latestLocation = appModel.latestLocation,
         latestLocation.isQuiteRecent()
       {
-        myPrint(
+        logger.debug(
           "User has NOT selected specific station & we have a recent location -> skip location update"
         )
         didGetLocation(latestLocation)
       } else {
-        myPrint(
-          "User has NOT selected specific station & only outdated location \(appModel.latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update"
+        logger.debug(
+          "User has NOT selected specific station & only outdated location \(self.appModel.latestLocation?.timestamp.timeIntervalSinceNow ?? 0) -> wait for location update"
         )
         location.update()
       }

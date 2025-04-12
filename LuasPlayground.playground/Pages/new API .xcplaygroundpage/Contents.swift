@@ -11,13 +11,14 @@ let station = TrainStation(
   shortCode: "BEE",
   route: .green,
   name: "Beechwood",
-  location: userLocation)
+  location: userLocation
+)
 
 let realAPI = LuasAPI(session: URLSession.shared)
 
 Task {
   do {
-    myPrint(try await realAPI.dueTimes(for: station))
+    print(try await realAPI.dueTimes(for: station))
   } catch {
     print("exception \(error)")
   }

@@ -11,7 +11,7 @@ public struct TrainStations: Sendable {
 
   // MARK: - Properties
 
-  public let stations: [TrainStation]
+  public let allStations: [TrainStation]
 
   // MARK: - Initializers
 
@@ -31,11 +31,11 @@ public struct TrainStations: Sendable {
       fatalError("could not parse JSON file")
     }
 
-    self.stations = Self.trainStations(from: stationsArray)
+    self.allStations = Self.trainStations(from: stationsArray)
   }
 
   internal init(stations: [TrainStation]) {
-    self.stations = stations
+    self.allStations = stations
   }
 
   // MARK: - Private Methods
@@ -77,70 +77,53 @@ public struct TrainStations: Sendable {
     }
   }
 
-  // MARK: - Helpers
-
-  public var redLineStations: [TrainStation] {
-    stations
-      .filter { $0.route == .red }
-  }
-
-  public var greenLineStations: [TrainStation] {
-    stations
-      .filter { $0.route == .green }
-  }
+  // MARK: - Sorting closest Stations
 
   public func closestStation(from location: CLLocation) -> TrainStation? {
-    closestStation(from: location, stations: stations)
-  }
-
-  public func closestStation(
-    from location: CLLocation,
-    stations: [TrainStation]
-  ) -> TrainStation? {
-    var closestStationSoFar: TrainStation?
-
-    stations.forEach { (station) in
-      // don't consider stations if they're too far away, currently 20km
-      if station.location.distance(from: location) > 20000 {
-        return
-      }
-
-      if let closest = closestStationSoFar {
-        if station.location.distance(from: location) < closest.location.distance(from: location) {
-          closestStationSoFar = station
-        }
-      } else {
-        closestStationSoFar = station
-      }
-    }
-
-    return closestStationSoFar
+    allStations.closestStation(from: location)
   }
 
   public func closestStation(from location: CLLocation, route: Route) -> TrainStation? {
     switch route {
       case .red:
-        return closestStation(from: location, stations: redLineStations)
+        return redLineStations.closestStation(from: location)
       case .green:
-        return closestStation(from: location, stations: greenLineStations)
+        return greenLineStations.closestStation(from: location)
     }
   }
 
+  public func closestStationsSorted(from location: CLLocation) -> [TrainStation] {
+    allStations.closestStations(from: location)
+  }
+
+  // MARK: - Helpers
+
+  public var redLineStations: [TrainStation] {
+    allStations
+      .filter { $0.route == .red }
+  }
+
+  public var greenLineStations: [TrainStation] {
+    allStations
+      .filter { $0.route == .green }
+  }
+
   public func station(shortCode: String) -> TrainStation? {
-    stations
+    allStations
       .filter { $0.shortCode == shortCode }
       .first
   }
+}
 
-  public static var unknown: TrainStation {
-    TrainStation(
-      stationIdShort: "unknown",
-      shortCode: "unknown",
-      route: .green,
-      name: "Unknown",
-      location: CLLocation(
-        latitude: CLLocationDegrees(53.3163934083453),
-        longitude: CLLocationDegrees(-6.25344151996991))
-    )
+private extension Array where Element == TrainStation {
+
+  func closestStations(from location: CLLocation) -> [TrainStation] {
+    sorted { (station1, station2) -> Bool in
+      station1.location.distance(from: location) < station2.location.distance(from: location)
+    }
+  }
+
+  func closestStation(from location: CLLocation) -> TrainStation? {
+    closestStations(from: location).first
   }
 }

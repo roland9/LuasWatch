@@ -39,13 +39,36 @@ public struct LuasAPI {
     )
   }
 
-  public func getTrains(stationShortCode: String) async throws -> Data {
+  internal func getTrains(stationShortCode: String) async throws -> Data {
 
     let request = buildRequest(stationShortCode: stationShortCode)
 
     let (data, _) = try await session.data(for: request)
 
     return data
+  }
+
+  public func dueTimes(for trainStation: TrainStation) async throws -> TrainsByDirection {
+
+    let data = try await getTrains(stationShortCode: trainStation.shortCode)
+
+    let trainsByDirection = try APIParser.parse(xml: data, for: trainStation)
+
+    if trainsByDirection.inbound.isEmpty && trainsByDirection.outbound.isEmpty {
+      /// success - but no trains?!?
+
+      if let messageFromAPI = trainsByDirection.message,
+         messageFromAPI.count > 0 {
+        /// if we get `message` from response XML, we return that as an error
+        throw APIError.noTrainsButMessageFromAPI(messageFromAPI)
+
+      } else {
+        throw APIError.noTrains
+      }
+
+    } else {
+      return trainsByDirection
+    }
   }
 }
 
