@@ -10,38 +10,38 @@ import LuasApp
 
 #if DEBUG
 
-#Preview("normal") {
-  @Previewable @State var selectedStation: TrainStation?
-  let appModel = makeAppModel(
-    state: AppState(.foundDueTimes(trainsOneWayStation)),
-    appMode: .favourite(stationGreen))
-  
-  SidebarView(selectedStation: $selectedStation)
-    .environmentObject(appModel)
-    .modelContainer(Previews().container)
-}
+  #Preview("normal") {
+    @Previewable @State var selectedStation: TrainStation?
+    let appModel = makeAppModel(
+      state: AppState(.foundDueTimes(trainsOneWayStation)),
+      appMode: .favourite(stationGreen))
 
-#Preview("err far away") {
-  @Previewable @State var selectedStation: TrainStation?
-  let appModel = makeAppModel(
-    state: AppState(
-      .errorGettingStationTooFarAway(LuasStrings.tooFarAway)),
-    appMode: .closest)
-  
-  SidebarView(selectedStation: $selectedStation)
-    .environmentObject(appModel)
-    .modelContainer(Previews().container)
-}
+    SidebarView(selectedStation: $selectedStation)
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
 
-#Preview("loc denied") {
-  @Previewable @State var selectedStation: TrainStation?
-  
-  let appModel = makeAppModel(
-    state: AppState(.foundDueTimes(trainsOneWayStation)),
-    appMode: .favourite(stationGreen), locationDenied: true)
-  
-  SidebarView(selectedStation: $selectedStation)
-    .environmentObject(appModel)
-    .modelContainer(Previews().container)
-}
+  #Preview("err far away") {
+    @Previewable @State var selectedStation: TrainStation?
+    let appModel = makeAppModel(
+      state: AppState(
+        .errorGettingStationTooFarAway(LuasStrings.tooFarAway)),
+      appMode: .closest)
+
+    SidebarView(selectedStation: $selectedStation)
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
+
+  #Preview("loc denied") {
+    @Previewable @State var selectedStation: TrainStation?
+
+    let appModel = makeAppModel(
+      state: AppState(.foundDueTimes(trainsOneWayStation)),
+      appMode: .favourite(stationGreen), locationDenied: true)
+
+    SidebarView(selectedStation: $selectedStation)
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
 #endif

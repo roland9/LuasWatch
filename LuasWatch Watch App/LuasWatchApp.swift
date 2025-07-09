@@ -62,11 +62,11 @@ struct LuasWatch_Watch_App: App {
     .onChange(of: scenePhase) {
       switch scenePhase {
       case .background, .inactive:
-          logger.info("App did enter background or because inactive -> invalidateTimer")
+        logger.info("App did enter background or because inactive -> invalidateTimer")
         mainCoordinator.invalidateTimer()
 
       case .active:
-          logger.info("App became active -> fireAndScheduleTimer")
+        logger.info("App became active -> fireAndScheduleTimer")
 
         #if DEBUG
           if appModel.mockMode == true {

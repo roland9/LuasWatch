@@ -26,25 +26,25 @@ extension StationView: View {
 
         switch appModel.appState {
 
-            // everything with LuasTextView has 'inactive' toolbar
-          case .idle, .gettingLocation,
-              .errorGettingLocation, .errorGettingStationTooFarAway, .errorGettingDueTimes:
-            ToolbarInactive()
+        // everything with LuasTextView has 'inactive' toolbar
+        case .idle, .gettingLocation,
+          .errorGettingLocation, .errorGettingStationTooFarAway, .errorGettingDueTimes:
+          ToolbarInactive()
 
-          case .locationAuthorizationUnknown:
-            ToolbarInactive()
+        case .locationAuthorizationUnknown:
+          ToolbarInactive()
 
-          case .loadingDueTimes(let station, _):
-            StationToolbar(
-              direction: $direction,
-              trainStation: station
-            )
+        case .loadingDueTimes(let station, _):
+          StationToolbar(
+            direction: $direction,
+            trainStation: station
+          )
 
-          case .foundDueTimes(let trains):
-            StationToolbar(
-              direction: $direction,
-              trainStation: trains.station
-            )
+        case .foundDueTimes(let trains):
+          StationToolbar(
+            direction: $direction,
+            trainStation: trains.station
+          )
         }
       }
   }
@@ -53,46 +53,46 @@ extension StationView: View {
   fileprivate func makeStationView(for appState: AppState) -> some View {
     switch appState {
 
-      case .idle:
-        LuasTextView(text: "LuasWatch is starting...")
+    case .idle:
+      LuasTextView(text: "LuasWatch is starting...")
 
-      case .gettingLocation:
-        LuasTextView(text: "Getting location...")
+    case .gettingLocation:
+      LuasTextView(text: "Getting location...")
 
-      case .locationAuthorizationUnknown:
-        // WIP we need new approach to trigger location prompt via appModel?
-        GrantLocationAuthView(didTapButton: {
-          appModel.appState = .gettingLocation
-        })
+    case .locationAuthorizationUnknown:
+      // WIP we need new approach to trigger location prompt via appModel?
+      GrantLocationAuthView(didTapButton: {
+        appModel.appState = .gettingLocation
+      })
 
-      case .errorGettingLocation:
-        LuasTextView(text: appModel.appState.description)
+    case .errorGettingLocation:
+      LuasTextView(text: appModel.appState.description)
 
-      case .errorGettingStationTooFarAway(let errorMessage):
-        LuasTextView(text: errorMessage)
-        
-      case .loadingDueTimes(let trainStation, let cachedTrains):
-        StationTimesView(
-          direction: $direction,
-          trainStation: trainStation,
-          trains: cachedTrains
-        )
-        .onAppear {
-          direction = modelContext.directionConsideringStationType(for: trainStation.shortCode)
-        }
+    case .errorGettingStationTooFarAway(let errorMessage):
+      LuasTextView(text: errorMessage)
 
-      case .errorGettingDueTimes(_, let message):
-        LuasTextView(text: message)
+    case .loadingDueTimes(let trainStation, let cachedTrains):
+      StationTimesView(
+        direction: $direction,
+        trainStation: trainStation,
+        trains: cachedTrains
+      )
+      .onAppear {
+        direction = modelContext.directionConsideringStationType(for: trainStation.shortCode)
+      }
 
-      case .foundDueTimes(let trains):
-        StationTimesView(
-          direction: $direction,
-          trainStation: trains.station,
-          trains: trains
-        )
-        .onAppear {
-          direction = modelContext.directionConsideringStationType(for: trains.station.shortCode)
-        }
+    case .errorGettingDueTimes(_, let message):
+      LuasTextView(text: message)
+
+    case .foundDueTimes(let trains):
+      StationTimesView(
+        direction: $direction,
+        trainStation: trains.station,
+        trains: trains
+      )
+      .onAppear {
+        direction = modelContext.directionConsideringStationType(for: trains.station.shortCode)
+      }
     }
   }
 

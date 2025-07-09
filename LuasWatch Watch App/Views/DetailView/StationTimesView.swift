@@ -43,8 +43,10 @@ extension StationTimesView {
   }
 
   @ViewBuilder
-  fileprivate func timetableView(for trains: TrainsByDirection,
-                                 direction: Direction) -> some View {
+  fileprivate func timetableView(
+    for trains: TrainsByDirection,
+    direction: Direction
+  ) -> some View {
 
     if trains.station.allowsSwitchingDirection {
 

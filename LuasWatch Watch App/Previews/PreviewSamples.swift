@@ -10,36 +10,36 @@ import LuasApp
 
 #if DEBUG
 
-#Preview("idle") {
-  makeTabView(.idle)
-}
+  #Preview("idle") {
+    makeTabView(.idle)
+  }
 
-#Preview("auth") {
-  makeTabView(.locationAuthorizationUnknown)
-}
+  #Preview("auth") {
+    makeTabView(.locationAuthorizationUnknown)
+  }
 
-#Preview("loading") {
-  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: nil))
-}
+  #Preview("loading") {
+    makeTabView(.loadingDueTimes(stationGreen, cachedTrains: nil))
+  }
 
-#Preview("loading cache") {
-  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
-}
+  #Preview("loading cache") {
+    makeTabView(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
+  }
 
-#Preview("Phibs") {
-  makeTabView(.foundDueTimes(trainsGreen))
-}
+  #Preview("Phibs") {
+    makeTabView(.foundDueTimes(trainsGreen))
+  }
 
-#Preview("No trains") {
-  makeTabView(.foundDueTimes(trainsNoTrains))
-}
+  #Preview("No trains") {
+    makeTabView(.foundDueTimes(trainsNoTrains))
+  }
 
-#Preview("No out") {
-  makeTabView(.foundDueTimes(trainsNoOutboundTrains))
-}
+  #Preview("No out") {
+    makeTabView(.foundDueTimes(trainsNoOutboundTrains))
+  }
 
-#Preview("Lots") {
-  makeTabView(.foundDueTimes(lotsOfTrains))
-}
+  #Preview("Lots") {
+    makeTabView(.foundDueTimes(lotsOfTrains))
+  }
 
 #endif
