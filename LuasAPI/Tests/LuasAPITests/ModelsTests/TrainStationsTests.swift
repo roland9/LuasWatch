@@ -31,7 +31,8 @@ struct TrainStationsTests {
     let bundleURL = Bundle.module.url(forResource: "luasStops_test", withExtension: "json")!
 
     #expect(bundleURL.description.contains("LuasAPITests.xctest/"))
-    #expect(bundleURL.description.hasSuffix("bundle/luasStops_test.json"))
+    #expect(bundleURL.description.hasSuffix("bundle/luasStops_test.json") ||
+            bundleURL.description.hasSuffix("Resources/luasStops_test.json"))
 
     let stations = TrainStations(url: bundleURL)
 
