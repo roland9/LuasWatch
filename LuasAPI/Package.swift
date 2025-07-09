@@ -6,9 +6,10 @@ import PackageDescription
 let package = Package(
   name: "LuasAPI",
   platforms: [
-         .iOS(.v18),
-         .watchOS(.v11)
-     ],
+    .iOS(.v18),
+    .watchOS(.v11),
+    .macOS(.v15)
+  ],
   products: [
     // Products define the executables and libraries a package produces, making them visible to other packages.
     .library(

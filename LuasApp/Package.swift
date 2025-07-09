@@ -4,29 +4,30 @@
 import PackageDescription
 
 let package = Package(
-    name: "LuasApp",
-    platforms: [
-           .iOS(.v18),
-           .watchOS(.v11)
-       ],
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "LuasApp",
-            targets: ["LuasApp"]),
-    ],
-    dependencies: [
-      .package(path: "../LuasAPI")
-        ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "LuasApp",
-            dependencies: ["LuasAPI"]),
-        .testTarget(
-            name: "LuasAppTests",
-            dependencies: ["LuasApp"]
-        ),
-    ]
+  name: "LuasApp",
+  platforms: [
+    .iOS(.v18),
+    .watchOS(.v11),
+    .macOS(.v15)
+  ],
+  products: [
+    // Products define the executables and libraries a package produces, making them visible to other packages.
+    .library(
+      name: "LuasApp",
+      targets: ["LuasApp"]),
+  ],
+  dependencies: [
+    .package(path: "../LuasAPI")
+  ],
+  targets: [
+    // Targets are the basic building blocks of a package, defining a module or a test suite.
+    // Targets can depend on other targets in this package and products from dependencies.
+    .target(
+      name: "LuasApp",
+      dependencies: ["LuasAPI"]),
+    .testTarget(
+      name: "LuasAppTests",
+      dependencies: ["LuasApp"]
+    ),
+  ]
 )
