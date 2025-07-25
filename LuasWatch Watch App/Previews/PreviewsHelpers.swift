@@ -27,9 +27,14 @@ import LuasApp
           .containerBackground(
             route.color.gradient,
             for: .tabView)
+
+        StationsModal(stations: route == .green ?  TrainStations().greenLineStations : TrainStations().redLineStations) { _ in }
+          .containerBackground(
+            route.color.gradient,
+            for: .tabView)
       }
-      //    .tabViewStyle(.verticalPage)
     }
+    .tabViewStyle(.verticalPage)
     .environmentObject(AppModel(appState))
     .modelContainer(Previews().container)
   }
