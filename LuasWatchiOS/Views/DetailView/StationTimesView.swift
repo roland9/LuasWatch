@@ -37,11 +37,7 @@ extension StationTimesView {
           if let userLocation = appModel.latestLocation {
             ClosestStationsView(userLocation: userLocation)
           } else {
-            Text("Location unavailable. Please enable location services to see nearby stations.")
-              .font(.subheadline)
-              .foregroundColor(.secondary)
-              .multilineTextAlignment(.center)
-              .padding(.horizontal)
+            noLocationPlaceholderText()
           }
 
         } else {
@@ -63,6 +59,16 @@ extension StationTimesView {
           trainStation: trainStation)
       }
     }
+  }
+
+
+  @ViewBuilder
+  fileprivate func noLocationPlaceholderText() -> some View {
+    Text("Location unavailable. Please enable location services to see nearby stations.")
+      .font(.subheadline)
+      .foregroundColor(.secondary)
+      .multilineTextAlignment(.center)
+      .padding(.horizontal)
   }
 
   @ViewBuilder
@@ -127,3 +133,4 @@ extension StationTimesView {
     }
   }
 }
+

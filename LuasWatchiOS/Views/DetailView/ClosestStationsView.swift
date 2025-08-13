@@ -19,10 +19,15 @@ struct ClosestStationsView: View {
       .prefix(7)
 
     VStack {
+      Text("Stations nearest to your current location.")
+        .font(.headline)
+        .foregroundColor(.primary)
+        .multilineTextAlignment(.center)
+        .padding(.horizontal)
       List(sevenClosestStations) { station in
         StationRow(station: station,
                    isHighlighted: false) {
-          // WIP
+          #warning("WIP: action tap?")
         }
       }
     }
@@ -37,3 +42,4 @@ struct ClosestStationsView: View {
 //
 //  ClosestStationsView(userLocation: closeLocation)
 //}
+
