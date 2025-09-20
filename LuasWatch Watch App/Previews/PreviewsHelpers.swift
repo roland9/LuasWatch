@@ -3,57 +3,61 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-
 import LuasAPI
 import LuasApp
+import SwiftUI
 
 #if DEBUG
 
-@MainActor
-func makeTabView(
-  _ appState: AppState,
-  _ route: Route = .green
-) -> some View {
+  @MainActor
+  func makeTabView(
+    _ appState: AppState,
+    _ route: Route = .green
+  ) -> some View {
 
-  @State var selectedStation: TrainStation? = trainsGreen.station
+    @State var selectedStation: TrainStation? = trainsGreen.station
 
-  return NavigationSplitView {
-    SidebarView(selectedStation: $selectedStation)
-  } detail: {
+    return NavigationSplitView {
+      SidebarView(selectedStation: $selectedStation)
+    } detail: {
 
-    TabView(selection: $selectedStation) {
-      StationView()
-        .containerBackground(
-          route.color.gradient,
-          for: .tabView)
+      TabView(selection: $selectedStation) {
+        StationView()
+          .containerBackground(
+            route.color.gradient,
+            for: .tabView)
+
+        StationsModal(stations: route == .green ? TrainStations().greenLineStations : TrainStations().redLineStations) { _ in }
+          .containerBackground(
+            route.color.gradient,
+            for: .tabView)
+      }
     }
-//    .tabViewStyle(.verticalPage)
-  }
-  .environmentObject(AppModel(appState))
-  .modelContainer(Previews().container)
-}
-
-@MainActor
-func luasMainScreen(state: AppState) -> some View {
-  let appModel = AppModel(state)
-  appModel.appMode = .favourite(stationGreen)
-
-  return LuasMainScreen()
-    .environmentObject(appModel)
+    .tabViewStyle(.verticalPage)
+    .environmentObject(AppModel(appState))
     .modelContainer(Previews().container)
-}
+  }
 
-func makeAppModel(
-  state: AppState,
-  appMode: AppMode = .specific(stationGreen),
-  locationDenied: Bool = false
-) -> AppModel {
-  let appModel = AppModel(state)
-  appModel.appMode = appMode
-  appModel.locationDenied = locationDenied
+  @MainActor
+  func luasMainScreen(state: AppState) -> some View {
+    let appModel = AppModel(state)
+    appModel.appMode = .favourite(stationGreen)
 
-  return appModel
-}
+    return LuasMainScreen()
+      .environmentObject(appModel)
+      .modelContainer(Previews().container)
+  }
+
+  func makeAppModel(
+    state: AppState,
+    appMode: AppMode = .specific(stationGreen),
+    locationDenied: Bool = false
+  ) -> AppModel {
+    let appModel = AppModel(state)
+    appModel.appMode = appMode
+    appModel.locationDenied = locationDenied
+
+    return appModel
+  }
 
 #endif

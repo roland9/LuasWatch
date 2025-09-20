@@ -3,30 +3,29 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-
 import LuasAPI
 import LuasApp
+import SwiftUI
 
 #if DEBUG
 
-#Preview("loading") {
-  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: nil))
-}
+  #Preview("loading") {
+    makeTabView(.loadingDueTimes(stationGreen, cachedTrains: nil))
+  }
 
-#Preview("loading (cached)") {
-  makeTabView(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
-}
+  #Preview("loading (cached)") {
+    makeTabView(.loadingDueTimes(stationGreen, cachedTrains: trainsGreen))
+  }
 
-#Preview("loading 1Way (cached)") {
-  makeTabView(.loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
-}
+  #Preview("loading 1Way (cached)") {
+    makeTabView(.loadingDueTimes(stationOneWay, cachedTrains: trainsMarlborough))
+  }
 
-#Preview("noTrains") {
-  makeTabView(.foundDueTimes(noTrainsGreen))
-}
+  #Preview("noTrains") {
+    makeTabView(.foundDueTimes(noTrainsGreen))
+  }
 
-#Preview("OK") {
-  makeTabView(.foundDueTimes(trainsGreen))
-}
+  #Preview("OK") {
+    makeTabView(.foundDueTimes(trainsGreen))
+  }
 #endif

@@ -3,12 +3,11 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftData
-import SwiftUI
-import OSLog
-
 import LuasAPI
 import LuasApp
+import OSLog
+import SwiftData
+import SwiftUI
 
 struct AllStationsListView {
   @EnvironmentObject var appModel: AppModel
