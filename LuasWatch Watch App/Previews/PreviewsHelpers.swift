@@ -3,10 +3,9 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-
 import LuasAPI
 import LuasApp
+import SwiftUI
 
 #if DEBUG
 
@@ -28,7 +27,7 @@ import LuasApp
             route.color.gradient,
             for: .tabView)
 
-        StationsModal(stations: route == .green ?  TrainStations().greenLineStations : TrainStations().redLineStations) { _ in }
+        StationsModal(stations: route == .green ? TrainStations().greenLineStations : TrainStations().redLineStations) { _ in }
           .containerBackground(
             route.color.gradient,
             for: .tabView)

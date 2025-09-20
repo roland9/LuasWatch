@@ -57,7 +57,7 @@ extension LuasMainScreen: View {
       }
 
       // this is the problem why it's moving!
-            .tabViewStyle(.verticalPage)
+      .tabViewStyle(.verticalPage)
 
       .onAppear {
         selectedTabView = 1

@@ -4,7 +4,6 @@
 //
 
 import CoreLocation
-
 import LuasAPI
 import LuasApp
 
