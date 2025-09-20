@@ -23,31 +23,27 @@ struct TrainsByDirectionTests {
       message: "Phibsborough lift works until 28/04/23. See news."
     )
 
-    var output = trains.shortcutOutput(direction: Direction.both)
+    var output = trains.formatForShortcut(direction: Direction.both)
     var expected =
+      """
+      LUAS to Broombridge is due now and in 12 minutes.
+      LUAS to Bride's Glen in 7 and in 14 minutes.
+      
+      """
+    #expect(expected == output)
+
+    output = trains.formatForShortcut(direction: Direction.inbound)
+    expected =
     """
-    Luas to Broombridge is Due.
-    Luas to Broombridge in 12.
-    Luas to Bride's Glen in 7.
-    Luas to Bride's Glen in 14.
+    LUAS to Broombridge is due now and in 12 minutes.
     
     """
     #expect(expected == output)
 
-    output = trains.shortcutOutput(direction: Direction.inbound)
+    output = trains.formatForShortcut(direction: Direction.outbound)
     expected =
     """
-    Luas to Broombridge is Due.
-    Luas to Broombridge in 12.
-    
-    """
-    #expect(expected == output)
-
-    output = trains.shortcutOutput(direction: Direction.outbound)
-    expected =
-    """
-    Luas to Bride's Glen in 7.
-    Luas to Bride's Glen in 14.
+    LUAS to Bride's Glen in 7 and in 14 minutes.
     
     """
     #expect(expected == output)
@@ -59,8 +55,7 @@ struct TrainsByDirectionTests {
       message: "Phibsborough lift works until 28/04/23. See news."
     )
 
-    output = noTrainsInBothDirections.shortcutOutput(
-      direction: Direction.inbound)
+    output = noTrainsInBothDirections.formatForShortcut(direction: Direction.inbound)
     expected =
     """
     No trains found for Harcourt LUAS stop.

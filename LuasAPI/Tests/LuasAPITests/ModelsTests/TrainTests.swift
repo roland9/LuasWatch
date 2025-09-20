@@ -44,9 +44,7 @@ struct TrainTests {
   }
 
   @Test func train_destinationDueTimeDescription() throws {
-    #expect(trainDue.destinationDueTimeDescription ==
-            "Luas to Broombridge is Due")
-    #expect(train2Mins.destinationDueTimeDescription ==
-            "Luas to Sandyford in 2")
+    #expect(trainDue.destinationDueTimeDescription == "is due now")
+    #expect(train2Mins.destinationDueTimeDescription == "in 2")
   }
 }
