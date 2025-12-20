@@ -19,6 +19,9 @@ struct LuasWatchSpecificStationAppIntent: AppIntent {
   @Parameter(title: "Train Direction (if Station has both)")
   var direction: DirectionEnum
 
+  @available(iOS 26.0, *)
+  static var supportedModes: IntentModes = [.background]
+
   private struct LuasStopOptionsProvider: DynamicOptionsProvider {
 
     func results() async throws -> [String] {
