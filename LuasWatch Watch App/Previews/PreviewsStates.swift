@@ -10,34 +10,34 @@ import SwiftUI
 #if DEBUG
 
   #Preview("idle") {
-    luasMainScreen(state: .idle)
+    makeTabView(.idle)
   }
 
   #Preview("gettingLoc") {
-    luasMainScreen(state: .gettingLocation)
+    makeTabView(.gettingLocation)
   }
 
   #Preview("authUnk") {
-    luasMainScreen(state: .locationAuthorizationUnknown)
+    makeTabView(.locationAuthorizationUnknown)
   }
 
   #Preview("locErr") {
-    luasMainScreen(state: .errorGettingLocation("Error getting location."))
+    makeTabView(.errorGettingLocation("Error getting location."))
   }
 
   #Preview("errStation") {
-    luasMainScreen(
-      state: .errorGettingStationTooFarAway(
+    makeTabView(
+      .errorGettingStationTooFarAway(
         "Some internal error getting station."))
   }
 
   #Preview("errFarAway") {
-    luasMainScreen(state: .errorGettingStationTooFarAway(LuasStrings.tooFarAway))
+    makeTabView(.errorGettingStationTooFarAway(LuasStrings.tooFarAway))
   }
 
   #Preview("errLoading") {
-    luasMainScreen(
-      state: .errorGettingDueTimes(
+    makeTabView(
+      .errorGettingDueTimes(
         stationGreen, "Error loading due times - could not access internet?"))
   }
 #endif

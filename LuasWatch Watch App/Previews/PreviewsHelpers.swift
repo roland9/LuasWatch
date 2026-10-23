@@ -10,22 +10,31 @@ import SwiftUI
 #if DEBUG
 
   @MainActor
-  func makeTabView(_ appModel: AppModel, _ route: Route) -> some View {
+  func makeTabView(
+    _ appState: AppState,
+    _ route: Route = .green
+  ) -> some View {
 
     @State var selectedStation: TrainStation? = trainsGreen.station
 
     return NavigationSplitView {
       SidebarView(selectedStation: $selectedStation)
     } detail: {
+
       TabView(selection: $selectedStation) {
         StationView()
-          .environmentObject(appModel)
+          .containerBackground(
+            route.color.gradient,
+            for: .tabView)
+
+        StationsModal(stations: route == .green ? TrainStations().greenLineStations : TrainStations().redLineStations) { _ in }
           .containerBackground(
             route.color.gradient,
             for: .tabView)
       }
     }
-    .environmentObject(appModel)
+    .tabViewStyle(.verticalPage)
+    .environmentObject(AppModel(appState))
     .modelContainer(Previews().container)
   }
 
@@ -40,7 +49,9 @@ import SwiftUI
   }
 
   func makeAppModel(
-    state: AppState, appMode: AppMode = .specific(stationGreen), locationDenied: Bool = false
+    state: AppState,
+    appMode: AppMode = .specific(stationGreen),
+    locationDenied: Bool = false
   ) -> AppModel {
     let appModel = AppModel(state)
     appModel.appMode = appMode

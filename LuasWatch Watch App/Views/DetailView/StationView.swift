@@ -10,13 +10,47 @@ import SwiftUI
 struct StationView {
 
   @EnvironmentObject private var appModel: AppModel
+  @Environment(\.modelContext) private var modelContext
+
+  @State private var direction: Direction = .both
 }
 
 extension StationView: View {
 
   var body: some View {
 
-    switch appModel.appState {
+    makeStationView(for: appModel.appState)
+
+      .toolbar {
+
+        switch appModel.appState {
+
+        // everything with LuasTextView has 'inactive' toolbar
+        case .idle, .gettingLocation,
+          .errorGettingLocation, .errorGettingStationTooFarAway, .errorGettingDueTimes:
+          ToolbarInactive()
+
+        case .locationAuthorizationUnknown:
+          ToolbarInactive()
+
+        case .loadingDueTimes(let station, _):
+          StationToolbar(
+            direction: $direction,
+            trainStation: station
+          )
+
+        case .foundDueTimes(let trains):
+          StationToolbar(
+            direction: $direction,
+            trainStation: trains.station
+          )
+        }
+      }
+  }
+
+  @ViewBuilder
+  fileprivate func makeStationView(for appState: AppState) -> some View {
+    switch appState {
 
     case .idle:
       LuasTextView(text: "LuasWatch is starting...")
@@ -37,13 +71,28 @@ extension StationView: View {
       LuasTextView(text: errorMessage)
 
     case .loadingDueTimes(let trainStation, let cachedTrains):
-      StationTimesView(trainStation: trainStation, trains: cachedTrains)
+      StationTimesView(
+        direction: $direction,
+        trainStation: trainStation,
+        trains: cachedTrains
+      )
+      .onAppear {
+        direction = modelContext.directionConsideringStationType(for: trainStation.shortCode)
+      }
 
     case .errorGettingDueTimes(_, let message):
       LuasTextView(text: message)
 
     case .foundDueTimes(let trains):
-      StationTimesView(trainStation: trains.station, trains: trains)
+      StationTimesView(
+        direction: $direction,
+        trainStation: trains.station,
+        trains: trains
+      )
+      .onAppear {
+        direction = modelContext.directionConsideringStationType(for: trains.station.shortCode)
+      }
     }
   }
+
 }

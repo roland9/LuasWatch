@@ -27,9 +27,11 @@ extension SimpleTimetableView {
     case .inbound:
       trains = trainsByDirection.inboundNoOverflowLarge
       hasOverflow = trainsByDirection.inboundHasOverflowLarge
+
     case .outbound:
       trains = trainsByDirection.outboundNoOverflowLarge
       hasOverflow = trainsByDirection.outboundHasOverflowLarge
+
     case .both:
       assertionFailure("expected either .inbound OR .outbound - not .both")
       trains = trainsByDirection.inbound
@@ -47,7 +49,6 @@ extension SimpleTimetableView {
       if hasOverflow {
         OverflowDotsView()
       }
-      Spacer()
     }
     .timeTableStyle()
     .opacity(appModel.appState.isLoading ? 0.52 : 1.0)

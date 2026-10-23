@@ -49,7 +49,7 @@ extension StationToolbar: ToolbarContent {
         }
 
         let shortCode = trainStation.shortCode
-        logger.info("\(#function) createOrUpdate \(shortCode) to \(direction)")
+        logger.debug("\(#function) createOrUpdate \(shortCode) to \(direction)")
         modelContext.createOrUpdate(shortCode: shortCode, to: direction)
 
       } label: {

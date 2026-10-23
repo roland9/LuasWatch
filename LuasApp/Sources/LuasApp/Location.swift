@@ -58,25 +58,28 @@ public class Location: NSObject {
 
   public func update() {
     if (locationAuthState == .granted
-      && (internalState == .stoppedUpdatingLocation || internalState == .error))
-      || internalState == .initializing
-      || locationAuthState == .unknown
+        && (internalState == .stoppedUpdatingLocation || internalState == .error))
+        || internalState == .initializing
+        || locationAuthState == .unknown
     {
 
-      logger.info("\(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> calling locationManager.startUpdatingLocation")
+      logger.info("\(#function) \(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> calling locationManager.startUpdatingLocation")
 
       internalState = .gettingLocation
       locationManager.delegate = self
       locationManager.startUpdatingLocation()
 
     } else if locationAuthState == .denied {
-      logger.info("\(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> calling delegate didFail(.denied)")
+      logger.info("\(#function) \(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> calling delegate didFail(.denied)")
 
       delegate?.didFail(.locationAccessDenied)
 
+    } else if locationAuthState == .granted && internalState == .gettingLocation {
+      logger.info("\(#function) \(String(describing: self.locationAuthState)) \(String(describing: self.internalState)) -> waiting")
+
     } else {
       assertionFailure("internal error")
-      logger.error("🚨 NOT calling locationManager.startUpdatingLocation")
+      logger.error("\(#function) 🚨 NOT calling locationManager.startUpdatingLocation")
     }
   }
 }

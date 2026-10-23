@@ -14,14 +14,12 @@ struct StationTimesView: View {
   @Environment(\.modelContext) private var modelContext
 
   @State private var direction: Direction = .both
-  @State private var selectedClosestStation = 0
 
   let trainStation: TrainStation
   let trains: TrainsByDirection?
 }
 
 extension StationTimesView {
-
 
   var body: some View {
 
@@ -37,19 +35,9 @@ extension StationTimesView {
           timetableView(for: trains)
 
           if let userLocation = appModel.latestLocation {
-
-            Picker("Select closest stations", selection: $selectedClosestStation) {
-                Text("Nearby Stations List").tag(0)
-                Text("Neaby on Map").tag(1)
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
-
-            if selectedClosestStation == 0 {
-              ClosestStationsView(userLocation: userLocation)
-            } else {
-              StationsMapsView(userLocation: userLocation)
-            }
+            ClosestStationsView(userLocation: userLocation)
+          } else {
+            noLocationPlaceholderText()
           }
 
         } else {
@@ -71,6 +59,16 @@ extension StationTimesView {
           trainStation: trainStation)
       }
     }
+  }
+
+
+  @ViewBuilder
+  fileprivate func noLocationPlaceholderText() -> some View {
+    Text("Location unavailable. Please enable location services to see nearby stations.")
+      .font(.subheadline)
+      .foregroundColor(.secondary)
+      .multilineTextAlignment(.center)
+      .padding(.horizontal)
   }
 
   @ViewBuilder
@@ -135,3 +133,4 @@ extension StationTimesView {
     }
   }
 }
+

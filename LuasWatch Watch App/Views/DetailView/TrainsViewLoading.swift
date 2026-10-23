@@ -9,14 +9,8 @@ import SwiftUI
 struct TrainsViewLoading: View {
 
   var body: some View {
-    VStack {
-      Spacer()
-      Text(LuasStrings.trainsLoading)
-        .font(.caption2)
-        .monospaced()
-        .foregroundColor(.yellow)
-        .frame(maxWidth: .infinity)
-      Spacer()
-    }
+    Text(LuasStrings.trainsLoading)
+      .frame(minHeight: 90)
+      .timeTableStyle()
   }
 }

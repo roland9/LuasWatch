@@ -6,20 +6,12 @@
 import SwiftUI
 
 struct LuasTextView: View {
+
   var text: String
 
   var body: some View {
-    HStack {
-      Spacer()
-      Text(text)
-        .font(.caption2)
-        .monospaced()
-      Spacer()
-    }
-    .foregroundColor(.yellow)
-    .timeTableStyle()
-    .toolbar {
-      ToolbarInactive()
-    }
+    Text(text)
+      .frame(minHeight: 90)
+      .timeTableStyle()
   }
 }
