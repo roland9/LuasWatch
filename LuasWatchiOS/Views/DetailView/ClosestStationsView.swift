@@ -4,10 +4,11 @@
 //
 
 import CoreLocation
-import LuasAPI
-import LuasApp
 import SwiftData
 import SwiftUI
+
+import LuasAPI
+import LuasApp
 
 struct ClosestStationsView: View {
   var userLocation: CLLocation

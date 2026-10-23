@@ -3,10 +3,11 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import LuasAPI
-import LuasApp
 import SwiftData
 import SwiftUI
+
+import LuasAPI
+import LuasApp
 
 struct StationTimesView: View {
 
