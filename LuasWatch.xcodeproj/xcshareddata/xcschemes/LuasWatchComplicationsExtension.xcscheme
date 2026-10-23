@@ -109,7 +109,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB2453F02AE424B40007FA7C"
             BuildableName = "LuasWatchComplicationsExtension.appex"
-            BlueprintName = "LuasWatchComplicationsExtension"
             ReferencedContainer = "container:LuasWatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

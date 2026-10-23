@@ -100,7 +100,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB695E2C2AE41C1C00B6DB99"
             BuildableName = "LuasWatch Watch App.app"
-            BlueprintName = "LuasWatch Watch App"
             ReferencedContainer = "container:LuasWatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -117,7 +116,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB695E2C2AE41C1C00B6DB99"
             BuildableName = "LuasWatch Watch App.app"
-            BlueprintName = "LuasWatch Watch App"
             ReferencedContainer = "container:LuasWatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
