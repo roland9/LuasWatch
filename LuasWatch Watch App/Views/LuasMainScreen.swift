@@ -32,7 +32,7 @@ extension LuasMainScreen: View {
         StationView()
           .containerBackground(
             appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
-            for: .navigation
+            for: .tabView
           )
           .tag(1)
 
@@ -50,14 +50,14 @@ extension LuasMainScreen: View {
         )
         .containerBackground(
           appModel.selectedStation?.route.color.gradient ?? Color("luasTheme").gradient,
-          for: .navigation
+          for: .tabView
         )
         .tag(2)
 
       }
 
       // this is the problem why it's moving!
-//      .tabViewStyle(.verticalPage)
+      .tabViewStyle(.verticalPage)
 
       .onAppear {
         selectedTabView = 1

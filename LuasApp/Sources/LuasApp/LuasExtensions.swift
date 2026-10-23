@@ -3,16 +3,24 @@
 //  Copyright © 2019 mApps.ie. All rights reserved.
 //
 
+#if canImport(UIKit)
+import UIKit
+public typealias PlatformColor = UIColor
+#elseif canImport(AppKit)
+import AppKit
+public typealias PlatformColor = NSColor
+#endif
+
 import SwiftUI
 
 public struct Colors {
 
-  public static let luasRed = Color(UIColor(rgb: 0xEE4251))
-  public static let luasGreen = Color(UIColor(rgb: 0x00A666))
-  public static let luasPurple = Color(UIColor(rgb: 0x5235D6))
+  public static let luasRed = Color(PlatformColor(rgb: 0xEE4251))
+  public static let luasGreen = Color(PlatformColor(rgb: 0x00A666))
+  public static let luasPurple = Color(PlatformColor(rgb: 0x5235D6))
 }
 
-extension UIColor {
+extension PlatformColor {
 
   convenience init(red: Int, green: Int, blue: Int) {
     assert(red >= 0 && red <= 255, "Invalid red component")

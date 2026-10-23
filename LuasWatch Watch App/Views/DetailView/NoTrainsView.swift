@@ -3,9 +3,8 @@
 //  Copyright © 2024 mApps.ie. All rights reserved.
 //
 
-import SwiftUI
-
 import LuasApp
+import SwiftUI
 
 struct NoTrainsView: View {
 

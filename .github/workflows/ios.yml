@@ -8,8 +8,8 @@ on:
 
 jobs:
   build:
-    name: Build and Test LuasKit scheme using watchOS simulator
-    runs-on: macos-14
+    name: Build and Test LuasAPI scheme using watchOS simulator
+    runs-on: macos-15
     env:
       scheme: 'LuasAPI'
       project: 'LuasWatch.xcodeproj'
